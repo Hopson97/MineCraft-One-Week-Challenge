@@ -25,5 +25,13 @@ void StatePlaying::update(float deltaTime)
 
 void StatePlaying::render(RenderMaster& renderer)
 {
-    renderer.drawQuad({0, 0, 0});
+    static sf::Clock c;
+    static float lastTime = 0;
+    float timeNow = c.getElapsedTime().asSeconds();
+    auto dt =  timeNow - lastTime;
+    lastTime = timeNow;
+
+
+
+    renderer.drawQuad({0, 0, std::sin(timeNow) * 3});
 }

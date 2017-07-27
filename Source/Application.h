@@ -8,6 +8,7 @@
 #include "Renderer/RenderMaster.h"
 
 #include "Context.h"
+#include "Camera.h"
 
 class Application
 {
@@ -32,6 +33,7 @@ class Application
 
         Context m_context;
         RenderMaster m_masterRenderer;
+        Camera m_camera;
 
 
         bool m_isPopState = false;

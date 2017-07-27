@@ -5,6 +5,9 @@
 Camera::Camera()
 {
     m_projectionMatrix = makeProjectionMatrix(90);
+
+    m_worldPosition = {0, 0, -5};
+    m_rotation      = {0, 0, 0};
 }
 
 void Camera::update()

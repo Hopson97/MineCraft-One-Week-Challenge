@@ -18,8 +18,10 @@ void Application::runLoop()
 
         state.handleInput();
         state.update(deltaTime.asSeconds());
+        m_camera.update();
+
         state.render(m_masterRenderer);
-        m_masterRenderer.finishRender(m_context.window);
+        m_masterRenderer.finishRender(m_context.window, m_camera);
 
         handleEvents();
         if (m_isPopState)
