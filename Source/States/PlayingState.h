@@ -2,6 +2,7 @@
 #define PLAYINGSTATE_H_INCLUDED
 
 #include "StateBase.h"
+#include "../Player/Player.h"
 
 class StatePlaying : public StateBase
 {
@@ -16,6 +17,7 @@ class StatePlaying : public StateBase
         void render(RenderMaster& renderer);
 
     private:
+        Player m_player;
 };
 
 #endif // PLAYINGSTATE_H_INCLUDED

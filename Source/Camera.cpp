@@ -11,6 +11,9 @@ Camera::Camera()
 
 void Camera::update()
 {
+    position = m_pEntity->position;
+    rotation = m_pEntity->rotation;
+
     m_viewMatrix = makeViewMatrix(*this);
     m_projViewMatrx = m_projectionMatrix * m_viewMatrix;
 }
