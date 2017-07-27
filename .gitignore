@@ -1,0 +1,17 @@
+
+#CodeBLocks stuff
+*.layout
+*.depend
+*.cbp
+bin/
+obj/
+
+#.dll stuff
+*.dll
+
+#Builds
+*.7z
+Project/
+
+#Profiler
+*.out
