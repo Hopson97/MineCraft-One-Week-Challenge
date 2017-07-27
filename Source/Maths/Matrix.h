@@ -4,11 +4,10 @@
 #include "glm.h"
 
 class Camera;
+class Entity;
 
-glm::mat4 makeModelMatrix(const glm::vec3& position, const glm::vec3& rotation);
-
-glm::mat4 makeViewMatrix(const Camera& camera);
-
-glm::mat4 makeProjectionMatrix(float fov);
+glm::mat4 makeModelMatrix       (const Entity& entity);
+glm::mat4 makeViewMatrix        (const Camera& camera);
+glm::mat4 makeProjectionMatrix  (float fov);
 
 #endif // MATRIX_H_INCLUDED

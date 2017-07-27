@@ -43,7 +43,7 @@ void QuadRenderer::renderQuads(const Camera& camera)
 
     for (auto& quad : m_quads)
     {
-         m_shader.loadModelMatrix(makeModelMatrix(quad, {0, 0, 0}));
+         m_shader.loadModelMatrix(makeModelMatrix({quad, {0, 0, 0}}));
 
          glDrawElements(GL_TRIANGLES, m_quadModel.getIndicesCount(), GL_UNSIGNED_INT, nullptr);
     }
