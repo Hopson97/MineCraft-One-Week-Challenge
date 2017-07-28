@@ -7,6 +7,7 @@
 #include "../Block/BlockDatabase.h"
 
 #include <vector>
+#include <iostream>
 
 namespace
 {
@@ -84,16 +85,21 @@ struct Directions
     sf::Vector3i back;
 };
 
+int faces = 0;
+
 void ChunkMeshBuilder::buildMesh(ChunkMesh& mesh)
 {
+    sf::Clock c;
+    std::cout << "Begin mesh build\n";
     m_pMesh = &mesh;
 
     Directions directions;
 
-    for (int y = 0; y < CHUNK_SIZE; ++y)
-    for (int x = 0; x < CHUNK_SIZE; ++x)
-    for (int z = 0; z < CHUNK_SIZE; ++z)
+    for (int8_t y = 0; y < CHUNK_SIZE; ++y)
+    for (int8_t x = 0; x < CHUNK_SIZE; ++x)
+    for (int8_t z = 0; z < CHUNK_SIZE; ++z)
     {
+        sf::Vector3i position(x, y, z);
         auto  block = m_pChunk->getBlock(x, y, z);
         if (block == 0)
         {
@@ -104,14 +110,14 @@ void ChunkMeshBuilder::buildMesh(ChunkMesh& mesh)
         auto& data = *m_pBlockData;
         directions.update(x, y, z);
 
-        tryAddFaceToMesh(topFace,       data.texTopCoord,       {x, y, z}, directions.up);
-        tryAddFaceToMesh(bottomFace,    data.texBottomCoord,    {x, y, z}, directions.down);
-
-        tryAddFaceToMesh(leftFace,  data.texSideCoord, {x, y, z}, directions.left);
-        tryAddFaceToMesh(rightFace, data.texSideCoord, {x, y, z}, directions.right);
-        tryAddFaceToMesh(frontFace, data.texSideCoord, {x, y, z}, directions.front);
-        tryAddFaceToMesh(backFace,  data.texSideCoord, {x, y, z}, directions.back);
+        tryAddFaceToMesh(topFace,       data.texTopCoord,       position, directions.up);
+        tryAddFaceToMesh(bottomFace,    data.texBottomCoord,    position, directions.down);
+        tryAddFaceToMesh(leftFace,      data.texSideCoord,      position, directions.left);
+        tryAddFaceToMesh(rightFace,     data.texSideCoord,      position, directions.right);
+        tryAddFaceToMesh(frontFace,     data.texSideCoord,      position, directions.front);
+        tryAddFaceToMesh(backFace,      data.texSideCoord,      position, directions.back);
     }
+    std::cout << "End mesh build, faces: " << faces << " Time: " << c.getElapsedTime().asMilliseconds() << "ms\n";
 }
 
 void ChunkMeshBuilder::tryAddFaceToMesh(const std::vector<GLfloat>& blockFace,
@@ -121,6 +127,7 @@ void ChunkMeshBuilder::tryAddFaceToMesh(const std::vector<GLfloat>& blockFace,
 {
     if (shouldMakeFace(blockFacing, *m_pBlockData))
     {
+        faces++;
         auto texCoords = BlockDatabase::get().textureAtlas.getTexture(textureCoords);
 
         m_pMesh->addFace(blockFace, texCoords, m_pChunk->getLocation(), blockPosition);

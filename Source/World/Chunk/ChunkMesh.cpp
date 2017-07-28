@@ -2,6 +2,8 @@
 
 #include "../WorldConstants.h"
 
+#include <iostream>
+
 ChunkMesh::ChunkMesh()
 { }
 
@@ -16,6 +18,8 @@ void ChunkMesh::addFace(const std::vector<GLfloat>& blockFace,
 
     texCoords.insert(texCoords.end(), textureCoords.begin(), textureCoords.end());
 
+    ///Vertex: The current vertex in the "blockFace" vector, 4 vertex in total hence "< 4"
+    ///Index: X, Y, Z
     for (int vertexNumber = 0, index = 0; vertexNumber < 4; vertexNumber++)
     {
         verticies.push_back(blockFace[index++] + chunkPosition.x * CHUNK_SIZE + blockPosition.x);
@@ -38,6 +42,10 @@ void ChunkMesh::addFace(const std::vector<GLfloat>& blockFace,
 
 void ChunkMesh::bufferMesh()
 {
+    std::cout   << "Buffered"
+                << "\nVertex:   " << m_mesh.vertexPositions.size()
+                << "\nTextures: " << m_mesh.textureCoords.size()
+                << "\nIndices:  " << m_mesh.indices.size() << "\n";
     m_model.addData(m_mesh);
 
     m_mesh.vertexPositions.clear();

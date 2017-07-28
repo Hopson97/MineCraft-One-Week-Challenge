@@ -34,5 +34,5 @@ void StatePlaying::update(float deltaTime)
 void StatePlaying::render(RenderMaster& renderer)
 {
     renderer.drawCube({0, 0, 0});
-    renderer.draw(m_chunkTest.mesh);
+    renderer.drawChunk(m_chunkTest.mesh);
 }

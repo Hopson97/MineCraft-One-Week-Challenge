@@ -5,9 +5,11 @@
 
 #include "../Camera.h"
 
+#include <iostream>
+
 void ChunkRenderer::add(const ChunkMesh& mesh)
 {
-
+    m_chunks.push_back(&mesh);
 }
 
 void ChunkRenderer::render(const Camera& camera)
@@ -25,4 +27,6 @@ void ChunkRenderer::render(const Camera& camera)
         m.getModel().bindVAO();
         glDrawElements(GL_TRIANGLES, m.getModel().getIndicesCount(), GL_UNSIGNED_BYTE, nullptr);
     }
+
+    m_chunks.clear();
 }
