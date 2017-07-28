@@ -3,6 +3,9 @@
 
 #include "BlockId.h"
 
+class BlockData;
+class BlockType;
+
 struct ChunkBlock
 {
     ChunkBlock() = default;
@@ -10,7 +13,10 @@ struct ChunkBlock
     ChunkBlock(Block_t id);
     ChunkBlock(BlockId id);
 
-    Block_t id = 0;
+    const BlockData& getData() const;
+    const BlockType& getType() const;
+
+    Block_t id = 1;
 };
 
 #endif // CHUNKBLOCK_H_INCLUDED
