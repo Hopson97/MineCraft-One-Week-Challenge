@@ -6,6 +6,7 @@
 
 #include "../WorldConstants.h"
 #include "../Block/ChunkBlock.h"
+#include "ChunkMesh.h"
 
 class ChunkSection
 {
@@ -16,6 +17,9 @@ class ChunkSection
         ChunkBlock getBlock (int x, int y, int z) const;
 
         const sf::Vector3i getLocation() const;
+
+        ///@TODO make private
+        ChunkMesh mesh;
 
     private:
         static bool outOfBounds (int value);

@@ -3,10 +3,17 @@
 #include "../Renderer/RenderMaster.h"
 #include "../Application.h"
 
+#include "../World/Chunk/ChunkMeshBuilder.h"
+
 StatePlaying::StatePlaying(Application& app)
 :   StateBase   (app)
 {
     app.getCamera().hookEntity(m_player);
+
+    ChunkMeshBuilder builder(m_chunkTest);
+    builder.buildMesh(m_chunkTest.mesh);
+
+    m_chunkTest.mesh.bufferMesh();
 }
 
 void StatePlaying::handleEvent(sf::Event e)
@@ -27,4 +34,5 @@ void StatePlaying::update(float deltaTime)
 void StatePlaying::render(RenderMaster& renderer)
 {
     renderer.drawCube({0, 0, 0});
+    renderer.draw(m_chunkTest.mesh);
 }

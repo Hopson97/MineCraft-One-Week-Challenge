@@ -96,7 +96,6 @@ void CubeRenderer::render(const Camera& camera)
 {
     glEnable(GL_CULL_FACE);
 
-
     m_shader.useProgram();
     m_cubeModel.bindVAO();
     m_atlasTest.bindTexture();

@@ -12,9 +12,10 @@ class BasicShader : public Shader
         void loadProjectionViewMatrix   (const glm::mat4& pvMatrix);
         void loadModelMatrix            (const glm::mat4& matrix);
 
-    private:
+    protected:
         virtual void getUniforms() override;
 
+    private:
         GLuint m_locationProjectionViewMatrix;
         GLuint m_locationModelMatrix;
 };
