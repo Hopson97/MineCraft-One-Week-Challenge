@@ -9,6 +9,8 @@
 #include "BlockTypes/BlockType.h"
 #include "BlockId.h"
 
+#include "../../Texture/TextureAtlas.h"
+
 class BlockDatabase : public Singleton
 {
     public:
@@ -16,6 +18,8 @@ class BlockDatabase : public Singleton
 
         const BlockType& getBlock(BlockId id) const;
         const BlockData& getData (BlockId id) const;
+
+        TextureAtlas textureAtlas;
 
     private:
         BlockDatabase();

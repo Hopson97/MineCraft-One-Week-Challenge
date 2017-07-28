@@ -3,6 +3,9 @@
 #include "ChunkSection.h"
 #include "ChunkMesh.h"
 
+#include "../Block/BlockData.h"
+#include "../Block/BlockDatabase.h"
+
 #include <vector>
 
 namespace
@@ -59,11 +62,97 @@ namespace
 
 ChunkMeshBuilder::ChunkMeshBuilder(ChunkSection& chunk)
 :   m_pChunk    (&chunk)
-{
+{ }
 
-}
+struct Directions
+{
+    void update(int x, int y, int z)
+    {
+        up      =   {x,     y + 1,  z};
+        down    =   {x,     y - 1,  z};
+        left    =   {x - 1, y,      z};
+        right   =   {x + 1, y,      z};
+        front   =   {x,     y,      z + 1};
+        back    =   {x,     y,      z - 1};
+    }
+
+    sf::Vector3i up;
+    sf::Vector3i down;
+    sf::Vector3i left;
+    sf::Vector3i right;
+    sf::Vector3i front;
+    sf::Vector3i back;
+};
 
 void ChunkMeshBuilder::buildMesh(ChunkMesh& mesh)
 {
     m_pMesh = &mesh;
+
+    Directions directions;
+
+    for (int y = 0; y < CHUNK_SIZE; ++y)
+    for (int x = 0; x < CHUNK_SIZE; ++x)
+    for (int z = 0; z < CHUNK_SIZE; ++z)
+    {
+        auto  block = m_pChunk->getBlock(x, y, z);
+        if (block == 0)
+        {
+            continue;
+        }
+
+        m_pBlockData = &block.getData().getBlockData();
+        auto& data = *m_pBlockData;
+        directions.update(x, y, z);
+
+        tryAddFaceToMesh(topFace,       data.texTopCoord,       {x, y, z}, directions.up);
+        tryAddFaceToMesh(bottomFace,    data.texBottomCoord,    {x, y, z}, directions.down);
+
+        tryAddFaceToMesh(leftFace,  data.texSideCoord, {x, y, z}, directions.left);
+        tryAddFaceToMesh(rightFace, data.texSideCoord, {x, y, z}, directions.right);
+        tryAddFaceToMesh(frontFace, data.texSideCoord, {x, y, z}, directions.front);
+        tryAddFaceToMesh(backFace,  data.texSideCoord, {x, y, z}, directions.back);
+    }
 }
+
+void ChunkMeshBuilder::tryAddFaceToMesh(const std::vector<GLfloat>& blockFace,
+                                        const sf::Vector2i& textureCoords,
+                                        const sf::Vector3i& blockPosition,
+                                        const sf::Vector3i& blockFacing)
+{
+    if (shouldMakeFace(blockFacing, *m_pBlockData))
+    {
+        auto texCoords = BlockDatabase::get().textureAtlas.getTexture(textureCoords);
+
+        m_pMesh->addFace(blockFace, texCoords, m_pChunk->getLocation(), blockPosition);
+    }
+}
+
+
+bool ChunkMeshBuilder::shouldMakeFace(const sf::Vector3i& adjBlock,
+                                      const BlockDataHolder& blockData)
+{
+    auto block = m_pChunk->getBlock(adjBlock.x, adjBlock.y, adjBlock.z);
+    //auto& data  = block.getData();
+
+    if (block == 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+    ///@TODO Transparent Blocks
+}
+
+
+
+
+
+
+
+
+
+
+
+

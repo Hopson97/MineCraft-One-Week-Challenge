@@ -54,13 +54,6 @@ CubeRenderer::CubeRenderer()
     auto side   = m_atlasTest.getTexture({1, 0});
     auto bottom = m_atlasTest.getTexture({2, 0});
 
-    for (auto t : top)
-        std::cout << t << std::endl;
-
-
-
-
-
     std::vector<GLfloat> texCoords;
     texCoords.insert(texCoords.end(), side.begin(),     side.end());
     texCoords.insert(texCoords.end(), side.begin(),     side.end());
