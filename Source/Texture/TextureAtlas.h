@@ -8,9 +8,11 @@ class TextureAtlas : public BasicTexture
     public:
         TextureAtlas(const std::string& textureFileName);
 
-        std::vector<GLfloat> getTexture;
+        std::vector<GLfloat> getTexture(const sf::Vector2i& coords);
 
     private:
+        int m_imageSize;
+        int m_individualTextureSize;
 };
 
 #endif // TEXTUREATLAS_H_INCLUDED

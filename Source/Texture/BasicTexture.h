@@ -3,6 +3,8 @@
 
 #include <GL/glew.h>
 #include <string>
+#include <SFML/Graphics.hpp>
+
 
 #include "../Util/NonCopyable.h"
 
@@ -14,6 +16,7 @@ class BasicTexture
 
         ~BasicTexture();
 
+        void loadFromImage(const sf::Image& image);
         void loadFromFile (const std::string& file);
 
         void bindTexture() const;

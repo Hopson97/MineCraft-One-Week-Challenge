@@ -6,8 +6,10 @@
 #include "../Maths/Matrix.h"
 
 CubeRenderer::CubeRenderer()
+:   m_atlasTest ("DefaultPack")
 {
     m_basicTexture.loadFromFile("test");
+
 
     std::vector<GLfloat> vertexCoords
     {
@@ -48,38 +50,25 @@ CubeRenderer::CubeRenderer()
         0, 0, 1.
     };
 
-    std::vector<GLfloat> texCoords
-    {
-        0, 1,
-        1, 1,
-        1, 0,
-        0, 0,
+    auto top    = m_atlasTest.getTexture({0, 0});
+    auto side   = m_atlasTest.getTexture({1, 0});
+    auto bottom = m_atlasTest.getTexture({2, 0});
 
-        0, 1,
-        1, 1,
-        1, 0,
-        0, 0,
+    for (auto t : top)
+        std::cout << t << std::endl;
 
-        0, 1,
-        1, 1,
-        1, 0,
-        0, 0,
 
-        0, 1,
-        1, 1,
-        1, 0,
-        0, 0,
 
-        0, 1,
-        1, 1,
-        1, 0,
-        0, 0,
 
-        0, 1,
-        1, 1,
-        1, 0,
-        0, 0,
-    };
+
+    std::vector<GLfloat> texCoords;
+    texCoords.insert(texCoords.end(), side.begin(),     side.end());
+    texCoords.insert(texCoords.end(), side.begin(),     side.end());
+    texCoords.insert(texCoords.end(), side.begin(),     side.end());
+    texCoords.insert(texCoords.end(), side.begin(),     side.end());
+    texCoords.insert(texCoords.end(), top.begin(),      top.end());
+    texCoords.insert(texCoords.end(), bottom.begin(),   bottom.end());
+
 
     std::vector<GLuint> indices
     {
@@ -117,7 +106,7 @@ void CubeRenderer::render(const Camera& camera)
 
     m_shader.useProgram();
     m_cubeModel.bindVAO();
-    m_basicTexture.bindTexture();
+    m_atlasTest.bindTexture();
 
     m_shader.loadProjectionViewMatrix(camera.getProjectionViewMatrix());
 

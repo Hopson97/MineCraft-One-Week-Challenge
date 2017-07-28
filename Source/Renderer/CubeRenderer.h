@@ -7,6 +7,7 @@
 #include "../Maths/glm.h"
 #include "../Shaders/BasicShader.h"
 #include "../Texture/BasicTexture.h"
+#include "../Texture/TextureAtlas.h"
 
 class Camera;
 
@@ -25,6 +26,8 @@ class CubeRenderer
         Model m_cubeModel;
         BasicShader m_shader;
         BasicTexture m_basicTexture;
+
+        TextureAtlas m_atlasTest;
 };
 
 #endif // CUBERENDERER_H_INCLUDED
