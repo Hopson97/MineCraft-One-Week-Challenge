@@ -3,7 +3,9 @@
 #include "../Block/BlockId.h"
 
 ChunkSection::ChunkSection()
-{ }
+{
+    m_location = {0, 0, 0};
+}
 
 void ChunkSection::setBlock(int x, int y, int z, ChunkBlock block)
 {

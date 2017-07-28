@@ -20,7 +20,7 @@ void ChunkMesh::addFace(const std::vector<GLfloat>& blockFace,
 
     ///Vertex: The current vertex in the "blockFace" vector, 4 vertex in total hence "< 4"
     ///Index: X, Y, Z
-    for (int vertexNumber = 0, index = 0; vertexNumber < 4; vertexNumber++)
+    for (int i = 0, index = 0; i < 4; ++i)
     {
         verticies.push_back(blockFace[index++] + chunkPosition.x * CHUNK_SIZE + blockPosition.x);
         verticies.push_back(blockFace[index++] + chunkPosition.y * CHUNK_SIZE + blockPosition.y);

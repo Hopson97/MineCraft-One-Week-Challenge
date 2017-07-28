@@ -26,10 +26,9 @@ class ChunkMeshBuilder
         bool shouldMakeFace (const sf::Vector3i& blockPosition,
                              const BlockDataHolder& blockData);
 
-        ChunkSection* m_pChunk;
-        ChunkMesh*    m_pMesh;
-
-        const BlockDataHolder* m_pBlockData;
+        ChunkSection*           m_pChunk        = nullptr;
+        ChunkMesh*              m_pMesh         = nullptr;
+        const BlockDataHolder*  m_pBlockData    = nullptr;
 };
 
 #endif // CHUNKMESHBUILDER_H_INCLUDED

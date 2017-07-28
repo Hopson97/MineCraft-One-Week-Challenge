@@ -14,7 +14,7 @@ void ChunkRenderer::add(const ChunkMesh& mesh)
 
 void ChunkRenderer::render(const Camera& camera)
 {
-    glEnable(GL_CULL_FACE);
+//    glEnable(GL_CULL_FACE);
     m_shader.useProgram();
     BlockDatabase::get().textureAtlas.bindTexture();
 

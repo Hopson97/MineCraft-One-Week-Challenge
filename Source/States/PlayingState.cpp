@@ -5,6 +5,8 @@
 
 #include "../World/Chunk/ChunkMeshBuilder.h"
 
+#include <iostream>
+
 StatePlaying::StatePlaying(Application& app)
 :   StateBase   (app)
 {
@@ -17,9 +19,7 @@ StatePlaying::StatePlaying(Application& app)
 }
 
 void StatePlaying::handleEvent(sf::Event e)
-{
-
-}
+{ }
 
 void StatePlaying::handleInput()
 {
@@ -28,11 +28,15 @@ void StatePlaying::handleInput()
 
 void StatePlaying::update(float deltaTime)
 {
+    std::cout   << "X: "    << (int)m_player.position.x
+                << " Y: "   << (int)m_player.position.y
+                << " Z: "   << (int)m_player.position.z
+                << '\n';
     m_player.update(deltaTime);
 }
 
 void StatePlaying::render(RenderMaster& renderer)
 {
-    renderer.drawCube({0, 0, 0});
+    renderer.drawCube({-1.1, 0, -1.1});
     renderer.drawChunk(m_chunkTest.mesh);
 }
