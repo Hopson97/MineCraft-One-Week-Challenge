@@ -1,10 +1,8 @@
 #include "Model.h"
 
-Model::Model(const std::vector<GLfloat>& vertexPositions,
-             const std::vector<GLfloat>& textureCoords,
-             const std::vector<GLuint>&  indices)
+Model::Model(const Mesh& mesh)
 {
-    addData(vertexPositions, textureCoords, indices);
+    addData(mesh);
 }
 
 Model::~Model()
@@ -17,21 +15,19 @@ void Model::bindVAO() const
     glBindVertexArray(m_vao);
 }
 
-void Model::addData(const std::vector<GLfloat>& vertexPositions,
-                    const std::vector<GLfloat>& textureCoords,
-                    const std::vector<GLuint>&  indices)
+void Model::addData(const Mesh& mesh)
 {
     if (m_vao != 0)
         deleteData();
 
-    m_indicesCount = indices.size();
+    m_indicesCount = mesh.indices.size();
 
     glGenVertexArrays(1, &m_vao);
     glBindVertexArray(m_vao);
 
-    addVBO(3, vertexPositions);
-    addVBO(2, textureCoords);
-    addEBO(indices);
+    addVBO(3, mesh.vertexPositions);
+    addVBO(2, mesh.textureCoords);
+    addEBO(mesh.indices);
 }
 
 void Model::addVBO(int dimensions, const std::vector<GLfloat>& data)

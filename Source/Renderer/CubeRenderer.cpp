@@ -91,7 +91,7 @@ CubeRenderer::CubeRenderer()
         22, 23, 20
     };
 
-    m_cubeModel.addData(vertexCoords, texCoords, indices);
+    m_cubeModel.addData({vertexCoords, texCoords, indices});
 }
 
 void CubeRenderer::add(const glm::vec3& position)

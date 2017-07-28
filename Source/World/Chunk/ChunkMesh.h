@@ -10,10 +10,11 @@ class ChunkMesh
     public:
         ChunkMesh();
 
-        void addFace();
+        void addFace(const Mesh& mesh);
 
     private:
-        std::vector<GLfloat> textureCoords
+        Mesh  m_mesh;
+        Model m_model;
 };
 
 #endif // CHUNKMESH_H_INCLUDED
