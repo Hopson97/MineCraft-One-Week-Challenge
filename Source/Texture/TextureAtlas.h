@@ -6,6 +6,9 @@
 class TextureAtlas : public BasicTexture
 {
     public:
+        TextureAtlas(const std::string& textureFileName);
+
+        std::vector<GLfloat> getTexture;
 
     private:
 };
