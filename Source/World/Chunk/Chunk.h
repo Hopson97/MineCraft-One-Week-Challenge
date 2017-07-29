@@ -17,7 +17,7 @@ class Chunk : public IChunk
         void drawChunks (RenderMaster& renderer);
 
     private:
-        bool outOfBound(int x, int y, int z) const noexcept;
+        bool outOfBound(int x, int y, int z) const ;
 
         std::vector<ChunkSection> m_chunks;
 

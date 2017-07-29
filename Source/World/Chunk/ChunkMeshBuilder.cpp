@@ -86,8 +86,7 @@ struct AdjacentBlockPositions
     sf::Vector3i back;
 };
 
-int faces = 0;
-
+int faces;
 void ChunkMeshBuilder::buildMesh(ChunkMesh& mesh)
 {
     sf::Clock c;
@@ -96,20 +95,18 @@ void ChunkMeshBuilder::buildMesh(ChunkMesh& mesh)
 
     AdjacentBlockPositions directions;
 
-    int itr = 0;
+    faces = 0;
     for (int8_t y = 0; y < CHUNK_SIZE; ++y)
     for (int8_t x = 0; x < CHUNK_SIZE; ++x)
     for (int8_t z = 0; z < CHUNK_SIZE; ++z)
     {
-        itr++;
         sf::Vector3i position(x, y, z);
         ChunkBlock   block = m_pChunk->getBlock(x, y, z);
 
         if (block == BlockId::Air)
         {
-            //continue;
+            continue;
         }
-
 
         m_pBlockData = &block.getData().getBlockData();
         auto& data = *m_pBlockData;
@@ -128,10 +125,9 @@ void ChunkMeshBuilder::buildMesh(ChunkMesh& mesh)
         tryAddFaceToMesh(frontFace,     data.texSideCoord,      position, directions.front);
         tryAddFaceToMesh(backFace,      data.texSideCoord,      position, directions.back);
     }
-    std::cout   << "End mesh build, faces: " << " itr: " << itr << " "
-                << faces << " Time: "
-                << c.getElapsedTime().asSeconds() * 1000
-                << "ms\n";
+    std::cout   << "End mesh build, faces:  " << faces << '\n'
+                << "Time:                   " << c.getElapsedTime().asSeconds() * 1000 << "ms" << '\n'
+                << "Y:                      " << m_pChunk->getLocation().y <<  "\n\n";
 }
 
 void ChunkMeshBuilder::tryAddFaceToMesh(const std::vector<GLfloat>& blockFace,

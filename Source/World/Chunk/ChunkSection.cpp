@@ -4,6 +4,8 @@
 
 #include "../World.h"
 
+#include <iostream>
+
 ChunkSection::ChunkSection(const sf::Vector3i& location, World& world)
 :   m_location  (location)
 ,   m_pWorld    (&world)
@@ -19,6 +21,7 @@ void ChunkSection::setBlock(int x, int y, int z, ChunkBlock block)
     {
         auto location = toWorldPosition(x, y, z);
         m_pWorld->setBlock(location.x, location.y, location.z, block);
+        return;
     }
 
     m_blocks[getIndex(x, y, z)] = block;
@@ -42,7 +45,7 @@ const sf::Vector3i ChunkSection::getLocation() const
     return m_location;
 }
 
-sf::Vector3i ChunkSection::toWorldPosition(int x, int y, int z) const noexcept
+sf::Vector3i ChunkSection::toWorldPosition(int x, int y, int z) const
 {
     return
     {

@@ -26,7 +26,7 @@ class ChunkSection : public IChunk
 
 
     private:
-        sf::Vector3i toWorldPosition (int x, int y, int z) const noexcept;
+        sf::Vector3i toWorldPosition (int x, int y, int z) const;
 
         static bool outOfBounds (int value);
         static int  getIndex    (int x, int y, int z);
