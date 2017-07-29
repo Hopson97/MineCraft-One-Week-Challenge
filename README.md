@@ -12,6 +12,14 @@ The day was finished off by creating a first person camera.
 
 ![Quad](http://i.imgur.com/fJDgA2a.png)
 
+End of day stats:
+
+Title | Data
+------------ | -------------
+Time programming Today | 3:21:51
+Lines of Code Today | 829
+Total Time programming | 3:21:51
+Total Lines of Code | 829
 
 # Day Two
 
@@ -24,6 +32,15 @@ I also worked out the coordinates for a cube, and thus created a cube renderer.
 I finished up the day attempting to create a mesh builder for the chunk; however, this did not go well at all, and two had ended before I got it to work correctly.
 
 ![Messed up chunk](http://i.imgur.com/UsKHJrR.png)
+
+End of day stats:
+
+Title | Data
+------------ | -------------
+Time programming Today | 4:16:07
+Lines of Code Today | 732
+Total Time programming | 7:37:58
+Total Lines of Code | 1561
 
 
 # Day Three
@@ -39,5 +56,14 @@ Anyways, after this I got the game working with more chunks. I now have an area 
 To finish the day off, I got some naive block editing to work.
 
 ![Block editing](http://i.imgur.com/ilTJr8i.png)
+
+End of day stats:
+
+Title | Data
+------------ | -------------
+Time programming Today | 3:15:38
+Lines of Code Today | 410
+Total Time programming | 10:53:36
+Total Lines of Code | 1974
 
 
