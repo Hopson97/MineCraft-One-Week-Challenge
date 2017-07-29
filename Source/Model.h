@@ -12,6 +12,9 @@ class Model : public NonCopyable
         Model(const Mesh& mesh);
         ~Model();
 
+        Model(Model&& other);
+        Model& operator= (Model&& other);
+
         void addData(const Mesh& mesh);
 
         void deleteData();

@@ -4,7 +4,8 @@
 #include "StateBase.h"
 #include "../Player/Player.h"
 
-#include "../World/Chunk/ChunkSection.h"
+#include "../World/Chunk/Chunk.h"
+#include "../World/World.h"
 
 class StatePlaying : public StateBase
 {
@@ -21,7 +22,7 @@ class StatePlaying : public StateBase
     private:
         Player m_player;
 
-        ChunkSection m_chunkTest;
+        World m_world;
 };
 
 #endif // PLAYINGSTATE_H_INCLUDED

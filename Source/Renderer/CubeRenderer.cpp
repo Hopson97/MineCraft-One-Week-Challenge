@@ -103,7 +103,7 @@ void CubeRenderer::render(const Camera& camera)
     for (auto& quad : m_quads)
     {
         m_shader.loadModelMatrix(makeModelMatrix({quad, {0, 0, 0}}));
-        GL::drawElements(m_cubeModel.getModel().getIndicesCount());
+        GL::drawElements(m_cubeModel.getIndicesCount());
     }
 
     m_quads.clear();

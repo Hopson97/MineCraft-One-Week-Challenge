@@ -63,8 +63,8 @@ void Player::mouseInput(const sf::RenderWindow& window)
     static auto lastMousePosition = sf::Mouse::getPosition(window);
     auto change = sf::Mouse::getPosition() - lastMousePosition;
 
-    rotation.y += change.x;// * 0.05;
-    rotation.x += change.y;// * 0.05;
+    rotation.y += change.x * 0.05;
+    rotation.x += change.y * 0.05;
 
     if      (rotation.x >  BOUND) rotation.x =  BOUND;
     else if (rotation.x < -BOUND) rotation.x = -BOUND;
@@ -75,7 +75,7 @@ void Player::mouseInput(const sf::RenderWindow& window)
     auto cx = static_cast<int>(window.getSize().x / 4);
     auto cy = static_cast<int>(window.getSize().y / 4);
 
-    //sf::Mouse::setPosition({cx, cy}, window);
+    sf::Mouse::setPosition({cx, cy}, window);
 
     lastMousePosition = sf::Mouse::getPosition();
 }
