@@ -94,8 +94,6 @@ void CubeRenderer::add(const glm::vec3& position)
 
 void CubeRenderer::render(const Camera& camera)
 {
-//    glEnable(GL_CULL_FACE);
-
     m_shader.useProgram();
     m_cubeModel.bindVAO();
     m_atlasTest.bindTexture();
@@ -104,9 +102,8 @@ void CubeRenderer::render(const Camera& camera)
 
     for (auto& quad : m_quads)
     {
-         m_shader.loadModelMatrix(makeModelMatrix({quad, {0, 0, 0}}));
-
-         glDrawElements(GL_TRIANGLES, m_cubeModel.getIndicesCount(), GL_UNSIGNED_INT, nullptr);
+        m_shader.loadModelMatrix(makeModelMatrix({quad, {0, 0, 0}}));
+        GL::drawElements(m_cubeModel.getModel().getIndicesCount());
     }
 
     m_quads.clear();

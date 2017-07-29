@@ -28,10 +28,6 @@ void StatePlaying::handleInput()
 
 void StatePlaying::update(float deltaTime)
 {
-    std::cout   << "X: "    << (int)m_player.position.x
-                << " Y: "   << (int)m_player.position.y
-                << " Z: "   << (int)m_player.position.z
-                << '\n';
     m_player.update(deltaTime);
 }
 

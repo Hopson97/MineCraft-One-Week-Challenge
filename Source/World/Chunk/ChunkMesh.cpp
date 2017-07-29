@@ -44,10 +44,6 @@ void ChunkMesh::addFace(const std::vector<GLfloat>& blockFace,
 
 void ChunkMesh::bufferMesh()
 {
-    std::cout   << "Buffered"
-                << "\nVertex:   " << m_mesh.vertexPositions.size()  / 3
-                << "\nTextures: " << m_mesh.textureCoords.size()    / 2
-                << "\nIndices:  " << m_mesh.indices.size()          / 1.5  << "\n";
     m_model.addData(m_mesh);
 
     m_mesh.vertexPositions.clear();
