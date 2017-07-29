@@ -18,6 +18,8 @@ class World : IChunk
 
         void renderWorld(RenderMaster& master);
 
+        void addChunk(int x, int z);
+
     private:
         std::vector<Chunk>  m_chunks;
         std::vector<Chunk*> m_changedChunks;

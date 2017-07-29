@@ -4,7 +4,7 @@
 
 Player::Player()
 {
-    position = {-1, 3, -1};
+    position = {-1, 16 * 3.5, -1};
 }
 
 void Player::handleInput(const sf::RenderWindow& window)
@@ -76,8 +76,8 @@ void Player::mouseInput(const sf::RenderWindow& window)
     if      (rotation.y >  360) rotation.y = 0;
     else if (rotation.y < 0)    rotation.y = 360;
 
-    auto cx = static_cast<int>(window.getSize().x / 4);
-    auto cy = static_cast<int>(window.getSize().y / 4);
+    auto cx = static_cast<int>(window.getSize().x / 2);
+    auto cy = static_cast<int>(window.getSize().y / 2);
 
     sf::Mouse::setPosition({cx, cy}, window);
 

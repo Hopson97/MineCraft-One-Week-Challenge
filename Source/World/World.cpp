@@ -47,7 +47,7 @@ World::World()
     {
         for (int z = 0; z < temp_worldSize; z++)
         {
-            m_chunks.emplace_back(*this, sf::Vector2i(x, z));
+            addChunk(x, z);
         }
     }
 
@@ -106,5 +106,10 @@ void World::renderWorld(RenderMaster& renderer)
 
     for (auto& chunk : m_chunks)
         chunk.drawChunks(renderer);
+}
+
+void World::addChunk(int x, int z)
+{
+    m_chunks.emplace_back(*this, sf::Vector2i(x, z));
 }
 
