@@ -21,7 +21,12 @@ struct ChunkBlock
         return id == other.id;
     }
 
-    Block_t id = 1;
+    bool operator !=(ChunkBlock other)
+    {
+        return id != other.id;
+    }
+
+    Block_t id = 0;
 };
 
 #endif // CHUNKBLOCK_H_INCLUDED

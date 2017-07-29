@@ -13,6 +13,25 @@ Chunk::Chunk(World& world, const sf::Vector2i& location)
     {
         m_chunks.emplace_back(sf::Vector3i(location.x, y, location.y), world);
     }
+
+    int h =  m_chunks.size() * CHUNK_SIZE - 1;
+    for (int y = 0; y < (int)m_chunks.size() * CHUNK_SIZE; y++)
+    for (int x = 0; x < 16; x++)
+    for (int z = 0; z < 16; z++)
+    {
+        if (y == h)
+        {
+            setBlock(x, y, z, BlockId::Grass);
+        }
+        else if (y > h - 3)
+        {
+            setBlock(x, y, z, BlockId::Dirt);
+        }
+        else
+        {
+            setBlock(x, y, z, BlockId::Stone);
+        }
+    }
 }
 
 void Chunk::makeAllMeshtemp()
@@ -30,6 +49,9 @@ void Chunk::setBlock(int x, int y, int z, ChunkBlock block)
 {
     if (outOfBound(x, y, z))
         return;
+
+    int bY = y % CHUNK_SIZE;
+    m_chunks.at(y / CHUNK_SIZE).setBlock(x, bY, z, block);
 }
 
 //Chunk block to SECTION BLOCK positions

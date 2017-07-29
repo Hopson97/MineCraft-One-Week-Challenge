@@ -14,6 +14,8 @@ class World : IChunk
         ChunkBlock  getBlock    (int x, int y, int z) const             override;
         void        setBlock    (int x, int y, int z, ChunkBlock block) override;
 
+        void editBlock(int x, int y, int z, ChunkBlock block);
+
         void renderWorld(RenderMaster& master);
 
     private:
