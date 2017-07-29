@@ -5,6 +5,7 @@
 ChunkSection::ChunkSection()
 {
     m_location = {0, 0, 0};
+    static_assert(sizeof(m_blocks) == CHUNK_VOLUME, "wot");
 }
 
 void ChunkSection::setBlock(int x, int y, int z, ChunkBlock block)

@@ -8,6 +8,7 @@
 
 #include <vector>
 #include <iostream>
+#include <cassert>
 
 namespace
 {
@@ -95,17 +96,20 @@ void ChunkMeshBuilder::buildMesh(ChunkMesh& mesh)
 
     AdjacentBlockPositions directions;
 
+    int itr = 0;
     for (int8_t y = 0; y < CHUNK_SIZE; ++y)
     for (int8_t x = 0; x < CHUNK_SIZE; ++x)
     for (int8_t z = 0; z < CHUNK_SIZE; ++z)
     {
+        itr++;
         sf::Vector3i position(x, y, z);
         ChunkBlock   block = m_pChunk->getBlock(x, y, z);
 
         if (block == BlockId::Air)
         {
-            continue;
+            //continue;
         }
+
 
         m_pBlockData = &block.getData().getBlockData();
         auto& data = *m_pBlockData;
@@ -114,17 +118,17 @@ void ChunkMeshBuilder::buildMesh(ChunkMesh& mesh)
 
         //Up/ Down
         tryAddFaceToMesh(bottomFace,    data.texBottomCoord,    position, directions.down);
-        tryAddFaceToMesh(topFace,       data.texTopCoord,   position, directions.up);
+        tryAddFaceToMesh(topFace,       data.texTopCoord,       position, directions.up);
 
         //Left/ Right
-        tryAddFaceToMesh(leftFace,      data.texSideCoord,  position, directions.left);
-        tryAddFaceToMesh(rightFace,     data.texSideCoord,  position, directions.right);
+        tryAddFaceToMesh(leftFace,      data.texSideCoord,      position, directions.left);
+        tryAddFaceToMesh(rightFace,     data.texSideCoord,      position, directions.right);
 
         //Front/ Back
-        tryAddFaceToMesh(frontFace,     data.texSideCoord,  position, directions.front);
-        tryAddFaceToMesh(backFace,      data.texSideCoord,  position, directions.back);
+        tryAddFaceToMesh(frontFace,     data.texSideCoord,      position, directions.front);
+        tryAddFaceToMesh(backFace,      data.texSideCoord,      position, directions.back);
     }
-    std::cout   << "End mesh build, faces: "
+    std::cout   << "End mesh build, faces: " << " itr: " << itr << " "
                 << faces << " Time: "
                 << c.getElapsedTime().asSeconds() * 1000
                 << "ms\n";
@@ -151,7 +155,7 @@ bool ChunkMeshBuilder::shouldMakeFace(const sf::Vector3i& adjBlock,
     auto block = m_pChunk->getBlock(adjBlock.x, adjBlock.y, adjBlock.z);
     //auto& data  = block.getData();
 
-    if (block == 0)
+    if (block == BlockId::Air)
     {
         return true;
     }

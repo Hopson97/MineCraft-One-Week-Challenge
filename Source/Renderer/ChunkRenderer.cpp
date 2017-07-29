@@ -25,7 +25,7 @@ void ChunkRenderer::render(const Camera& camera)
         const ChunkMesh& m = *mesh;
 
         m.getModel().bindVAO();
-        glDrawElements(GL_TRIANGLES, m.getModel().getIndicesCount(), GL_UNSIGNED_BYTE, nullptr);
+        glDrawElements(GL_TRIANGLES, m.getModel().getIndicesCount(), GL_UNSIGNED_INT, nullptr);
     }
 
     m_chunks.clear();

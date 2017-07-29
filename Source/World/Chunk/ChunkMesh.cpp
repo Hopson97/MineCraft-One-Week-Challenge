@@ -12,6 +12,7 @@ void ChunkMesh::addFace(const std::vector<GLfloat>& blockFace,
                         const sf::Vector3i&         chunkPosition,
                         const sf::Vector3i&         blockPosition)
 {
+
     auto& verticies = m_mesh.vertexPositions;
     auto& texCoords = m_mesh.textureCoords;
     auto& indices   = m_mesh.indices;
@@ -25,6 +26,7 @@ void ChunkMesh::addFace(const std::vector<GLfloat>& blockFace,
         verticies.push_back(blockFace[index++] + chunkPosition.x * CHUNK_SIZE + blockPosition.x);
         verticies.push_back(blockFace[index++] + chunkPosition.y * CHUNK_SIZE + blockPosition.y);
         verticies.push_back(blockFace[index++] + chunkPosition.z * CHUNK_SIZE + blockPosition.z);
+
     }
 
     indices.insert(indices.end(),
@@ -43,9 +45,9 @@ void ChunkMesh::addFace(const std::vector<GLfloat>& blockFace,
 void ChunkMesh::bufferMesh()
 {
     std::cout   << "Buffered"
-                << "\nVertex:   " << m_mesh.vertexPositions.size()
-                << "\nTextures: " << m_mesh.textureCoords.size()
-                << "\nIndices:  " << m_mesh.indices.size() << "\n";
+                << "\nVertex:   " << m_mesh.vertexPositions.size()  / 3
+                << "\nTextures: " << m_mesh.textureCoords.size()    / 2
+                << "\nIndices:  " << m_mesh.indices.size()          / 1.5  << "\n";
     m_model.addData(m_mesh);
 
     m_mesh.vertexPositions.clear();
