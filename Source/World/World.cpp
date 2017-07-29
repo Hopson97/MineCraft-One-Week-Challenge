@@ -4,9 +4,42 @@
 
 #include <iostream>
 
-constexpr int temp_worldSize = 8;
+namespace
+{
+    constexpr int temp_worldSize = 8;
 
+    struct VectorXZ
+    {
+        int x, z;
+    };
 
+    VectorXZ getBlockXZ(int x, int z)
+    {
+        return
+        {
+            x % CHUNK_SIZE,
+            z % CHUNK_SIZE
+        };
+    }
+
+    VectorXZ getChunkXZ(int x, int z)
+    {
+        return
+        {
+            x / CHUNK_SIZE,
+            z / CHUNK_SIZE
+        };
+    }
+
+    bool isOutOfBounds(const VectorXZ& chunkPos)
+    {
+        if (chunkPos.x < 0) return true;
+        if (chunkPos.z < 0) return true;
+        if (chunkPos.x >= temp_worldSize) return true;
+        if (chunkPos.z >= temp_worldSize) return true;
+        return false;
+    }
+}
 
 World::World()
 {
@@ -25,61 +58,52 @@ World::World()
 //world coords into chunk column coords
 ChunkBlock World::getBlock(int x, int y, int z) const
 {
-    int bX = x % CHUNK_SIZE;
-    int bZ = z % CHUNK_SIZE;
+    auto bp = getBlockXZ(x, z);
+    auto cp = getChunkXZ(x, z);
 
-    int cX = x / CHUNK_SIZE;
-    int cZ = z / CHUNK_SIZE;
+    if (isOutOfBounds(cp))
+    {
+        return BlockId::Air;
+    }
 
-    if (cX < 0) return BlockId::Air;
-    if (cZ < 0) return BlockId::Air;
-    if (cX >= temp_worldSize) return BlockId::Air;
-    if (cZ >= temp_worldSize) return BlockId::Air;
-
-    return m_chunks.at(cX * temp_worldSize + cZ).getBlock(bX, y, bZ);
+    return m_chunks.at(cp.x * temp_worldSize + cp.z).getBlock(bp.x, y, bp.z);
 }
 
 void World::setBlock(int x, int y, int z, ChunkBlock block)
 {
-    int bX = x % CHUNK_SIZE;
-    int bZ = z % CHUNK_SIZE;
+    auto bp = getBlockXZ(x, z);
+    auto cp = getChunkXZ(x, z);
 
-    int cX = x / CHUNK_SIZE;
-    int cZ = z / CHUNK_SIZE;
+    if (isOutOfBounds(cp))
+    {
+        return;
+    }
 
-    if (cX < 0) return;
-    if (cZ < 0) return;
-    if (cX >= temp_worldSize) return;
-    if (cZ >= temp_worldSize) return;
-
-    m_chunks.at(cX * temp_worldSize + cZ).setBlock(bX, y, bZ, block);
+    m_chunks.at(cp.x * temp_worldSize + cp.z).setBlock(bp.x, y, bp.z, block);
 }
 
 void World::editBlock(int x, int y, int z, ChunkBlock block)
 {
-    int cX = x / CHUNK_SIZE;
-    int cZ = z / CHUNK_SIZE;
+    auto bp = getBlockXZ(x, z);
+    auto cp = getChunkXZ(x, z);
 
-    if (cX < 0) return;
-    if (cZ < 0) return;
-    if (cX >= temp_worldSize) return;
-    if (cZ >= temp_worldSize) return;
+    if (isOutOfBounds(cp))
+    {
+        return;
+    }
 
     setBlock(x, y, z, block);
-    m_changedChunks.push_back(&m_chunks.at(cX * temp_worldSize + cZ));
-
-    int bX = x % CHUNK_SIZE;
-    int bZ = z % CHUNK_SIZE;
-    int bY = y % CHUNK_SIZE;
-
-    if (bX == 0) m_changedChunks.push_back(&m_chunks.at((cX - 1) * temp_worldSize + cZ));
+    m_changedChunks.push_back(&m_chunks.at(cp.x * temp_worldSize + cp.z));
 }
-
-
-
 
 void World::renderWorld(RenderMaster& renderer)
 {
+    for (auto& chunk : m_changedChunks)
+    {
+        chunk->makeAllMeshtemp();
+    }
+    m_changedChunks.clear();
+
     for (auto& chunk : m_chunks)
         chunk.drawChunks(renderer);
 }
