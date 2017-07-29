@@ -44,6 +44,14 @@ void StatePlaying::handleInput()
                     m_world.editBlock(x, y, z, 0);
                     break;
                 }
+                else if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
+                {
+                    timer.restart();
+                    m_world.editBlock(lastPosition.x,
+                                      lastPosition.y,
+                                      lastPosition.z, 1);
+                    break;
+                }
             }
         }
         lastPosition = ray.getEnd();

@@ -6,6 +6,8 @@
 
 constexpr int temp_worldSize = 8;
 
+
+
 World::World()
 {
     for (int x = 0; x < temp_worldSize; x++)
@@ -64,7 +66,13 @@ void World::editBlock(int x, int y, int z, ChunkBlock block)
     if (cZ >= temp_worldSize) return;
 
     setBlock(x, y, z, block);
-    m_chunks.at(cX * temp_worldSize + cZ).makeAllMeshtemp();
+    m_changedChunks.push_back(&m_chunks.at(cX * temp_worldSize + cZ));
+
+    int bX = x % CHUNK_SIZE;
+    int bZ = z % CHUNK_SIZE;
+    int bY = y % CHUNK_SIZE;
+
+    if (bX == 0) m_changedChunks.push_back(&m_chunks.at((cX - 1) * temp_worldSize + cZ));
 }
 
 
