@@ -17,7 +17,7 @@ class World : IChunk
         void renderWorld(RenderMaster& master);
 
     private:
-        Chunk m_chunk;
+        std::vector<Chunk> m_chunks;
 };
 
 #endif // WORLD_H_INCLUDED

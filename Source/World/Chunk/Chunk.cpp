@@ -5,14 +5,18 @@
 
 #include <iostream>
 
-Chunk::Chunk(World& world)
-:   m_pWorld    (&world)
+Chunk::Chunk(World& world, const sf::Vector2i& location)
+:   m_location  (location)
+,   m_pWorld    (&world)
 {
     for (int y = 0; y < 3; y++)
     {
-        m_chunks.emplace_back(sf::Vector3i(0, y, 0), world);
+        m_chunks.emplace_back(sf::Vector3i(location.x, y, location.y), world);
     }
+}
 
+void Chunk::makeAllMeshtemp()
+{
     for (auto& chunk : m_chunks)
     {
         ChunkMeshBuilder builder(chunk);
