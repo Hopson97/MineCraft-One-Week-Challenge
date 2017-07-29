@@ -23,6 +23,10 @@ void Player::keyboardInput()
 {
     glm::vec3 change;
     float speed = 0.5;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
+    {
+        speed *= 3;
+    }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {

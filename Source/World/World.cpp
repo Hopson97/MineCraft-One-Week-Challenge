@@ -15,7 +15,7 @@ ChunkBlock World::getBlock(int x, int y, int z) const
     int bZ = z % CHUNK_SIZE;
 
     int cX = x / CHUNK_SIZE;
-    int cZ = y / CHUNK_SIZE;
+    int cZ = z / CHUNK_SIZE;
 
     return m_chunk.getBlock(bX, bY, bZ);
 }

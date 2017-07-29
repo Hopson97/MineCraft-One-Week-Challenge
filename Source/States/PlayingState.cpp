@@ -23,6 +23,8 @@ void StatePlaying::handleInput()
 
 void StatePlaying::update(float deltaTime)
 {
+    //std::cout << "X: " << m_player.position.x << " Y: " <<
+
     m_player.update(deltaTime);
 }
 
