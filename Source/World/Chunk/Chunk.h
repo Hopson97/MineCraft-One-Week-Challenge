@@ -11,7 +11,7 @@ class Chunk : public IChunk
     public:
         Chunk(World& world, const sf::Vector2i& location);
 
-        void makeAllMeshtemp();
+        bool makeMesh();
 
         void setBlock       (int x, int y, int z, ChunkBlock block) override;
         ChunkBlock getBlock (int x, int y, int z) const override;
@@ -19,12 +19,14 @@ class Chunk : public IChunk
         void drawChunks (RenderMaster& renderer);
 
     private:
-        bool outOfBound(int x, int y, int z) const ;
+        bool outOfBound(int x, int y, int z) const;
 
         std::vector<ChunkSection>   m_chunks;
         sf::Vector2i                m_location;
 
         World* m_pWorld;
+
+        bool m_isLoaded = false;
 
 };
 

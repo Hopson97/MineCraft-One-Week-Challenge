@@ -52,7 +52,9 @@ World::World()
     }
 
     for (auto& chunk : m_chunks)
-        chunk.makeAllMeshtemp();
+    {
+        chunk.makeMesh();
+    }
 }
 
 //world coords into chunk column coords
@@ -84,7 +86,6 @@ void World::setBlock(int x, int y, int z, ChunkBlock block)
 
 void World::editBlock(int x, int y, int z, ChunkBlock block)
 {
-    auto bp = getBlockXZ(x, z);
     auto cp = getChunkXZ(x, z);
 
     if (isOutOfBounds(cp))
@@ -100,7 +101,7 @@ void World::renderWorld(RenderMaster& renderer)
 {
     for (auto& chunk : m_changedChunks)
     {
-        chunk->makeAllMeshtemp();
+        chunk->makeMesh();
     }
     m_changedChunks.clear();
 

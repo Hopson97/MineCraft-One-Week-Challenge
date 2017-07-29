@@ -20,9 +20,9 @@ class ChunkSection : public IChunk
         void setBlock       (int x, int y, int z, ChunkBlock block) override;
         ChunkBlock getBlock (int x, int y, int z) const override;
 
-        const sf::Vector3i getLocation() const;
+        const sf::Vector3i getLocation() const noexcept;
 
-        ///@TODO make private
+        bool hasMesh() const noexcept;
 
 
     private:
@@ -31,12 +31,12 @@ class ChunkSection : public IChunk
         static bool outOfBounds (int value);
         static int  getIndex    (int x, int y, int z);
 
-
         std::array<ChunkBlock, CHUNK_VOLUME>    m_blocks;
         ChunkMesh                               m_mesh;
         sf::Vector3i                            m_location;
 
         World* m_pWorld;
+        bool m_hasMesh = false;
 };
 
 #endif // CHUNKSECTION_H_INCLUDED

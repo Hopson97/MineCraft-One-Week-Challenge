@@ -11,6 +11,7 @@ ChunkSection::ChunkSection(const sf::Vector3i& location, World& world)
 ,   m_pWorld    (&world)
 {
     static_assert(sizeof(m_blocks) == CHUNK_VOLUME, "Size too big, yo");
+    std::cout << sizeof(m_blocks) << " " << sizeof(*this) << std::endl;
 }
 
 void ChunkSection::setBlock(int x, int y, int z, ChunkBlock block)
@@ -40,9 +41,14 @@ ChunkBlock ChunkSection::getBlock(int x, int y, int z) const
     return m_blocks[getIndex(x, y, z)];
 }
 
-const sf::Vector3i ChunkSection::getLocation() const
+const sf::Vector3i ChunkSection::getLocation() const noexcept
 {
     return m_location;
+}
+
+bool ChunkSection::hasMesh() const noexcept
+{
+    return m_hasMesh;
 }
 
 sf::Vector3i ChunkSection::toWorldPosition(int x, int y, int z) const

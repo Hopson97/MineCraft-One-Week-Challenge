@@ -2,6 +2,7 @@
 
 #include "../../Renderer/RenderMaster.h"
 #include "ChunkMeshBuilder.h"
+#include "../../Util/Random.h"
 
 #include <iostream>
 
@@ -34,13 +35,16 @@ Chunk::Chunk(World& world, const sf::Vector2i& location)
     }
 }
 
-void Chunk::makeAllMeshtemp()
+bool Chunk::makeMesh()
 {
     for (auto& chunk : m_chunks)
     {
-        ChunkMeshBuilder builder(chunk);
-        builder.buildMesh(chunk.m_mesh);
-        chunk.m_mesh.bufferMesh();
+        if (!chunk.hasMesh())
+        {
+            ChunkMeshBuilder(chunk, chunk.m_mesh).buildMesh();
+            chunk.m_mesh.bufferMesh();
+            chunk.m_hasMesh = true;
+        }
     }
 }
 
@@ -88,7 +92,8 @@ void Chunk::drawChunks(RenderMaster& renderer)
 {
     for (auto& chunk : m_chunks)
     {
-        renderer.drawChunk(chunk.m_mesh);
+        if (chunk.hasMesh())
+            renderer.drawChunk(chunk.m_mesh);
     }
 }
 

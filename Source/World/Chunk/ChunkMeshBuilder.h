@@ -13,9 +13,9 @@ class BlockDataHolder;
 class ChunkMeshBuilder
 {
     public:
-        ChunkMeshBuilder(ChunkSection& chunk);
+        ChunkMeshBuilder(const ChunkSection& chunk, ChunkMesh& mesh);
 
-        void buildMesh(ChunkMesh& mesh);
+        void buildMesh();
 
     private:
         void tryAddFaceToMesh(const std::vector<GLfloat>& blockFace,
@@ -26,7 +26,7 @@ class ChunkMeshBuilder
         bool shouldMakeFace (const sf::Vector3i& blockPosition,
                              const BlockDataHolder& blockData);
 
-        ChunkSection*           m_pChunk        = nullptr;
+        const ChunkSection*           m_pChunk        = nullptr;
         ChunkMesh*              m_pMesh         = nullptr;
         const BlockDataHolder*  m_pBlockData    = nullptr;
 };
