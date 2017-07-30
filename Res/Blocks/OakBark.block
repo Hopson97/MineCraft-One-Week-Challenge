@@ -1,5 +1,11 @@
 Name
 OakBark
 
-TexAll
-2 0
+TexTop
+5 0
+
+TexSide
+4 0
+
+TexBottom
+5 0

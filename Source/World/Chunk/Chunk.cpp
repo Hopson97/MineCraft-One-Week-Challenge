@@ -81,7 +81,8 @@ bool Chunk::hasLoaded() const
 
 void Chunk::load()
 {
-    static Random<std::minstd_rand> rand(500);
+    Random<std::minstd_rand> rand((m_location.x ^ m_location.y) << 2 );
+
     NoiseGenerator temp_noiseGen(6345);
     std::array<int, CHUNK_AREA> heightMap;
     std::vector<sf::Vector3i> treelocations;
@@ -91,7 +92,7 @@ void Chunk::load()
     {
         for (int z = 0; z < CHUNK_SIZE; z++)
         {
-            int h = temp_noiseGen.getHeight(x, z, m_location.x, m_location.y);
+            int h = temp_noiseGen.getHeight(x, z, m_location.x + 10, m_location.y + 10);
             heightMap[x * CHUNK_SIZE + z] = h;
 
             maxValue = std::max(maxValue, h);
@@ -111,24 +112,35 @@ void Chunk::load()
 
         if (y > h)
         {
-            setBlock(x, y, z, BlockId::Air);
+            continue;
         }
         else if (y == h)
         {
             setBlock(x, y, z, BlockId::Grass);
-            if (rand.intInRange(0, 100) == 10)
-            {
-                treelocations.emplace_back(x, y, z);
-            }
+        }
+        else if (y > h - 3)
+        {
+            setBlock(x, y, z, BlockId::Dirt);
         }
         else
         {
-            setBlock(x, y, z, BlockId::Dirt);
+            setBlock(x, y, z, BlockId::Stone);
         }
     }
 
     for (auto& tree : treelocations)
     {
+        int h = rand.intInRange(5, 9);
+        for (int y = 0; y < h; y++)
+        {
+            setBlock(tree.x, tree.y + y, tree.z, BlockId::OakBark);
+        }
+        for (int x = -2; x < 2; x++)
+        for (int z = -2; z < 2; z++)
+        for (int y =  0; y < 3; y++)
+        {
+            setBlock(tree.x + x, tree.y + h + y, tree.z + z, BlockId::OakLeaf);
+        }
 
     }
 

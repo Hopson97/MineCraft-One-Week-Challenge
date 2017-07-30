@@ -11,6 +11,8 @@ enum class BlockId :  Block_t
     Grass,
     Dirt,
     Stone,
+    OakBark,
+    OakLeaf,
 
     NUM_TYPES
 };
