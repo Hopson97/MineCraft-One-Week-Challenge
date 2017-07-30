@@ -61,6 +61,7 @@ void StatePlaying::handleInput()
 void StatePlaying::update(float deltaTime)
 {
     m_player.update(deltaTime);
+    m_world.update(m_pApplication->getCamera());
 }
 
 void StatePlaying::render(RenderMaster& renderer)

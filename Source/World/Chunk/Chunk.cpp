@@ -14,9 +14,13 @@ bool Chunk::makeMesh()
 {
     for (auto& chunk : m_chunks)
     {
-        chunk.makeMesh();
+        if (!chunk.hasMesh())
+        {
+            chunk.makeMesh();
+            return true;
+        }
     }
-    return 1;
+    return false;
 }
 
 
