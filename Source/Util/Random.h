@@ -31,9 +31,9 @@ template<typename REngine = std::mt19937>
 class Random
 {
     public:
-        Random()
+        Random(int n = std::time(nullptr))
         {
-            m_randomEngine.seed(std::time(nullptr));
+            m_randomEngine.seed(n);
             for (int i = 0; i < 5; i++)
                 intInRange(i, i * 5);
         }

@@ -39,8 +39,6 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
 
-
-
     m_quadRenderer  .render (camera);
     m_cubeRenderer  .render (camera);
     m_chunkRenderer .render (camera);
