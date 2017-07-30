@@ -6,6 +6,7 @@
 
 #include "../World/Chunk/Chunk.h"
 #include "../World/World.h"
+#include "../Util/FPSCounter.h"
 
 class StatePlaying : public StateBase
 {
@@ -23,8 +24,9 @@ class StatePlaying : public StateBase
 
     private:
         Player m_player;
-
         World m_world;
+
+        FPSCounter m_fpsCounter;
 };
 
 #endif // PLAYINGSTATE_H_INCLUDED

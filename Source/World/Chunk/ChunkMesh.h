@@ -21,7 +21,7 @@ class ChunkMesh
 
         const Model& getModel() const;
 
-
+        int faces = 0;
     private:
         Mesh  m_mesh;
         Model m_model;

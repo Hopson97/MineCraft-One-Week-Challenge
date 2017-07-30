@@ -114,7 +114,8 @@ void ChunkMeshBuilder::buildMesh()
 
 
         //Up/ Down
-        tryAddFaceToMesh(bottomFace,    data.texBottomCoord,    position, directions.down);
+        if ((y == 0) && (m_pChunk->getLocation().y > 0))
+            tryAddFaceToMesh(bottomFace, data.texBottomCoord, position, directions.down);
         tryAddFaceToMesh(topFace,       data.texTopCoord,       position, directions.up);
 
         //Left/ Right

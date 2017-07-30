@@ -4,6 +4,13 @@
 
 #include <iostream>
 
+#include "../World/Chunk/ChunkMesh.h"
+
+void RenderMaster::drawSFML(const sf::Drawable& drawable)
+{
+    m_sfmlRenderer.add(drawable);
+}
+
 void RenderMaster::drawQuad(const glm::vec3& pos)
 {
     m_quadRenderer.add(pos);
@@ -16,7 +23,8 @@ void RenderMaster::drawCube(const glm::vec3& pos)
 
 void RenderMaster::drawChunk(const ChunkMesh& mesh)
 {
-    m_chunkRenderer.add(mesh);
+    if (mesh.faces > 0)
+        m_chunkRenderer.add(mesh);
 }
 
 void RenderMaster::drawSky()

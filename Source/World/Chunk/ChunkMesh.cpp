@@ -12,7 +12,7 @@ void ChunkMesh::addFace(const std::vector<GLfloat>& blockFace,
                         const sf::Vector3i&         chunkPosition,
                         const sf::Vector3i&         blockPosition)
 {
-
+    faces++;
     auto& verticies = m_mesh.vertexPositions;
     auto& texCoords = m_mesh.textureCoords;
     auto& indices   = m_mesh.indices;

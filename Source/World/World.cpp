@@ -6,8 +6,6 @@
 
 #include "../Maths/Vector2XZ.h"
 
-
-
 namespace
 {
     constexpr int temp_worldSize = 16;

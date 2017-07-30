@@ -60,14 +60,17 @@ void StatePlaying::handleInput()
 
 void StatePlaying::update(float deltaTime)
 {
+    m_fpsCounter.update();
     m_player.update(deltaTime);
     m_world.update(m_pApplication->getCamera());
 }
 
 void StatePlaying::render(RenderMaster& renderer)
 {
+
     renderer.drawCube({-1.1, 0, -1.1});
     m_world.renderWorld(renderer);
+    m_fpsCounter.draw(renderer);
 }
 
 void StatePlaying::onOpen()

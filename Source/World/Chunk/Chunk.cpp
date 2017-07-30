@@ -108,7 +108,7 @@ void Chunk::load()
 
 ChunkSection& Chunk::getSection(int index)
 {
-    while (index >= m_chunks.size())
+    while (index >= (int)m_chunks.size())
     {
         m_chunks.emplace_back(sf::Vector3i(m_location.x, m_chunks.size(), m_location.y), *m_pWorld);
     }

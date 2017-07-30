@@ -3,14 +3,16 @@
 
 #include <SFML/Graphics.hpp>
 
+class RenderMaster;
+
 class FPSCounter
 {
     public:
         FPSCounter();
 
-        float getFPS();
-
         void update();
+
+        void draw(RenderMaster& renderer);
 
     private:
         sf::Text m_text;
