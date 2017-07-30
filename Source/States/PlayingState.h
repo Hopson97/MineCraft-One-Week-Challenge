@@ -12,12 +12,14 @@ class StatePlaying : public StateBase
     public:
         StatePlaying(Application& app);
 
-        void handleEvent(sf::Event e);
-        void handleInput();
+        void handleEvent(sf::Event e) override;
+        void handleInput() override;
 
-        void update(float deltaTime);
+        void update(float deltaTime) override;
 
-        void render(RenderMaster& renderer);
+        void render(RenderMaster& renderer) override;
+
+        void onOpen() override;
 
     private:
         Player m_player;

@@ -22,6 +22,7 @@ class Application
         {
             m_states.push_back(std::make_unique<T>(std::forward<Args>(args)...));
             auto& s = m_states.back();
+            s->onOpen();
         }
 
         void popState();
@@ -29,6 +30,9 @@ class Application
         Camera& getCamera() { return m_camera; }
 
         const sf::RenderWindow& getWindow() const { return m_context.window; }
+
+        void turnOffMouse();
+        void turnOnMouse ();
 
     private:
         void handleEvents();

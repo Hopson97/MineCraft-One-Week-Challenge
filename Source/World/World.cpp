@@ -10,7 +10,7 @@
 
 namespace
 {
-    constexpr int temp_worldSize = 32;
+    constexpr int temp_worldSize = 16;
 
     VectorXZ getBlockXZ(int x, int z)
     {

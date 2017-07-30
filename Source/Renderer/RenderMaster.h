@@ -7,6 +7,7 @@
 #include "CubeRenderer.h"
 #include "ChunkRenderer.h"
 #include "SkyboxRenderer.h"
+#include "SFMLRenderer.h"
 
 class Camera;
 class ChunkMesh;
@@ -26,6 +27,7 @@ class RenderMaster
         CubeRenderer    m_cubeRenderer;
         ChunkRenderer   m_chunkRenderer;
         SkyboxRenderer  m_skyboxRenderer;
+        SFMLRenderer    m_sfmlRenderer;
 
         bool m_drawBox = false;
 };

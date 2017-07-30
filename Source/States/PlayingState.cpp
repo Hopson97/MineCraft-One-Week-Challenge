@@ -69,3 +69,8 @@ void StatePlaying::render(RenderMaster& renderer)
     renderer.drawCube({-1.1, 0, -1.1});
     m_world.renderWorld(renderer);
 }
+
+void StatePlaying::onOpen()
+{
+    m_pApplication->turnOffMouse();
+}

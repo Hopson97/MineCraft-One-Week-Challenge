@@ -66,3 +66,14 @@ void Application::popState()
 {
     m_isPopState = true;
 }
+
+void Application::turnOffMouse()
+{
+    m_context.window.setMouseCursorVisible(false);
+}
+
+void Application::turnOnMouse()
+{
+    m_context.window.setMouseCursorVisible(true);
+}
+
