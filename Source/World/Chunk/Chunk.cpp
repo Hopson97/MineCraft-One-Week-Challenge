@@ -1,7 +1,6 @@
 #include "Chunk.h"
 
 #include "../../Renderer/RenderMaster.h"
-#include "ChunkMeshBuilder.h"
 #include "../../Util/Random.h"
 
 #include <iostream>
@@ -9,43 +8,15 @@
 Chunk::Chunk(World& world, const sf::Vector2i& location)
 :   m_location  (location)
 ,   m_pWorld    (&world)
-{
-    for (int y = 0; y < 3; y++)
-    {
-        m_chunks.emplace_back(sf::Vector3i(location.x, y, location.y), world);
-    }
-
-    int h =  m_chunks.size() * CHUNK_SIZE - 1;
-    for (int y = 0; y < (int)m_chunks.size() * CHUNK_SIZE; y++)
-    for (int x = 0; x < 16; x++)
-    for (int z = 0; z < 16; z++)
-    {
-        if (y == h)
-        {
-            setBlock(x, y, z, BlockId::Grass);
-        }
-        else if (y > h - 3)
-        {
-            setBlock(x, y, z, BlockId::Dirt);
-        }
-        else
-        {
-            setBlock(x, y, z, BlockId::Stone);
-        }
-    }
-}
+{ }
 
 bool Chunk::makeMesh()
 {
     for (auto& chunk : m_chunks)
     {
-        if (!chunk.hasMesh())
-        {
-            ChunkMeshBuilder(chunk, chunk.m_mesh).buildMesh();
-            chunk.m_mesh.bufferMesh();
-            chunk.m_hasMesh = true;
-        }
+        chunk.makeMesh();
     }
+    return 1;
 }
 
 
@@ -88,12 +59,57 @@ bool Chunk::outOfBound(int x, int y, int z) const
     return false;
 }
 
-void Chunk::drawChunks(RenderMaster& renderer)
+void Chunk::drawChunks(RenderMaster& renderer) const
 {
-    for (auto& chunk : m_chunks)
+    for (const auto& chunk : m_chunks)
     {
         if (chunk.hasMesh())
             renderer.drawChunk(chunk.m_mesh);
     }
 }
+
+bool Chunk::hasLoaded() const
+{
+    return m_isLoaded;
+}
+
+void Chunk::load()
+{
+    for (int y = 0; y < 3; y++)
+    {
+        m_chunks.emplace_back(sf::Vector3i(m_location.x, y, m_location.y), *m_pWorld);
+    }
+
+    int h =  m_chunks.size() * CHUNK_SIZE - 1;
+    for (int y = 0; y < (int)m_chunks.size() * CHUNK_SIZE; y++)
+    for (int x = 0; x < 16; x++)
+    for (int z = 0; z < 16; z++)
+    {
+        if (y == h)
+        {
+            setBlock(x, y, z, BlockId::Grass);
+        }
+        else if (y > h - 3)
+        {
+            setBlock(x, y, z, BlockId::Dirt);
+        }
+        else
+        {
+            setBlock(x, y, z, BlockId::Stone);
+        }
+    }
+
+    m_isLoaded = true;
+}
+
+ChunkSection& Chunk::getSection(int index)
+{
+    while (index >= m_chunks.size())
+    {
+        m_chunks.emplace_back(sf::Vector3i(m_location.x, m_chunks.size(), m_location.y), *m_pWorld);
+    }
+    return m_chunks.at(index);
+}
+
+
 

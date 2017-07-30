@@ -24,6 +24,7 @@ class ChunkSection : public IChunk
 
         bool hasMesh() const noexcept;
 
+        void makeMesh();
 
     private:
         sf::Vector3i toWorldPosition (int x, int y, int z) const;

@@ -3,6 +3,7 @@
 #include "../Block/BlockId.h"
 
 #include "../World.h"
+#include "ChunkMeshBuilder.h"
 
 #include <iostream>
 
@@ -11,11 +12,11 @@ ChunkSection::ChunkSection(const sf::Vector3i& location, World& world)
 ,   m_pWorld    (&world)
 {
     static_assert(sizeof(m_blocks) == CHUNK_VOLUME, "Size too big, yo");
-    std::cout << sizeof(m_blocks) << " " << sizeof(*this) << std::endl;
 }
 
 void ChunkSection::setBlock(int x, int y, int z, ChunkBlock block)
 {
+    m_hasMesh = false;
     if (outOfBounds(x) ||
         outOfBounds(y) ||
         outOfBounds(z))
@@ -60,6 +61,18 @@ sf::Vector3i ChunkSection::toWorldPosition(int x, int y, int z) const
         m_location.z * CHUNK_SIZE + z
     };
 }
+
+void ChunkSection::makeMesh()
+{
+    if (!hasMesh())
+    {
+        ChunkMeshBuilder(*this, m_mesh).buildMesh();
+        m_mesh.bufferMesh();
+        m_hasMesh = true;
+    }
+}
+
+
 
 bool ChunkSection::outOfBounds(int value)
 {

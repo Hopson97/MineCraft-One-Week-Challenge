@@ -17,7 +17,7 @@ class QuadRenderer
 
         void add(const glm::vec3& position);
 
-        void renderQuads(const Camera& camera);
+        void render(const Camera& camera);
 
     private:
         std::vector<glm::vec3> m_quads;

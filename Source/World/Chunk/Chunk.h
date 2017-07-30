@@ -16,7 +16,12 @@ class Chunk : public IChunk
         void setBlock       (int x, int y, int z, ChunkBlock block) override;
         ChunkBlock getBlock (int x, int y, int z) const override;
 
-        void drawChunks (RenderMaster& renderer);
+        void drawChunks (RenderMaster& renderer) const;
+
+        bool hasLoaded() const;
+        void load();
+
+        ChunkSection& getSection(int index);
 
     private:
         bool outOfBound(int x, int y, int z) const;

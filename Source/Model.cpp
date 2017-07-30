@@ -35,6 +35,14 @@ Model& Model::operator=(Model&& other)
     return *this;
 }
 
+void Model::genVAO()
+{
+    if (m_vao != 0)
+        deleteData();
+
+    glGenVertexArrays(1, &m_vao);
+    glBindVertexArray(m_vao);
+}
 
 void Model::bindVAO() const
 {
@@ -43,13 +51,7 @@ void Model::bindVAO() const
 
 void Model::addData(const Mesh& mesh)
 {
-    if (m_vao != 0)
-        deleteData();
-
-    m_indicesCount = mesh.indices.size();
-
-    glGenVertexArrays(1, &m_vao);
-    glBindVertexArray(m_vao);
+    genVAO();
 
     addVBO(3, mesh.vertexPositions);
     addVBO(2, mesh.textureCoords);
@@ -80,6 +82,7 @@ void Model::addVBO(int dimensions, const std::vector<GLfloat>& data)
 
 void Model::addEBO(const std::vector<GLuint>& indices)
 {
+    m_indicesCount = indices.size();
     GLuint ebo;
     glGenBuffers(1, &ebo);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);

@@ -19,6 +19,12 @@ void RenderMaster::drawChunk(const ChunkMesh& mesh)
     m_chunkRenderer.add(mesh);
 }
 
+void RenderMaster::drawSky()
+{
+    m_drawBox = true;
+}
+
+
 void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
 {
     glClearColor(0.1, 0.5, 1.0, 1.0);
@@ -26,10 +32,16 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
 
-    m_quadRenderer.renderQuads  (camera);
-    m_cubeRenderer.render       (camera);
-    m_chunkRenderer.render      (camera);
+    m_quadRenderer  .render (camera);
+    m_cubeRenderer  .render (camera);
+    m_chunkRenderer .render (camera);
 
+    if (m_drawBox)
+    {
+        glDisable(GL_CULL_FACE);
+        m_skyboxRenderer.render (camera);
+        m_drawBox = false;
+    }
 
     window.display();
 }

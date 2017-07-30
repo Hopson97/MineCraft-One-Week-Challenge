@@ -4,7 +4,7 @@
 
 Player::Player()
 {
-    position = {-1, 16 * 3.5, -1};
+    position = {50, 16 * 3.5, 50};
 }
 
 void Player::handleInput(const sf::RenderWindow& window)
