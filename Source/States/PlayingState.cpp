@@ -73,10 +73,11 @@ void StatePlaying::update(float deltaTime)
 
 void StatePlaying::render(RenderMaster& renderer)
 {
+    static Entity cubeTest({0, 150, 0}, {50, 70, 25});
     m_fpsCounter.draw(renderer);
     renderer.drawSFML(m_crosshair);
 
-    renderer.drawCube({-1.1, 0, -1.1});
+    renderer.drawCube(cubeTest);
     m_world.renderWorld(renderer);
 
 }

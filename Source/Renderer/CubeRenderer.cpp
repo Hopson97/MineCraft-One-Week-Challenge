@@ -87,9 +87,9 @@ CubeRenderer::CubeRenderer()
     m_cubeModel.addData({vertexCoords, texCoords, indices});
 }
 
-void CubeRenderer::add(const glm::vec3& position)
+void CubeRenderer::add(const Entity& entity)
 {
-    m_quads.push_back(position);
+    m_cubes.push_back(&entity);
 }
 
 void CubeRenderer::render(const Camera& camera)
@@ -100,12 +100,12 @@ void CubeRenderer::render(const Camera& camera)
 
     m_shader.loadProjectionViewMatrix(camera.getProjectionViewMatrix());
 
-    for (auto& quad : m_quads)
+    for (auto& cube : m_cubes)
     {
-        m_shader.loadModelMatrix(makeModelMatrix({quad, {0, 0, 0}}));
+        m_shader.loadModelMatrix(makeModelMatrix(*cube));
         GL::drawElements(m_cubeModel.getIndicesCount());
     }
 
-    m_quads.clear();
+    m_cubes.clear();
 }
 

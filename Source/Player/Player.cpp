@@ -8,7 +8,7 @@
 
 
 Player::Player()
-:   Entity  ({25, 125, 25}, {0, 0, 0}, {0.5, 1, 0.5})
+:   Entity  ({25, 125, 25}, {0, 0, 0}, {0.5, 1.5, 0.5})
 {
 
 }
@@ -30,7 +30,7 @@ void Player::update(float dt, World& world)
 
     if (!m_isOnGround)
     {
-        velocity.y -= 45 * dt;
+        velocity.y -= 55 * dt;
     }
     m_isOnGround = false;
 
@@ -51,46 +51,42 @@ void Player::update(float dt, World& world)
 
 void Player::collide(World& world, const glm::vec3& vel, float dt)
 {
-    auto& d = box.dimensions;
-    auto& p = position;
-    auto& v = vel;
-
-    for (int x = p.x - d.x; x < p.x + d.x; x++)
-    for (int y = p.y - d.y; y < p.y + 0.7; y++)
-    for (int z = p.z - d.y; z < p.z + d.z; z++)
+    for (int x = position.x - box.dimensions.x; x < position.x + box.dimensions.x   ; x++)
+    for (int y = position.y - box.dimensions.y; y < position.y + box.dimensions.y   ; y++)
+    for (int z = position.z - box.dimensions.z; z < position.z + box.dimensions.z   ; z++)
     {
         auto block = world.getBlock(x, y, z);
 
         if (block != 0)
         {
-            if (v.x > 0)
+            if (vel.x > 0)
             {
-                p.x = x - d.x;
+                position.x = x - box.dimensions.x;
             }
-            else if (v.x < 0)
+            if (vel.x < 0)
             {
-                p.x = x + d.x + 1;
+                position.x = x + box.dimensions.x + 1;
             }
 
-            if (v.y > 0)
+            if (vel.y > 0)
             {
-                p.y = y - d.y;
+                position.y = y - box.dimensions.y;
                 velocity.y = 0;
             }
-            else if (v.y < 0)
+            if (vel.y < 0)
             {
-                p.y = y + d.y + 1;
+                position.y = y + box.dimensions.y + 1;
                 velocity.y = 0;
                 m_isOnGround = true;
             }
 
-            if (v.z > 0)
+            if (vel.z > 0)
             {
-                p.z = z - d.z;
+                position.z = z - box.dimensions.z;
             }
-            else if (v.x < 0)
+            if (vel.x < 0)
             {
-                p.z = z + d.z + 1;
+                position.z = z + box.dimensions.z + 1;
             }
         }
     }
@@ -129,7 +125,7 @@ void Player::keyboardInput()
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && m_isOnGround)
     {
-        change.y += speed * 50;
+        change.y += speed * 35;
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
     {

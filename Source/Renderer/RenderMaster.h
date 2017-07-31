@@ -17,7 +17,7 @@ class RenderMaster
     public:
         void drawSFML(const sf::Drawable& drawable);
         void drawQuad(const glm::vec3& pos);
-        void drawCube(const glm::vec3& pos);
+        void drawCube(const Entity& cube);
         void drawChunk(const ChunkMesh& mesh);
         void drawSky();
 

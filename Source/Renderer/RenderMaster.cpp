@@ -16,9 +16,9 @@ void RenderMaster::drawQuad(const glm::vec3& pos)
     m_quadRenderer.add(pos);
 }
 
-void RenderMaster::drawCube(const glm::vec3& pos)
+void RenderMaster::drawCube(const Entity& cube)
 {
-    m_cubeRenderer.add(pos);
+    m_cubeRenderer.add(cube);
 }
 
 void RenderMaster::drawChunk(const ChunkMesh& mesh)
