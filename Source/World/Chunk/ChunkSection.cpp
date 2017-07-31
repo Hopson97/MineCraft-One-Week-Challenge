@@ -71,6 +71,7 @@ void ChunkSection::makeMesh()
 {
     ChunkMeshBuilder(*this, m_mesh).buildMesh();
     m_hasMesh = true;
+    m_hasBufferedMesh = false;
 }
 
 void ChunkSection::bufferMesh()

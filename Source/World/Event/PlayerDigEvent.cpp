@@ -22,14 +22,15 @@ void PlayerDigEvent::dig(World& world)
     switch (m_buttonPress)
     {
         case sf::Mouse::Button::Left:{
-            ///@TODO Use player tool
-            world.setBlock(m_digSpot.x, m_digSpot.y, m_digSpot.z, 0);
+            world.updateChunk   (m_digSpot.x, m_digSpot.y, m_digSpot.z);
+            world.setBlock      (m_digSpot.x, m_digSpot.y, m_digSpot.z, 0);
             break;
         }
 
         case sf::Mouse::Button::Right:{
             ///@TODO Use player held item
-            world.setBlock(m_digSpot.x, m_digSpot.y, m_digSpot.z, 1);
+            world.updateChunk   (m_digSpot.x, m_digSpot.y, m_digSpot.z);
+            world.setBlock      (m_digSpot.x, m_digSpot.y, m_digSpot.z, 1);
             break;
         }
         default:

@@ -10,6 +10,7 @@
 
 class RenderMaster;
 class Camera;
+class Entity;
 
 class World
 {
@@ -20,6 +21,7 @@ class World
         void        setBlock    (int x, int y, int z, ChunkBlock block);
 
         void update(const Camera& camera);
+        void updateChunk(int blockX, int blockY, int blockZ);
 
         void renderWorld(RenderMaster& master);
 
@@ -28,6 +30,8 @@ class World
         static VectorXZ getBlockXZ(int x, int z);
         static VectorXZ getChunkXZ(int x, int z);
 
+        void collisionTest(Entity& entity);
+
         template<typename T, typename... Args>
         void addEvent(Args&&... args)
         {
@@ -35,7 +39,10 @@ class World
         }
 
     private:
+        void updateChunks();
+
         std::vector<std::unique_ptr<IWorldEvent>> m_events;
+        std::unordered_map<sf::Vector3i, ChunkSection*> m_chunkUpdates;
 
         ChunkManager m_chunkManager;
 };

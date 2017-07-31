@@ -4,9 +4,13 @@
 
 #include <iostream>
 
+#include "../World/World.h"
+
+
 Player::Player()
+:   Entity  ({25, 125, 25}, {0, 0, 0}, {0.5, 1, 0.5})
 {
-    position = {50, 200, 50};
+
 }
 
 void Player::handleInput(const sf::RenderWindow& window)
@@ -15,7 +19,7 @@ void Player::handleInput(const sf::RenderWindow& window)
     mouseInput(window);
 }
 
-void Player::update(float dt)
+void Player::update(float dt, World& world)
 {
     static sf::Clock c;
 
@@ -24,9 +28,74 @@ void Player::update(float dt)
         c.restart();
     }
 
-    position += m_velocity * dt;
-    m_velocity *= 0.95;
+    if (!m_isOnGround)
+    {
+        velocity.y -= 45 * dt;
+    }
+    m_isOnGround = false;
+
+    box.update(position);
+    velocity.x *= 0.95;
+    velocity.z *= 0.95;
+
+    position.x += velocity.x * dt;
+    collide (world, {velocity.x, 0, 0}, dt);
+
+    position.y += velocity.y * dt;
+    collide (world, {0, velocity.y, 0}, dt);
+
+    position.z += velocity.z * dt;
+    collide (world, {0, 0, velocity.z}, dt);
 }
+
+
+void Player::collide(World& world, const glm::vec3& vel, float dt)
+{
+    auto& d = box.dimensions;
+    auto& p = position;
+    auto& v = vel;
+
+    for (int x = p.x - d.x; x < p.x + d.x; x++)
+    for (int y = p.y - d.y; y < p.y + 0.7; y++)
+    for (int z = p.z - d.y; z < p.z + d.z; z++)
+    {
+        auto block = world.getBlock(x, y, z);
+
+        if (block != 0)
+        {
+            if (v.x > 0)
+            {
+                p.x = x - d.x;
+            }
+            else if (v.x < 0)
+            {
+                p.x = x + d.x + 1;
+            }
+
+            if (v.y > 0)
+            {
+                p.y = y - d.y;
+                velocity.y = 0;
+            }
+            else if (v.y < 0)
+            {
+                p.y = y + d.y + 1;
+                velocity.y = 0;
+                m_isOnGround = true;
+            }
+
+            if (v.z > 0)
+            {
+                p.z = z - d.z;
+            }
+            else if (v.x < 0)
+            {
+                p.z = z + d.z + 1;
+            }
+        }
+    }
+}
+
 
 void Player::keyboardInput()
 {
@@ -58,16 +127,16 @@ void Player::keyboardInput()
         change.z += glm::sin(glm::radians(rotation.y)) * speed;
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && m_isOnGround)
     {
-        change.y += speed;
+        change.y += speed * 50;
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
     {
         change.y -= speed;
     }
 
-    m_velocity += change;
+    velocity += change;
 }
 
 void Player::mouseInput(const sf::RenderWindow& window)

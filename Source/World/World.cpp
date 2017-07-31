@@ -10,17 +10,8 @@
 
 namespace
 {
-    constexpr int temp_worldSize = 16;
-    constexpr int renderDistance = 8;
-
-    bool isOutOfBounds(const VectorXZ& chunkPos)
-    {
-        if (chunkPos.x < 0) return true;
-        if (chunkPos.z < 0) return true;
-        if (chunkPos.x >= temp_worldSize) return true;
-        if (chunkPos.z >= temp_worldSize) return true;
-        return false;
-    }
+    constexpr int renderDistance = 5;
+    constexpr float GRAV = -3;
 }
 
 World::World()
@@ -33,11 +24,6 @@ ChunkBlock World::getBlock(int x, int y, int z)
     auto bp = getBlockXZ(x, z);
     auto cp = getChunkXZ(x, z);
 
-    if (isOutOfBounds(cp))
-    {
-        //return BlockId::Air;
-    }
-
     return m_chunkManager.getChunk(cp.x, cp.z).getBlock(bp.x, y, bp.z);
 }
 
@@ -48,11 +34,6 @@ void World::setBlock(int x, int y, int z, ChunkBlock block)
 
     auto bp = getBlockXZ(x, z);
     auto cp = getChunkXZ(x, z);
-
-    if (isOutOfBounds(cp))
-    {
-        //return;
-    }
 
     m_chunkManager.getChunk(cp.x, cp.z).setBlock(bp.x, y, bp.z, block);
 }
@@ -65,31 +46,71 @@ void World::update(const Camera& camera)
     {
         event->handle(*this);
     }
+    m_events.clear();
 
-    int cX = camera.position.x / CHUNK_SIZE;
-    int cZ = camera.position.z / CHUNK_SIZE;
+    updateChunks();
 
-    int minX = cX - renderDistance;
-    int maxX = cX + renderDistance;
-
-    int minZ = cZ - renderDistance;
-    int maxZ = cZ + renderDistance;
-
-    if (minZ < 0) minZ = 0;
-    if (minX < 0) minX = 0;
-
-    for (int x = minX; x < maxX; x++)
+    for (int x = 0; x < renderDistance; x++)
     {
-        for (int z = minZ; z < maxZ; z++)
+        for (int z = 0; z < renderDistance; z++)
         {
-            if (!m_chunkManager.chunkExistsAt(x, z))
-            {
-                m_chunkManager.loadChunk(x, z);
-            }
-            //make one mesh per frame maximum
             if (m_chunkManager.makeMesh(x, z))
                 return;
         }
+    }
+}
+
+void World::updateChunk(int blockX, int blockY, int blockZ)
+{
+    std::cout << "Update chunk" << " X: " << blockX
+                                << " Y: " << blockY
+                                << " Z: " << blockZ << "\n\n";
+
+    auto addChunkToUpdateBatch = [&](const sf::Vector3i& key, ChunkSection& section)
+    {
+        m_chunkUpdates.emplace(key, &section);
+    };
+
+    auto cp = getChunkXZ(blockX, blockZ);
+    auto cy        = blockY / CHUNK_SIZE;
+
+    sf::Vector3i key(cp.x, cy, cp.z);
+    addChunkToUpdateBatch(key, m_chunkManager.getChunk(cp.x, cp.z).getSection(cy));
+
+    auto sectionBlockXZ = getBlockXZ(blockX, blockZ);
+    auto sectionBlockY  = blockY % CHUNK_SIZE;
+
+    if (sectionBlockXZ.x == 0)
+    {
+        sf::Vector3i newKey(cp.x - 1, cy, cp.z);
+        addChunkToUpdateBatch(newKey, m_chunkManager.getChunk(newKey.x, newKey.z).getSection(newKey.y));
+    }
+    else if (sectionBlockXZ.x == CHUNK_SIZE - 1)
+    {
+        sf::Vector3i newKey(cp.x + 1, cy, cp.z);
+        addChunkToUpdateBatch(newKey, m_chunkManager.getChunk(newKey.x, newKey.z).getSection(newKey.y));
+    }
+
+    if (sectionBlockY == 0)
+    {
+        sf::Vector3i newKey(cp.x, cy - 1, cp.z);
+        addChunkToUpdateBatch(newKey, m_chunkManager.getChunk(newKey.x, newKey.z).getSection(newKey.y));
+    }
+    else if (sectionBlockY == CHUNK_SIZE - 1)
+    {
+        sf::Vector3i newKey(cp.x, cy + 1, cp.z);
+        addChunkToUpdateBatch(newKey, m_chunkManager.getChunk(newKey.x, newKey.z).getSection(newKey.y));
+    }
+
+    if (sectionBlockXZ.z == 0)
+    {
+        sf::Vector3i newKey(cp.x, cy, cp.z - 1);
+        addChunkToUpdateBatch(newKey, m_chunkManager.getChunk(newKey.x, newKey.z).getSection(newKey.y));
+    }
+    else if (sectionBlockXZ.z == CHUNK_SIZE - 1)
+    {
+        sf::Vector3i newKey(cp.x, cy, cp.z + 1);
+        addChunkToUpdateBatch(newKey, m_chunkManager.getChunk(newKey.x, newKey.z).getSection(newKey.y));
     }
 }
 
@@ -104,6 +125,7 @@ void World::renderWorld(RenderMaster& renderer)
         chunk.second.drawChunks(renderer);
     }
 }
+
 
 const ChunkManager& World::getChunkManager() const
 {
@@ -127,3 +149,15 @@ VectorXZ World::getChunkXZ(int x, int z)
         z / CHUNK_SIZE
     };
 }
+
+void World::updateChunks()
+{
+    for (auto& c : m_chunkUpdates)
+    {
+        std::cout << m_chunkUpdates.size() << "\n";
+        ChunkSection& s = *c.second;
+        s.makeMesh();
+    }
+    m_chunkUpdates.clear();
+}
+

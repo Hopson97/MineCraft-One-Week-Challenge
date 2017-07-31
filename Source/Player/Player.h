@@ -5,6 +5,8 @@
 
 #include "../Entity.h"
 
+class World;
+
 class Player : public Entity
 {
     public:
@@ -12,13 +14,13 @@ class Player : public Entity
 
         void handleInput(const sf::RenderWindow& window);
 
-        void update(float dt);
+        void update(float dt, World& wolrd);
+        void collide(World& world, const glm::vec3& vel, float dt);
 
     private:
         void keyboardInput();
         void mouseInput(const sf::RenderWindow& window);
-
-        glm::vec3 m_velocity;
+        bool m_isOnGround = false;
 };
 
 

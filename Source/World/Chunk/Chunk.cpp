@@ -75,7 +75,6 @@ void Chunk::drawChunks(RenderMaster& renderer)
             if (!chunk.hasBuffered())
             {
                 chunk.bufferMesh();
-                continue;
             }
             renderer.drawChunk(chunk.m_mesh);
         }
