@@ -18,6 +18,7 @@ class ChunkManager
     public:
         ChunkManager(World& world);
 
+        Chunk&      qGetChunk   (int x, int z);
         Chunk&      getChunk    (int x, int z);
         ChunkMap&   getChunks   ();
 

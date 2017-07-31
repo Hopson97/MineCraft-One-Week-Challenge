@@ -82,3 +82,21 @@ Time programming Today | 3:14:15
 Lines of Code Today | 523
 Total Time programming | 14:07:51
 Total Lines of Code | 2489
+
+# Day 5
+
+I started off the day by cleaning up some of the chunk code, and then proceeded to make the world infinite, but
+I felt it was not needed, so I simply went back to a fixed-sized world.
+
+I then added an item system. My implementation probably was not great for this, but it was my first time
+at creating that sort of the thing.
+
+Basically, when a player breaks a block, it gets added to their inventory. When they place a block, a block
+is placed.
+
+Title | Data
+------------ | -------------
+Time programming Today | 2:54:14
+Lines of Code Today | 560
+Total Time programming | 17:02:05
+Total Lines of Code | 3049

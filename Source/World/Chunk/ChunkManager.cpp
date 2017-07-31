@@ -8,16 +8,23 @@ ChunkManager::ChunkManager(World& world)
 
 }
 
+
+Chunk& ChunkManager::qGetChunk(int x, int z)
+{
+    VectorXZ key {x, z};
+    return m_chunks.at(key);
+}
+
 Chunk& ChunkManager::getChunk(int x, int z)
 {
+    VectorXZ key {x, z};
     if (!chunkExistsAt(x, z))
     {
-        VectorXZ    key     {x, z};
-        Chunk       chunk   {*m_world, {x, z}};
+        Chunk chunk {*m_world, {x, z}};
         m_chunks.emplace(key, std::move(chunk));
     }
 
-    return m_chunks.at({x, z});
+    return m_chunks.at(key);
 }
 
 ChunkMap& ChunkManager::getChunks()

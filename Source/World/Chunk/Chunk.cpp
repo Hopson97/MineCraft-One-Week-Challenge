@@ -33,7 +33,7 @@ void Chunk::setBlock(int x, int y, int z, ChunkBlock block)
         return;
 
     int bY = y % CHUNK_SIZE;
-    m_chunks.at(y / CHUNK_SIZE).setBlock(x, bY, z, block);
+    m_chunks[y / CHUNK_SIZE].setBlock(x, bY, z, block);
 }
 
 //Chunk block to SECTION BLOCK positions
@@ -46,7 +46,7 @@ ChunkBlock Chunk::getBlock(int x, int y, int z) const
 
     int bY = y % CHUNK_SIZE;
 
-    return m_chunks.at(y / CHUNK_SIZE).getBlock(x, bY, z);
+    return m_chunks[y / CHUNK_SIZE].getBlock(x, bY, z);
 }
 
 bool Chunk::outOfBound(int x, int y, int z) const
@@ -167,7 +167,11 @@ void Chunk::load()
 
 ChunkSection& Chunk::getSection(int index)
 {
-    return m_chunks.at(index);
+    static ChunkSection errorSection({444,444,444}, *m_pWorld);
+
+    if (index >= m_chunks.size() || index < 0) return errorSection;
+
+    return m_chunks[index];
 }
 
 void Chunk::addSection()
@@ -184,7 +188,7 @@ void Chunk::addSectionsBlockTarget(int blockY)
 
 void Chunk::addSectionsIndexTarget(int index)
 {
-    while (m_chunks.size() < index + 1)
+    while ((int)m_chunks.size() < index + 1)
     {
         addSection();
     }

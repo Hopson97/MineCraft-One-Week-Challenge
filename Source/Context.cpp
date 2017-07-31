@@ -19,5 +19,5 @@ Context::Context()
 
     glCullFace(GL_BACK);
 
-    window.setVerticalSyncEnabled(true);
+    //window.setVerticalSyncEnabled(true);
 }

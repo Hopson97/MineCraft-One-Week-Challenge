@@ -22,13 +22,13 @@ Player::Player()
         m_items.emplace_back(Material::NOTHING, 0);
     }
 
-    for (int i = 0; i < 5; i++)
+    for (float i = 0; i < 5; i++)
     {
         sf::Text t;
         t.setFont(f);
         t.setOutlineColor(sf::Color::Black);
         t.setCharacterSize(25);
-        t.setPosition({20, 20 * i + 100});
+        t.setPosition({20.0f, 20.0f * i + 100.0f});
         m_itemText.push_back(t);
     }
 }
@@ -37,11 +37,12 @@ void Player::addItem(const Material& material)
 {
     Material::ID id = material.id;
 
-    for (int i = 0; i < m_items.size(); i++)
+    for (unsigned i = 0; i < m_items.size(); i++)
     {
         if (m_items[i].getMaterial().id == id)
         {
             int leftOver = m_items[i].add(1);
+
             return;
         }
         else if (m_items[i].getMaterial().id == Material::ID::Nothing)
@@ -63,7 +64,7 @@ void Player::handleInput(const sf::RenderWindow& window)
     if(m_itemDown.isKeyPressed())
     {
         m_heldItem++;
-        if (m_heldItem == m_items.size())
+        if (m_heldItem == (int)m_items.size())
         {
             m_heldItem = 0;
         }
@@ -219,10 +220,10 @@ void Player::mouseInput(const sf::RenderWindow& window)
 
 void Player::draw(RenderMaster& master)
 {
-    for (int i = 0; i < m_items.size(); i++)
+    for (unsigned i = 0; i < m_items.size(); i++)
     {
         sf::Text& t = m_itemText[i];
-        if (i == m_heldItem)
+        if (i == (unsigned)m_heldItem)
         {
             t.setFillColor(sf::Color::Red);
         }
