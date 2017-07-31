@@ -12,6 +12,8 @@ sf::Font f;
 
 Player::Player()
 :   Entity  ({25, 125, 25}, {0, 0, 0}, {0.5, 1.5, 0.5})
+,   m_itemDown  (sf::Keyboard::Down)
+,   m_itemUp    (sf::Keyboard::Up)
 {
     f.loadFromFile("Res/Fonts/rs.ttf");
 
@@ -31,15 +33,51 @@ Player::Player()
     }
 }
 
-void Player::addItem(Material& material)
+void Player::addItem(const Material& material)
 {
+    Material::ID id = material.id;
 
+    for (int i = 0; i < m_items.size(); i++)
+    {
+        if (m_items[i].getMaterial().id == id)
+        {
+            int leftOver = m_items[i].add(1);
+            return;
+        }
+        else if (m_items[i].getMaterial().id == Material::ID::Nothing)
+        {
+            m_items[i] = {material, 1};
+            return;
+        }
+    }
 }
 
+ItemStack& Player::getHeldItems()
+{
+    return m_items[m_heldItem];
+}
 
 
 void Player::handleInput(const sf::RenderWindow& window)
 {
+    if(m_itemDown.isKeyPressed())
+    {
+        m_heldItem++;
+        if (m_heldItem == m_items.size())
+        {
+            m_heldItem = 0;
+        }
+    }
+    else if (m_itemUp.isKeyPressed())
+    {
+        m_heldItem--;
+        if (m_heldItem == -1)
+        {
+            m_heldItem = m_items.size() - 1;
+        }
+    }
+
+
     keyboardInput();
     mouseInput(window);
 }
@@ -192,7 +230,7 @@ void Player::draw(RenderMaster& master)
         {
             t.setFillColor(sf::Color::White);
         }
-        t.setString((m_items[i].getMaterial().name));
+        t.setString((m_items[i].getMaterial().name) + " " + std::to_string(m_items[i].getNumInStack()));
         master.drawSFML(t);
     }
 }

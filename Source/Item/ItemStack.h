@@ -8,7 +8,7 @@ class ItemStack
     public:
         ItemStack(const Material& material, int amount);
 
-        void add(int amount);
+        int add(int amount);
         void remove();
 
         int getNumInStack() const;
@@ -16,8 +16,8 @@ class ItemStack
         const Material& getMaterial() const;
 
     private:
-        const Material* m_pMaterial;
-        int             m_numInStack;
+        const Material* m_pMaterial  = &Material::NOTHING;
+        int             m_numInStack = 0;
 
 };
 

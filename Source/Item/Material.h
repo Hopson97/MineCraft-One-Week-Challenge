@@ -29,6 +29,8 @@ struct Material : public NonCopyable
 
     BlockId toBlockID() const;
 
+    static const Material& toMaterial(BlockId id);
+
     const Material::ID  id;
     const int           maxStackSize;
     const bool          isBlock;

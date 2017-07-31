@@ -42,3 +42,29 @@ BlockId Material::toBlockID() const
             return BlockId::NUM_TYPES;
     }
 }
+
+const Material& Material::toMaterial(BlockId id)
+{
+    switch (id)
+    {
+        case BlockId::Air:
+            return NOTHING;
+
+        case BlockId::Grass:
+            return GRASS_BLOCK;
+
+        case BlockId::Dirt:
+            return DIRT_BLOCK;
+
+        case BlockId::Stone:
+            return STONE_BLOCK;
+
+        case BlockId::OakBark:
+            return OAK_BARK_BLOCK;
+
+        case BlockId::OakLeaf:
+            return OAK_LEAF_BLOCK;
+    }
+}
+
+
