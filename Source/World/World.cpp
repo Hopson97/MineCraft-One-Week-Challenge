@@ -6,9 +6,12 @@
 
 #include "../Maths/Vector2XZ.h"
 
+#include "../Camera.h"
+
 namespace
 {
     constexpr int temp_worldSize = 16;
+    constexpr int renderDistance = 8;
 
     bool isOutOfBounds(const VectorXZ& chunkPos)
     {
@@ -32,7 +35,7 @@ ChunkBlock World::getBlock(int x, int y, int z)
 
     if (isOutOfBounds(cp))
     {
-        return BlockId::Air;
+        //return BlockId::Air;
     }
 
     return m_chunkManager.getChunk(cp.x, cp.z).getBlock(bp.x, y, bp.z);
@@ -48,7 +51,7 @@ void World::setBlock(int x, int y, int z, ChunkBlock block)
 
     if (isOutOfBounds(cp))
     {
-        return;
+        //return;
     }
 
     m_chunkManager.getChunk(cp.x, cp.z).setBlock(bp.x, y, bp.z, block);
@@ -63,15 +66,29 @@ void World::update(const Camera& camera)
         event->handle(*this);
     }
 
-    for (int x = 0; x < temp_worldSize; x++)
+    int cX = camera.position.x / CHUNK_SIZE;
+    int cZ = camera.position.z / CHUNK_SIZE;
+
+    int minX = cX - renderDistance;
+    int maxX = cX + renderDistance;
+
+    int minZ = cZ - renderDistance;
+    int maxZ = cZ + renderDistance;
+
+    if (minZ < 0) minZ = 0;
+    if (minX < 0) minX = 0;
+
+    for (int x = minX; x < maxX; x++)
     {
-        for (int z = 0; z < temp_worldSize; z++)
+        for (int z = minZ; z < maxZ; z++)
         {
             if (!m_chunkManager.chunkExistsAt(x, z))
             {
                 m_chunkManager.loadChunk(x, z);
             }
-            if (m_chunkManager.makeMesh(x, z)) return;
+            //make one mesh per frame maximum
+            if (m_chunkManager.makeMesh(x, z))
+                return;
         }
     }
 }

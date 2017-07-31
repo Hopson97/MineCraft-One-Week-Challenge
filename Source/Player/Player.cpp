@@ -21,7 +21,6 @@ void Player::update(float dt)
 
     if (c.getElapsedTime().asSeconds() > 0.1)
     {
-        //std::cout << position.x << " " << position.y << " " << position.z << "\n";
         c.restart();
     }
 
