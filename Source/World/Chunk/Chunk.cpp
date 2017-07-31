@@ -132,7 +132,7 @@ void Chunk::load()
             }
             else
             {
-                setBlock(x, y, z, BlockId::Dirt);
+                setBlock(x, y, z, BlockId::Grass);
             }
 
         }

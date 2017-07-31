@@ -8,6 +8,7 @@
 #include "../Item/ItemStack.h"
 
 class World;
+class RenderMaster;
 
 class Player : public Entity
 {
@@ -19,12 +20,18 @@ class Player : public Entity
         void update(float dt, World& wolrd);
         void collide(World& world, const glm::vec3& vel, float dt);
 
+        void addItem(Material& material)
+
+        void draw(RenderMaster& master);
+
     private:
         void keyboardInput();
         void mouseInput(const sf::RenderWindow& window);
         bool m_isOnGround = false;
 
-        std::vector<ItemStack> m_itmes;
+        std::vector<ItemStack> m_items;
+        std::vector<sf::Text>  m_itemText;
+        int m_heldItem = 0;
 };
 
 

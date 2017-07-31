@@ -10,7 +10,7 @@
 
 namespace
 {
-    constexpr int renderDistance = 5;
+    constexpr int renderDistance = 20;
     constexpr float GRAV = -3;
 }
 

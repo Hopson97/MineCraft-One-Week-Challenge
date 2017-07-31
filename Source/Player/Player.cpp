@@ -6,12 +6,37 @@
 
 #include "../World/World.h"
 
+#include "../Renderer/RenderMaster.h"
+
+sf::Font f;
 
 Player::Player()
 :   Entity  ({25, 125, 25}, {0, 0, 0}, {0.5, 1.5, 0.5})
 {
+    f.loadFromFile("Res/Fonts/rs.ttf");
+
+    for (int i = 0; i < 5; i++)
+    {
+        m_items.emplace_back(Material::NOTHING, 0);
+    }
+
+    for (int i = 0; i < 5; i++)
+    {
+        sf::Text t;
+        t.setFont(f);
+        t.setOutlineColor(sf::Color::Black);
+        t.setCharacterSize(25);
+        t.setPosition({20, 20 * i + 100});
+        m_itemText.push_back(t);
+    }
+}
+
+void Player::addItem(Material& material)
+{
 
 }
+
+
 
 void Player::handleInput(const sf::RenderWindow& window)
 {
@@ -21,31 +46,27 @@ void Player::handleInput(const sf::RenderWindow& window)
 
 void Player::update(float dt, World& world)
 {
-    static sf::Clock c;
-
-    if (c.getElapsedTime().asSeconds() > 0.1)
-    {
-        c.restart();
-    }
-
+/*
     if (!m_isOnGround)
     {
         velocity.y -= 55 * dt;
     }
+*/
     m_isOnGround = false;
 
     box.update(position);
     velocity.x *= 0.95;
     velocity.z *= 0.95;
+    velocity.y *= 0.95;
 
     position.x += velocity.x * dt;
-    collide (world, {velocity.x, 0, 0}, dt);
+    //collide (world, {velocity.x, 0, 0}, dt);
 
     position.y += velocity.y * dt;
-    collide (world, {0, velocity.y, 0}, dt);
+    //collide (world, {0, velocity.y, 0}, dt);
 
     position.z += velocity.z * dt;
-    collide (world, {0, 0, velocity.z}, dt);
+    //collide (world, {0, 0, velocity.z}, dt);
 }
 
 
@@ -96,10 +117,10 @@ void Player::collide(World& world, const glm::vec3& vel, float dt)
 void Player::keyboardInput()
 {
     glm::vec3 change;
-    float speed = 0.5;
+    float speed = 0.8;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
     {
-        speed *= 10;
+        speed *= 8;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
@@ -123,9 +144,9 @@ void Player::keyboardInput()
         change.z += glm::sin(glm::radians(rotation.y)) * speed;
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && m_isOnGround)
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
-        change.y += speed * 35;
+        change.y += speed;
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
     {
@@ -156,6 +177,24 @@ void Player::mouseInput(const sf::RenderWindow& window)
     sf::Mouse::setPosition({cx, cy}, window);
 
     lastMousePosition = sf::Mouse::getPosition();
+}
+
+void Player::draw(RenderMaster& master)
+{
+    for (int i = 0; i < m_items.size(); i++)
+    {
+        sf::Text& t = m_itemText[i];
+        if (i == m_heldItem)
+        {
+            t.setFillColor(sf::Color::Red);
+        }
+        else
+        {
+            t.setFillColor(sf::Color::White);
+        }
+        t.setString((m_items[i].getMaterial().name));
+        master.drawSFML(t);
+    }
 }
 
 

@@ -80,6 +80,8 @@ void StatePlaying::render(RenderMaster& renderer)
     renderer.drawCube(cubeTest);
     m_world.renderWorld(renderer);
 
+    m_player.draw(renderer);
+
 }
 
 void StatePlaying::onOpen()
