@@ -2,8 +2,10 @@
 #define PLAYER_H_INCLUDED
 
 #include <SFML/Graphics.hpp>
+#include <vector>
 
 #include "../Entity.h"
+#include "../Item/ItemStack.h"
 
 class World;
 
@@ -21,6 +23,8 @@ class Player : public Entity
         void keyboardInput();
         void mouseInput(const sf::RenderWindow& window);
         bool m_isOnGround = false;
+
+        std::vector<ItemStack> m_itmes;
 };
 
 
