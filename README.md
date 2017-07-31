@@ -66,4 +66,19 @@ Lines of Code Today | 410
 Total Time programming | 10:53:36
 Total Lines of Code | 1974
 
+# Day 4
 
+The first thing I did on day 4 was create a sky box using OpenGL cube maps.
+
+After this, I started work on the world generation, eg adding height map and trees.
+
+![Skybox and world gen](http://i.imgur.com/mzUwqPo.png)
+
+End of day stats:
+
+Title | Data
+------------ | -------------
+Time programming Today | 3:14:15
+Lines of Code Today | 523
+Total Time programming | 14:07:51
+Total Lines of Code | 2489
