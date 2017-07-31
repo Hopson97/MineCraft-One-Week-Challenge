@@ -1,6 +1,9 @@
 Name
 Grass
 
+Id
+1
+
 TexTop
 0 0
 
@@ -9,3 +12,6 @@ TexSide
 
 TexBottom
 2 0
+
+Opaque
+1

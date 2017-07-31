@@ -1,6 +1,9 @@
 Name
 Air
 
+Id
+0
+
 TexTop
 0 0
 
@@ -9,3 +12,6 @@ TexSide
 
 TexBottom
 0 0
+
+Opaque
+0

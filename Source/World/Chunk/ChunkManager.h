@@ -11,23 +11,26 @@
 
 class World;
 
+using ChunkMap = std::unordered_map<VectorXZ, Chunk>;
+
 class ChunkManager
 {
     public:
         ChunkManager(World& world);
 
-        Chunk& getChunk(int x, int z);
-
-        const std::unordered_map<VectorXZ, Chunk>& getChunks() const;
+        Chunk&      getChunk    (int x, int z);
+        ChunkMap&   getChunks   ();
 
         bool makeMesh(int x, int z);
 
-        void queueChunk(int x, int z);
+        bool chunkLoadedAt(int x, int z) const;
+        bool chunkExistsAt(int x, int z) const;
 
-        void update();
+        void loadChunk(int x, int z);
+        void unloadChunk(int x, int z);
 
     private:
-        std::unordered_map<VectorXZ, Chunk> m_chunks;
+        ChunkMap m_chunks;
 
         World* m_world;
 };

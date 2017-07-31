@@ -16,7 +16,6 @@ ChunkSection::ChunkSection(const sf::Vector3i& location, World& world)
 
 void ChunkSection::setBlock(int x, int y, int z, ChunkBlock block)
 {
-    //m_hasMesh = false;
     if (outOfBounds(x) ||
         outOfBounds(y) ||
         outOfBounds(z))
@@ -52,6 +51,12 @@ bool ChunkSection::hasMesh() const noexcept
     return m_hasMesh;
 }
 
+bool ChunkSection::hasBuffered() const noexcept
+{
+    return m_hasBufferedMesh;
+}
+
+
 sf::Vector3i ChunkSection::toWorldPosition(int x, int y, int z) const
 {
     return
@@ -65,9 +70,15 @@ sf::Vector3i ChunkSection::toWorldPosition(int x, int y, int z) const
 void ChunkSection::makeMesh()
 {
     ChunkMeshBuilder(*this, m_mesh).buildMesh();
-    m_mesh.bufferMesh();
     m_hasMesh = true;
 }
+
+void ChunkSection::bufferMesh()
+{
+    m_mesh.bufferMesh();
+    m_hasBufferedMesh = true;
+}
+
 
 bool ChunkSection::outOfBounds(int value)
 {

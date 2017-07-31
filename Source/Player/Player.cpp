@@ -21,7 +21,7 @@ void Player::update(float dt)
 
     if (c.getElapsedTime().asSeconds() > 0.1)
     {
-        std::cout << position.x << " " << position.y << " " << position.z << "\n";
+        //std::cout << position.x << " " << position.y << " " << position.z << "\n";
         c.restart();
     }
 
@@ -35,7 +35,7 @@ void Player::keyboardInput()
     float speed = 0.5;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
     {
-        speed *= 3;
+        speed *= 10;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))

@@ -3,7 +3,7 @@
 
 #include "BlockId.h"
 
-class BlockData;
+class BlockDataHolder;
 class BlockType;
 
 struct ChunkBlock
@@ -13,7 +13,7 @@ struct ChunkBlock
     ChunkBlock(Block_t id);
     ChunkBlock(BlockId id);
 
-    const BlockData& getData() const;
+    const BlockDataHolder& getData() const;
     const BlockType& getType() const;
 
     bool operator ==(ChunkBlock other)

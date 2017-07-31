@@ -16,7 +16,7 @@ class Chunk : public IChunk
         void setBlock       (int x, int y, int z, ChunkBlock block) override;
         ChunkBlock getBlock (int x, int y, int z) const override;
 
-        void drawChunks (RenderMaster& renderer) const;
+        void drawChunks (RenderMaster& renderer);
 
         bool hasLoaded() const;
         void load();
@@ -24,6 +24,10 @@ class Chunk : public IChunk
         ChunkSection& getSection(int index);
 
     private:
+        void addSection();
+        void addSectionsBlockTarget(int blockY);
+        void addSectionsIndexTarget(int index);
+
         bool outOfBound(int x, int y, int z) const;
 
         std::vector<ChunkSection>   m_chunks;

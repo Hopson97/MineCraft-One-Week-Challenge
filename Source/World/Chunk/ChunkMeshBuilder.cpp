@@ -108,7 +108,7 @@ void ChunkMeshBuilder::buildMesh()
             continue;
         }
 
-        m_pBlockData = &block.getData().getBlockData();
+        m_pBlockData = &block.getData();
         auto& data = *m_pBlockData;
         directions.update(x, y, z);
 
@@ -152,17 +152,17 @@ bool ChunkMeshBuilder::shouldMakeFace(const sf::Vector3i& adjBlock,
                                       const BlockDataHolder& blockData)
 {
     auto block = m_pChunk->getBlock(adjBlock.x, adjBlock.y, adjBlock.z);
-    //auto& data  = block.getData();
+    auto& data  = block.getData();
 
     if (block == BlockId::Air)
     {
         return true;
     }
-    else
+    else if ((!data.isOpaque) && (data.id != m_pBlockData->id))
     {
-        return false;
+        return true;
     }
-    ///@TODO Transparent Blocks
+    return false;
 }
 
 

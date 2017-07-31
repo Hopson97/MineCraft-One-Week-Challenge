@@ -22,9 +22,11 @@ class ChunkSection : public IChunk
 
         const sf::Vector3i getLocation() const noexcept;
 
-        bool hasMesh() const noexcept;
+        bool hasMesh    () const noexcept;
+        bool hasBuffered() const noexcept;
 
         void makeMesh();
+        void bufferMesh();
 
     private:
         sf::Vector3i toWorldPosition (int x, int y, int z) const;
@@ -37,7 +39,9 @@ class ChunkSection : public IChunk
         sf::Vector3i                            m_location;
 
         World* m_pWorld;
+
         bool m_hasMesh = false;
+        bool m_hasBufferedMesh = false;
 };
 
 #endif // CHUNKSECTION_H_INCLUDED

@@ -15,9 +15,9 @@ ChunkBlock::ChunkBlock(BlockId id)
 }
 
 
-const BlockData& ChunkBlock::getData() const
+const BlockDataHolder& ChunkBlock::getData() const
 {
-    return BlockDatabase::get().getData((BlockId)id);
+    return BlockDatabase::get().getData((BlockId)id).getBlockData();
 }
 
 const BlockType& ChunkBlock::getType() const

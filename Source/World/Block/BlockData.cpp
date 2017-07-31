@@ -40,6 +40,16 @@ BlockData::BlockData(const std::string& fileName)
             m_data.texSideCoord     = {x, y};
             m_data.texBottomCoord   = {x, y};
         }
+        else if (line == "Id")
+        {
+            int id;
+            inFile >> id;
+            m_data.id = static_cast<BlockId>(id);
+        }
+        else if (line == "Opaque")
+        {
+            inFile >> m_data.isOpaque;
+        }
     }
 }
 

@@ -26,6 +26,9 @@ class StatePlaying : public StateBase
         Player m_player;
         World m_world;
 
+        sf::RectangleShape m_crosshair;
+        sf::Texture        m_chTexture;
+
         FPSCounter m_fpsCounter;
 };
 

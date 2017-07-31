@@ -1,6 +1,9 @@
 Name
 OakBark
 
+Id
+4
+
 TexTop
 5 0
 
@@ -9,3 +12,6 @@ TexSide
 
 TexBottom
 5 0
+
+Opaque
+1

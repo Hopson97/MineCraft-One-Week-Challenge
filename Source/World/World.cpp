@@ -10,24 +10,6 @@ namespace
 {
     constexpr int temp_worldSize = 16;
 
-    VectorXZ getBlockXZ(int x, int z)
-    {
-        return
-        {
-            x % CHUNK_SIZE,
-            z % CHUNK_SIZE
-        };
-    }
-
-    VectorXZ getChunkXZ(int x, int z)
-    {
-        return
-        {
-            x / CHUNK_SIZE,
-            z / CHUNK_SIZE
-        };
-    }
-
     bool isOutOfBounds(const VectorXZ& chunkPos)
     {
         if (chunkPos.x < 0) return true;
@@ -40,15 +22,7 @@ namespace
 
 World::World()
 :   m_chunkManager  (*this)
-{
-    for (int x = 0; x < temp_worldSize; x++)
-    {
-        for (int z = 0; z < temp_worldSize; z++)
-        {
-            m_chunkManager.getChunk(x, z).load();
-        }
-    }
-}
+{ }
 
 //world coords into chunk column coords
 ChunkBlock World::getBlock(int x, int y, int z)
@@ -77,20 +51,26 @@ void World::setBlock(int x, int y, int z, ChunkBlock block)
         return;
     }
 
-    auto& chunk = m_chunkManager.getChunk(cp.x, cp.z);
-    chunk.setBlock(bp.x, y, bp.z, block);
-    if (chunk.hasLoaded())
-    {
-        m_rebuildChunks.emplace(cp.x, y / CHUNK_SIZE, cp.z);
-    }
+    m_chunkManager.getChunk(cp.x, cp.z).setBlock(bp.x, y, bp.z, block);
 }
 
+//loads chunks
+//make chunk meshes
 void World::update(const Camera& camera)
 {
+    for (auto& event : m_events)
+    {
+        event->handle(*this);
+    }
+
     for (int x = 0; x < temp_worldSize; x++)
     {
         for (int z = 0; z < temp_worldSize; z++)
         {
+            if (!m_chunkManager.chunkExistsAt(x, z))
+            {
+                m_chunkManager.loadChunk(x, z);
+            }
             if (m_chunkManager.makeMesh(x, z)) return;
         }
     }
@@ -99,20 +79,34 @@ void World::update(const Camera& camera)
 
 void World::renderWorld(RenderMaster& renderer)
 {
-    for (auto& location : m_rebuildChunks)
-    {
-        ChunkSection& section = m_chunkManager.getChunk(location.x, location.z).getSection(location.y);
-        section.makeMesh();
-    }
-    m_rebuildChunks.clear();
-
-
     renderer.drawSky();
 
-    const auto& chunkMap = m_chunkManager.getChunks();
+    auto& chunkMap = m_chunkManager.getChunks();
     for (auto& chunk : chunkMap)
     {
         chunk.second.drawChunks(renderer);
     }
 }
 
+const ChunkManager& World::getChunkManager() const
+{
+    return m_chunkManager;
+}
+
+VectorXZ World::getBlockXZ(int x, int z)
+{
+    return
+    {
+        x % CHUNK_SIZE,
+        z % CHUNK_SIZE
+    };
+}
+
+VectorXZ World::getChunkXZ(int x, int z)
+{
+    return
+    {
+        x / CHUNK_SIZE,
+        z / CHUNK_SIZE
+    };
+}

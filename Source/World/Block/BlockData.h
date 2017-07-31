@@ -2,13 +2,17 @@
 #define BLOCKDATA_H_INCLUDED
 
 #include "../../Util/NonCopyable.h"
+#include "BlockID.h"
 #include <SFML/Graphics.hpp>
 
 struct BlockDataHolder : public NonCopyable
 {
+    BlockId      id;
     sf::Vector2i texTopCoord;
     sf::Vector2i texSideCoord;
     sf::Vector2i texBottomCoord;
+
+    bool isOpaque;
 };
 
 class BlockData : public NonCopyable
