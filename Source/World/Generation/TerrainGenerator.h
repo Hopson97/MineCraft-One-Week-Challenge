@@ -16,13 +16,18 @@ class TerrainGenerator
         void generateTerrainFor (Chunk& chunk);
 
     private:
-        void setBlocks();
+        static void setUpNoise();
+
+        void setBlocks(int maxHeight);
         void setTopBlock(int x, int y, int z);
 
-        std::array<int, CHUNK_AREA> getHeightMap();
-        std::array<int, CHUNK_AREA> getBiomeMap ();
+        void getHeightMap();
+        void getBiomeMap ();
 
-        static void setUpNoise();
+        std::array<int, CHUNK_AREA> m_heightMap;
+        std::array<int, CHUNK_AREA> m_biomeMap;
+
+
 
         static NoiseGenerator m_heightNoiseGen;
         static NoiseGenerator m_biomeNoiseGen;

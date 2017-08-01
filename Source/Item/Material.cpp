@@ -1,11 +1,12 @@
 #include "Material.h"
 
-const Material Material::NOTHING          (ID::Nothing, 0,  false, "None" );
-const Material Material::GRASS_BLOCK      (ID::Grass, 99, true, "Grass Block");
-const Material Material::DIRT_BLOCK       (ID::Dirt, 99, true, "Dirt Block");
-const Material Material::STONE_BLOCK      (ID::Stone, 99, true, "Stone Block");
-const Material Material::OAK_BARK_BLOCK   (ID::OakBark, 99, true, "Oak Bark Block");
-const Material Material::OAK_LEAF_BLOCK   (ID::OakLeaf, 99, true, "Oak Leaf Block");
+const Material Material::NOTHING        (ID::Nothing, 0,  false, "None" );
+const Material Material::GRASS_BLOCK    (ID::Grass, 99, true, "Grass Block");
+const Material Material::DIRT_BLOCK     (ID::Dirt, 99, true, "Dirt Block");
+const Material Material::STONE_BLOCK    (ID::Stone, 99, true, "Stone Block");
+const Material Material::OAK_BARK_BLOCK (ID::OakBark, 99, true, "Oak Bark Block");
+const Material Material::OAK_LEAF_BLOCK (ID::OakLeaf, 99, true, "Oak Leaf Block");
+const Material Material::SAND_BLOCK     (ID::Sand, 99, true, "Sand Block");
 
 Material::Material(Material::ID id, int maxStack, bool isBlock, std::string&& name)
 :   id              (id)
@@ -38,6 +39,9 @@ BlockId Material::toBlockID() const
         case OakLeaf:
             return BlockId::OakLeaf;
 
+        case Sand:
+            return BlockId::Sand;
+
         default:
             return BlockId::NUM_TYPES;
     }
@@ -65,6 +69,9 @@ const Material& Material::toMaterial(BlockId id)
 
         case BlockId::OakLeaf:
             return OAK_LEAF_BLOCK;
+
+        case BlockId::Sand:
+            return SAND_BLOCK;
     }
 }
 

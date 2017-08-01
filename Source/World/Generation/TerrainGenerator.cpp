@@ -56,54 +56,45 @@ void TerrainGenerator::generateTerrainFor(Chunk& chunk)
     auto location = chunk.getLocation();
     Random<std::minstd_rand> rand((location.x ^ location.y) << 2 );
 
-    auto heightMap  = getHeightMap();
-    //auto biomeMap   = getBiomeMap();
-
-    auto maxHeight = *std::max_element(heightMap.begin(), heightMap.end());
-    //std::cout << maxHeight << std::endl;
-
-
+    getHeightMap();
+    getBiomeMap();
+    auto maxHeight = *std::max_element(m_heightMap.begin(), m_heightMap.end());
+    setBlocks(maxHeight);
 }
 
 
-std::array<int, CHUNK_AREA> TerrainGenerator::getHeightMap()
+void TerrainGenerator::getHeightMap()
 {
-    std::array<int, CHUNK_AREA> arr;
     auto location = m_pChunk->getLocation();
 
     for (int x = 0; x < CHUNK_SIZE; x++)
     for (int z = 0; z < CHUNK_SIZE; z++)
     {
         int h = m_heightNoiseGen.getHeight(x, z, location.x + 10, location.y + 10);
-        arr[x * CHUNK_SIZE + z] = h;
+        m_heightMap[x * CHUNK_SIZE + z] = h;
     }
-
-    return arr;
 }
 
-std::array<int, CHUNK_AREA> TerrainGenerator::getBiomeMap()
+void TerrainGenerator::getBiomeMap()
 {
-    std::array<int, CHUNK_AREA> arr;
     auto location = m_pChunk->getLocation();
 
     for (int x = 0; x < CHUNK_SIZE; x++)
     for (int z = 0; z < CHUNK_SIZE; z++)
     {
         int h = m_biomeNoiseGen.getHeight(x, z, location.x + 10, location.y + 10);
-        arr[x * CHUNK_SIZE + z] = h;
+        m_biomeMap[x * CHUNK_SIZE + z] = h;
     }
-
-    return arr;
 }
 
-void TerrainGenerator::setBlocks()
+void TerrainGenerator::setBlocks(int maxHeight)
 {
     for (int y = 0; y < maxHeight + 1; y++)
     for (int x = 0; x < CHUNK_SIZE; x++)
     for (int z = 0; z < CHUNK_SIZE; z++)
     {
-        int height = heightMap[x * CHUNK_SIZE + z];
-        int biome  = biomeMap [x * CHUNK_SIZE + z];
+        int height = m_heightMap[x * CHUNK_SIZE + z];
+        int biome  = m_biomeMap [x * CHUNK_SIZE + z];
 
         if (y > height)
         {
@@ -111,14 +102,14 @@ void TerrainGenerator::setBlocks()
         }
         else if (y == height)
         {
-            if (y > WATER_LEVEL)
+            //if (y > WATER_LEVEL)
             {
                 setTopBlock(x, y, z);
-            }
+            }/*
             else
             {
                 m_pChunk->setBlock(x, y, z, BlockId::Grass);
-            }
+            }*/
 
         }
         else if (y > height - 3)
@@ -134,15 +125,15 @@ void TerrainGenerator::setBlocks()
 
 void TerrainGenerator::setTopBlock(int x, int y, int z)
 {
-    int biome  = biomeMap [x * CHUNK_SIZE + z];
+    int biome = m_biomeMap [x * CHUNK_SIZE + z];
 
     if (biome < 100)
     {
-
+        m_pChunk->setBlock(x, y, z, BlockId::Grass);
     }
     else
     {
-
+        m_pChunk->setBlock(x, y, z, BlockId::Sand);
     }
 }
 
