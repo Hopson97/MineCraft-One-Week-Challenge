@@ -46,6 +46,11 @@ class Random
             return dist(m_randomEngine);
         }
 
+        void setSeed(int seed)
+        {
+            m_randomEngine.seed(seed);
+        }
+
     private:
         REngine m_randomEngine;
 };

@@ -6,6 +6,7 @@
 #include "../Chunk/Chunk.h"
 #include "../../Util/Random.h"
 
+#include "TreeGenerator.h"
 
 namespace
 {
@@ -46,19 +47,17 @@ void TerrainGenerator::setUpNoise()
     }
 }
 
-
-
-
 void TerrainGenerator::generateTerrainFor(Chunk& chunk)
 {
     m_pChunk = &chunk;
 
     auto location = chunk.getLocation();
-    Random<std::minstd_rand> rand((location.x ^ location.y) << 2 );
+    m_random.setSeed((location.x ^ location.y) << 2 );
 
     getHeightMap();
     getBiomeMap();
     auto maxHeight = *std::max_element(m_heightMap.begin(), m_heightMap.end());
+    maxHeight = std::max(maxHeight, WATER_LEVEL);
     setBlocks(maxHeight);
 }
 
@@ -89,6 +88,8 @@ void TerrainGenerator::getBiomeMap()
 
 void TerrainGenerator::setBlocks(int maxHeight)
 {
+    std::vector<sf::Vector3i> trees;
+
     for (int y = 0; y < maxHeight + 1; y++)
     for (int x = 0; x < CHUNK_SIZE; x++)
     for (int z = 0; z < CHUNK_SIZE; z++)
@@ -98,18 +99,28 @@ void TerrainGenerator::setBlocks(int maxHeight)
 
         if (y > height)
         {
+            if (y <= WATER_LEVEL)
+            {
+                m_pChunk->setBlock(x, y, z, BlockId::Water);
+            }
             continue;
         }
         else if (y == height)
         {
-            //if (y > WATER_LEVEL)
+            if (y >= WATER_LEVEL)
             {
+                if (m_random.intInRange(0, 200) == 99 )
+                {
+                    trees.emplace_back(x, y, z);
+                }
                 setTopBlock(x, y, z);
-            }/*
+            }
             else
             {
-                m_pChunk->setBlock(x, y, z, BlockId::Grass);
-            }*/
+                m_pChunk->setBlock(x, y, z, m_random.intInRange(0, 10) < 5 ?
+                                                BlockId::Sand :
+                                                BlockId::Dirt);
+            }
 
         }
         else if (y > height - 3)
@@ -120,6 +131,11 @@ void TerrainGenerator::setBlocks(int maxHeight)
         {
             m_pChunk->setBlock(x, y, z, BlockId::Stone);
         }
+    }
+
+    for (auto& tree : trees)
+    {
+        makeOakTree(*m_pChunk, m_random, tree.x, tree.y, tree.z);
     }
 }
 

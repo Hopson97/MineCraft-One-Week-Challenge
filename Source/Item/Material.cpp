@@ -7,6 +7,7 @@ const Material Material::STONE_BLOCK    (ID::Stone, 99, true, "Stone Block");
 const Material Material::OAK_BARK_BLOCK (ID::OakBark, 99, true, "Oak Bark Block");
 const Material Material::OAK_LEAF_BLOCK (ID::OakLeaf, 99, true, "Oak Leaf Block");
 const Material Material::SAND_BLOCK     (ID::Sand, 99, true, "Sand Block");
+const Material Material::CACTUS_BLOCK   (ID::Cactus, 99, true, "Cactus Block");
 
 Material::Material(Material::ID id, int maxStack, bool isBlock, std::string&& name)
 :   id              (id)
@@ -42,6 +43,9 @@ BlockId Material::toBlockID() const
         case Sand:
             return BlockId::Sand;
 
+        case Cactus:
+            return BlockId::Cactus;
+
         default:
             return BlockId::NUM_TYPES;
     }
@@ -51,9 +55,6 @@ const Material& Material::toMaterial(BlockId id)
 {
     switch (id)
     {
-        case BlockId::NUM_TYPES:
-        case BlockId::Air:
-            return NOTHING;
 
         case BlockId::Grass:
             return GRASS_BLOCK;
@@ -72,6 +73,12 @@ const Material& Material::toMaterial(BlockId id)
 
         case BlockId::Sand:
             return SAND_BLOCK;
+
+        case BlockId::Cactus:
+            return CACTUS_BLOCK;
+
+        default:
+            return NOTHING;
     }
 }
 

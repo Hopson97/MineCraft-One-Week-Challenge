@@ -1,0 +1,11 @@
+#ifndef STRUCTUREBUILDER_H_INCLUDED
+#define STRUCTUREBUILDER_H_INCLUDED
+
+class IChunk;
+
+class StructureBuilder
+{
+
+};
+
+#endif // STRUCTUREBUILDER_H_INCLUDED

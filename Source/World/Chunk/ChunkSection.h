@@ -10,6 +10,7 @@
 #include "IChunk.h"
 
 #include "../../Physics/AABB.h"
+#include "../Block/BlockData.h"
 
 class World;
 
@@ -22,7 +23,7 @@ class ChunkSection : public IChunk
         public:
             void update(ChunkBlock c)
             {
-                if (c == 0)
+                if (c.getData().isOpaque)
                 {
                     m_solidBlockCount--;
                 }
