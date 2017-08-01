@@ -10,7 +10,7 @@
 
 namespace
 {
-    constexpr int renderDistance = 33;
+    constexpr int renderDistance = 16;
     constexpr float GRAV = -3;
 }
 
@@ -50,13 +50,42 @@ void World::update(const Camera& camera)
 
     updateChunks();
 
-    for (int x = 0; x < renderDistance; x++)
+    bool isMeshMade = false;
+    int cameraX = camera.position.x / CHUNK_SIZE;
+    int cameraZ = camera.position.z / CHUNK_SIZE;
+
+    for (int i = 0; i < m_loadDistance; i++)
     {
-        for (int z = 0; z < renderDistance; z++)
+        int minX = std::max(cameraX  - i, 0);
+        int minZ = std::max(cameraZ  - i, 0);
+        int maxX = cameraX + i;
+        int maxZ = cameraZ + i;
+
+        for (int x = minX; x < maxX; ++x)
         {
-            if (m_chunkManager.makeMesh(x, z))
-                return;
+            for (int z = minZ; z < maxZ; ++z)
+            {
+                if( m_chunkManager.makeMesh(x, z))
+                {
+                    isMeshMade = true;
+                    break;
+                }
+            }
+            if (isMeshMade)
+                break;
         }
+
+        if (isMeshMade)
+            break;
+    }
+
+    if (!isMeshMade)
+    {
+        m_loadDistance++;
+    }
+    if (m_loadDistance >= renderDistance)
+    {
+        m_loadDistance = 2;
     }
 }
 
@@ -120,12 +149,35 @@ void World::renderWorld(RenderMaster& renderer, const Camera& camera)
     renderer.drawSky();
 
     auto& chunkMap = m_chunkManager.getChunks();
-    for (auto& chunk : chunkMap)
+    for (auto itr = chunkMap.begin(); itr != chunkMap.end();)
     {
-        chunk.second.drawChunks(renderer, camera);
+        Chunk& chunk = itr->second;
+
+        int cameraX = camera.position.x;
+        int cameraZ = camera.position.z;
+
+        int minX = (cameraX / CHUNK_SIZE) - renderDistance;
+        int minZ = (cameraZ / CHUNK_SIZE) - renderDistance;
+        int maxX = (cameraX / CHUNK_SIZE) + renderDistance;
+        int maxZ = (cameraZ / CHUNK_SIZE) + renderDistance;
+
+        auto location = chunk.getLocation();
+
+        if (minX > location.x ||
+            minZ > location.y ||
+            maxZ < location.y ||
+            maxX < location.x)
+        {
+            itr = chunkMap.erase(itr);
+            continue;
+        }
+        else
+        {
+            chunk.drawChunks(renderer, camera);
+            itr++;
+        }
     }
 }
-
 
 ChunkManager& World::getChunkManager()
 {

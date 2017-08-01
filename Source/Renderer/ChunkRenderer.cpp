@@ -14,6 +14,10 @@ void ChunkRenderer::add(const ChunkMesh& mesh)
 
 void ChunkRenderer::render(const Camera& camera)
 {
+    if (m_chunks.empty())
+    {
+        return;
+    }
 
     m_shader.useProgram();
     BlockDatabase::get().textureAtlas.bindTexture();

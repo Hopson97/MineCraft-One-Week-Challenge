@@ -11,7 +11,7 @@
 sf::Font f;
 
 Player::Player()
-:   Entity  ({25, 125, 25}, {0, 0, 0}, {0.5, 1.5, 0.5})
+:   Entity  ({2500, 125, 2500}, {0, 0, 0}, {0.5, 1.5, 0.5})
 ,   m_itemDown  (sf::Keyboard::Down)
 ,   m_itemUp    (sf::Keyboard::Up)
 {

@@ -25,6 +25,8 @@ class Chunk : public IChunk
 
         ChunkSection& getSection(int index);
 
+        const sf::Vector2i& getLocation() const noexcept { return m_location; }
+
     private:
         void addSection();
         void addSectionsBlockTarget(int blockY);
