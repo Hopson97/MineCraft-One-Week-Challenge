@@ -21,7 +21,7 @@ class ChunkSection : public IChunk
     class Layer
     {
         public:
-            void update(ChunkBlock c)
+            void update(ChunkBlock c) noexcept
             {
                 if (c.getData().isOpaque)
                 {
@@ -33,7 +33,7 @@ class ChunkSection : public IChunk
                 }
             }
 
-            bool isAllSolid() const
+            bool isAllSolid() const noexcept
             {
                 return m_solidBlockCount == CHUNK_AREA;
             }

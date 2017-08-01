@@ -24,7 +24,7 @@ Chunk& ChunkManager::getChunk(int x, int z)
         m_chunks.emplace(key, std::move(chunk));
     }
 
-    return m_chunks.at(key);
+    return m_chunks[key];
 }
 
 ChunkMap& ChunkManager::getChunks()

@@ -6,14 +6,14 @@
 class GrasslandBiome : public Biome
 {
     public:
-        GrasslandBiome(int seed);
+        GrasslandBiome(int seed) noexcept;
 
-        BlockId getTopBlock(Rand& rand) const;
+        BlockId getTopBlock(Rand& rand) const noexcept;
         void makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) const;
 
 
     private:
-        NoiseParameters getNoiseParameters();
+        NoiseParameters getNoiseParameters() noexcept;
 };
 
 #endif // GRASSLANDBIOME_H_INCLUDED

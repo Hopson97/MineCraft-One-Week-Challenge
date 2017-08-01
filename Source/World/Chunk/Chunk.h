@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "ChunkSection.h"
-
+#include "../../Util/NonCopyable.h"
 
 class RenderMaster;
 class Camera;
@@ -11,6 +11,7 @@ class Camera;
 class Chunk : public IChunk
 {
     public:
+        Chunk() = default;
         Chunk(World& world, const sf::Vector2i& location);
 
         bool makeMesh();
@@ -20,7 +21,7 @@ class Chunk : public IChunk
 
         void drawChunks (RenderMaster& renderer, const Camera& camera);
 
-        bool hasLoaded() const;
+        bool hasLoaded() const noexcept;
         void load();
 
         ChunkSection& getSection(int index);

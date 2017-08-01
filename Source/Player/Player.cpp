@@ -11,7 +11,7 @@
 sf::Font f;
 
 Player::Player()
-:   Entity  ({2500, 125, 2500}, {0, 0, 0}, {0.5, 1.5, 0.5})
+:   Entity  ({1500, 125, 1500}, {0, 0, 0}, {0.5, 1.5, 0.5})
 ,   m_itemDown  (sf::Keyboard::Down)
 ,   m_itemUp    (sf::Keyboard::Up)
 {
@@ -156,7 +156,7 @@ void Player::collide(World& world, const glm::vec3& vel, float dt)
 void Player::keyboardInput()
 {
     glm::vec3 change;
-    float speed = 0.8;
+    float speed = 0.5;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
     {
         speed *= 8;

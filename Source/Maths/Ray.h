@@ -6,13 +6,13 @@
 class Ray
 {
     public:
-        Ray(const glm::vec3& position, const glm::vec3& direction);
+        Ray(const glm::vec3& position, const glm::vec3& direction) noexcept;
 
-        void step(float scale);
+        void step(float scale) noexcept;
 
-        const glm::vec3& getEnd() const;
+        const glm::vec3& getEnd() const noexcept;
 
-        float getLength() const;
+        float getLength() const noexcept;
 
     private:
         glm::vec3 m_rayStart;

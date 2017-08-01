@@ -2,7 +2,7 @@
 
 #include "TreeGenerator.h"
 
-TemperateForestBiome::TemperateForestBiome(int seed)
+TemperateForestBiome::TemperateForestBiome(int seed) noexcept
 :   Biome  (getNoiseParameters(), 55, seed)
 {
 
@@ -20,7 +20,7 @@ void TemperateForestBiome::makeTree(Rand& rand, Chunk& chunk, int x, int y, int 
     makeOakTree(chunk, rand, x, y, z);
 }
 
-NoiseParameters TemperateForestBiome::getNoiseParameters()
+NoiseParameters TemperateForestBiome::getNoiseParameters() noexcept
 {
     NoiseParameters heightParams;
     heightParams.octaves       = 9;

@@ -6,14 +6,14 @@
 class TemperateForestBiome : public Biome
 {
     public:
-        TemperateForestBiome(int seed);
+        TemperateForestBiome(int seed) noexcept;
 
         BlockId getTopBlock(Rand& rand) const;
         void makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) const;
 
 
     private:
-        NoiseParameters getNoiseParameters();
+        NoiseParameters getNoiseParameters() noexcept;
 };
 
 #endif // TEMPERATEFORESTBIOME_H_INCLUDED

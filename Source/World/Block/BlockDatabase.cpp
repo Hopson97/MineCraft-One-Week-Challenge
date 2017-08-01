@@ -15,7 +15,7 @@ BlockDatabase::BlockDatabase()
     m_blocks[(int)BlockId::Cactus]  = std::make_unique<DefaultBlock>("Cactus");
 }
 
-BlockDatabase& BlockDatabase::get()
+BlockDatabase& BlockDatabase::get() noexcept
 {
     static BlockDatabase d;
     return d;

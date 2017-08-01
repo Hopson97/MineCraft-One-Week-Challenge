@@ -10,8 +10,7 @@
 
 namespace
 {
-    constexpr int renderDistance = 16;
-    constexpr float GRAV = -3;
+    constexpr int renderDistance = 12;
 }
 
 World::World()

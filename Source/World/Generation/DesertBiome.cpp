@@ -2,13 +2,13 @@
 
 #include "TreeGenerator.h"
 
-DesertBiome::DesertBiome(int seed)
+DesertBiome::DesertBiome(int seed) noexcept
 :   Biome  (getNoiseParameters(), 175, seed)
 {
 
 }
 
-BlockId DesertBiome::getTopBlock(Rand& rand) const
+BlockId DesertBiome::getTopBlock(Rand& rand) const noexcept
 {
     return BlockId::Sand;
 }
@@ -18,7 +18,7 @@ void DesertBiome::makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) const
     makeCactus(chunk, rand, x, y, z);
 }
 
-NoiseParameters DesertBiome::getNoiseParameters()
+NoiseParameters DesertBiome::getNoiseParameters() noexcept
 {
     NoiseParameters heightParams;
     heightParams.octaves       = 9;
