@@ -56,7 +56,8 @@ void TerrainGenerator::generateTerrainFor(Chunk& chunk)
     getBiomeMap();
     getHeightMap();
 
-    auto maxHeight = *std::max_element(m_heightMap.begin(), m_heightMap.end());
+    auto maxHeight = m_heightMap.getMaxValue();
+
     maxHeight = std::max(maxHeight, WATER_LEVEL);
     setBlocks(maxHeight);
 }
@@ -66,7 +67,7 @@ void TerrainGenerator::getHeightIn (int xMin, int zMin, int xMax, int zMax)
 
     auto getHeightAt = [&](int x, int z)
     {
-        const IBiome& biome = getBiome(x, z);
+        const Biome& biome = getBiome(x, z);
 
         return biome.getHeight(x, z,
                                m_pChunk->getLocation().x,
@@ -91,7 +92,7 @@ void TerrainGenerator::getHeightIn (int xMin, int zMin, int xMax, int zMax)
                                       zMin, zMax,
                                       x, z);
 
-        m_heightMap[x * CHUNK_SIZE + z] = h;
+        m_heightMap.get(x, z) = h;
     }
 }
 
@@ -116,7 +117,7 @@ void TerrainGenerator::getBiomeMap()
     for (int z = 0; z < CHUNK_SIZE + 1; z++)
     {
         int h = m_biomeNoiseGen.getHeight(x, z, location.x + 10, location.y + 10);
-        m_biomeMap[x * (CHUNK_SIZE + 1) + z] = h;
+        m_biomeMap.get(x, z) = h;
     }
 }
 
@@ -128,7 +129,7 @@ void TerrainGenerator::setBlocks(int maxHeight)
     for (int x = 0; x < CHUNK_SIZE; x++)
     for (int z = 0; z < CHUNK_SIZE; z++)
     {
-        int height = m_heightMap[x * CHUNK_SIZE + z];
+        int height = m_heightMap.get(x, z);
         auto& biome = getBiome(x, z);
 
         if (y > height)
@@ -182,15 +183,15 @@ void TerrainGenerator::setTopBlock(int x, int y, int z)
 
 }
 
-const IBiome& TerrainGenerator::getBiome(int x, int z) const
+const Biome& TerrainGenerator::getBiome(int x, int z) const
 {
-    int biomeValue = m_biomeMap [x * (CHUNK_SIZE + 1) + z];
+    int biomeValue = m_biomeMap.get(x, z);
 
     if (biomeValue > 155)
     {
         return m_desertBiome;
     }
-    else if (biomeValue > 135)
+    else if (biomeValue > 115)
     {
         return m_lightForest;
     }
@@ -199,5 +200,3 @@ const IBiome& TerrainGenerator::getBiome(int x, int z) const
         return m_grassBiome;
     }
 }
-
-

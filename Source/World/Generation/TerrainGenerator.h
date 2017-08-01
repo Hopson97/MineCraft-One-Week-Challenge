@@ -1,13 +1,16 @@
 #ifndef TERRAINGENERATOR_H_INCLUDED
 #define TERRAINGENERATOR_H_INCLUDED
 
-#include <array>
+#include "../../Util/Array2D.h"
+#include "../../Util/Random.h"
 
 #include "../../Maths/NoiseGenerator.h"
 #include "../WorldConstants.h"
-#include "../../Util/Random.h"
 
-#include "Biome.h"
+
+#include "GrasslandBiome.h"
+#include "TemperateForestBiome.h"
+#include "DesertBiome.h"
 
 class Chunk;
 
@@ -28,18 +31,18 @@ class TerrainGenerator
         void getHeightMap();
         void getBiomeMap ();
 
-        const IBiome& getBiome(int x, int z) const;
+        const Biome& getBiome(int x, int z) const;
 
-        std::array<int, CHUNK_AREA> m_heightMap;
-        std::array<int, (CHUNK_SIZE + 1) * (CHUNK_SIZE + 1)> m_biomeMap;
+        Array2D<int, CHUNK_SIZE>        m_heightMap;
+        Array2D<int, CHUNK_SIZE + 1>    m_biomeMap;
 
         Random<std::minstd_rand> m_random;
 
         static NoiseGenerator m_biomeNoiseGen;
 
-        GrasslandBiome      m_grassBiome;
-        LightForestBiome    m_lightForest;
-        DesertBiome         m_desertBiome;
+        GrasslandBiome          m_grassBiome;
+        TemperateForestBiome    m_lightForest;
+        DesertBiome             m_desertBiome;
 
         Chunk* m_pChunk = nullptr;
 };
