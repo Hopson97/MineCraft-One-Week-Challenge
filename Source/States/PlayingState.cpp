@@ -66,6 +66,10 @@ void StatePlaying::handleInput()
 
 void StatePlaying::update(float deltaTime)
 {
+    if (m_player.position.x < 0) m_player.position.x = 0;
+    if (m_player.position.z < 0) m_player.position.z = 0;
+
+
     m_fpsCounter.update();
     m_player.update(deltaTime, m_world);
     m_world.update(m_pApplication->getCamera());

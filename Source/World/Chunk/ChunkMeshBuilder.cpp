@@ -91,14 +91,15 @@ int faces;
 void ChunkMeshBuilder::buildMesh()
 {
     sf::Clock c;
-//    std::cout << "Begin mesh build\n";
+    //std::cout << "Begin mesh build\n";
 
     AdjacentBlockPositions directions;
 
     faces = 0;
     for (int8_t y = 0; y < CHUNK_SIZE; ++y)
     {
-        if (!shouldMakeLayer(y)) continue;
+        if (!shouldMakeLayer(y))
+            continue;
 
         for (int8_t x = 0; x < CHUNK_SIZE; ++x)
         for (int8_t z = 0; z < CHUNK_SIZE; ++z)
@@ -130,11 +131,11 @@ void ChunkMeshBuilder::buildMesh()
             tryAddFaceToMesh(backFace,      data.texSideCoord,      position, directions.back);
         }
     }
-    /*
+/*
     std::cout   << "End mesh build, faces:  " << faces << '\n'
                 << "Time:                   " << c.getElapsedTime().asSeconds() * 1000 << "ms" << '\n'
                 << "Y:                      " << m_pChunk->getLocation().y <<  "\n\n";
-    */
+*/
 }
 
 void ChunkMeshBuilder::tryAddFaceToMesh(const std::vector<GLfloat>& blockFace,
@@ -187,14 +188,6 @@ bool ChunkMeshBuilder::shouldMakeLayer(int y)
             (!adjIsSolid( 0, -1));
 
 }
-
-
-
-
-
-
-
-
 
 
 
