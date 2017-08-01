@@ -25,6 +25,8 @@ void ChunkSection::setBlock(int x, int y, int z, ChunkBlock block)
         return;
     }
 
+    m_layers[y].update(block);
+
     m_blocks[getIndex(x, y, z)] = block;
 }
 
@@ -79,6 +81,41 @@ void ChunkSection::bufferMesh()
     m_mesh.bufferMesh();
     m_hasBufferedMesh = true;
 }
+
+const ChunkSection::Layer& ChunkSection::getLayer(int y) const
+{
+    if (y == -1)
+    {
+        return
+        m_pWorld->getChunkManager   ()
+                    .getChunk       (m_location.x, m_location.z)
+                    .getSection     (m_location.y - 1)
+                    .getLayer       (CHUNK_SIZE - 1);
+    }
+    else if (y == CHUNK_SIZE)
+    {
+        return
+        m_pWorld->getChunkManager   ()
+                    .getChunk       (m_location.x, m_location.z)
+                    .getSection     (m_location.y + 1)
+                    .getLayer       (0);
+    }
+    else
+    {
+        return m_layers[y];
+    }
+}
+
+ChunkSection& ChunkSection::getAdjacent(int dx, int dz)
+{
+    int newX = m_location.x + dx;
+    int newZ = m_location.z + dz;
+
+    return m_pWorld->getChunkManager().getChunk(newX, newZ).getSection(m_location.y);
+}
+
+
+
 
 
 bool ChunkSection::outOfBounds(int value)

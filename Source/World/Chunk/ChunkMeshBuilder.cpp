@@ -62,7 +62,7 @@ namespace
 
 }
 
-ChunkMeshBuilder::ChunkMeshBuilder(const ChunkSection& chunk, ChunkMesh& mesh)
+ChunkMeshBuilder::ChunkMeshBuilder(ChunkSection& chunk, ChunkMesh& mesh)
 :   m_pChunk    (&chunk)
 ,   m_pMesh     (&mesh)
 { }
@@ -97,34 +97,38 @@ void ChunkMeshBuilder::buildMesh()
 
     faces = 0;
     for (int8_t y = 0; y < CHUNK_SIZE; ++y)
-    for (int8_t x = 0; x < CHUNK_SIZE; ++x)
-    for (int8_t z = 0; z < CHUNK_SIZE; ++z)
     {
-        sf::Vector3i position(x, y, z);
-        ChunkBlock   block = m_pChunk->getBlock(x, y, z);
+        if (!shouldMakeLayer(y)) continue;
 
-        if (block == BlockId::Air)
+        for (int8_t x = 0; x < CHUNK_SIZE; ++x)
+        for (int8_t z = 0; z < CHUNK_SIZE; ++z)
         {
-            continue;
+            sf::Vector3i position(x, y, z);
+            ChunkBlock   block = m_pChunk->getBlock(x, y, z);
+
+            if (block == BlockId::Air)
+            {
+                continue;
+            }
+
+            m_pBlockData = &block.getData();
+            auto& data = *m_pBlockData;
+            directions.update(x, y, z);
+
+
+            //Up/ Down
+            //if ((y == 0) && (m_pChunk->getLocation().y == 0))
+            tryAddFaceToMesh(bottomFace, data.texBottomCoord, position, directions.down);
+            tryAddFaceToMesh(topFace,       data.texTopCoord,       position, directions.up);
+
+            //Left/ Right
+            tryAddFaceToMesh(leftFace,      data.texSideCoord,      position, directions.left);
+            tryAddFaceToMesh(rightFace,     data.texSideCoord,      position, directions.right);
+
+            //Front/ Back
+            tryAddFaceToMesh(frontFace,     data.texSideCoord,      position, directions.front);
+            tryAddFaceToMesh(backFace,      data.texSideCoord,      position, directions.back);
         }
-
-        m_pBlockData = &block.getData();
-        auto& data = *m_pBlockData;
-        directions.update(x, y, z);
-
-
-        //Up/ Down
-        //if ((y == 0) && (m_pChunk->getLocation().y == 0))
-        tryAddFaceToMesh(bottomFace, data.texBottomCoord, position, directions.down);
-        tryAddFaceToMesh(topFace,       data.texTopCoord,       position, directions.up);
-
-        //Left/ Right
-        tryAddFaceToMesh(leftFace,      data.texSideCoord,      position, directions.left);
-        tryAddFaceToMesh(rightFace,     data.texSideCoord,      position, directions.right);
-
-        //Front/ Back
-        tryAddFaceToMesh(frontFace,     data.texSideCoord,      position, directions.front);
-        tryAddFaceToMesh(backFace,      data.texSideCoord,      position, directions.back);
     }
     /*
     std::cout   << "End mesh build, faces:  " << faces << '\n'
@@ -165,6 +169,24 @@ bool ChunkMeshBuilder::shouldMakeFace(const sf::Vector3i& adjBlock,
     return false;
 }
 
+bool ChunkMeshBuilder::shouldMakeLayer(int y)
+{
+    auto adjIsSolid = [&](int dx, int dz)
+    {
+        const ChunkSection& sect = m_pChunk->getAdjacent(dx, dz);
+        return sect.getLayer(y).isAllSolid();
+    };
+
+    return  (!m_pChunk->getLayer(y    ).isAllSolid()) ||
+            (!m_pChunk->getLayer(y + 1).isAllSolid()) ||
+            (!m_pChunk->getLayer(y - 1).isAllSolid()) ||
+
+            (!adjIsSolid( 1,  0)) ||
+            (!adjIsSolid( 0,  1)) ||
+            (!adjIsSolid(-1,  0)) ||
+            (!adjIsSolid( 0, -1));
+
+}
 
 
 

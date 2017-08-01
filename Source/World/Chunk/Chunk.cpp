@@ -169,7 +169,8 @@ ChunkSection& Chunk::getSection(int index)
 {
     static ChunkSection errorSection({444,444,444}, *m_pWorld);
 
-    if (index >= m_chunks.size() || index < 0) return errorSection;
+    if (index >= m_chunks.size() || index < 0)
+        return errorSection;
 
     return m_chunks[index];
 }

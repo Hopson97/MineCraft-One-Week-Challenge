@@ -13,7 +13,7 @@ class BlockDataHolder;
 class ChunkMeshBuilder
 {
     public:
-        ChunkMeshBuilder(const ChunkSection& chunk, ChunkMesh& mesh);
+        ChunkMeshBuilder(ChunkSection& chunk, ChunkMesh& mesh);
 
         void buildMesh();
 
@@ -26,7 +26,9 @@ class ChunkMeshBuilder
         bool shouldMakeFace (const sf::Vector3i& blockPosition,
                              const BlockDataHolder& blockData);
 
-        const ChunkSection*           m_pChunk        = nullptr;
+        bool shouldMakeLayer(int y);
+
+        ChunkSection*           m_pChunk        = nullptr;
         ChunkMesh*              m_pMesh         = nullptr;
         const BlockDataHolder*  m_pBlockData    = nullptr;
 };

@@ -127,7 +127,7 @@ void World::renderWorld(RenderMaster& renderer)
 }
 
 
-const ChunkManager& World::getChunkManager() const
+ChunkManager& World::getChunkManager()
 {
     return m_chunkManager;
 }

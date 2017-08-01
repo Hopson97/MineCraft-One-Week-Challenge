@@ -14,6 +14,31 @@ class World;
 class ChunkSection : public IChunk
 {
     friend class Chunk;
+
+    class Layer
+    {
+        public:
+            void update(ChunkBlock c)
+            {
+                if (c == 0)
+                {
+                    m_solidBlockCount--;
+                }
+                else
+                {
+                    m_solidBlockCount++;
+                }
+            }
+
+            bool isAllSolid() const
+            {
+                return m_solidBlockCount == CHUNK_AREA;
+            }
+
+        private:
+            int m_solidBlockCount = 0;
+    };
+
     public:
         ChunkSection(const sf::Vector3i& position, World& world);
 
@@ -28,12 +53,16 @@ class ChunkSection : public IChunk
         void makeMesh();
         void bufferMesh();
 
+        const Layer& getLayer (int y) const;
+        ChunkSection& getAdjacent(int dx, int dz);
+
     private:
         sf::Vector3i toWorldPosition (int x, int y, int z) const;
 
         static bool outOfBounds (int value);
         static int  getIndex    (int x, int y, int z);
 
+        std::array<Layer, CHUNK_SIZE>           m_layers;
         std::array<ChunkBlock, CHUNK_VOLUME>    m_blocks;
         ChunkMesh                               m_mesh;
         sf::Vector3i                            m_location;

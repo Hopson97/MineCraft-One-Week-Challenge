@@ -25,7 +25,7 @@ class World
 
         void renderWorld(RenderMaster& master);
 
-        const ChunkManager& getChunkManager() const;
+        ChunkManager& getChunkManager();
 
         static VectorXZ getBlockXZ(int x, int z);
         static VectorXZ getChunkXZ(int x, int z);
