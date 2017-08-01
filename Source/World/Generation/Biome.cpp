@@ -10,30 +10,30 @@ GrasslandBiome::GrasslandBiome(int seed)
 {
     NoiseParameters heightParams;
     heightParams.octaves       = 9;
-    heightParams.amplitude     = 80;
+    heightParams.amplitude     = 90;
     heightParams.smoothness    = 335;
     heightParams.heightOffset  = -5;
-    heightParams.roughness     = 0.56;
+    heightParams.roughness     = 0.50;
 
     m_heightGenerator.setParameters(heightParams);
 }
 
-BlockId GrasslandBiome::getTopBlock(Rand& rand)
+BlockId GrasslandBiome::getTopBlock(Rand& rand) const
 {
     return BlockId::Grass;
 }
 
-void GrasslandBiome::makeTree(Rand& rand, Chunk& chunk, int x, int y, int z)
+void GrasslandBiome::makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) const
 {
     makeOakTree(chunk, rand, x, y, z);
 }
 
-int GrasslandBiome::getHeight(int x, int z, int chunkX, int chunkZ)
+int GrasslandBiome::getHeight(int x, int z, int chunkX, int chunkZ) const
 {
     return m_heightGenerator.getHeight(x, z, chunkX, chunkZ);
 }
 
-int GrasslandBiome::getTreeFrequency()
+int GrasslandBiome::getTreeFrequency() const
 {
     return 100;
 }
@@ -46,32 +46,32 @@ LightForestBiome::LightForestBiome(int seed)
 {
     NoiseParameters heightParams;
     heightParams.octaves       = 9;
-    heightParams.amplitude     = 120;
-    heightParams.smoothness    = 135;
+    heightParams.amplitude     = 100;
+    heightParams.smoothness    = 195;
     heightParams.heightOffset  = -15;
-    heightParams.roughness     = 0.52;
+    heightParams.roughness     = 0.50;
 
     m_heightGenerator.setParameters(heightParams);
 }
 
-BlockId LightForestBiome::getTopBlock(Rand& rand)
+BlockId LightForestBiome::getTopBlock(Rand& rand) const
 {
-    return rand.intInRange(0, 10) > 8 ?
+    return rand.intInRange(0, 10) < 8 ?
         BlockId::Grass :
         BlockId::Dirt;
 }
 
-void LightForestBiome::makeTree(Rand& rand, Chunk& chunk, int x, int y, int z)
+void LightForestBiome::makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) const
 {
     makeOakTree(chunk, rand, x, y, z);
 }
 
-int LightForestBiome::getHeight(int x, int z, int chunkX, int chunkZ)
+int LightForestBiome::getHeight(int x, int z, int chunkX, int chunkZ) const
 {
     return m_heightGenerator.getHeight(x, z, chunkX, chunkZ);
 }
 
-int LightForestBiome::getTreeFrequency()
+int LightForestBiome::getTreeFrequency() const
 {
     return 50;
 }
@@ -84,7 +84,7 @@ DesertBiome::DesertBiome(int seed)
 {
     NoiseParameters heightParams;
     heightParams.octaves       = 9;
-    heightParams.amplitude     = 70;
+    heightParams.amplitude     = 80;
     heightParams.smoothness    = 335;
     heightParams.heightOffset  = 0;
     heightParams.roughness     = 0.53;
@@ -92,22 +92,22 @@ DesertBiome::DesertBiome(int seed)
     m_heightGenerator.setParameters(heightParams);
 }
 
-BlockId DesertBiome::getTopBlock(Rand& rand)
+BlockId DesertBiome::getTopBlock(Rand& rand) const
 {
     return BlockId::Sand;
 }
 
-void DesertBiome::makeTree(Rand& rand, Chunk& chunk, int x, int y, int z)
+void DesertBiome::makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) const
 {
     makeCactus(chunk, rand, x, y, z);
 }
 
-int DesertBiome::getHeight(int x, int z, int chunkX, int chunkZ)
+int DesertBiome::getHeight(int x, int z, int chunkX, int chunkZ) const
 {
     return m_heightGenerator.getHeight(x, z, chunkX, chunkZ);
 }
 
-int DesertBiome::getTreeFrequency()
+int DesertBiome::getTreeFrequency() const
 {
     return 200;
 }

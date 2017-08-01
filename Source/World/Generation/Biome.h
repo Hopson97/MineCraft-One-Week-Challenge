@@ -11,11 +11,11 @@ class Chunk;
 
 struct IBiome
 {
-    virtual BlockId getTopBlock(Rand& rand) = 0;
-    virtual void makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) = 0;
+    virtual BlockId getTopBlock(Rand& rand) const = 0;
+    virtual void makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) const = 0;
 
-    virtual int getHeight(int x, int z, int chunkX, int chunkZ) = 0;
-    virtual int getTreeFrequency();
+    virtual int getHeight(int x, int z, int chunkX, int chunkZ) const = 0;
+    virtual int getTreeFrequency() const = 0;
 };
 
 class GrasslandBiome : public IBiome
@@ -23,12 +23,12 @@ class GrasslandBiome : public IBiome
     public:
         GrasslandBiome(int seed);
 
-        BlockId getTopBlock(Rand& rand);
-        void makeTree(Rand& rand, Chunk& chunk, int x, int y, int z);
+        BlockId getTopBlock(Rand& rand) const;
+        void makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) const;
 
-        int getHeight(int x, int z, int chunkX, int chunkZ);
+        int getHeight(int x, int z, int chunkX, int chunkZ) const;
 
-        int getTreeFrequency();
+        int getTreeFrequency() const;
 
     private:
         NoiseGenerator m_heightGenerator;
@@ -39,12 +39,12 @@ class LightForestBiome : public IBiome
     public:
         LightForestBiome(int seed);
 
-        BlockId getTopBlock(Rand& rand);
-        void makeTree(Rand& rand, Chunk& chunk, int x, int y, int z);
+        BlockId getTopBlock(Rand& rand) const;
+        void makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) const;
 
-        int getHeight(int x, int z, int chunkX, int chunkZ);
+        int getHeight(int x, int z, int chunkX, int chunkZ) const;
 
-        int getTreeFrequency();
+        int getTreeFrequency() const;
 
     private:
         NoiseGenerator m_heightGenerator;
@@ -55,12 +55,12 @@ class DesertBiome : public IBiome
     public:
         DesertBiome(int seed);
 
-        BlockId getTopBlock(Rand& rand);
-        void makeTree(Rand& rand, Chunk& chunk, int x, int y, int z);
+        BlockId getTopBlock(Rand& rand) const;
+        void makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) const;
 
-        int getHeight(int x, int z, int chunkX, int chunkZ);
+        int getHeight(int x, int z, int chunkX, int chunkZ) const;
 
-        int getTreeFrequency();
+        int getTreeFrequency() const;
 
     private:
         NoiseGenerator m_heightGenerator;
