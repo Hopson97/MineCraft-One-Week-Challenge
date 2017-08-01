@@ -2,7 +2,7 @@
 #define CAMERA_H_INCLUDED
 
 #include "Maths/glm.h"
-
+#include "Maths/Frustum.h"
 #include "Entity.h"
 
 class Camera : public Entity
@@ -17,8 +17,12 @@ class Camera : public Entity
         const glm::mat4& getProjMatrix ()           const noexcept;
         const glm::mat4& getProjectionViewMatrix () const noexcept;
 
+        const ViewFrustum& getFrustum() const noexcept;
+
     private:
         const Entity* m_pEntity;
+
+        ViewFrustum m_frustum;
 
         glm::mat4 m_projectionMatrix;
         glm::mat4 m_viewMatrix;

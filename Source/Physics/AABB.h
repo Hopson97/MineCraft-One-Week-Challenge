@@ -40,15 +40,15 @@ struct AABB
     {
         glm::vec3 res = position;
 
-        if (normal.x < 0)
+        if (normal.x > 0)
         {
             res.x += dimensions.x;
         }
-        if (normal.y < 0)
+        if (normal.y > 0)
         {
             res.y += dimensions.y;
         }
-        if (normal.z < 0)
+        if (normal.z > 0)
         {
             res.z += dimensions.z;
         }

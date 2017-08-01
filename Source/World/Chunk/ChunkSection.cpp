@@ -8,9 +8,11 @@
 #include <iostream>
 
 ChunkSection::ChunkSection(const sf::Vector3i& location, World& world)
-:   m_location  (location)
+:   m_aabb      ({CHUNK_SIZE, CHUNK_SIZE, CHUNK_SIZE})
+,   m_location  (location)
 ,   m_pWorld    (&world)
 {
+    m_aabb.update({location.x * CHUNK_SIZE, location.y * CHUNK_SIZE, location.z * CHUNK_SIZE});
     static_assert(sizeof(m_blocks) == CHUNK_VOLUME, "Size too big, yo");
 }
 
@@ -113,10 +115,6 @@ ChunkSection& ChunkSection::getAdjacent(int dx, int dz)
 
     return m_pWorld->getChunkManager().getChunk(newX, newZ).getSection(m_location.y);
 }
-
-
-
-
 
 bool ChunkSection::outOfBounds(int value)
 {

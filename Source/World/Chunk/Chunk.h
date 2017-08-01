@@ -4,7 +4,9 @@
 #include <vector>
 #include "ChunkSection.h"
 
+
 class RenderMaster;
+class Camera;
 
 class Chunk : public IChunk
 {
@@ -16,7 +18,7 @@ class Chunk : public IChunk
         void setBlock       (int x, int y, int z, ChunkBlock block) override;
         ChunkBlock getBlock (int x, int y, int z) const override;
 
-        void drawChunks (RenderMaster& renderer);
+        void drawChunks (RenderMaster& renderer, const Camera& camera);
 
         bool hasLoaded() const;
         void load();
@@ -36,6 +38,7 @@ class Chunk : public IChunk
         World* m_pWorld;
 
         bool m_isLoaded = false;
+
 
 };
 

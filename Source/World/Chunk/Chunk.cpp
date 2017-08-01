@@ -2,10 +2,8 @@
 
 #include "../../Renderer/RenderMaster.h"
 #include "../../Util/Random.h"
-
-#include <iostream>
-
 #include "../../Maths/NoiseGenerator.h"
+#include "../../Camera.h"
 
 Chunk::Chunk(World& world, const sf::Vector2i& location)
 :   m_location  (location)
@@ -66,7 +64,7 @@ bool Chunk::outOfBound(int x, int y, int z) const
     return false;
 }
 
-void Chunk::drawChunks(RenderMaster& renderer)
+void Chunk::drawChunks(RenderMaster& renderer, const Camera& camera)
 {
     for (auto& chunk : m_chunks)
     {
@@ -76,7 +74,9 @@ void Chunk::drawChunks(RenderMaster& renderer)
             {
                 chunk.bufferMesh();
             }
-            renderer.drawChunk(chunk.m_mesh);
+
+            if (camera.getFrustum().isBoxInFrustum(chunk.m_aabb))
+                renderer.drawChunk(chunk.m_mesh);
         }
     }
 }
@@ -169,7 +169,7 @@ ChunkSection& Chunk::getSection(int index)
 {
     static ChunkSection errorSection({444,444,444}, *m_pWorld);
 
-    if (index >= m_chunks.size() || index < 0)
+    if (index >= (int)m_chunks.size() || index < 0)
         return errorSection;
 
     return m_chunks[index];
@@ -194,6 +194,3 @@ void Chunk::addSectionsIndexTarget(int index)
         addSection();
     }
 }
-
-
-

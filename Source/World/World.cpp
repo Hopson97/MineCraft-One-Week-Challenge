@@ -115,14 +115,14 @@ void World::updateChunk(int blockX, int blockY, int blockZ)
 }
 
 
-void World::renderWorld(RenderMaster& renderer)
+void World::renderWorld(RenderMaster& renderer, const Camera& camera)
 {
     renderer.drawSky();
 
     auto& chunkMap = m_chunkManager.getChunks();
     for (auto& chunk : chunkMap)
     {
-        chunk.second.drawChunks(renderer);
+        chunk.second.drawChunks(renderer, camera);
     }
 }
 

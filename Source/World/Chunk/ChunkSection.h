@@ -9,6 +9,8 @@
 #include "ChunkMesh.h"
 #include "IChunk.h"
 
+#include "../../Physics/AABB.h"
+
 class World;
 
 class ChunkSection : public IChunk
@@ -62,10 +64,12 @@ class ChunkSection : public IChunk
         static bool outOfBounds (int value);
         static int  getIndex    (int x, int y, int z);
 
-        std::array<Layer, CHUNK_SIZE>           m_layers;
         std::array<ChunkBlock, CHUNK_VOLUME>    m_blocks;
-        ChunkMesh                               m_mesh;
-        sf::Vector3i                            m_location;
+        std::array<Layer, CHUNK_SIZE>           m_layers;
+
+        ChunkMesh       m_mesh;
+        AABB            m_aabb;
+        sf::Vector3i    m_location;
 
         World* m_pWorld;
 

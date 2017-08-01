@@ -23,7 +23,7 @@ class World
         void update(const Camera& camera);
         void updateChunk(int blockX, int blockY, int blockZ);
 
-        void renderWorld(RenderMaster& master);
+        void renderWorld(RenderMaster& master, const Camera& camera);
 
         ChunkManager& getChunkManager();
 
