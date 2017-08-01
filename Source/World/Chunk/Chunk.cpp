@@ -4,6 +4,7 @@
 #include "../../Util/Random.h"
 #include "../../Maths/NoiseGenerator.h"
 #include "../../Camera.h"
+#include "../Generation/TerrainGenerator.h"
 
 Chunk::Chunk(World& world, const sf::Vector2i& location)
 :   m_location  (location)
@@ -88,6 +89,15 @@ bool Chunk::hasLoaded() const
 
 void Chunk::load()
 {
+    if (hasLoaded())
+        return;
+
+    TerrainGenerator gen;
+    gen.generateTerrainFor(*this);
+    m_isLoaded = true;
+    return;
+
+
     static int seed = RandomSingleton::get().intInRange(444,444444);
     if (hasLoaded())
         return;

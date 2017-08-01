@@ -47,6 +47,7 @@ const Material& Material::toMaterial(BlockId id)
 {
     switch (id)
     {
+        case BlockId::NUM_TYPES:
         case BlockId::Air:
             return NOTHING;
 

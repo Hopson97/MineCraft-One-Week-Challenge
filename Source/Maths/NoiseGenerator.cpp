@@ -14,6 +14,12 @@ NoiseGenerator::NoiseGenerator(int seed)
     m_noiseParameters.roughness     = 0.53;
 }
 
+void NoiseGenerator::setParameters(const NoiseParameters& params)
+{
+    m_noiseParameters = params;
+}
+
+
 //wtf?
 double NoiseGenerator::getNoise(int  n) const
 {
