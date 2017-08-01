@@ -12,7 +12,7 @@
 
 namespace
 {
-    int seed = 333333;
+    int seed = RandomSingleton::get().intInRange(424, 325322);
 }
 
 NoiseGenerator TerrainGenerator::m_biomeNoiseGen    (seed * 2);
@@ -112,11 +112,11 @@ void TerrainGenerator::getBiomeMap()
 {
     auto location = m_pChunk->getLocation();
 
-    for (int x = 0; x < CHUNK_SIZE; x++)
-    for (int z = 0; z < CHUNK_SIZE; z++)
+    for (int x = 0; x < CHUNK_SIZE + 1; x++)
+    for (int z = 0; z < CHUNK_SIZE + 1; z++)
     {
         int h = m_biomeNoiseGen.getHeight(x, z, location.x + 10, location.y + 10);
-        m_biomeMap[x * CHUNK_SIZE + z] = h;
+        m_biomeMap[x * (CHUNK_SIZE + 1) + z] = h;
     }
 }
 
@@ -184,7 +184,7 @@ void TerrainGenerator::setTopBlock(int x, int y, int z)
 
 const IBiome& TerrainGenerator::getBiome(int x, int z) const
 {
-    int biomeValue = m_biomeMap [x * CHUNK_SIZE + z];
+    int biomeValue = m_biomeMap [x * (CHUNK_SIZE + 1) + z];
 
     if (biomeValue > 155)
     {

@@ -31,7 +31,7 @@ class TerrainGenerator
         const IBiome& getBiome(int x, int z) const;
 
         std::array<int, CHUNK_AREA> m_heightMap;
-        std::array<int, CHUNK_AREA> m_biomeMap;
+        std::array<int, (CHUNK_SIZE + 1) * (CHUNK_SIZE + 1)> m_biomeMap;
 
         Random<std::minstd_rand> m_random;
 
