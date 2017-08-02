@@ -20,6 +20,7 @@ World::World(const Camera& camera)
         while(m_isRunning)
         {
             loadChunks(camera);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
         }
     })
 {
@@ -87,13 +88,13 @@ void World::loadChunks(const Camera& camera)
                 if(m_chunkManager.makeMesh(x, z))
                 {
                     isMeshMade = true;
-                    m_mutex.unlock();
-                    break;
+                    //m_mutex.unlock();
+                    //break;
                 }
                 m_mutex.unlock();
             }
-            if (isMeshMade)
-                break;
+            //if (isMeshMade)
+            //    break;
         }
 
         if (isMeshMade)

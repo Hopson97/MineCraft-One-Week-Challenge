@@ -71,7 +71,6 @@ void StatePlaying::update(float deltaTime)
     if (m_player.position.x < 0) m_player.position.x = 0;
     if (m_player.position.z < 0) m_player.position.z = 0;
 
-
     m_fpsCounter.update();
     m_player.update(deltaTime, m_world);
     m_world.update(m_pApplication->getCamera());
@@ -79,15 +78,23 @@ void StatePlaying::update(float deltaTime)
 
 void StatePlaying::render(RenderMaster& renderer)
 {
-    static Entity cubeTest({0, 150, 0}, {50, 70, 25});
-    m_fpsCounter.draw(renderer);
-    renderer.drawSFML(m_crosshair);
+    static bool drawGUI = false;
+    static ToggleKey drawKey(sf::Keyboard::F3);
 
-    renderer.drawCube(cubeTest);
+    if (drawKey.isKeyPressed())
+    {
+        drawGUI = !drawGUI;
+    }
+
+    if (drawGUI)
+    {
+        m_fpsCounter.draw(renderer);
+        renderer.drawSFML(m_crosshair);
+        m_player.draw(renderer);
+    }
+
+
     m_world.renderWorld(renderer, m_pApplication->getCamera());
-
-    m_player.draw(renderer);
-
 }
 
 void StatePlaying::onOpen()
