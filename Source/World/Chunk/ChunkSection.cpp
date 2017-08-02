@@ -45,17 +45,17 @@ ChunkBlock ChunkSection::getBlock(int x, int y, int z) const
     return m_blocks[getIndex(x, y, z)];
 }
 
-const sf::Vector3i ChunkSection::getLocation() const noexcept
+const sf::Vector3i ChunkSection::getLocation() const
 {
     return m_location;
 }
 
-bool ChunkSection::hasMesh() const noexcept
+bool ChunkSection::hasMesh() const
 {
     return m_hasMesh;
 }
 
-bool ChunkSection::hasBuffered() const noexcept
+bool ChunkSection::hasBuffered() const
 {
     return m_hasBufferedMesh;
 }

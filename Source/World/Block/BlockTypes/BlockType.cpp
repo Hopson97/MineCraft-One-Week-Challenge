@@ -6,7 +6,7 @@ BlockType::BlockType(const std::string& fileName)
 
 }
 
-const BlockData& BlockType::getData() const noexcept
+const BlockData& BlockType::getData() const
 {
     return m_data;
 }

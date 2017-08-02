@@ -82,7 +82,7 @@ void Chunk::drawChunks(RenderMaster& renderer, const Camera& camera)
     }
 }
 
-bool Chunk::hasLoaded() const noexcept
+bool Chunk::hasLoaded() const
 {
     return m_isLoaded;
 }

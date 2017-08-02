@@ -10,12 +10,12 @@ class Array2D
     using Array = std::array<T, WIDTH * WIDTH>;
 
     public:
-        T& get(int x, int z) noexcept
+        T& get(int x, int z)
         {
             return m_array[x * WIDTH + z];
         }
 
-        const T& get(int x, int z) const noexcept
+        const T& get(int x, int z) const
         {
             return m_array[x * WIDTH + z];
         }

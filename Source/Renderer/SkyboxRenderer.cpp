@@ -73,12 +73,12 @@ SkyboxRenderer::SkyboxRenderer()
 
     m_cubeTexture.loadFromFiles(
     {
-        "right",
-        "left",
-        "top",
-        "bottom",
-        "back",
-        "front",
+        "dm",
+        "dm",
+        "dt",
+        "db",
+        "dm",
+        "dm",
     });
 }
 

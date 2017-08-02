@@ -21,7 +21,7 @@ TerrainGenerator::TerrainGenerator()
 :   m_grassBiome    (seed)
 ,   m_lightForest   (seed)
 ,   m_desertBiome   (seed)
-
+,   m_oceanBiome    (seed)
 {
     setUpNoise();
 }
@@ -37,10 +37,9 @@ void TerrainGenerator::setUpNoise()
         NoiseParameters biomeParmams;
         biomeParmams.octaves       = 5;
         biomeParmams.amplitude     = 125;
-        biomeParmams.smoothness    = 735;
-        biomeParmams.heightOffset  = -5;
-        biomeParmams.roughness     = 0.6;
-
+        biomeParmams.smoothness    = 1035;
+        biomeParmams.heightOffset  = 0;
+        biomeParmams.roughness     = 0.7;
 
         m_biomeNoiseGen     .setParameters   (biomeParmams);
     }
@@ -195,8 +194,12 @@ const Biome& TerrainGenerator::getBiome(int x, int z) const
     {
         return m_lightForest;
     }
-    else
+    else if (biomeValue > 100)
     {
         return m_grassBiome;
+    }
+    else
+    {
+        return m_oceanBiome;
     }
 }

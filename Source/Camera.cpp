@@ -24,22 +24,22 @@ void Camera::hookEntity(const Entity& entity)
     m_pEntity = &entity;
 }
 
-const glm::mat4& Camera::getViewMatrix() const noexcept
+const glm::mat4& Camera::getViewMatrix() const
 {
     return m_viewMatrix;
 }
 
-const glm::mat4& Camera::getProjMatrix() const noexcept
+const glm::mat4& Camera::getProjMatrix() const
 {
     return m_projectionMatrix;
 }
 
-const glm::mat4& Camera::getProjectionViewMatrix() const noexcept
+const glm::mat4& Camera::getProjectionViewMatrix() const
 {
     return m_projViewMatrx;
 }
 
-const ViewFrustum& Camera::getFrustum() const noexcept
+const ViewFrustum& Camera::getFrustum() const
 {
     return m_frustum;
 }

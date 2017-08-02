@@ -21,7 +21,7 @@ class ChunkSection : public IChunk
     class Layer
     {
         public:
-            void update(ChunkBlock c) noexcept
+            void update(ChunkBlock c)
             {
                 if (c.getData().isOpaque)
                 {
@@ -33,7 +33,7 @@ class ChunkSection : public IChunk
                 }
             }
 
-            bool isAllSolid() const noexcept
+            bool isAllSolid() const
             {
                 return m_solidBlockCount == CHUNK_AREA;
             }
@@ -48,10 +48,10 @@ class ChunkSection : public IChunk
         void setBlock       (int x, int y, int z, ChunkBlock block) override;
         ChunkBlock getBlock (int x, int y, int z) const override;
 
-        const sf::Vector3i getLocation() const noexcept;
+        const sf::Vector3i getLocation() const ;
 
-        bool hasMesh    () const noexcept;
-        bool hasBuffered() const noexcept;
+        bool hasMesh    () const ;
+        bool hasBuffered() const ;
 
         void makeMesh();
         void bufferMesh();

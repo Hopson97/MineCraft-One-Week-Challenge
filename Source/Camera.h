@@ -13,11 +13,11 @@ class Camera : public Entity
         void update();
         void hookEntity(const Entity& entity);
 
-        const glm::mat4& getViewMatrix ()           const noexcept;
-        const glm::mat4& getProjMatrix ()           const noexcept;
-        const glm::mat4& getProjectionViewMatrix () const noexcept;
+        const glm::mat4& getViewMatrix ()           const ;
+        const glm::mat4& getProjMatrix ()           const ;
+        const glm::mat4& getProjectionViewMatrix () const ;
 
-        const ViewFrustum& getFrustum() const noexcept;
+        const ViewFrustum& getFrustum() const ;
 
     private:
         const Entity* m_pEntity;

@@ -21,12 +21,12 @@ class Chunk : public IChunk
 
         void drawChunks (RenderMaster& renderer, const Camera& camera);
 
-        bool hasLoaded() const noexcept;
+        bool hasLoaded() const ;
         void load();
 
         ChunkSection& getSection(int index);
 
-        const sf::Vector2i& getLocation() const noexcept { return m_location; }
+        const sf::Vector2i& getLocation() const  { return m_location; }
 
     private:
         void addSection();

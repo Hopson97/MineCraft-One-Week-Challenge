@@ -23,7 +23,6 @@ void FPSCounter::update()
     if (m_delayTimer.getElapsedTime().asSeconds() > 0.5)
     {
         m_fps = m_frameCount / m_fpsTimer.restart().asSeconds();
-
         m_frameCount = 0;
         m_delayTimer.restart();
     }

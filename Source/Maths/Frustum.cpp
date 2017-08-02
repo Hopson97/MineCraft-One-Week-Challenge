@@ -12,12 +12,12 @@ enum Planes
     Bottom,
 };
 
-float Plane::distanceToPoint(const glm::vec3& point) const noexcept
+float Plane::distanceToPoint(const glm::vec3& point) const
 {
     return glm::dot(point, normal) + distanceToOrigin;
 }
 
-void ViewFrustum::update(const glm::mat4& mat) noexcept
+void ViewFrustum::update(const glm::mat4& mat)
 {
     // left
     m_planes[Planes::Left].normal.x     = mat[0][3] + mat[0][0];
@@ -64,7 +64,7 @@ void ViewFrustum::update(const glm::mat4& mat) noexcept
 
 }
 
-bool ViewFrustum::isBoxInFrustum(const AABB& box) const noexcept
+bool ViewFrustum::isBoxInFrustum(const AABB& box) const
 {
     bool result = true;
     for (auto& plane : m_planes)

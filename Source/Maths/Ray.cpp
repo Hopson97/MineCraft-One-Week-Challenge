@@ -1,6 +1,6 @@
 #include "Ray.h"
 
-Ray::Ray(const glm::vec3& position, const glm::vec3& direction) noexcept
+Ray::Ray(const glm::vec3& position, const glm::vec3& direction)
 :   m_rayStart  (position)
 ,   m_rayEnd    (position)
 ,   m_direction (direction)
@@ -8,7 +8,7 @@ Ray::Ray(const glm::vec3& position, const glm::vec3& direction) noexcept
 
 }
 
-void Ray::step(float scale) noexcept
+void Ray::step(float scale)
 {
     float yaw = glm::radians    (m_direction.y + 90);
     float pitch = glm::radians  (m_direction.x);
@@ -20,12 +20,12 @@ void Ray::step(float scale) noexcept
     p.y -= glm::tan(pitch)  * scale;
 }
 
-const glm::vec3& Ray::getEnd() const noexcept
+const glm::vec3& Ray::getEnd() const
 {
     return m_rayEnd;
 }
 
-float Ray::getLength() const noexcept
+float Ray::getLength() const
 {
     return glm::distance(m_rayStart, m_rayEnd);
 }

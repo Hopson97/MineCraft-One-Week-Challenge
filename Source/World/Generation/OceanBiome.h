@@ -1,12 +1,12 @@
-#ifndef TEMPERATEFORESTBIOME_H_INCLUDED
-#define TEMPERATEFORESTBIOME_H_INCLUDED
+#ifndef OCEANBIOME_H_INCLUDED
+#define OCEANBIOME_H_INCLUDED
 
 #include "Biome.h"
 
-class TemperateForestBiome : public Biome
+class OceanBiome : public Biome
 {
     public:
-        TemperateForestBiome(int seed) ;
+        OceanBiome(int seed);
 
         BlockId getTopBlock(Rand& rand) const;
         void makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) const;
@@ -16,4 +16,4 @@ class TemperateForestBiome : public Biome
         NoiseParameters getNoiseParameters() ;
 };
 
-#endif // TEMPERATEFORESTBIOME_H_INCLUDED
+#endif // OCEANBIOME_H_INCLUDED

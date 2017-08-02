@@ -2,13 +2,13 @@
 
 #include "TreeGenerator.h"
 
-GrasslandBiome::GrasslandBiome(int seed) noexcept
+GrasslandBiome::GrasslandBiome(int seed)
 :   Biome  (getNoiseParameters(), 100, seed)
 {
 
 }
 
-BlockId GrasslandBiome::getTopBlock(Rand& rand) const noexcept
+BlockId GrasslandBiome::getTopBlock(Rand& rand) const
 {
     return BlockId::Grass;
 }
@@ -18,7 +18,7 @@ void GrasslandBiome::makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) con
     makeOakTree(chunk, rand, x, y, z);
 }
 
-NoiseParameters GrasslandBiome::getNoiseParameters() noexcept
+NoiseParameters GrasslandBiome::getNoiseParameters()
 {
     NoiseParameters heightParams;
     heightParams.octaves       = 9;

@@ -9,7 +9,7 @@ class BlockType : public NonCopyable
         BlockType(const std::string& fileName);
         virtual ~BlockType() = default;
 
-        const BlockData& getData() const noexcept;
+        const BlockData& getData() const ;
 
     private:
         BlockData m_data;

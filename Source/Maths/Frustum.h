@@ -9,7 +9,7 @@ class AABB;
 
 struct Plane
 {
-    float distanceToPoint(const glm::vec3& point) const noexcept;
+    float distanceToPoint(const glm::vec3& point) const ;
 
     float distanceToOrigin;
     glm::vec3 normal;
@@ -18,9 +18,9 @@ struct Plane
 class ViewFrustum
 {
     public:
-        void update(const glm::mat4& projViewMatrix) noexcept;
+        void update(const glm::mat4& projViewMatrix) ;
 
-        bool isBoxInFrustum(const AABB& box) const noexcept;
+        bool isBoxInFrustum(const AABB& box) const ;
 
     private:
         std::array<Plane, 6> m_planes;

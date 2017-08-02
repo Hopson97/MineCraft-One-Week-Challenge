@@ -18,6 +18,4 @@ Context::Context()
     glViewport(0, 0, 1280, 720);
 
     glCullFace(GL_BACK);
-
-    //window.setVerticalSyncEnabled(true);
 }
