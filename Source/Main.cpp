@@ -1,6 +1,5 @@
 #include "Application.h"
 
-
 #ifdef __WIN32
     extern "C"
     {
@@ -13,5 +12,6 @@
 int main()
 {
     Application app("Minecraft");
+
     app.runLoop();
 }

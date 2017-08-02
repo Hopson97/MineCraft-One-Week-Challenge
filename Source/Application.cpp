@@ -1,9 +1,11 @@
 #include "Application.h"
-#include "States/PlayingState.h"
 
+#include "States/PlayingState.h"
+#include "World/Block/BlockDatabase.h"
 
 Application::Application(std::string&& name)
 {
+    BlockDatabase::get();
     pushState<StatePlaying>(*this);
 }
 
