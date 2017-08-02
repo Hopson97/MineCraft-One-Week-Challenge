@@ -23,6 +23,9 @@ class ChunkMeshBuilder
     private:
         void setActiveMesh(ChunkBlock block);
 
+        void addXBlockToMesh(const sf::Vector2i& textureCoords,
+                             const sf::Vector3i& blockPosition);
+
         void tryAddFaceToMesh(const std::vector<GLfloat>& blockFace,
                               const sf::Vector2i& textureCoords,
                               const sf::Vector3i& blockPosition,

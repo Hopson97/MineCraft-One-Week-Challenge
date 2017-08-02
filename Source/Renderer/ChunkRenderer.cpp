@@ -20,7 +20,7 @@ void ChunkRenderer::render(const Camera& camera)
     }
 
     glDisable(GL_BLEND);
-    glEnable(GL_CULL_FACE);
+    glDisable(GL_CULL_FACE);
 
     m_shader.useProgram();
     BlockDatabase::get().textureAtlas.bindTexture();
