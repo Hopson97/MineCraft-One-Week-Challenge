@@ -12,9 +12,25 @@ namespace
 {
     constexpr int renderDistance = 12;
 }
+
 World::World(const Camera& camera)
 :   m_chunkManager  (*this)
-{ }
+,   m_chunkLoadThread   ([&]()
+    {
+        while(m_isRunning)
+        {
+            loadChunks(camera);
+        }
+    })
+{
+
+}
+
+World::~World()
+{
+    m_isRunning = false;
+    m_chunkLoadThread.join();
+}
 
 //world coords into chunk column coords
 ChunkBlock World::getBlock(int x, int y, int z)
@@ -47,7 +63,7 @@ void World::update(const Camera& camera)
     m_events.clear();
 
     updateChunks();
-    loadChunks(camera);
+    //loadChunks(camera);
 }
 
 void World::loadChunks(const Camera& camera)
@@ -67,11 +83,14 @@ void World::loadChunks(const Camera& camera)
         {
             for (int z = minZ; z < maxZ; ++z)
             {
+                m_mutex.lock();
                 if(m_chunkManager.makeMesh(x, z))
                 {
                     isMeshMade = true;
+                    m_mutex.unlock();
                     break;
                 }
+                m_mutex.unlock();
             }
             if (isMeshMade)
                 break;
@@ -94,9 +113,7 @@ void World::loadChunks(const Camera& camera)
 
 void World::updateChunk(int blockX, int blockY, int blockZ)
 {
-    std::cout << "Update chunk" << " X: " << blockX
-                                << " Y: " << blockY
-                                << " Z: " << blockZ << "\n\n";
+    m_mutex.lock();
 
     auto addChunkToUpdateBatch = [&](const sf::Vector3i& key, ChunkSection& section)
     {
@@ -144,11 +161,14 @@ void World::updateChunk(int blockX, int blockY, int blockZ)
         sf::Vector3i newKey(cp.x, cy, cp.z + 1);
         addChunkToUpdateBatch(newKey, m_chunkManager.getChunk(newKey.x, newKey.z).getSection(newKey.y));
     }
+
+    m_mutex.unlock();
 }
 
 
 void World::renderWorld(RenderMaster& renderer, const Camera& camera)
 {
+    m_mutex.lock();
     renderer.drawSky();
 
     auto& chunkMap = m_chunkManager.getChunks();
@@ -180,6 +200,7 @@ void World::renderWorld(RenderMaster& renderer, const Camera& camera)
             itr++;
         }
     }
+    m_mutex.unlock();
 }
 
 ChunkManager& World::getChunkManager()
@@ -207,6 +228,7 @@ VectorXZ World::getChunkXZ(int x, int z)
 
 void World::updateChunks()
 {
+    m_mutex.lock();
     for (auto& c : m_chunkUpdates)
     {
         std::cout << m_chunkUpdates.size() << "\n";
@@ -214,5 +236,6 @@ void World::updateChunks()
         s.makeMesh();
     }
     m_chunkUpdates.clear();
+    m_mutex.unlock();
 }
 
