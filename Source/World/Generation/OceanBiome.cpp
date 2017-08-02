@@ -3,7 +3,7 @@
 #include "TreeGenerator.h"
 
 OceanBiome::OceanBiome(int seed)
-:   Biome  (getNoiseParameters(), 50, seed)
+:   Biome  (getNoiseParameters(), 50, 100, seed)
 {
 
 }
@@ -30,4 +30,11 @@ NoiseParameters OceanBiome::getNoiseParameters()
     heightParams.roughness     = 0.50;
 
     return heightParams;
+}
+
+BlockId OceanBiome::getPlant(Rand& rand) const
+{
+    return rand.intInRange(0, 10) > 6 ?
+        BlockId::Rose :
+        BlockId::TallGrass;
 }

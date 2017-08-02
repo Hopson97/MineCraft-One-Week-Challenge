@@ -12,13 +12,16 @@ class Chunk;
 struct Biome
 {
     public:
-        Biome(const NoiseParameters& parameters, int treeFreq, int seed)  ;
+        Biome(const NoiseParameters& parameters, int treeFreq, int plantFreq, int seed);
 
-        virtual BlockId getTopBlock(Rand& rand) const = 0;
-        virtual void makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) const = 0;
+        virtual BlockId getPlant    (Rand& rand) const = 0;
+        virtual BlockId getTopBlock (Rand& rand) const = 0;
+        virtual void makeTree       (Rand& rand, Chunk& chunk, int x, int y, int z) const = 0;
 
-        int getHeight(int x, int z, int chunkX, int chunkZ) const ;
-        int getTreeFrequency() const ;
+
+        int getHeight(int x, int z, int chunkX, int chunkZ) const;
+        int getTreeFrequency    () const noexcept;
+        int getPlantFrequency   () const noexcept;
 
     protected:
         virtual NoiseParameters getNoiseParameters() = 0;
@@ -26,6 +29,7 @@ struct Biome
     private:
         NoiseGenerator m_heightGenerator;
         int m_treeFreq;
+        int m_plantFreq;
 };
 
 #endif // BIOME_H_INCLUDED

@@ -3,7 +3,7 @@
 #include "TreeGenerator.h"
 
 GrasslandBiome::GrasslandBiome(int seed)
-:   Biome  (getNoiseParameters(), 100, seed)
+:   Biome  (getNoiseParameters(), 100, 50, seed)
 {
 
 }
@@ -28,4 +28,11 @@ NoiseParameters GrasslandBiome::getNoiseParameters()
     heightParams.roughness     = 0.51;
 
     return heightParams;
+}
+
+BlockId GrasslandBiome::getPlant(Rand& rand) const
+{
+    return rand.intInRange(0, 10) > 6 ?
+        BlockId::Rose :
+        BlockId::TallGrass;
 }

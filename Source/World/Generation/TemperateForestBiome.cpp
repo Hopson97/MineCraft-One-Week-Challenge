@@ -3,7 +3,7 @@
 #include "TreeGenerator.h"
 
 TemperateForestBiome::TemperateForestBiome(int seed)
-:   Biome  (getNoiseParameters(), 55, seed)
+:   Biome  (getNoiseParameters(), 55, 75, seed)
 {
 
 }
@@ -29,6 +29,10 @@ NoiseParameters TemperateForestBiome::getNoiseParameters()
     heightParams.heightOffset  = -30;
     heightParams.roughness     = 0.52;
 
-
     return heightParams;
+}
+
+BlockId TemperateForestBiome::getPlant(Rand& rand) const
+{
+    return BlockId::TallGrass;
 }

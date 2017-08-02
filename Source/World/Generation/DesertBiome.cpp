@@ -3,7 +3,7 @@
 #include "TreeGenerator.h"
 
 DesertBiome::DesertBiome(int seed)
-:   Biome  (getNoiseParameters(), 175, seed)
+:   Biome  (getNoiseParameters(), 175, 150, seed)
 {
 
 }
@@ -29,4 +29,9 @@ NoiseParameters DesertBiome::getNoiseParameters()
 
 
     return heightParams;
+}
+
+BlockId DesertBiome::getPlant(Rand& rand) const
+{
+    return BlockId::DeadShrub;
 }

@@ -62,18 +62,19 @@ namespace
 
     const std::vector<GLfloat> xFace1
     {
-        0, 1, 0,
         0, 0, 0,
         1, 0, 1,
-        1, 1, 1
+        1, 1, 1,
+        0, 1, 0,
     };
 
     const std::vector<GLfloat> xFace2
     {
-        0, 1, 1,
         0, 0, 1,
         1, 0, 0,
-        1, 1, 0
+        1, 1, 0,
+        0, 1, 1,
+
     };
 
     constexpr GLfloat LIGHT_TOP = 1.0f;
