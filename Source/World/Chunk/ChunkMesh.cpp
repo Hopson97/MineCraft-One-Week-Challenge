@@ -4,9 +4,6 @@
 
 #include <iostream>
 
-ChunkMesh::ChunkMesh()
-{ }
-
 void ChunkMesh::addFace(const std::vector<GLfloat>& blockFace,
                         const std::vector<GLfloat>& textureCoords,
                         const sf::Vector3i&         chunkPosition,

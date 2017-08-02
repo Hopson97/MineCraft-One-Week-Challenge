@@ -13,7 +13,6 @@ ChunkSection::ChunkSection(const sf::Vector3i& location, World& world)
 ,   m_pWorld    (&world)
 {
     m_aabb.update({location.x * CHUNK_SIZE, location.y * CHUNK_SIZE, location.z * CHUNK_SIZE});
-    static_assert(sizeof(m_blocks) == CHUNK_VOLUME, "Size too big, yo");
 }
 
 void ChunkSection::setBlock(int x, int y, int z, ChunkBlock block)

@@ -11,25 +11,10 @@
 namespace
 {
     constexpr int renderDistance = 12;
-    std::mutex  m_chuMutex;
 }
-
 World::World(const Camera& camera)
 :   m_chunkManager  (*this)
-,   m_thread ([&]
-{
-    while (m_running)
-    {
-        loadChunks(camera);
-    }
-})
 { }
-
-World::~World()
-{
-    m_running = false;
-    m_thread.join();
-}
 
 //world coords into chunk column coords
 ChunkBlock World::getBlock(int x, int y, int z)
@@ -62,7 +47,7 @@ void World::update(const Camera& camera)
     m_events.clear();
 
     updateChunks();
-    //loadChunks(camera);
+    loadChunks(camera);
 }
 
 void World::loadChunks(const Camera& camera)
@@ -82,14 +67,11 @@ void World::loadChunks(const Camera& camera)
         {
             for (int z = minZ; z < maxZ; ++z)
             {
-                m_chuMutex.lock();
                 if(m_chunkManager.makeMesh(x, z))
                 {
                     isMeshMade = true;
-                    m_chuMutex.unlock();
                     break;
                 }
-                m_chuMutex.unlock();
             }
             if (isMeshMade)
                 break;
@@ -169,7 +151,6 @@ void World::renderWorld(RenderMaster& renderer, const Camera& camera)
 {
     renderer.drawSky();
 
-    m_chuMutex.lock();
     auto& chunkMap = m_chunkManager.getChunks();
     for (auto itr = chunkMap.begin(); itr != chunkMap.end();)
     {
@@ -199,7 +180,6 @@ void World::renderWorld(RenderMaster& renderer, const Camera& camera)
             itr++;
         }
     }
-    m_chuMutex.unlock();
 }
 
 ChunkManager& World::getChunkManager()

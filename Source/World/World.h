@@ -20,8 +20,6 @@ class World
 {
     public:
         World(const Camera& camera);
-        ~World();
-
 
         ChunkBlock  getBlock    (int x, int y, int z);
         void        setBlock    (int x, int y, int z, ChunkBlock block);
@@ -49,8 +47,6 @@ class World
         void updateChunks   ();
 
         ChunkManager m_chunkManager;
-        std::atomic<bool>    m_running {true};
-        std::thread         m_thread;
 
         std::vector<std::unique_ptr<IWorldEvent>> m_events;
         std::unordered_map<sf::Vector3i, ChunkSection*> m_chunkUpdates;
