@@ -100,3 +100,13 @@ Time programming Today | 2:54:14
 Lines of Code Today | 560
 Total Time programming | 17:02:05
 Total Lines of Code | 3049
+
+# Day 6
+
+Mostly optimizations, such as view-frustum culling and making the mesh building faster.
+
+# Day 7 
+
+Focus on improving how it looks, eg adding directional lighting
+
+Also implemented 100% safe concurency :)
