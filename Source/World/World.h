@@ -3,6 +3,10 @@
 
 #include <vector>
 #include <memory>
+#include <thread>
+#include <mutex>
+#include <atomic>
+
 #include "Chunk/Chunk.h"
 #include "Chunk/ChunkManager.h"
 
@@ -15,7 +19,9 @@ class Entity;
 class World
 {
     public:
-        World();
+        World(const Camera& camera);
+        ~World();
+
 
         ChunkBlock  getBlock    (int x, int y, int z);
         void        setBlock    (int x, int y, int z, ChunkBlock block);
@@ -39,12 +45,17 @@ class World
         }
 
     private:
-        void updateChunks();
+        void loadChunks     (const Camera& camera);
+        void updateChunks   ();
+
+        ChunkManager m_chunkManager;
+        std::atomic<bool>    m_running {true};
+        std::thread         m_thread;
 
         std::vector<std::unique_ptr<IWorldEvent>> m_events;
         std::unordered_map<sf::Vector3i, ChunkSection*> m_chunkUpdates;
 
-        ChunkManager m_chunkManager;
+
 
         int m_loadDistance = 2;
 };

@@ -15,7 +15,9 @@ BlockId OceanBiome::getTopBlock(Rand& rand) const
 
 void OceanBiome::makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) const
 {
-    makeOakTree(chunk, rand, x, y, z);
+    rand.intInRange(0, 5) < 3 ?
+        makePalmTree(chunk, rand, x, y, z) :
+        makeOakTree (chunk, rand, x, y, z);
 }
 
 NoiseParameters OceanBiome::getNoiseParameters()

@@ -60,6 +60,11 @@ namespace
         0, 0, 1
     };
 
+    constexpr GLfloat LIGHT_TOP = 1.0f;
+    constexpr GLfloat LIGHT_X   = 0.8f;
+    constexpr GLfloat LIGHT_Z   = 0.6f;
+    constexpr GLfloat LIGHT_BOT = 0.4f;
+
 }
 
 ChunkMeshBuilder::ChunkMeshBuilder(ChunkSection& chunk, ChunkMesh& mesh)
@@ -119,16 +124,16 @@ void ChunkMeshBuilder::buildMesh()
 
             //Up/ Down
             //if ((y == 0) && (m_pChunk->getLocation().y == 0))
-            tryAddFaceToMesh(bottomFace, data.texBottomCoord, position, directions.down);
-            tryAddFaceToMesh(topFace,       data.texTopCoord,       position, directions.up);
+            tryAddFaceToMesh(bottomFace, data.texBottomCoord,    position, directions.down, LIGHT_BOT);
+            tryAddFaceToMesh(topFace,    data.texTopCoord,       position, directions.up, LIGHT_TOP);
 
             //Left/ Right
-            tryAddFaceToMesh(leftFace,      data.texSideCoord,      position, directions.left);
-            tryAddFaceToMesh(rightFace,     data.texSideCoord,      position, directions.right);
+            tryAddFaceToMesh(leftFace,  data.texSideCoord, position, directions.left,  LIGHT_X);
+            tryAddFaceToMesh(rightFace, data.texSideCoord, position, directions.right, LIGHT_X);
 
             //Front/ Back
-            tryAddFaceToMesh(frontFace,     data.texSideCoord,      position, directions.front);
-            tryAddFaceToMesh(backFace,      data.texSideCoord,      position, directions.back);
+            tryAddFaceToMesh(frontFace, data.texSideCoord, position, directions.front, LIGHT_Z);
+            tryAddFaceToMesh(backFace,  data.texSideCoord, position, directions.back,  LIGHT_Z);
         }
     }
 /*
@@ -141,14 +146,19 @@ void ChunkMeshBuilder::buildMesh()
 void ChunkMeshBuilder::tryAddFaceToMesh(const std::vector<GLfloat>& blockFace,
                                         const sf::Vector2i& textureCoords,
                                         const sf::Vector3i& blockPosition,
-                                        const sf::Vector3i& blockFacing)
+                                        const sf::Vector3i& blockFacing,
+                                        GLfloat cardinalLight)
 {
     if (shouldMakeFace(blockFacing, *m_pBlockData))
     {
         faces++;
         auto texCoords = BlockDatabase::get().textureAtlas.getTexture(textureCoords);
 
-        m_pMesh->addFace(blockFace, texCoords, m_pChunk->getLocation(), blockPosition);
+        m_pMesh->addFace(blockFace,
+                         texCoords,
+                         m_pChunk->getLocation(),
+                         blockPosition,
+                         cardinalLight);
     }
 }
 

@@ -10,6 +10,7 @@
 
 StatePlaying::StatePlaying(Application& app)
 :   StateBase   (app)
+,   m_world     (app.getCamera())
 {
     app.getCamera().hookEntity(m_player);
 
