@@ -23,11 +23,11 @@ void TemperateForestBiome::makeTree(Rand& rand, Chunk& chunk, int x, int y, int 
 NoiseParameters TemperateForestBiome::getNoiseParameters()
 {
     NoiseParameters heightParams;
-    heightParams.octaves       = 9;
+    heightParams.octaves       = 5;
     heightParams.amplitude     = 100;
     heightParams.smoothness    = 195;
-    heightParams.heightOffset  = -15;
-    heightParams.roughness     = 0.50;
+    heightParams.heightOffset  = -30;
+    heightParams.roughness     = 0.52;
 
 
     return heightParams;

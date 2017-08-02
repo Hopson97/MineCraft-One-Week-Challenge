@@ -23,11 +23,11 @@ void OceanBiome::makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) const
 NoiseParameters OceanBiome::getNoiseParameters()
 {
     NoiseParameters heightParams;
-    heightParams.octaves       = 9;
-    heightParams.amplitude     = 40;
-    heightParams.smoothness    = 100;
+    heightParams.octaves       = 7;
+    heightParams.amplitude     = 43;
+    heightParams.smoothness    = 55;
     heightParams.heightOffset  = 0;
-    heightParams.roughness     = 0.52;
+    heightParams.roughness     = 0.50;
 
     return heightParams;
 }

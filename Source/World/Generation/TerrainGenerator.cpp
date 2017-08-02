@@ -143,6 +143,12 @@ void TerrainGenerator::setBlocks(int maxHeight)
         {
             if (y >= WATER_LEVEL)
             {
+                if (y < WATER_LEVEL + 5)
+                {
+                    m_pChunk->setBlock(x, y, z, BlockId::Sand);
+                    continue;
+                }
+
                 if (m_random.intInRange(0, biome.getTreeFrequency()) == 5 )
                 {
                     trees.emplace_back(x, y, z);
@@ -179,7 +185,6 @@ void TerrainGenerator::setBlocks(int maxHeight)
 void TerrainGenerator::setTopBlock(int x, int y, int z)
 {
     m_pChunk->setBlock(x, y, z, getBiome(x, z).getTopBlock(m_random));
-
 }
 
 const Biome& TerrainGenerator::getBiome(int x, int z) const

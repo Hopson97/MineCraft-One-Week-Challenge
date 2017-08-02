@@ -22,10 +22,10 @@ NoiseParameters GrasslandBiome::getNoiseParameters()
 {
     NoiseParameters heightParams;
     heightParams.octaves       = 9;
-    heightParams.amplitude     = 90;
-    heightParams.smoothness    = 335;
-    heightParams.heightOffset  = -5;
-    heightParams.roughness     = 0.50;
+    heightParams.amplitude     = 85;
+    heightParams.smoothness    = 235;
+    heightParams.heightOffset  = -20;
+    heightParams.roughness     = 0.51;
 
     return heightParams;
 }
