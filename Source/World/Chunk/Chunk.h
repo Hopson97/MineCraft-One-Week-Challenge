@@ -17,11 +17,11 @@ class Chunk : public IChunk
         bool makeMesh();
 
         void setBlock       (int x, int y, int z, ChunkBlock block) override;
-        ChunkBlock getBlock (int x, int y, int z) const override;
+        ChunkBlock getBlock (int x, int y, int z) const noexcept override ;
 
         void drawChunks (RenderMaster& renderer, const Camera& camera);
 
-        bool hasLoaded() const ;
+        bool hasLoaded() const noexcept;
         void load();
 
         ChunkSection& getSection(int index);
@@ -33,7 +33,7 @@ class Chunk : public IChunk
         void addSectionsBlockTarget(int blockY);
         void addSectionsIndexTarget(int index);
 
-        bool outOfBound(int x, int y, int z) const;
+        bool outOfBound(int x, int y, int z) const noexcept;
 
         std::vector<ChunkSection>   m_chunks;
         sf::Vector2i                m_location;

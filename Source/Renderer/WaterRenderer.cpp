@@ -24,7 +24,6 @@ void WaterRenderer::render(const Camera& camera)
     m_shader.useProgram();
 
     m_shader.loadProjectionViewMatrix(camera.getProjectionViewMatrix());
-    m_shader.addTime(m_timer.getElapsedTime().asSeconds());
 
     for (const auto& mesh : m_chunks)
     {

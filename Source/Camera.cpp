@@ -2,14 +2,14 @@
 
 #include "Maths/Matrix.h"
 
-Camera::Camera()
+Camera::Camera() noexcept
 {
     m_projectionMatrix = makeProjectionMatrix(90);
 
     position = {0, 0, -3.5};
 }
 
-void Camera::update()
+void Camera::update() noexcept
 {
     position = m_pEntity->position;
     rotation = m_pEntity->rotation;
@@ -19,27 +19,27 @@ void Camera::update()
     m_frustum.update(m_projViewMatrx);
 }
 
-void Camera::hookEntity(const Entity& entity)
+void Camera::hookEntity(const Entity& entity) noexcept
 {
     m_pEntity = &entity;
 }
 
-const glm::mat4& Camera::getViewMatrix() const
+const glm::mat4& Camera::getViewMatrix() const noexcept
 {
     return m_viewMatrix;
 }
 
-const glm::mat4& Camera::getProjMatrix() const
+const glm::mat4& Camera::getProjMatrix() const noexcept
 {
     return m_projectionMatrix;
 }
 
-const glm::mat4& Camera::getProjectionViewMatrix() const
+const glm::mat4& Camera::getProjectionViewMatrix() const noexcept
 {
     return m_projViewMatrx;
 }
 
-const ViewFrustum& Camera::getFrustum() const
+const ViewFrustum& Camera::getFrustum() const noexcept
 {
     return m_frustum;
 }

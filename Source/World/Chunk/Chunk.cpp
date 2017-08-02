@@ -36,7 +36,7 @@ void Chunk::setBlock(int x, int y, int z, ChunkBlock block)
 }
 
 //Chunk block to SECTION BLOCK positions
-ChunkBlock Chunk::getBlock(int x, int y, int z) const
+ChunkBlock Chunk::getBlock(int x, int y, int z) const noexcept
 {
     if (outOfBound(x, y, z))
     {
@@ -48,7 +48,7 @@ ChunkBlock Chunk::getBlock(int x, int y, int z) const
     return m_chunks[y / CHUNK_SIZE].getBlock(x, bY, z);
 }
 
-bool Chunk::outOfBound(int x, int y, int z) const
+bool Chunk::outOfBound(int x, int y, int z) const noexcept
 {
     if (x >= CHUNK_SIZE) return true;
     if (z >= CHUNK_SIZE) return true;
@@ -82,7 +82,7 @@ void Chunk::drawChunks(RenderMaster& renderer, const Camera& camera)
     }
 }
 
-bool Chunk::hasLoaded() const
+bool Chunk::hasLoaded() const noexcept
 {
     return m_isLoaded;
 }

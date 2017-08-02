@@ -8,16 +8,16 @@
 class Camera : public Entity
 {
     public:
-        Camera();
+        Camera() noexcept;
 
-        void update();
-        void hookEntity(const Entity& entity);
+        void update() noexcept;
+        void hookEntity(const Entity& entity) noexcept;
 
-        const glm::mat4& getViewMatrix ()           const ;
-        const glm::mat4& getProjMatrix ()           const ;
-        const glm::mat4& getProjectionViewMatrix () const ;
+        const glm::mat4& getViewMatrix ()           const noexcept;
+        const glm::mat4& getProjMatrix ()           const noexcept;
+        const glm::mat4& getProjectionViewMatrix () const noexcept;
 
-        const ViewFrustum& getFrustum() const ;
+        const ViewFrustum& getFrustum() const noexcept;
 
     private:
         const Entity* m_pEntity;

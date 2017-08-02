@@ -9,14 +9,14 @@ struct VectorXZ
     int x, z;
 };
 
-bool operator ==(const VectorXZ& left, const VectorXZ& right);
+bool operator ==(const VectorXZ& left, const VectorXZ& right) noexcept;
 
 namespace std
 {
     template<>
     struct hash<VectorXZ>
     {
-        size_t operator()(const VectorXZ& vect) const
+        size_t operator()(const VectorXZ& vect) const noexcept
         {
             std::hash<decltype(vect.x)> hasher;
 
@@ -33,7 +33,7 @@ namespace std
     template<>
     struct hash<sf::Vector3i>
     {
-        size_t operator()(const sf::Vector3i& vect) const
+        size_t operator()(const sf::Vector3i& vect) const noexcept
         {
             std::hash<decltype(vect.x)> hasher;
 

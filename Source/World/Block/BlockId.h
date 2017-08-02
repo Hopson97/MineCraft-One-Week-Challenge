@@ -16,6 +16,9 @@ enum class BlockId :  Block_t
     Sand    = 6,
     Water   = 7,
     Cactus  = 8,
+    Rose    = 9,
+    TallGrass = 10,
+    DeadShrub = 11,
 
     NUM_TYPES
 };

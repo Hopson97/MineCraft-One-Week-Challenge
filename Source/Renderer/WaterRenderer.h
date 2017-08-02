@@ -4,7 +4,7 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 
-#include "../Shaders/WaterShader.h"
+#include "../Shaders/ChunkShader.h"
 
 class ChunkMesh;
 class Camera;
@@ -18,9 +18,7 @@ class WaterRenderer
     private:
         std::vector<const ChunkMesh*> m_chunks;
 
-        WaterShader m_shader;
-        sf::Clock m_timer;
-
+        ChunkShader m_shader;
 };
 
 #endif // WATERRENDERER_H_INCLUDED
