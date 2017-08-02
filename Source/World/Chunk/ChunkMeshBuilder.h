@@ -5,7 +5,10 @@
 #include <SFML/Graphics.hpp>
 #include <GL/glew.h>
 
+#include "../Block/ChunkBlock.h"
+
 class ChunkSection;
+class ChunkMeshCollection;
 class ChunkMesh;
 class BlockData;
 class BlockDataHolder;
@@ -13,11 +16,13 @@ class BlockDataHolder;
 class ChunkMeshBuilder
 {
     public:
-        ChunkMeshBuilder(ChunkSection& chunk, ChunkMesh& mesh);
+        ChunkMeshBuilder(ChunkSection& chunk, ChunkMeshCollection& meshes);
 
         void buildMesh();
 
     private:
+        void setActiveMesh(ChunkBlock block);
+
         void tryAddFaceToMesh(const std::vector<GLfloat>& blockFace,
                               const sf::Vector2i& textureCoords,
                               const sf::Vector3i& blockPosition,
@@ -29,9 +34,11 @@ class ChunkMeshBuilder
 
         bool shouldMakeLayer(int y);
 
-        ChunkSection*           m_pChunk        = nullptr;
-        ChunkMesh*              m_pMesh         = nullptr;
+        ChunkSection*           m_pChunk    = nullptr;
+        ChunkMeshCollection*    m_pMeshes   = nullptr;
+        ChunkMesh*              m_pActiveMesh   = nullptr;
         const BlockDataHolder*  m_pBlockData    = nullptr;
+
 };
 
 #endif // CHUNKMESHBUILDER_H_INCLUDED

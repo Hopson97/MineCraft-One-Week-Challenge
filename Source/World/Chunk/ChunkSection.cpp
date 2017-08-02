@@ -72,14 +72,15 @@ sf::Vector3i ChunkSection::toWorldPosition(int x, int y, int z) const
 
 void ChunkSection::makeMesh()
 {
-    ChunkMeshBuilder(*this, m_mesh).buildMesh();
+    ChunkMeshBuilder(*this, m_meshes).buildMesh();
     m_hasMesh = true;
     m_hasBufferedMesh = false;
 }
 
 void ChunkSection::bufferMesh()
 {
-    m_mesh.bufferMesh();
+    m_meshes.solidMesh.bufferMesh();
+    m_meshes.waterMesh.bufferMesh();
     m_hasBufferedMesh = true;
 }
 

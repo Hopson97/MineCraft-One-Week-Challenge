@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include "../World/Chunk/ChunkMesh.h"
+#include "../World/Chunk/ChunkSection.h"
 
 void RenderMaster::drawSFML(const sf::Drawable& drawable)
 {
@@ -21,10 +22,16 @@ void RenderMaster::drawCube(const Entity& cube)
     m_cubeRenderer.add(cube);
 }
 
-void RenderMaster::drawChunk(const ChunkMesh& mesh)
+void RenderMaster::drawChunk(const ChunkSection& chunk)
 {
-    if (mesh.faces > 0)
-        m_chunkRenderer.add(mesh);
+    const ChunkMesh& solidMesh = chunk.getMeshes().solidMesh;
+    const ChunkMesh& waterMesh = chunk.getMeshes().waterMesh;
+
+    if (solidMesh.faces > 0)
+        m_chunkRenderer.add(solidMesh);
+
+    if (waterMesh.faces > 0)
+        m_waterRenderer.add(waterMesh);
 }
 
 void RenderMaster::drawSky()
@@ -39,9 +46,10 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
 
-    m_quadRenderer  .render (camera);
-    m_cubeRenderer  .render (camera);
+    //m_quadRenderer  .render (camera);
+    //m_cubeRenderer  .render (camera);
     m_chunkRenderer .render (camera);
+    m_waterRenderer .render (camera);
 
     if (m_drawBox)
     {

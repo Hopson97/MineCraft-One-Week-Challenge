@@ -1,4 +1,4 @@
-#include "ChunkRenderer.h"
+#include "WaterRenderer.h"
 
 #include "../World/Chunk/ChunkMesh.h"
 #include "../World/Block/BlockDatabase.h"
@@ -7,27 +7,26 @@
 
 #include <iostream>
 
-void ChunkRenderer::add(const ChunkMesh& mesh)
+void WaterRenderer::add(const ChunkMesh& mesh)
 {
     m_chunks.push_back(&mesh);
 }
 
-void ChunkRenderer::render(const Camera& camera)
+void WaterRenderer::render(const Camera& camera)
 {
     if (m_chunks.empty())
     {
         return;
     }
 
-    glDisable(GL_BLEND);
-    glEnable(GL_CULL_FACE);
-
+    glEnable(GL_BLEND);
+    glDisable(GL_CULL_FACE);
     m_shader.useProgram();
-    BlockDatabase::get().textureAtlas.bindTexture();
 
     m_shader.loadProjectionViewMatrix(camera.getProjectionViewMatrix());
+    m_shader.addTime(m_timer.getElapsedTime().asSeconds());
 
-    for (const ChunkMesh* mesh : m_chunks)
+    for (const auto& mesh : m_chunks)
     {
         const ChunkMesh& m = *mesh;
 

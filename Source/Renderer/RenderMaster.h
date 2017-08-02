@@ -8,9 +8,10 @@
 #include "ChunkRenderer.h"
 #include "SkyboxRenderer.h"
 #include "SFMLRenderer.h"
+#include "WaterRenderer.h"
 
 class Camera;
-class ChunkMesh;
+class ChunkSection;
 
 class RenderMaster
 {
@@ -18,7 +19,7 @@ class RenderMaster
         void drawSFML(const sf::Drawable& drawable);
         void drawQuad(const glm::vec3& pos);
         void drawCube(const Entity& cube);
-        void drawChunk(const ChunkMesh& mesh);
+        void drawChunk(const ChunkSection& chunk);
         void drawSky();
 
         void finishRender(sf::RenderWindow& window, const Camera& camera);
@@ -27,6 +28,7 @@ class RenderMaster
         QuadRenderer    m_quadRenderer;
         CubeRenderer    m_cubeRenderer;
         ChunkRenderer   m_chunkRenderer;
+        WaterRenderer   m_waterRenderer;
         SkyboxRenderer  m_skyboxRenderer;
         SFMLRenderer    m_sfmlRenderer;
 

@@ -18,4 +18,5 @@ Context::Context()
     glViewport(0, 0, 1280, 720);
 
     glCullFace(GL_BACK);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }

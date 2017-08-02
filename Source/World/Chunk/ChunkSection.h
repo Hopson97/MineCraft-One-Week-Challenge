@@ -59,6 +59,8 @@ class ChunkSection : public IChunk
         const Layer& getLayer (int y) const;
         ChunkSection& getAdjacent(int dx, int dz);
 
+        const ChunkMeshCollection& getMeshes() const { return m_meshes; }
+
     private:
         sf::Vector3i toWorldPosition (int x, int y, int z) const;
 
@@ -68,7 +70,7 @@ class ChunkSection : public IChunk
         std::array<ChunkBlock, CHUNK_VOLUME>    m_blocks;
         std::array<Layer, CHUNK_SIZE>           m_layers;
 
-        ChunkMesh       m_mesh;
+        ChunkMeshCollection       m_meshes;
         AABB            m_aabb;
         sf::Vector3i    m_location;
 

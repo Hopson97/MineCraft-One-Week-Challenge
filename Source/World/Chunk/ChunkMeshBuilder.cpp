@@ -67,9 +67,9 @@ namespace
 
 }
 
-ChunkMeshBuilder::ChunkMeshBuilder(ChunkSection& chunk, ChunkMesh& mesh)
+ChunkMeshBuilder::ChunkMeshBuilder(ChunkSection& chunk, ChunkMeshCollection& mesh)
 :   m_pChunk    (&chunk)
-,   m_pMesh     (&mesh)
+,   m_pMeshes   (&mesh)
 { }
 
 struct AdjacentBlockPositions
@@ -95,9 +95,6 @@ struct AdjacentBlockPositions
 int faces;
 void ChunkMeshBuilder::buildMesh()
 {
-    sf::Clock c;
-    //std::cout << "Begin mesh build\n";
-
     AdjacentBlockPositions directions;
 
     faces = 0;
@@ -111,6 +108,7 @@ void ChunkMeshBuilder::buildMesh()
         {
             sf::Vector3i position(x, y, z);
             ChunkBlock   block = m_pChunk->getBlock(x, y, z);
+            setActiveMesh(block);
 
             if (block == BlockId::Air)
             {
@@ -121,9 +119,7 @@ void ChunkMeshBuilder::buildMesh()
             auto& data = *m_pBlockData;
             directions.update(x, y, z);
 
-
             //Up/ Down
-            //if ((y == 0) && (m_pChunk->getLocation().y == 0))
             tryAddFaceToMesh(bottomFace, data.texBottomCoord,    position, directions.down, LIGHT_BOT);
             tryAddFaceToMesh(topFace,    data.texTopCoord,       position, directions.up, LIGHT_TOP);
 
@@ -136,12 +132,20 @@ void ChunkMeshBuilder::buildMesh()
             tryAddFaceToMesh(backFace,  data.texSideCoord, position, directions.back,  LIGHT_Z);
         }
     }
-/*
-    std::cout   << "End mesh build, faces:  " << faces << '\n'
-                << "Time:                   " << c.getElapsedTime().asSeconds() * 1000 << "ms" << '\n'
-                << "Y:                      " << m_pChunk->getLocation().y <<  "\n\n";
-*/
 }
+
+void ChunkMeshBuilder::setActiveMesh(ChunkBlock block)
+{
+    if (block.id == (int)BlockId::Water)
+    {
+        m_pActiveMesh = &m_pMeshes->waterMesh;
+    }
+    else
+    {
+        m_pActiveMesh = &m_pMeshes->solidMesh;
+    }
+}
+
 
 void ChunkMeshBuilder::tryAddFaceToMesh(const std::vector<GLfloat>& blockFace,
                                         const sf::Vector2i& textureCoords,
@@ -154,11 +158,11 @@ void ChunkMeshBuilder::tryAddFaceToMesh(const std::vector<GLfloat>& blockFace,
         faces++;
         auto texCoords = BlockDatabase::get().textureAtlas.getTexture(textureCoords);
 
-        m_pMesh->addFace(blockFace,
-                         texCoords,
-                         m_pChunk->getLocation(),
-                         blockPosition,
-                         cardinalLight);
+        m_pActiveMesh->addFace( blockFace,
+                                texCoords,
+                                m_pChunk->getLocation(),
+                                blockPosition,
+                                cardinalLight);
     }
 }
 

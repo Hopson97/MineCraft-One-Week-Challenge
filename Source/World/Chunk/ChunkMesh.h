@@ -31,4 +31,10 @@ class ChunkMesh
 
 };
 
+struct ChunkMeshCollection
+{
+    ChunkMesh solidMesh;
+    ChunkMesh waterMesh;
+};
+
 #endif // CHUNKMESH_H_INCLUDED

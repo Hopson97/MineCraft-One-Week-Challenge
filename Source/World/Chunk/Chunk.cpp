@@ -77,7 +77,7 @@ void Chunk::drawChunks(RenderMaster& renderer, const Camera& camera)
             }
 
             if (camera.getFrustum().isBoxInFrustum(chunk.m_aabb))
-                renderer.drawChunk(chunk.m_mesh);
+                renderer.drawChunk(chunk);
         }
     }
 }
