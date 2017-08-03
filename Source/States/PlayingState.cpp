@@ -35,7 +35,7 @@ void StatePlaying::handleInput()
 
     for (Ray ray(m_player.position, m_player.rotation);
              ray.getLength() < 6;
-             ray.step(0.1))
+             ray.step(0.05))
     {
         int x = ray.getEnd().x;
         int y = ray.getEnd().y;

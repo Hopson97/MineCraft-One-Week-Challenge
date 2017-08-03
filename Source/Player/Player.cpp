@@ -210,7 +210,7 @@ void Player::mouseInput(const sf::RenderWindow& window)
         return;
     }
 
-    static auto const BOUND = 80;
+    static auto const BOUND = 89.9999;
     static auto lastMousePosition = sf::Mouse::getPosition(window);
     auto change = sf::Mouse::getPosition() - lastMousePosition;
 

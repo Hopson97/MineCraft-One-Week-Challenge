@@ -36,10 +36,10 @@ void TerrainGenerator::setUpNoise()
 
         NoiseParameters biomeParmams;
         biomeParmams.octaves       = 5;
-        biomeParmams.amplitude     = 125;
+        biomeParmams.amplitude     = 120;
         biomeParmams.smoothness    = 1035;
         biomeParmams.heightOffset  = 0;
-        biomeParmams.roughness     = 0.7;
+        biomeParmams.roughness     = 0.75;
 
         m_biomeNoiseGen.setParameters(biomeParmams);
     }
@@ -204,19 +204,19 @@ const Biome& TerrainGenerator::getBiome(int x, int z) const
 {
     int biomeValue = m_biomeMap.get(x, z);
 
-    if (biomeValue > 155)
+    if (biomeValue > 160)
     {
         return m_oceanBiome;
     }
-    else if (biomeValue > 145)
+    else if (biomeValue > 150)
     {
         return m_grassBiome;
     }
-    else if (biomeValue > 110)
+    else if (biomeValue > 130)
     {
         return m_lightForest;
     }
-    else if (biomeValue > 90)
+    else if (biomeValue > 112)
     {
         return m_grassBiome;
     }

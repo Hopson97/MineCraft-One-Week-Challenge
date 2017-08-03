@@ -5,7 +5,7 @@
 
 #include "glm.h"
 
-class AABB;
+struct AABB;
 
 struct Plane
 {
