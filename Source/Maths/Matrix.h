@@ -5,9 +5,10 @@
 
 class Camera;
 class Entity;
+class Config;
 
 glm::mat4 makeModelMatrix       (const Entity& entity) ;
 glm::mat4 makeViewMatrix        (const Camera& camera) ;
-glm::mat4 makeProjectionMatrix  (float fov) ;
+glm::mat4 makeProjectionMatrix  (const Config& config);
 
 #endif // MATRIX_H_INCLUDED

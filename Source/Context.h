@@ -3,9 +3,12 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Config.h"
+
+
 struct Context
 {
-    Context();
+    Context(const Config& config);
 
     sf::RenderWindow window;
 };

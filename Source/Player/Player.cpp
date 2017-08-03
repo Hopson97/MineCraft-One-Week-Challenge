@@ -156,7 +156,7 @@ void Player::collide(World& world, const glm::vec3& vel, float dt)
 void Player::keyboardInput()
 {
     glm::vec3 change;
-    float speed = 0.2;//0.5;
+    float speed = 0.1;//0.5;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
     {
         speed *= 8;
@@ -245,6 +245,7 @@ void Player::draw(RenderMaster& master)
             t.setFillColor(sf::Color::White);
         }
         t.setString((m_items[i].getMaterial().name) + " " + std::to_string(m_items[i].getNumInStack()));
+
         master.drawSFML(t);
     }
 }

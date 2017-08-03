@@ -3,10 +3,12 @@
 #include "States/PlayingState.h"
 #include "World/Block/BlockDatabase.h"
 
-Application::Application(std::string&& name)
+Application::Application(const Config& config)
+:   m_context   (config)
+,   m_camera    (config)
 {
     BlockDatabase::get();
-    pushState<StatePlaying>(*this);
+    pushState<StatePlaying>(*this, config);
 }
 
 void Application::runLoop()

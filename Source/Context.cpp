@@ -2,7 +2,7 @@
 
 #include <GL/glew.h>
 
-Context::Context()
+Context::Context(const Config& config)
 {
     sf::ContextSettings settings;
     settings.antialiasingLevel = 0;
@@ -11,11 +11,19 @@ Context::Context()
     settings.depthBits = 24;
     settings.stencilBits = 8;
 
-    window.create({1280, 720}, "Minecraft", sf::Style::Close, settings);
+    if(config.isFullscreen)
+    {
+        window.create(sf::VideoMode::getDesktopMode(), "MineCraft Week", sf::Style::Fullscreen, settings);
+    }
+    else
+    {
+        sf::VideoMode winMode(config.windowX, config.windowY);
+        window.create(winMode, "MineCraft Week", sf::Style::Close, settings);
+    }
 
     glewInit();
     glewExperimental = GL_TRUE;
-    glViewport(0, 0, 1280, 720);
+    glViewport(0, 0, window.getSize().x, window.getSize().y);
 
     glCullFace(GL_BACK);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

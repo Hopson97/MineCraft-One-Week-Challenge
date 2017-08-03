@@ -8,9 +8,9 @@
 
 #include <iostream>
 
-StatePlaying::StatePlaying(Application& app)
+StatePlaying::StatePlaying(Application& app, const Config& config)
 :   StateBase   (app)
-,   m_world     (app.getCamera())
+,   m_world     (app.getCamera(), config)
 {
     app.getCamera().hookEntity(m_player);
 

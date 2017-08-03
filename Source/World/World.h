@@ -13,6 +13,8 @@
 
 #include "Event/IWorldEvent.h"
 
+#include "../Config.h"
+
 class RenderMaster;
 class Camera;
 class Entity;
@@ -20,7 +22,7 @@ class Entity;
 class World : public NonCopyable
 {
     public:
-        World(const Camera& camera);
+        World(const Camera& camera, const Config& config);
         ~World();
 
         ChunkBlock  getBlock    (int x, int y, int z);
@@ -58,6 +60,7 @@ class World : public NonCopyable
         std::mutex  m_mutex;
 
         int m_loadDistance = 2;
+        const int m_renderDistance;
 };
 
 #endif // WORLD_H_INCLUDED

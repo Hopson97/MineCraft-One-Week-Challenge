@@ -1,0 +1,4 @@
+renderdistance 16
+fullscreen 0
+windowsize 1280 720
+fov 145

@@ -10,10 +10,11 @@
 #include "Context.h"
 #include "Camera.h"
 
+
 class Application
 {
     public:
-        Application(std::string&& name);
+        Application(const Config& config);
 
         void runLoop();
 

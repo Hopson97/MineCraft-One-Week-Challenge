@@ -8,16 +8,12 @@
 
 #include "../Camera.h"
 
-namespace
-{
-    constexpr int renderDistance = 16;
-    constexpr int WORKERS = 4;
-}
 
-World::World(const Camera& camera)
-:   m_chunkManager  (*this)
+World::World(const Camera& camera, const Config& config)
+:   m_chunkManager      (*this)
+,   m_renderDistance    (config.renderDistance)
 {
-    for (int i = 0; i < WORKERS; i++)
+    for (int i = 0; i < 2; i++)
     {
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
         m_chunkLoadThreads.emplace_back([&]()
@@ -83,7 +79,7 @@ void World::loadChunks(const Camera& camera)
 
     for (int i = 0; i < m_loadDistance; i++)
     {
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        //std::this_thread::sleep_for(std::chrono::milliseconds(5));
         int minX = std::max(cameraX  - i, 0);
         int minZ = std::max(cameraZ  - i, 0);
         int maxX = cameraX + i;
@@ -93,7 +89,6 @@ void World::loadChunks(const Camera& camera)
         {
             for (int z = minZ; z < maxZ; ++z)
             {
-
                 m_mutex.lock();
                 isMeshMade = m_chunkManager.makeMesh(x, z);
                 m_mutex.unlock();
@@ -110,7 +105,7 @@ void World::loadChunks(const Camera& camera)
     {
         m_loadDistance++;
     }
-    if (m_loadDistance >= renderDistance)
+    if (m_loadDistance >= m_renderDistance)
     {
         m_loadDistance = 2;
     }
@@ -185,10 +180,10 @@ void World::renderWorld(RenderMaster& renderer, const Camera& camera)
         int cameraX = camera.position.x;
         int cameraZ = camera.position.z;
 
-        int minX = (cameraX / CHUNK_SIZE) - renderDistance;
-        int minZ = (cameraZ / CHUNK_SIZE) - renderDistance;
-        int maxX = (cameraX / CHUNK_SIZE) + renderDistance;
-        int maxZ = (cameraZ / CHUNK_SIZE) + renderDistance;
+        int minX = (cameraX / CHUNK_SIZE) - m_renderDistance;
+        int minZ = (cameraZ / CHUNK_SIZE) - m_renderDistance;
+        int maxX = (cameraX / CHUNK_SIZE) + m_renderDistance;
+        int maxZ = (cameraZ / CHUNK_SIZE) + m_renderDistance;
 
         auto location = chunk.getLocation();
 

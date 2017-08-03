@@ -4,11 +4,12 @@
 #include "Maths/glm.h"
 #include "Maths/Frustum.h"
 #include "Entity.h"
+#include "Config.h"
 
 class Camera : public Entity
 {
     public:
-        Camera() noexcept;
+        Camera(const Config& config) noexcept;
 
         void update() noexcept;
         void hookEntity(const Entity& entity) noexcept;
@@ -27,6 +28,8 @@ class Camera : public Entity
         glm::mat4 m_projectionMatrix;
         glm::mat4 m_viewMatrix;
         glm::mat4 m_projViewMatrx;
+
+        Config m_config;
 
 
 };

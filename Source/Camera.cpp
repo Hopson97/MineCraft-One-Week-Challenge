@@ -2,9 +2,10 @@
 
 #include "Maths/Matrix.h"
 
-Camera::Camera() noexcept
+Camera::Camera(const Config& config) noexcept
+:   m_config    (config)
 {
-    m_projectionMatrix = makeProjectionMatrix(90);
+    m_projectionMatrix = makeProjectionMatrix(config);
 
     position = {0, 0, -3.5};
 }

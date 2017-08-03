@@ -11,7 +11,7 @@
 class StatePlaying : public StateBase
 {
     public:
-        StatePlaying(Application& app);
+        StatePlaying(Application& app, const Config& config);
 
         void handleEvent(sf::Event e) override;
         void handleInput() override;
