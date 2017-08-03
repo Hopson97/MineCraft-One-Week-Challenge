@@ -156,7 +156,7 @@ void Player::collide(World& world, const glm::vec3& vel, float dt)
 void Player::keyboardInput()
 {
     glm::vec3 change;
-    float speed = 0.5;
+    float speed = 0.2;//0.5;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
     {
         speed *= 8;
@@ -197,6 +197,19 @@ void Player::keyboardInput()
 
 void Player::mouseInput(const sf::RenderWindow& window)
 {
+    static bool useMouse = true;
+    static ToggleKey useMouseKey (sf::Keyboard::L);
+
+    if (useMouseKey.isKeyPressed())
+    {
+        useMouse = !useMouse;
+    }
+
+    if (!useMouse)
+    {
+        return;
+    }
+
     static auto const BOUND = 80;
     static auto lastMousePosition = sf::Mouse::getPosition(window);
     auto change = sf::Mouse::getPosition() - lastMousePosition;

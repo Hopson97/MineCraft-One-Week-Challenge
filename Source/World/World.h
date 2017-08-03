@@ -54,7 +54,7 @@ class World : public NonCopyable
         std::unordered_map<sf::Vector3i, ChunkSection*> m_chunkUpdates;
 
         std::atomic<bool> m_isRunning {true};
-        std::thread m_chunkLoadThread;
+        std::vector<std::thread> m_chunkLoadThreads;
         std::mutex  m_mutex;
 
         int m_loadDistance = 2;

@@ -10,27 +10,34 @@
 
 namespace
 {
-    constexpr int renderDistance = 12;
+    constexpr int renderDistance = 16;
+    constexpr int WORKERS = 4;
 }
 
 World::World(const Camera& camera)
 :   m_chunkManager  (*this)
-,   m_chunkLoadThread   ([&]()
-    {
-        while(m_isRunning)
-        {
-            loadChunks(camera);
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));
-        }
-    })
 {
+    for (int i = 0; i < WORKERS; i++)
+    {
+        m_chunkLoadThreads.emplace_back([&]()
+        {
+            while(m_isRunning)
+            {
+                loadChunks(camera);
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            }
+        });
+    }
 
 }
 
 World::~World()
 {
     m_isRunning = false;
-    m_chunkLoadThread.join();
+    for (auto& thread : m_chunkLoadThreads)
+    {
+        thread.join();
+    }
 }
 
 //world coords into chunk column coords
@@ -64,7 +71,6 @@ void World::update(const Camera& camera)
     m_events.clear();
 
     updateChunks();
-    //loadChunks(camera);
 }
 
 void World::loadChunks(const Camera& camera)
@@ -85,16 +91,11 @@ void World::loadChunks(const Camera& camera)
             for (int z = minZ; z < maxZ; ++z)
             {
                 m_mutex.lock();
-                if(m_chunkManager.makeMesh(x, z))
-                {
-                    isMeshMade = true;
-                    //m_mutex.unlock();
-                    //break;
-                }
+                isMeshMade = m_chunkManager.makeMesh(x, z);
                 m_mutex.unlock();
             }
-            //if (isMeshMade)
-            //    break;
+            if (isMeshMade)
+                break;
         }
 
         if (isMeshMade)

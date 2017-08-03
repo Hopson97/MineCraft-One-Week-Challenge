@@ -8,6 +8,6 @@ uniform sampler2D texSampler;
 
 void main()
 {
-    outColour = texture(texSampler, passTextureCoord) * 1;//passCardinalLight;
+    outColour = texture(texSampler, passTextureCoord) * passCardinalLight;
     if (outColour.a == 0) discard;
 }
