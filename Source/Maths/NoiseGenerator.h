@@ -16,17 +16,17 @@ class NoiseGenerator
     public:
         NoiseGenerator(int seed);
 
-        double getHeight(int x, int z, int chunkX, int chunkZ) const;
+        double getHeight(int x, int z, int chunkX, int chunkZ) const noexcept;
 
-        void setParameters(const NoiseParameters& params);
+        void setParameters(const NoiseParameters& params) noexcept;
 
     private:
-        double getNoise(int  n) const;
-        double getNoise(double  x, double  z) const;
+        double getNoise(int  n) const noexcept;
+        double getNoise(double  x, double  z) const noexcept;
 
-        double lerp(double a, double b, double z) const;
+        double lerp(double a, double b, double z) const noexcept;
 
-        double noise(double  x, double  z) const;
+        double noise(double  x, double  z) const noexcept;
 
         NoiseParameters m_noiseParameters;
 

@@ -14,14 +14,14 @@ NoiseGenerator::NoiseGenerator(int seed)
     m_noiseParameters.roughness     = 0.53;
 }
 
-void NoiseGenerator::setParameters(const NoiseParameters& params)
+void NoiseGenerator::setParameters(const NoiseParameters& params) noexcept
 {
     m_noiseParameters = params;
 }
 
 
 //wtf?
-double NoiseGenerator::getNoise(int  n) const
+double NoiseGenerator::getNoise(int  n) const noexcept
 {
     n += m_seed;
     n = (n << 13) ^ n;
@@ -30,18 +30,18 @@ double NoiseGenerator::getNoise(int  n) const
     return 1.0 - ((double)newN / 1073741824.0);
 }
 
-double NoiseGenerator::getNoise(double  x, double  z) const
+double NoiseGenerator::getNoise(double  x, double  z) const noexcept
 {
     return getNoise(x + z * 57);
 }
 
-double NoiseGenerator::lerp(double a, double b, double z) const
+double NoiseGenerator::lerp(double a, double b, double z) const noexcept
 {
     double mu2 = (1 - std::cos(z * 3.14)) / 2;
     return (a * (1 - mu2) + b * mu2);
 }
 
-double NoiseGenerator::noise(double  x, double  z) const
+double NoiseGenerator::noise(double  x, double  z) const noexcept
 {
     auto floorX = (double)((int)x); //This is kinda a cheap way to floor a double integer.
     auto floorZ = (double)((int)z);
@@ -62,7 +62,7 @@ double NoiseGenerator::noise(double  x, double  z) const
     return rec3;
 }
 
-double NoiseGenerator::getHeight(int x, int z, int chunkX, int chunkZ) const
+double NoiseGenerator::getHeight(int x, int z, int chunkX, int chunkZ) const noexcept
 {
         auto newX = (x + (chunkX * CHUNK_SIZE));
         auto newZ = (z + (chunkZ * CHUNK_SIZE));
@@ -88,35 +88,5 @@ double NoiseGenerator::getHeight(int x, int z, int chunkX, int chunkZ) const
 
         return val > 0 ? val : 1;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

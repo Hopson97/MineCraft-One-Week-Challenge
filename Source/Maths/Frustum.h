@@ -18,9 +18,9 @@ struct Plane
 class ViewFrustum
 {
     public:
-        void update(const glm::mat4& projViewMatrix) ;
+        void update(const glm::mat4& projViewMatrix) noexcept;
 
-        bool isBoxInFrustum(const AABB& box) const ;
+        bool isBoxInFrustum(const AABB& box) const noexcept;
 
     private:
         std::array<Plane, 6> m_planes;

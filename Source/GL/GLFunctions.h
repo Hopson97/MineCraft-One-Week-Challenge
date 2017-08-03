@@ -5,7 +5,7 @@
 
 namespace GL
 {
-    void drawElements(GLuint indicesCount);
+    void drawElements(GLuint indicesCount) noexcept;
 
     namespace Enum
     {
