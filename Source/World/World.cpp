@@ -19,12 +19,12 @@ World::World(const Camera& camera)
 {
     for (int i = 0; i < WORKERS; i++)
     {
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
         m_chunkLoadThreads.emplace_back([&]()
         {
             while(m_isRunning)
             {
                 loadChunks(camera);
-                std::this_thread::sleep_for(std::chrono::milliseconds(10));
             }
         });
     }
@@ -73,6 +73,8 @@ void World::update(const Camera& camera)
     updateChunks();
 }
 
+///@TODO
+///Optimize for CPU usage :thinking:
 void World::loadChunks(const Camera& camera)
 {
     bool isMeshMade = false;
@@ -81,6 +83,7 @@ void World::loadChunks(const Camera& camera)
 
     for (int i = 0; i < m_loadDistance; i++)
     {
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
         int minX = std::max(cameraX  - i, 0);
         int minZ = std::max(cameraZ  - i, 0);
         int maxX = cameraX + i;
@@ -90,6 +93,7 @@ void World::loadChunks(const Camera& camera)
         {
             for (int z = minZ; z < maxZ; ++z)
             {
+
                 m_mutex.lock();
                 isMeshMade = m_chunkManager.makeMesh(x, z);
                 m_mutex.unlock();
