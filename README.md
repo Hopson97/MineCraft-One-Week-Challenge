@@ -2,6 +2,8 @@
 
 I challenged myself to see if I could create Minecraft in just one week... So lets go!
 
+Video: https://www.youtube.com/watch?v=okQhOgGxAOg
+
 # Day One
 
 End of day one commit: https://github.com/Hopson97/MineCraft-One-Week-Challenge/tree/44ace72573833796da05a97972be5765b05ce94f
