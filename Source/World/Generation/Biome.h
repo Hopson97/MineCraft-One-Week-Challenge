@@ -13,6 +13,7 @@ struct Biome
 {
     public:
         Biome(const NoiseParameters& parameters, int treeFreq, int plantFreq, int seed);
+        virtual ~Biome() = default;
 
         virtual BlockId getPlant    (Rand& rand) const = 0;
         virtual BlockId getTopBlock (Rand& rand) const = 0;

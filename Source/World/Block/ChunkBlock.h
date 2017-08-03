@@ -3,7 +3,7 @@
 
 #include "BlockId.h"
 
-class BlockDataHolder;
+struct BlockDataHolder;
 class BlockType;
 
 struct ChunkBlock

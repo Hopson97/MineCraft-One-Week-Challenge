@@ -8,10 +8,11 @@
 #include "../Block/ChunkBlock.h"
 
 class ChunkSection;
-class ChunkMeshCollection;
 class ChunkMesh;
 class BlockData;
-class BlockDataHolder;
+
+struct ChunkMeshCollection;
+struct BlockDataHolder;
 
 class ChunkMeshBuilder
 {

@@ -10,7 +10,7 @@
 #include "../Texture/TextureAtlas.h"
 
 class Camera;
-class Entity;
+struct Entity;
 
 class CubeRenderer
 {

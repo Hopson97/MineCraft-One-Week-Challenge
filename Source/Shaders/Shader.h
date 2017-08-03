@@ -11,7 +11,7 @@ class Shader : NonCopyable
 {
     public:
         Shader(const std::string& vertexFile, const std::string& fragmentFile);
-        ~Shader();
+        virtual ~Shader();
 
         void useProgram() const;
 

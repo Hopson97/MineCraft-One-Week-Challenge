@@ -4,8 +4,9 @@
 #include "glm.h"
 
 class Camera;
-class Entity;
-class Config;
+
+struct Entity;
+struct Config;
 
 glm::mat4 makeModelMatrix       (const Entity& entity) ;
 glm::mat4 makeViewMatrix        (const Camera& camera) ;

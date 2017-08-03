@@ -17,7 +17,8 @@
 
 class RenderMaster;
 class Camera;
-class Entity;
+
+struct Entity;
 
 class World : public NonCopyable
 {
