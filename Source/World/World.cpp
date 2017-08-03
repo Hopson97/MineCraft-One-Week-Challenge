@@ -19,7 +19,7 @@ World::World(const Camera& camera)
 {
     for (int i = 0; i < WORKERS; i++)
     {
-        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
         m_chunkLoadThreads.emplace_back([&]()
         {
             while(m_isRunning)
