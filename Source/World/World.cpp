@@ -90,7 +90,7 @@ void World::loadChunks(const Camera& camera)
             for (int z = minZ; z < maxZ; ++z)
             {
                 m_mutex.lock();
-                isMeshMade = m_chunkManager.makeMesh(x, z);
+                isMeshMade = m_chunkManager.makeMesh(x, z, camera);
                 m_mutex.unlock();
             }
             if (isMeshMade)

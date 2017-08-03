@@ -14,7 +14,7 @@ class Chunk : public IChunk
         Chunk() = default;
         Chunk(World& world, const sf::Vector2i& location);
 
-        bool makeMesh();
+        bool makeMesh(const Camera& camera);
 
         void setBlock       (int x, int y, int z, ChunkBlock block) override;
         ChunkBlock getBlock (int x, int y, int z) const noexcept override ;

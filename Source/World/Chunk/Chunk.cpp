@@ -11,14 +11,17 @@ Chunk::Chunk(World& world, const sf::Vector2i& location)
 ,   m_pWorld    (&world)
 { }
 
-bool Chunk::makeMesh()
+bool Chunk::makeMesh(const Camera& camera)
 {
     for (auto& chunk : m_chunks)
     {
-        if (!chunk.hasMesh())
+        if (!chunk.hasMesh() && camera.getFrustum().isBoxInFrustum(chunk.m_aabb))
         {
-            chunk.makeMesh();
-            return true;
+            if (camera.getFrustum().isBoxInFrustum(chunk.m_aabb))
+            {
+                chunk.makeMesh();
+                return true;
+            }
         }
     }
     return false;

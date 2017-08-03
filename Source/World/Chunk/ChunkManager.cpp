@@ -32,7 +32,7 @@ ChunkMap& ChunkManager::getChunks()
     return m_chunks;
 }
 
-bool ChunkManager::makeMesh(int x, int z)
+bool ChunkManager::makeMesh(int x, int z, const Camera& camera)
 {
     for (int nx = -1; nx <= 1; nx++)
     for (int nz = -1; nz <= 1; nz++)
@@ -40,7 +40,7 @@ bool ChunkManager::makeMesh(int x, int z)
         getChunk(x + nx, z + nz).load();
     }
 
-    return getChunk(x, z).makeMesh();
+    return getChunk(x, z).makeMesh(camera);
 }
 
 bool ChunkManager::chunkLoadedAt(int x, int z) const
