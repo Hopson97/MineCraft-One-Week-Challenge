@@ -22,12 +22,20 @@ class ChunkMesh
 
         const Model& getModel() const;
 
+        void deleteData()
+        {
+            m_model.deleteData();
+        }
+
         int faces = 0;
+
+
     private:
         Mesh  m_mesh;
         Model m_model;
         std::vector<GLfloat> m_light;
         GLuint m_indexIndex = 0;
+
 
 };
 

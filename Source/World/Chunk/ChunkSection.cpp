@@ -108,6 +108,18 @@ const ChunkSection::Layer& ChunkSection::getLayer(int y) const
     }
 }
 
+void ChunkSection::deleteMeshes()
+{
+    if (m_hasMesh)
+    {
+        m_hasBufferedMesh = false;
+        m_hasMesh = false;
+        m_meshes.solidMesh.deleteData();
+        m_meshes.waterMesh.deleteData();
+    }
+}
+
+
 ChunkSection& ChunkSection::getAdjacent(int dx, int dz)
 {
     int newX = m_location.x + dx;

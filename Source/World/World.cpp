@@ -5,8 +5,8 @@
 #include <iostream>
 
 #include "../Maths/Vector2XZ.h"
-
 #include "../Camera.h"
+#include "../ToggleKey.h"
 
 
 World::World(const Camera& camera, const Config& config)
@@ -60,6 +60,16 @@ void World::setBlock(int x, int y, int z, ChunkBlock block)
 //make chunk meshes
 void World::update(const Camera& camera)
 {
+    static ToggleKey key(sf::Keyboard::C);
+
+    if (key.isKeyPressed())
+    {
+        m_mutex.lock();
+        m_chunkManager.deleteMeshes();
+        m_mutex.unlock();
+    }
+
+
     for (auto& event : m_events)
     {
         event->handle(*this);
@@ -79,7 +89,7 @@ void World::loadChunks(const Camera& camera)
 
     for (int i = 0; i < m_loadDistance; i++)
     {
-        //std::this_thread::sleep_for(std::chrono::milliseconds(5));
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
         int minX = std::max(cameraX  - i, 0);
         int minZ = std::max(cameraZ  - i, 0);
         int maxX = cameraX + i;

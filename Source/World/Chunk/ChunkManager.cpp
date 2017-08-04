@@ -9,12 +9,6 @@ ChunkManager::ChunkManager(World& world)
 }
 
 
-Chunk& ChunkManager::qGetChunk(int x, int z)
-{
-    VectorXZ key {x, z};
-    return m_chunks.at(key);
-}
-
 Chunk& ChunkManager::getChunk(int x, int z)
 {
     VectorXZ key {x, z};
@@ -61,6 +55,15 @@ void ChunkManager::loadChunk(int x, int z)
 {
     getChunk(x, z).load();
 }
+
+void ChunkManager::deleteMeshes()
+{
+    for (auto& chunk : m_chunks)
+    {
+        chunk.second.deleteMeshes();
+    }
+}
+
 
 void ChunkManager::unloadChunk(int x, int z)
 {

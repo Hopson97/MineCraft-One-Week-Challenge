@@ -61,6 +61,9 @@ ItemStack& Player::getHeldItems()
 
 void Player::handleInput(const sf::RenderWindow& window)
 {
+    keyboardInput();
+    mouseInput(window);
+
     if(m_itemDown.isKeyPressed())
     {
         m_heldItem++;
@@ -77,10 +80,6 @@ void Player::handleInput(const sf::RenderWindow& window)
             m_heldItem = m_items.size() - 1;
         }
     }
-
-
-    keyboardInput();
-    mouseInput(window);
 }
 
 void Player::update(float dt, World& world)
@@ -91,21 +90,20 @@ void Player::update(float dt, World& world)
         velocity.y -= 55 * dt;
     }
 */
-    m_isOnGround = false;
-
     box.update(position);
     velocity.x *= 0.95;
     velocity.z *= 0.95;
     velocity.y *= 0.95;
 
     position.x += velocity.x * dt;
-    //collide (world, {velocity.x, 0, 0}, dt);
+   // collide (world, {velocity.x, 0, 0}, dt);
 
     position.y += velocity.y * dt;
-    //collide (world, {0, velocity.y, 0}, dt);
+   // collide (world, {0, velocity.y, 0}, dt);
+    //std::cout << std::boolalpha << m_isOnGround << "\n";
 
     position.z += velocity.z * dt;
-    //collide (world, {0, 0, velocity.z}, dt);
+   // collide (world, {0, 0, velocity.z}, dt);
 }
 
 
@@ -156,7 +154,7 @@ void Player::collide(World& world, const glm::vec3& vel, float dt)
 void Player::keyboardInput()
 {
     glm::vec3 change;
-    float speed = 0.1;//0.5;
+    float speed = 0.25f;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
     {
         speed *= 8;
@@ -183,8 +181,9 @@ void Player::keyboardInput()
         change.z += glm::sin(glm::radians(rotation.y)) * speed;
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)/*&& m_isOnGround*/)
     {
+        m_isOnGround = false;
         change.y += speed;
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))

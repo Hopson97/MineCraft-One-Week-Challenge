@@ -85,6 +85,9 @@ void Chunk::drawChunks(RenderMaster& renderer, const Camera& camera)
     }
 }
 
+
+
+
 bool Chunk::hasLoaded() const noexcept
 {
     return m_isLoaded;
@@ -110,6 +113,14 @@ ChunkSection& Chunk::getSection(int index)
     return m_chunks[index];
 }
 
+void Chunk::deleteMeshes()
+{
+    for (int i = 0; i < m_chunks.size(); i++)
+    {
+        m_chunks[i].deleteMeshes();
+    }
+}
+
 void Chunk::addSection()
 {
     int y = m_chunks.size();
@@ -129,3 +140,5 @@ void Chunk::addSectionsIndexTarget(int index)
         addSection();
     }
 }
+
+

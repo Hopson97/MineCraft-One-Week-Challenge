@@ -28,6 +28,8 @@ class Chunk : public IChunk
 
         const sf::Vector2i& getLocation() const  { return m_location; }
 
+        void deleteMeshes();
+
     private:
         void addSection();
         void addSectionsBlockTarget(int blockY);

@@ -18,7 +18,6 @@ class ChunkManager
     public:
         ChunkManager(World& world);
 
-        Chunk&      qGetChunk   (int x, int z);
         Chunk&      getChunk    (int x, int z);
         ChunkMap&   getChunks   ();
 
@@ -29,6 +28,8 @@ class ChunkManager
 
         void loadChunk(int x, int z);
         void unloadChunk(int x, int z);
+
+        void deleteMeshes();
 
     private:
         ChunkMap m_chunks;
