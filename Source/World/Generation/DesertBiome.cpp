@@ -1,9 +1,10 @@
 #include "DesertBiome.h"
 
 #include "TreeGenerator.h"
+#include "../WorldConstants.h"
 
 DesertBiome::DesertBiome(int seed)
-:   Biome  (getNoiseParameters(), 175, 150, seed)
+:   Biome  (getNoiseParameters(), 350, 150, seed)
 {
 
 }
@@ -15,7 +16,21 @@ BlockId DesertBiome::getTopBlock(Rand& rand) const
 
 void DesertBiome::makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) const
 {
-    makeCactus(chunk, rand, x, y, z);
+    if (y < WATER_LEVEL + 10)
+    {
+        if (rand.intInRange(0, 100) > 95)
+        {
+            makePalmTree(chunk, rand, x, y, z);
+        }
+        else
+        {
+            makeCactus(chunk, rand, x, y, z);
+        }
+    }
+    else
+    {
+        makeCactus(chunk, rand, x, y, z);
+    }
 }
 
 NoiseParameters DesertBiome::getNoiseParameters()
@@ -24,8 +39,8 @@ NoiseParameters DesertBiome::getNoiseParameters()
     heightParams.octaves       = 9;
     heightParams.amplitude     = 80;
     heightParams.smoothness    = 335;
-    heightParams.heightOffset  = -10;
-    heightParams.roughness     = 0.53;
+    heightParams.heightOffset  = -7;
+    heightParams.roughness     = 0.56;
 
 
     return heightParams;

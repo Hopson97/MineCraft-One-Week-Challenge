@@ -15,13 +15,10 @@ World::World(const Camera& camera, const Config& config)
 {
     for (int i = 0; i < 2; i++)
     {
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
         m_chunkLoadThreads.emplace_back([&]()
         {
-            while(m_isRunning)
-            {
-                loadChunks(camera);
-            }
+            loadChunks(camera);
         });
     }
 
@@ -40,9 +37,9 @@ World::~World()
 ChunkBlock World::getBlock(int x, int y, int z)
 {
     auto bp = getBlockXZ(x, z);
-    auto cp = getChunkXZ(x, z);
+    auto chunkPosition = getChunkXZ(x, z);
 
-    return m_chunkManager.getChunk(cp.x, cp.z).getBlock(bp.x, y, bp.z);
+    return m_chunkManager.getChunk(chunkPosition.x, chunkPosition.z).getBlock(bp.x, y, bp.z);
 }
 
 void World::setBlock(int x, int y, int z, ChunkBlock block)
@@ -51,9 +48,9 @@ void World::setBlock(int x, int y, int z, ChunkBlock block)
         return;
 
     auto bp = getBlockXZ(x, z);
-    auto cp = getChunkXZ(x, z);
+    auto chunkPosition = getChunkXZ(x, z);
 
-    m_chunkManager.getChunk(cp.x, cp.z).setBlock(bp.x, y, bp.z, block);
+    m_chunkManager.getChunk(chunkPosition.x, chunkPosition.z).setBlock(bp.x, y, bp.z, block);
 }
 
 //loads chunks
@@ -66,6 +63,7 @@ void World::update(const Camera& camera)
     {
         m_mutex.lock();
         m_chunkManager.deleteMeshes();
+        m_loadDistance = 2;
         m_mutex.unlock();
     }
 
@@ -80,44 +78,47 @@ void World::update(const Camera& camera)
 }
 
 ///@TODO
-///Optimize for CPU usage :thinking:
+///Optimize for chunkPositionU usage :thinking:
 void World::loadChunks(const Camera& camera)
 {
-    bool isMeshMade = false;
-    int cameraX = camera.position.x / CHUNK_SIZE;
-    int cameraZ = camera.position.z / CHUNK_SIZE;
-
-    for (int i = 0; i < m_loadDistance; i++)
+    while(m_isRunning)
     {
-        std::this_thread::sleep_for(std::chrono::milliseconds(1));
-        int minX = std::max(cameraX  - i, 0);
-        int minZ = std::max(cameraZ  - i, 0);
-        int maxX = cameraX + i;
-        int maxZ = cameraZ + i;
+        bool isMeshMade = false;
+        int cameraX = camera.position.x / CHUNK_SIZE;
+        int cameraZ = camera.position.z / CHUNK_SIZE;
 
-        for (int x = minX; x < maxX; ++x)
+        for (int i = 0; i < m_loadDistance; i++)
         {
-            for (int z = minZ; z < maxZ; ++z)
+            std::this_thread::sleep_for(std::chrono::milliseconds(1));
+            int minX = std::max(cameraX  - i, 0);
+            int minZ = std::max(cameraZ  - i, 0);
+            int maxX = cameraX + i;
+            int maxZ = cameraZ + i;
+
+            for (int x = minX; x < maxX; ++x)
             {
-                m_mutex.lock();
-                isMeshMade = m_chunkManager.makeMesh(x, z, camera);
-                m_mutex.unlock();
+                for (int z = minZ; z < maxZ; ++z)
+                {
+                    m_mutex.lock();
+                    isMeshMade = m_chunkManager.makeMesh(x, z, camera);
+                    m_mutex.unlock();
+                }
+                if (isMeshMade)
+                    break;
             }
+
             if (isMeshMade)
                 break;
         }
 
-        if (isMeshMade)
-            break;
-    }
-
-    if (!isMeshMade)
-    {
-        m_loadDistance++;
-    }
-    if (m_loadDistance >= m_renderDistance)
-    {
-        m_loadDistance = 2;
+        if (!isMeshMade)
+        {
+            m_loadDistance++;
+        }
+        if (m_loadDistance >= m_renderDistance)
+        {
+            m_loadDistance = 2;
+        }
     }
 }
 
@@ -131,51 +132,50 @@ void World::updateChunk(int blockX, int blockY, int blockZ)
         m_chunkUpdates.emplace(key, &section);
     };
 
-    auto cp = getChunkXZ(blockX, blockZ);
-    auto cy        = blockY / CHUNK_SIZE;
+    auto chunkPosition = getChunkXZ(blockX, blockZ);
+    auto chunkSectionY = blockY / CHUNK_SIZE;
 
-    sf::Vector3i key(cp.x, cy, cp.z);
-    addChunkToUpdateBatch(key, m_chunkManager.getChunk(cp.x, cp.z).getSection(cy));
+    sf::Vector3i key(chunkPosition.x, chunkSectionY, chunkPosition.z);
+    addChunkToUpdateBatch(key, m_chunkManager.getChunk(chunkPosition.x, chunkPosition.z).getSection(chunkSectionY));
 
     auto sectionBlockXZ = getBlockXZ(blockX, blockZ);
     auto sectionBlockY  = blockY % CHUNK_SIZE;
 
     if (sectionBlockXZ.x == 0)
     {
-        sf::Vector3i newKey(cp.x - 1, cy, cp.z);
+        sf::Vector3i newKey(chunkPosition.x - 1, chunkSectionY, chunkPosition.z);
         addChunkToUpdateBatch(newKey, m_chunkManager.getChunk(newKey.x, newKey.z).getSection(newKey.y));
     }
     else if (sectionBlockXZ.x == CHUNK_SIZE - 1)
     {
-        sf::Vector3i newKey(cp.x + 1, cy, cp.z);
+        sf::Vector3i newKey(chunkPosition.x + 1, chunkSectionY, chunkPosition.z);
         addChunkToUpdateBatch(newKey, m_chunkManager.getChunk(newKey.x, newKey.z).getSection(newKey.y));
     }
 
     if (sectionBlockY == 0)
     {
-        sf::Vector3i newKey(cp.x, cy - 1, cp.z);
+        sf::Vector3i newKey(chunkPosition.x, chunkSectionY - 1, chunkPosition.z);
         addChunkToUpdateBatch(newKey, m_chunkManager.getChunk(newKey.x, newKey.z).getSection(newKey.y));
     }
     else if (sectionBlockY == CHUNK_SIZE - 1)
     {
-        sf::Vector3i newKey(cp.x, cy + 1, cp.z);
+        sf::Vector3i newKey(chunkPosition.x, chunkSectionY + 1, chunkPosition.z);
         addChunkToUpdateBatch(newKey, m_chunkManager.getChunk(newKey.x, newKey.z).getSection(newKey.y));
     }
 
     if (sectionBlockXZ.z == 0)
     {
-        sf::Vector3i newKey(cp.x, cy, cp.z - 1);
+        sf::Vector3i newKey(chunkPosition.x, chunkSectionY, chunkPosition.z - 1);
         addChunkToUpdateBatch(newKey, m_chunkManager.getChunk(newKey.x, newKey.z).getSection(newKey.y));
     }
     else if (sectionBlockXZ.z == CHUNK_SIZE - 1)
     {
-        sf::Vector3i newKey(cp.x, cy, cp.z + 1);
+        sf::Vector3i newKey(chunkPosition.x, chunkSectionY, chunkPosition.z + 1);
         addChunkToUpdateBatch(newKey, m_chunkManager.getChunk(newKey.x, newKey.z).getSection(newKey.y));
     }
 
     m_mutex.unlock();
 }
-
 
 void World::renderWorld(RenderMaster& renderer, const Camera& camera)
 {
@@ -242,7 +242,6 @@ void World::updateChunks()
     m_mutex.lock();
     for (auto& c : m_chunkUpdates)
     {
-        std::cout << m_chunkUpdates.size() << "\n";
         ChunkSection& s = *c.second;
         s.makeMesh();
     }

@@ -31,7 +31,7 @@ bool ChunkManager::makeMesh(int x, int z, const Camera& camera)
     for (int nx = -1; nx <= 1; nx++)
     for (int nz = -1; nz <= 1; nz++)
     {
-        getChunk(x + nx, z + nz).load();
+        getChunk(x + nx, z + nz).load(m_terrainGenerator);
     }
 
     return getChunk(x, z).makeMesh(camera);
@@ -53,7 +53,7 @@ bool ChunkManager::chunkExistsAt(int x, int z) const
 
 void ChunkManager::loadChunk(int x, int z)
 {
-    getChunk(x, z).load();
+    getChunk(x, z).load(m_terrainGenerator);
 }
 
 void ChunkManager::deleteMeshes()

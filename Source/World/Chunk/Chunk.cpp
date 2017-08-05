@@ -4,12 +4,15 @@
 #include "../../Util/Random.h"
 #include "../../Maths/NoiseGenerator.h"
 #include "../../Camera.h"
+#include "../World.h"
 #include "../Generation/TerrainGenerator.h"
 
 Chunk::Chunk(World& world, const sf::Vector2i& location)
 :   m_location  (location)
 ,   m_pWorld    (&world)
-{ }
+{
+    m_highestBlocks.setAll(0);
+}
 
 bool Chunk::makeMesh(const Camera& camera)
 {
@@ -36,6 +39,24 @@ void Chunk::setBlock(int x, int y, int z, ChunkBlock block)
 
     int bY = y % CHUNK_SIZE;
     m_chunks[y / CHUNK_SIZE].setBlock(x, bY, z, block);
+
+    if (y == m_highestBlocks.get(x, z))
+    {
+        auto highBlock = getBlock(x, y--, z);
+        while (!highBlock.getData().isOpaque)
+        {
+            highBlock = getBlock(x, y--, z);
+        }
+    }
+    else if (y > m_highestBlocks.get(x, z))
+    {
+        m_highestBlocks.get(x, z) = y;
+    }
+
+    if (m_isLoaded)
+    {
+        //m_pWorld->updateChunk(x, y, z);
+    }
 }
 
 //Chunk block to SECTION BLOCK positions
@@ -85,21 +106,17 @@ void Chunk::drawChunks(RenderMaster& renderer, const Camera& camera)
     }
 }
 
-
-
-
 bool Chunk::hasLoaded() const noexcept
 {
     return m_isLoaded;
 }
 
-void Chunk::load()
+void Chunk::load(TerrainGenerator& generator)
 {
     if (hasLoaded())
         return;
 
-    TerrainGenerator gen;
-    gen.generateTerrainFor(*this);
+    generator.generateTerrainFor(*this);
     m_isLoaded = true;
 }
 
@@ -115,7 +132,7 @@ ChunkSection& Chunk::getSection(int index)
 
 void Chunk::deleteMeshes()
 {
-    for (int i = 0; i < m_chunks.size(); i++)
+    for (unsigned i = 0; i < m_chunks.size(); i++)
     {
         m_chunks[i].deleteMeshes();
     }

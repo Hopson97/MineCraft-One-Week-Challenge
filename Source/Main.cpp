@@ -28,25 +28,25 @@ int main()
             {
                 configFile >> config.renderDistance;
                 std::cout   << "Config: Render Distance: "
-                            << config.renderDistance << "\n";
+                            << config.renderDistance << '\n';
             }
             else if (key == "fullscreen")
             {
                 configFile >> config.isFullscreen;
                 std::cout   << "Config: Full screen mode: "
-                            << std::boolalpha <<  config.isFullscreen << "\n";
+                            << std::boolalpha <<  config.isFullscreen << '\n';
             }
             else if (key == "windowsize")
             {
                 configFile >> config.windowX >> config.windowY;
                 std::cout   << "Config: Window Size: "
-                            << config.windowX << " x " << config.windowY << "\n";
+                            << config.windowX << " x " << config.windowY << '\n';
             }
             else if (key == "fov")
             {
                 configFile >> config.fov;
                 std::cout   << "Config: Field of Vision: "
-                            << config.fov << "\n";
+                            << config.fov << '\n';
             }
         }
     }

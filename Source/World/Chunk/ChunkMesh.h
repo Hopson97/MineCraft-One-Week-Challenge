@@ -22,10 +22,7 @@ class ChunkMesh
 
         const Model& getModel() const;
 
-        void deleteData()
-        {
-            m_model.deleteData();
-        }
+        void deleteData();
 
         int faces = 0;
 

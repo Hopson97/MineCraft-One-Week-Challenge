@@ -58,6 +58,11 @@ void ChunkMesh::bufferMesh()
     m_indexIndex = 0;
 }
 
+void ChunkMesh::deleteData()
+{
+    m_model.deleteData();
+}
+
 const Model& ChunkMesh::getModel() const
 {
     return m_model;

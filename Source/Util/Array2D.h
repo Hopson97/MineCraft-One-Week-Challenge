@@ -25,6 +25,11 @@ class Array2D
             return *std::max_element(m_array.begin(), m_array.end());
         }
 
+        void setAll(T val)
+        {
+            m_array.fill(val);
+        }
+
     private:
         Array m_array;
 };

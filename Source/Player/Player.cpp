@@ -11,7 +11,7 @@
 sf::Font f;
 
 Player::Player()
-:   Entity  ({1500, 125, 1500}, {0, 0, 0}, {0.5, 1.5, 0.5})
+:   Entity  ({5000, 125, 5000}, {0, 0, 0}, {0.5, 1.5, 0.5})
 ,   m_itemDown  (sf::Keyboard::Down)
 ,   m_itemUp    (sf::Keyboard::Up)
 {
@@ -100,7 +100,7 @@ void Player::update(float dt, World& world)
 
     position.y += velocity.y * dt;
    // collide (world, {0, velocity.y, 0}, dt);
-    //std::cout << std::boolalpha << m_isOnGround << "\n";
+    //std::cout << std::boolalpha << m_isOnGround << '\n';
 
     position.z += velocity.z * dt;
    // collide (world, {0, 0, velocity.z}, dt);
@@ -243,7 +243,8 @@ void Player::draw(RenderMaster& master)
         {
             t.setFillColor(sf::Color::White);
         }
-        t.setString((m_items[i].getMaterial().name) + " " + std::to_string(m_items[i].getNumInStack()));
+        t.setString((m_items[i].getMaterial().name) + " " + std::to_string(m_items[i].getNumInStack()) + " ");
+                    //+ std::to_string((int)position.x) + " " + std::to_string((int)position.y) + " " + std::to_string((int)position.z) );
 
         master.drawSFML(t);
     }

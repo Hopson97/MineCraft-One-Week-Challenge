@@ -9,6 +9,8 @@
 
 #include "Chunk.h"
 
+#include "../Generation/TerrainGenerator.h"
+
 class World;
 
 using ChunkMap = std::unordered_map<VectorXZ, Chunk>;
@@ -33,6 +35,7 @@ class ChunkManager
 
     private:
         ChunkMap m_chunks;
+        TerrainGenerator m_terrainGenerator;
 
         World* m_world;
 };

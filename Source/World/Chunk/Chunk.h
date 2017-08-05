@@ -3,10 +3,12 @@
 
 #include <vector>
 #include "ChunkSection.h"
+#include "../../Util/Array2D.h"
 #include "../../Util/NonCopyable.h"
 
 class RenderMaster;
 class Camera;
+class TerrainGenerator;
 
 class Chunk : public IChunk
 {
@@ -22,7 +24,7 @@ class Chunk : public IChunk
         void drawChunks (RenderMaster& renderer, const Camera& camera);
 
         bool hasLoaded() const noexcept;
-        void load();
+        void load(TerrainGenerator& generator);
 
         ChunkSection& getSection(int index);
 
@@ -38,6 +40,7 @@ class Chunk : public IChunk
         bool outOfBound(int x, int y, int z) const noexcept;
 
         std::vector<ChunkSection>   m_chunks;
+        Array2D<int, CHUNK_SIZE>    m_highestBlocks;
         sf::Vector2i                m_location;
 
         World* m_pWorld;

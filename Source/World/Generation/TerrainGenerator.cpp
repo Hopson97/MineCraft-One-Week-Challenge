@@ -28,6 +28,7 @@ TerrainGenerator::TerrainGenerator()
 
 void TerrainGenerator::setUpNoise()
 {
+    std::cout << "Seed: " << seed << '\n';
     static bool noiseGen = false;
     if (!noiseGen)
     {
@@ -48,6 +49,7 @@ void TerrainGenerator::setUpNoise()
 void TerrainGenerator::generateTerrainFor(Chunk& chunk)
 {
     m_pChunk = &chunk;
+
 
     auto location = chunk.getLocation();
     m_random.setSeed((location.x ^ location.y) << 2 );
@@ -177,14 +179,6 @@ void TerrainGenerator::setBlocks(int maxHeight)
         }
     }
 
-    for (auto& tree : trees)
-    {
-        int x = tree.x;
-        int z = tree.z;
-
-        getBiome(x, z).makeTree(m_random, *m_pChunk, x, tree.y, z);
-    }
-
     for (auto& plant : plants)
     {
         int x = plant.x;
@@ -192,6 +186,14 @@ void TerrainGenerator::setBlocks(int maxHeight)
 
         auto block = getBiome(x, z).getPlant(m_random);
         m_pChunk->setBlock(x, plant.y, z, block);
+    }
+
+    for (auto& tree : trees)
+    {
+        int x = tree.x;
+        int z = tree.z;
+
+        getBiome(x, z).makeTree(m_random, *m_pChunk, x, tree.y, z);
     }
 }
 
