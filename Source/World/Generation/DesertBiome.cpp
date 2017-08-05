@@ -16,9 +16,9 @@ BlockId DesertBiome::getTopBlock(Rand& rand) const
 
 void DesertBiome::makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) const
 {
-    if (y < WATER_LEVEL + 10)
+    if (y < WATER_LEVEL + 15)
     {
-        if (rand.intInRange(0, 100) > 95)
+        if (rand.intInRange(0, 100) > 75)
         {
             makePalmTree(chunk, rand, x, y, z);
         }

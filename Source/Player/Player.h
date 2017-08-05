@@ -28,16 +28,21 @@ class Player : public Entity
         ItemStack& getHeldItems();
 
     private:
+        void jump();
+
         void keyboardInput();
         void mouseInput(const sf::RenderWindow& window);
         bool m_isOnGround = false;
 
         std::vector<ItemStack> m_items;
         std::vector<sf::Text>  m_itemText;
+        sf::Text m_posPrint;
         int m_heldItem = 0;
 
         ToggleKey m_itemDown;
         ToggleKey m_itemUp;
+
+        glm::vec3 m_acceleation;
 };
 
 

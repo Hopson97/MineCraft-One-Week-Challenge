@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 
 #include <iostream>
+#include <sstream>
+#include <iomanip>
 
 #include "../World/World.h"
 
@@ -11,11 +13,12 @@
 sf::Font f;
 
 Player::Player()
-:   Entity  ({5000, 125, 5000}, {0, 0, 0}, {0.5, 1.5, 0.5})
+:   Entity  ({2500, 125, 2500}, {0, 0, 0}, {0.5, 1.5, 0.5})
 ,   m_itemDown  (sf::Keyboard::Down)
 ,   m_itemUp    (sf::Keyboard::Up)
 {
     f.loadFromFile("Res/Fonts/rs.ttf");
+
 
     for (int i = 0; i < 5; i++)
     {
@@ -31,7 +34,15 @@ Player::Player()
         t.setPosition({20.0f, 20.0f * i + 100.0f});
         m_itemText.push_back(t);
     }
+    m_posPrint.setFont(f);
+    m_posPrint.setOutlineColor(sf::Color::Black);
+    m_posPrint.setCharacterSize(25);
+    m_posPrint.setPosition(20.0f, 20.0f * 6.0f + 100.0f);
 }
+
+
+
+
 
 void Player::addItem(const Material& material)
 {
@@ -84,114 +95,114 @@ void Player::handleInput(const sf::RenderWindow& window)
 
 void Player::update(float dt, World& world)
 {
-/*
+    velocity += m_acceleation;
+    m_acceleation = {0, 0, 0};
+
     if (!m_isOnGround)
     {
         velocity.y -= 55 * dt;
     }
-*/
+    m_isOnGround = false;
+
+    position.x += velocity.x * dt;
+    collide (world, {velocity.x, 0, 0}, dt);
+
+    position.y += velocity.y * dt;
+    collide (world, {0, velocity.y, 0}, dt);
+
+    position.z += velocity.z * dt;
+    collide (world, {0, 0, velocity.z}, dt);
+
+
     box.update(position);
     velocity.x *= 0.95;
     velocity.z *= 0.95;
-    velocity.y *= 0.95;
-
-    position.x += velocity.x * dt;
-   // collide (world, {velocity.x, 0, 0}, dt);
-
-    position.y += velocity.y * dt;
-   // collide (world, {0, velocity.y, 0}, dt);
-    //std::cout << std::boolalpha << m_isOnGround << '\n';
-
-    position.z += velocity.z * dt;
-   // collide (world, {0, 0, velocity.z}, dt);
+    //velocity.y *= 0.95;
 }
 
 
 void Player::collide(World& world, const glm::vec3& vel, float dt)
 {
-    for (int x = position.x - box.dimensions.x; x < position.x + box.dimensions.x   ; x++)
-    for (int y = position.y - box.dimensions.y; y < position.y + box.dimensions.y   ; y++)
-    for (int z = position.z - box.dimensions.z; z < position.z + box.dimensions.z   ; z++)
+    for (int x = position.x - box.dimensions.x; x < position.x + box.dimensions.x; x++)
+    for (int y = position.y - box.dimensions.y; y < position.y + 0.7             ; y++)
+    for (int z = position.z - box.dimensions.z; z < position.z + box.dimensions.z; z++)
     {
         auto block = world.getBlock(x, y, z);
 
         if (block != 0)
         {
-            if (vel.x > 0)
-            {
-                position.x = x - box.dimensions.x;
-            }
-            if (vel.x < 0)
-            {
-                position.x = x + box.dimensions.x + 1;
-            }
-
             if (vel.y > 0)
             {
                 position.y = y - box.dimensions.y;
                 velocity.y = 0;
             }
-            if (vel.y < 0)
+            else if (vel.y < 0)
             {
                 position.y = y + box.dimensions.y + 1;
                 velocity.y = 0;
                 m_isOnGround = true;
             }
 
+            if (vel.x > 0)
+            {
+                jump();
+                position.x = x - box.dimensions.x;
+            }
+            else if (vel.x < 0)
+            {
+                jump();
+                position.x = x + box.dimensions.x + 1;
+            }
+
             if (vel.z > 0)
             {
+                jump();
                 position.z = z - box.dimensions.z;
             }
-            if (vel.x < 0)
+            else if (vel.z < 0)
             {
+                jump();
                 position.z = z + box.dimensions.z + 1;
             }
         }
     }
 }
 
+///@TODO Move this
+float speed = 0.25f;
+
 
 void Player::keyboardInput()
 {
-    glm::vec3 change;
-    float speed = 0.25f;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
-    {
-        speed *= 8;
-    }
-
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
-        change.x += -glm::cos(glm::radians(rotation.y + 90)) * speed;
-        change.z += -glm::sin(glm::radians(rotation.y + 90)) * speed;
+        m_acceleation.x += -glm::cos(glm::radians(rotation.y + 90)) * speed;
+        m_acceleation.z += -glm::sin(glm::radians(rotation.y + 90)) * speed;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
-        change.x += glm::cos(glm::radians(rotation.y + 90)) * speed;
-        change.z += glm::sin(glm::radians(rotation.y + 90)) * speed;
+        m_acceleation.x += glm::cos(glm::radians(rotation.y + 90)) * speed;
+        m_acceleation.z += glm::sin(glm::radians(rotation.y + 90)) * speed;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
-        change.x += -glm::cos(glm::radians(rotation.y)) * speed;
-        change.z += -glm::sin(glm::radians(rotation.y)) * speed;
+        m_acceleation.x += -glm::cos(glm::radians(rotation.y)) * speed;
+        m_acceleation.z += -glm::sin(glm::radians(rotation.y)) * speed;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
-        change.x += glm::cos(glm::radians(rotation.y)) * speed;
-        change.z += glm::sin(glm::radians(rotation.y)) * speed;
+        m_acceleation.x += glm::cos(glm::radians(rotation.y)) * speed;
+        m_acceleation.z += glm::sin(glm::radians(rotation.y)) * speed;
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)/*&& m_isOnGround*/)
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
-        m_isOnGround = false;
-        change.y += speed;
+        jump();
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
     {
-        change.y -= speed;
+        m_acceleation.y -= speed;
     }
-
-    velocity += change;
 }
 
 void Player::mouseInput(const sf::RenderWindow& window)
@@ -244,31 +255,27 @@ void Player::draw(RenderMaster& master)
             t.setFillColor(sf::Color::White);
         }
         t.setString((m_items[i].getMaterial().name) + " " + std::to_string(m_items[i].getNumInStack()) + " ");
-                    //+ std::to_string((int)position.x) + " " + std::to_string((int)position.y) + " " + std::to_string((int)position.z) );
-
         master.drawSFML(t);
     }
+    std::ostringstream stream;
+    stream  << " X: " << position.x
+            << " Y: " << position.y
+            << " Z: " << position.z
+            << " Grounded " << std::boolalpha << m_isOnGround;
+
+    m_posPrint.setString(stream.str());
+
+    master.drawSFML(m_posPrint);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void Player::jump()
+{
+    if (m_isOnGround)
+    {
+        m_isOnGround = false;
+        m_acceleation.y += speed * 50;
+    }
+}
 
 
 

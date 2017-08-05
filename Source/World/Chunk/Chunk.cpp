@@ -20,11 +20,8 @@ bool Chunk::makeMesh(const Camera& camera)
     {
         if (!chunk.hasMesh() && camera.getFrustum().isBoxInFrustum(chunk.m_aabb))
         {
-            if (camera.getFrustum().isBoxInFrustum(chunk.m_aabb))
-            {
-                chunk.makeMesh();
-                return true;
-            }
+            chunk.makeMesh();
+            return true;
         }
     }
     return false;
