@@ -104,10 +104,14 @@ void TerrainGenerator::getHeightMap()
     constexpr static auto HALF_CHUNK    = CHUNK_SIZE / 2;
     constexpr static auto CHUNK         = CHUNK_SIZE;
 
+    getHeightIn(0, 0, 16, 16);
+
+/*
     getHeightIn(0,          0,          HALF_CHUNK,     HALF_CHUNK);
     getHeightIn(HALF_CHUNK, 0,          CHUNK,          HALF_CHUNK);
     getHeightIn(0,          HALF_CHUNK, HALF_CHUNK,     CHUNK);
     getHeightIn(HALF_CHUNK, HALF_CHUNK, CHUNK,          CHUNK);
+    */
 }
 
 void TerrainGenerator::getBiomeMap()
@@ -146,7 +150,7 @@ void TerrainGenerator::setBlocks(int maxHeight)
         {
             if (y >= WATER_LEVEL)
             {
-                if (y < WATER_LEVEL + 5)
+                if (y < WATER_LEVEL + 4)
                 {
                     m_pChunk->setBlock(x, y, z, BlockId::Sand);
                     continue;
@@ -160,13 +164,11 @@ void TerrainGenerator::setBlocks(int maxHeight)
                 {
                     plants.emplace_back(x, y + 1, z);
                 }
-                setTopBlock(x, y, z);
+                m_pChunk->setBlock(x, y, z, getBiome(x, z).getTopBlock(m_random));
             }
             else
             {
-                m_pChunk->setBlock(x, y, z, m_random.intInRange(0, 10) < 5 ?
-                                                BlockId::Sand :
-                                                BlockId::Dirt);
+                m_pChunk->setBlock(x, y, z, biome.getUnderWaterBlock(m_random));
             }
         }
         else if (y > height - 3)
@@ -199,7 +201,7 @@ void TerrainGenerator::setBlocks(int maxHeight)
 
 void TerrainGenerator::setTopBlock(int x, int y, int z)
 {
-    m_pChunk->setBlock(x, y, z, getBiome(x, z).getTopBlock(m_random));
+
 }
 
 const Biome& TerrainGenerator::getBiome(int x, int z) const
@@ -218,7 +220,7 @@ const Biome& TerrainGenerator::getBiome(int x, int z) const
     {
         return m_lightForest;
     }
-    else if (biomeValue > 112)
+    else if (biomeValue > 100)
     {
         return m_grassBiome;
     }

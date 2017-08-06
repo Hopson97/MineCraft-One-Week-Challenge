@@ -9,10 +9,16 @@ DesertBiome::DesertBiome(int seed)
 
 }
 
-BlockId DesertBiome::getTopBlock(Rand& rand) const
+ChunkBlock DesertBiome::getTopBlock(Rand& rand) const
 {
     return BlockId::Sand;
 }
+
+ChunkBlock DesertBiome::getUnderWaterBlock(Rand& rand) const
+{
+    return BlockId::Sand;
+}
+
 
 void DesertBiome::makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) const
 {
@@ -46,7 +52,7 @@ NoiseParameters DesertBiome::getNoiseParameters()
     return heightParams;
 }
 
-BlockId DesertBiome::getPlant(Rand& rand) const
+ChunkBlock DesertBiome::getPlant(Rand& rand) const
 {
     return BlockId::DeadShrub;
 }

@@ -3,7 +3,7 @@
 
 #include "../../Maths/NoiseGenerator.h"
 #include "../../Util/Random.h"
-#include "../Block/BlockId.h"
+#include "../Block/ChunkBlock.h"
 
 using Rand = Random<std::minstd_rand>;
 
@@ -15,8 +15,9 @@ struct Biome
         Biome(const NoiseParameters& parameters, int treeFreq, int plantFreq, int seed);
         virtual ~Biome() = default;
 
-        virtual BlockId getPlant    (Rand& rand) const = 0;
-        virtual BlockId getTopBlock (Rand& rand) const = 0;
+        virtual ChunkBlock getPlant             (Rand& rand) const = 0;
+        virtual ChunkBlock getTopBlock          (Rand& rand) const = 0;
+        virtual ChunkBlock getUnderWaterBlock   (Rand& rand) const = 0;
         virtual void makeTree       (Rand& rand, Chunk& chunk, int x, int y, int z) const = 0;
 
 
