@@ -10,7 +10,7 @@
 
 StatePlaying::StatePlaying(Application& app, const Config& config)
 :   StateBase   (app)
-,   m_world     (app.getCamera(), config)
+,   m_world     (app.getCamera(), config, m_player)
 {
     app.getCamera().hookEntity(m_player);
 

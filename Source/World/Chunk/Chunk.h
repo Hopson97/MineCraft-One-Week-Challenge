@@ -20,6 +20,7 @@ class Chunk : public IChunk
 
         void setBlock       (int x, int y, int z, ChunkBlock block) override;
         ChunkBlock getBlock (int x, int y, int z) const noexcept override ;
+        int getHeightAt     (int x, int z);
 
         void drawChunks (RenderMaster& renderer, const Camera& camera);
 
@@ -27,6 +28,7 @@ class Chunk : public IChunk
         void load(TerrainGenerator& generator);
 
         ChunkSection& getSection(int index);
+
 
         const sf::Vector2i& getLocation() const  { return m_location; }
 

@@ -17,13 +17,14 @@
 
 class RenderMaster;
 class Camera;
+class Player;
 
 struct Entity;
 
 class World : public NonCopyable
 {
     public:
-        World(const Camera& camera, const Config& config);
+        World(const Camera& camera, const Config& config, Player& player);
         ~World();
 
         ChunkBlock  getBlock    (int x, int y, int z);
@@ -50,6 +51,7 @@ class World : public NonCopyable
     private:
         void loadChunks     (const Camera& camera);
         void updateChunks   ();
+        void setSpawnPoint  ();
 
         ChunkManager m_chunkManager;
 
@@ -62,6 +64,8 @@ class World : public NonCopyable
 
         int m_loadDistance = 2;
         const int m_renderDistance;
+
+        glm::vec3 m_playerSpawnPoint;
 };
 
 #endif // WORLD_H_INCLUDED

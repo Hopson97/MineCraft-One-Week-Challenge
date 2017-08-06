@@ -68,5 +68,7 @@ void ChunkManager::deleteMeshes()
 void ChunkManager::unloadChunk(int x, int z)
 {
     ///@TODO Save chunk to file ?
+    if (chunkExistsAt(x, z))
+        m_chunks.erase({x, z});
 }
 

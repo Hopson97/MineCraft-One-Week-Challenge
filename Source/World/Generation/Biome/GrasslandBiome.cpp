@@ -22,9 +22,9 @@ ChunkBlock GrasslandBiome::getUnderWaterBlock(Rand& rand) const
 
 ChunkBlock GrasslandBiome::getBeachBlock (Rand& rand) const
 {
-    return rand.intInRange(0, 10) > 8 ?
+    return rand.intInRange(0, 10) > 2 ?
         BlockId::Grass :
-        BlockId::Sand;
+        BlockId::Dirt;
 }
 
 void GrasslandBiome::makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) const

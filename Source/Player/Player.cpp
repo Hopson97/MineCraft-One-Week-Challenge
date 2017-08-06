@@ -216,9 +216,9 @@ void Player::keyboardInput()
     {
         jump();
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && m_isFlying)
     {
-        m_acceleation.y -= speed;
+        m_acceleation.y -= speed * 3;
     }
 }
 
@@ -297,7 +297,7 @@ void Player::jump()
     }
     else
     {
-        m_acceleation.y += speed;
+        m_acceleation.y += speed * 3;
     }
 }
 

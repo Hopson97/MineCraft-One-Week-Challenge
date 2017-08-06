@@ -69,6 +69,12 @@ ChunkBlock Chunk::getBlock(int x, int y, int z) const noexcept
     return m_chunks[y / CHUNK_SIZE].getBlock(x, bY, z);
 }
 
+int Chunk::getHeightAt(int x, int z)
+{
+    return m_highestBlocks.get(x, z);
+}
+
+
 bool Chunk::outOfBound(int x, int y, int z) const noexcept
 {
     if (x >= CHUNK_SIZE) return true;

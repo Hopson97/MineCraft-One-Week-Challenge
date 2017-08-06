@@ -8,11 +8,16 @@
 #include "../Camera.h"
 #include "../ToggleKey.h"
 
+#include "../Player/Player.h"
 
-World::World(const Camera& camera, const Config& config)
+
+World::World(const Camera& camera, const Config& config, Player& player)
 :   m_chunkManager      (*this)
 ,   m_renderDistance    (config.renderDistance)
 {
+    setSpawnPoint();
+    player.position = m_playerSpawnPoint;
+
     for (int i = 0; i < 2; i++)
     {
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
@@ -247,5 +252,37 @@ void World::updateChunks()
     }
     m_chunkUpdates.clear();
     m_mutex.unlock();
+}
+
+
+void World::setSpawnPoint()
+{
+    sf::Clock timer;
+    std::cout << "Searching for spawn...\n";
+    int attempts = 0;
+    int chunkX;
+    int chunkZ;
+    int blockX;
+    int blockZ;
+    int blockY = 0;
+
+    while(blockY <= WATER_LEVEL)
+    {
+        m_chunkManager.unloadChunk(chunkX, chunkZ);
+        chunkX = RandomSingleton::get().intInRange(100, 200);
+        chunkZ = RandomSingleton::get().intInRange(100, 200);
+        blockX = RandomSingleton::get().intInRange(0, 15);
+        blockZ = RandomSingleton::get().intInRange(0, 15);
+        m_chunkManager.loadChunk(chunkX, chunkZ);
+        blockY = m_chunkManager.getChunk(chunkX, chunkZ).getHeightAt(blockX, blockZ);
+        attempts++;
+    }
+
+    int worldX = chunkX * CHUNK_SIZE + blockX;
+    int worldZ = chunkZ * CHUNK_SIZE + blockZ;
+
+    m_playerSpawnPoint = {worldX, blockY, worldZ};
+    std::cout   << "Spawn found! Attempts: "    << attempts
+                << " Time Taken: "              << timer.getElapsedTime().asSeconds() << " seconds\n";
 }
 
