@@ -195,11 +195,6 @@ void TerrainGenerator::setBlocks(int maxHeight)
     }
 }
 
-void TerrainGenerator::setTopBlock(int x, int y, int z)
-{
-
-}
-
 const Biome& TerrainGenerator::getBiome(int x, int z) const
 {
     int biomeValue = m_biomeMap.get(x, z);

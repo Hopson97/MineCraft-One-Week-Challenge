@@ -27,7 +27,6 @@ class TerrainGenerator
         static void setUpNoise();
 
         void setBlocks(int maxHeight);
-        void setTopBlock(int x, int y, int z);
 
         void getHeightIn (int xMin, int zMin, int xMax, int zMax);
         void getHeightMap();
