@@ -148,7 +148,7 @@ void TerrainGenerator::setBlocks(int maxHeight)
             {
                 if (y < WATER_LEVEL + 4)
                 {
-                    m_pChunk->setBlock(x, y, z, BlockId::Sand);
+                    m_pChunk->setBlock(x, y, z, biome.getBeachBlock(m_random));
                     continue;
                 }
 

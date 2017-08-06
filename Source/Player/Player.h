@@ -33,6 +33,7 @@ class Player : public Entity
         void keyboardInput();
         void mouseInput(const sf::RenderWindow& window);
         bool m_isOnGround = false;
+        bool m_isFlying   = false;
 
         std::vector<ItemStack> m_items;
         std::vector<sf::Text>  m_itemText;
@@ -41,6 +42,7 @@ class Player : public Entity
 
         ToggleKey m_itemDown;
         ToggleKey m_itemUp;
+        ToggleKey m_flyKey;
 
         glm::vec3 m_acceleation;
 };

@@ -16,6 +16,7 @@ Player::Player()
 :   Entity  ({2500, 125, 2500}, {0, 0, 0}, {0.5, 1.5, 0.5})
 ,   m_itemDown  (sf::Keyboard::Down)
 ,   m_itemUp    (sf::Keyboard::Up)
+,   m_flyKey    (sf::Keyboard::F)
 {
     f.loadFromFile("Res/Fonts/rs.ttf");
 
@@ -39,10 +40,6 @@ Player::Player()
     m_posPrint.setCharacterSize(25);
     m_posPrint.setPosition(20.0f, 20.0f * 6.0f + 100.0f);
 }
-
-
-
-
 
 void Player::addItem(const Material& material)
 {
@@ -91,6 +88,11 @@ void Player::handleInput(const sf::RenderWindow& window)
             m_heldItem = m_items.size() - 1;
         }
     }
+
+    if (m_flyKey.isKeyPressed())
+    {
+        m_isFlying = !m_isFlying;
+    }
 }
 
 void Player::update(float dt, World& world)
@@ -98,11 +100,15 @@ void Player::update(float dt, World& world)
     velocity += m_acceleation;
     m_acceleation = {0, 0, 0};
 
-    if (!m_isOnGround)
+    if (!m_isFlying)
     {
-        velocity.y -= 55 * dt;
+        if (!m_isOnGround)
+        {
+            velocity.y -= 55 * dt;
+        }
+        m_isOnGround = false;
     }
-    m_isOnGround = false;
+
 
     position.x += velocity.x * dt;
     collide (world, {velocity.x, 0, 0}, dt);
@@ -117,7 +123,10 @@ void Player::update(float dt, World& world)
     box.update(position);
     velocity.x *= 0.95;
     velocity.z *= 0.95;
-    //velocity.y *= 0.95;
+    if (m_isFlying)
+    {
+        velocity.y *= 0.95;
+    }
 }
 
 
@@ -278,10 +287,17 @@ void Player::draw(RenderMaster& master)
 
 void Player::jump()
 {
-    if (m_isOnGround)
+    if (!m_isFlying)
     {
-        m_isOnGround = false;
-        m_acceleation.y += speed * 60;
+        if (m_isOnGround)
+        {
+            m_isOnGround = false;
+            m_acceleation.y += speed * 60;
+        }
+    }
+    else
+    {
+        m_acceleation.y += speed;
     }
 }
 
