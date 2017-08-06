@@ -1,6 +1,6 @@
 #include "TreeGenerator.h"
 
-#include "../Chunk/Chunk.h"
+#include "../../Chunk/Chunk.h"
 #include "StructureBuilder.h"
 
 

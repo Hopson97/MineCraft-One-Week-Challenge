@@ -1,9 +1,9 @@
 #include "GrasslandBiome.h"
 
-#include "TreeGenerator.h"
+#include "../Structures/TreeGenerator.h"
 
 GrasslandBiome::GrasslandBiome(int seed)
-:   Biome  (getNoiseParameters(), 100, 50, seed)
+:   Biome  (getNoiseParameters(), 1000, 20, seed)
 {
 
 }

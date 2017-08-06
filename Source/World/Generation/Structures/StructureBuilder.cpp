@@ -1,6 +1,6 @@
 #include "StructureBuilder.h"
 
-#include "../Chunk/Chunk.h"
+#include "../../Chunk/Chunk.h"
 
 #include <iostream>
 

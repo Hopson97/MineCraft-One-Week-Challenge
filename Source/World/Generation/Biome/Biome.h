@@ -1,9 +1,9 @@
 #ifndef BIOME_H_INCLUDED
 #define BIOME_H_INCLUDED
 
-#include "../../Maths/NoiseGenerator.h"
-#include "../../Util/Random.h"
-#include "../Block/ChunkBlock.h"
+#include "../../../Maths/NoiseGenerator.h"
+#include "../../../Util/Random.h"
+#include "../../Block/ChunkBlock.h"
 
 using Rand = Random<std::minstd_rand>;
 

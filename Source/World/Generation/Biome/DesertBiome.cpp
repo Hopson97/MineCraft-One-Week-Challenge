@@ -1,7 +1,7 @@
 #include "DesertBiome.h"
 
-#include "TreeGenerator.h"
-#include "../WorldConstants.h"
+#include "../Structures/TreeGenerator.h"
+#include "../../WorldConstants.h"
 
 DesertBiome::DesertBiome(int seed)
 :   Biome  (getNoiseParameters(), 350, 150, seed)
@@ -46,7 +46,7 @@ NoiseParameters DesertBiome::getNoiseParameters()
     heightParams.amplitude     = 80;
     heightParams.smoothness    = 335;
     heightParams.heightOffset  = -7;
-    heightParams.roughness     = 0.56;
+    heightParams.roughness = 0.56;
 
 
     return heightParams;

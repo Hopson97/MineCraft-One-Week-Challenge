@@ -5,23 +5,23 @@
 
 #include "../Chunk/Chunk.h"
 #include "../../Util/Random.h"
-
-#include "TreeGenerator.h"
-
 #include "../../Maths/GeneralMaths.h"
+
+#include "Structures/TreeGenerator.h"
 
 namespace
 {
-    int seed = RandomSingleton::get().intInRange(424, 325322);
+    const int seed = RandomSingleton::get().intInRange(424, 325322);
 }
 
 NoiseGenerator TerrainGenerator::m_biomeNoiseGen    (seed * 2);
 
 TerrainGenerator::TerrainGenerator()
-:   m_grassBiome    (seed)
-,   m_lightForest   (seed)
-,   m_desertBiome   (seed)
-,   m_oceanBiome    (seed)
+:   m_grassBiome        (seed)
+,   m_temperateForest   (seed)
+,   m_desertBiome       (seed)
+,   m_oceanBiome        (seed)
+,   m_lightForest       (seed)
 {
     setUpNoise();
 }
@@ -104,14 +104,10 @@ void TerrainGenerator::getHeightMap()
     constexpr static auto HALF_CHUNK    = CHUNK_SIZE / 2;
     constexpr static auto CHUNK         = CHUNK_SIZE;
 
-    getHeightIn(0, 0, 16, 16);
-
-/*
     getHeightIn(0,          0,          HALF_CHUNK,     HALF_CHUNK);
     getHeightIn(HALF_CHUNK, 0,          CHUNK,          HALF_CHUNK);
     getHeightIn(0,          HALF_CHUNK, HALF_CHUNK,     CHUNK);
     getHeightIn(HALF_CHUNK, HALF_CHUNK, CHUNK,          CHUNK);
-    */
 }
 
 void TerrainGenerator::getBiomeMap()
@@ -218,7 +214,7 @@ const Biome& TerrainGenerator::getBiome(int x, int z) const
     }
     else if (biomeValue > 130)
     {
-        return m_lightForest;
+        return m_temperateForest;
     }
     else if (biomeValue > 100)
     {

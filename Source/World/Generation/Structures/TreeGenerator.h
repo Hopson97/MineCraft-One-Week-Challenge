@@ -1,7 +1,7 @@
 #ifndef TREEGENERATOR_H_INCLUDED
 #define TREEGENERATOR_H_INCLUDED
 
-#include "../../Util/Random.h"
+#include "../../../Util/Random.h"
 
 class Chunk;
 

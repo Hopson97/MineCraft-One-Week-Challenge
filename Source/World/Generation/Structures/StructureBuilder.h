@@ -2,7 +2,7 @@
 #define STRUCTUREBUILDER_H_INCLUDED
 
 #include <vector>
-#include "../Block/BlockId.h"
+#include "../../Block/BlockId.h"
 
 class Chunk;
 
