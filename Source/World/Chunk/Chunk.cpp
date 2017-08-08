@@ -5,7 +5,7 @@
 #include "../../Maths/NoiseGenerator.h"
 #include "../../Camera.h"
 #include "../World.h"
-#include "../Generation/TerrainGenerator.h"
+#include "../Generation/Terrain/TerrainGenerator.h"
 
 Chunk::Chunk(World& world, const sf::Vector2i& location)
 :   m_location  (location)

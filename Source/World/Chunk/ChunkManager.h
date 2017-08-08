@@ -2,14 +2,12 @@
 #define CHUNKMANAGER_H_INCLUDED
 
 #include <functional>
+#include <memory>
 #include <unordered_map>
-#include <unordered_set>
-
-#include "../../Maths/Vector2XZ.h"
 
 #include "Chunk.h"
-
-#include "../Generation/TerrainGenerator.h"
+#include "../../Maths/Vector2XZ.h"
+#include "../Generation/Terrain/TerrainGenerator.h"
 
 class World;
 
@@ -33,9 +31,11 @@ class ChunkManager
 
         void deleteMeshes();
 
+        const TerrainGenerator& getTerrainGenerator() const noexcept;
+
     private:
         ChunkMap m_chunks;
-        TerrainGenerator m_terrainGenerator;
+        std::unique_ptr<TerrainGenerator> m_terrainGenerator;
 
         World* m_world;
 };

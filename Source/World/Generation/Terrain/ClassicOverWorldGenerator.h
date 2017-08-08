@@ -1,27 +1,30 @@
-#ifndef TERRAINGENERATOR_H_INCLUDED
-#define TERRAINGENERATOR_H_INCLUDED
+#ifndef CLASSICOVERWORLDGENERATOR_H_INCLUDED
+#define CLASSICOVERWORLDGENERATOR_H_INCLUDED
 
-#include "../../Util/Array2D.h"
-#include "../../Util/Random.h"
+#include "TerrainGenerator.h"
 
-#include "../../Maths/NoiseGenerator.h"
-#include "../WorldConstants.h"
+#include "../../../Util/Array2D.h"
+#include "../../../Util/Random.h"
+
+#include "../../../Maths/NoiseGenerator.h"
+#include "../../WorldConstants.h"
 
 
-#include "Biome/GrasslandBiome.h"
-#include "Biome/TemperateForestBiome.h"
-#include "Biome/DesertBiome.h"
-#include "Biome/OceanBiome.h"
-#include "Biome/LightForest.h"
+#include "../Biome/GrasslandBiome.h"
+#include "../Biome/TemperateForestBiome.h"
+#include "../Biome/DesertBiome.h"
+#include "../Biome/OceanBiome.h"
+#include "../Biome/LightForest.h"
 
 class Chunk;
 
-class TerrainGenerator
+class ClassicOverWorldGenerator : public TerrainGenerator
 {
     public:
-        TerrainGenerator();
+        ClassicOverWorldGenerator();
 
-        void generateTerrainFor (Chunk& chunk);
+        void generateTerrainFor     (Chunk& chunk)      override;
+        int  getMinimumSpawnHeight  () const noexcept   override;
 
     private:
         static void setUpNoise();
@@ -50,7 +53,4 @@ class TerrainGenerator
         Chunk* m_pChunk = nullptr;
 };
 
-
-
-
-#endif // TERRAINGENERATOR_H_INCLUDED
+#endif // CLASSICOVERWORLDGENERATOR_H_INCLUDED

@@ -1,22 +1,22 @@
-#include "TerrainGenerator.h"
+#include "ClassicOverWorldGenerator.h"
 
 #include <functional>
 #include <iostream>
 
-#include "../Chunk/Chunk.h"
-#include "../../Util/Random.h"
-#include "../../Maths/GeneralMaths.h"
+#include "../../Chunk/Chunk.h"
+#include "../../../Util/Random.h"
+#include "../../../Maths/GeneralMaths.h"
 
-#include "Structures/TreeGenerator.h"
+#include "../Structures/TreeGenerator.h"
 
 namespace
 {
     const int seed = RandomSingleton::get().intInRange(424, 325322);
 }
 
-NoiseGenerator TerrainGenerator::m_biomeNoiseGen    (seed * 2);
+NoiseGenerator ClassicOverWorldGenerator::m_biomeNoiseGen    (seed * 2);
 
-TerrainGenerator::TerrainGenerator()
+ClassicOverWorldGenerator::ClassicOverWorldGenerator()
 :   m_grassBiome        (seed)
 ,   m_temperateForest   (seed)
 ,   m_desertBiome       (seed)
@@ -26,7 +26,7 @@ TerrainGenerator::TerrainGenerator()
     setUpNoise();
 }
 
-void TerrainGenerator::setUpNoise()
+void ClassicOverWorldGenerator::setUpNoise()
 {
     std::cout << "Seed: " << seed << '\n';
     static bool noiseGen = false;
@@ -46,7 +46,7 @@ void TerrainGenerator::setUpNoise()
     }
 }
 
-void TerrainGenerator::generateTerrainFor(Chunk& chunk)
+void ClassicOverWorldGenerator::generateTerrainFor(Chunk& chunk)
 {
     m_pChunk = &chunk;
 
@@ -63,7 +63,12 @@ void TerrainGenerator::generateTerrainFor(Chunk& chunk)
     setBlocks(maxHeight);
 }
 
-void TerrainGenerator::getHeightIn (int xMin, int zMin, int xMax, int zMax)
+int ClassicOverWorldGenerator::getMinimumSpawnHeight() const noexcept
+{
+    return WATER_LEVEL;
+}
+
+void ClassicOverWorldGenerator::getHeightIn (int xMin, int zMin, int xMax, int zMax)
 {
 
     auto getHeightAt = [&](int x, int z)
@@ -99,7 +104,7 @@ void TerrainGenerator::getHeightIn (int xMin, int zMin, int xMax, int zMax)
 
 
 
-void TerrainGenerator::getHeightMap()
+void ClassicOverWorldGenerator::getHeightMap()
 {
     constexpr static auto HALF_CHUNK    = CHUNK_SIZE / 2;
     constexpr static auto CHUNK         = CHUNK_SIZE;
@@ -110,7 +115,7 @@ void TerrainGenerator::getHeightMap()
     getHeightIn(HALF_CHUNK, HALF_CHUNK, CHUNK,          CHUNK);
 }
 
-void TerrainGenerator::getBiomeMap()
+void ClassicOverWorldGenerator::getBiomeMap()
 {
     auto location = m_pChunk->getLocation();
 
@@ -122,7 +127,7 @@ void TerrainGenerator::getBiomeMap()
     }
 }
 
-void TerrainGenerator::setBlocks(int maxHeight)
+void ClassicOverWorldGenerator::setBlocks(int maxHeight)
 {
     std::vector<sf::Vector3i> trees;
     std::vector<sf::Vector3i> plants;
@@ -195,7 +200,7 @@ void TerrainGenerator::setBlocks(int maxHeight)
     }
 }
 
-const Biome& TerrainGenerator::getBiome(int x, int z) const
+const Biome& ClassicOverWorldGenerator::getBiome(int x, int z) const
 {
     int biomeValue = m_biomeMap.get(x, z);
 

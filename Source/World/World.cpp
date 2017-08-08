@@ -8,6 +8,7 @@
 #include "../ToggleKey.h"
 #include "../Renderer/RenderMaster.h"
 #include "../Player/Player.h"
+#include "../Util/Random.h"
 
 
 World::World(const Camera& camera, const Config& config, Player& player)
@@ -261,11 +262,13 @@ void World::setSpawnPoint()
     int attempts = 0;
     int chunkX = -1;
     int chunkZ = -1;
-    int blockX;
-    int blockZ;
+    int blockX = 0;
+    int blockZ = 0;
     int blockY = 0;
 
-    while(blockY <= WATER_LEVEL)
+    auto h = m_chunkManager.getTerrainGenerator().getMinimumSpawnHeight();
+
+    while(blockY <= h)
     {
         m_chunkManager.unloadChunk(chunkX, chunkZ);
 
