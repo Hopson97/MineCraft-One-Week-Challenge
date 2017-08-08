@@ -4,7 +4,7 @@
 #include "../../WorldConstants.h"
 
 DesertBiome::DesertBiome(int seed)
-:   Biome  (getNoiseParameters(), 350, 150, seed)
+:   Biome  (getNoiseParameters(), 1350, 500, seed)
 {
 
 }

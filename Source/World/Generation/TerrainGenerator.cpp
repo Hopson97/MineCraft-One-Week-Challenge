@@ -209,7 +209,15 @@ const Biome& TerrainGenerator::getBiome(int x, int z) const
     }
     else if (biomeValue > 130)
     {
+        return m_lightForest;
+    }
+    else if (biomeValue > 120)
+    {
         return m_temperateForest;
+    }
+    else if (biomeValue > 110)
+    {
+        return m_lightForest;
     }
     else if (biomeValue > 100)
     {

@@ -25,6 +25,8 @@ class StructureBuilder
         void build(Chunk& chunk);
 
         void makeColumn(int x, int z, int yStart, int height, BlockId block);
+        void makeRowX   (int xStart, int xEnd, int y, int z, BlockId block);
+        void makeRowZ   (int zStart, int zEnd, int x, int y, BlockId block);
 
         void fill (int y, int xStart, int xEnd, int zStart, int zEnd, BlockId block);
 

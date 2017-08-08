@@ -60,7 +60,8 @@ class World : public NonCopyable
 
         std::atomic<bool> m_isRunning {true};
         std::vector<std::thread> m_chunkLoadThreads;
-        std::mutex  m_mutex;
+        std::mutex m_mainMutex;
+        std::mutex m_genMutex;
 
         int m_loadDistance = 2;
         const int m_renderDistance;

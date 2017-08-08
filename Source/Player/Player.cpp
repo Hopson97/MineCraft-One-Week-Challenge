@@ -192,7 +192,7 @@ void Player::keyboardInput()
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
         float s = speed;
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) s *= 4;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) s *= 5;
         m_acceleation.x += -glm::cos(glm::radians(rotation.y + 90)) * s;
         m_acceleation.z += -glm::sin(glm::radians(rotation.y + 90)) * s;
     }
@@ -292,7 +292,7 @@ void Player::jump()
         if (m_isOnGround)
         {
             m_isOnGround = false;
-            m_acceleation.y += speed * 60;
+            m_acceleation.y += speed * 75;
         }
     }
     else

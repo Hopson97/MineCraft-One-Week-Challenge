@@ -1,13 +1,12 @@
 #include "World.h"
 
-#include "../Renderer/RenderMaster.h"
-
 #include <iostream>
+#include <future>
 
 #include "../Maths/Vector2XZ.h"
 #include "../Camera.h"
 #include "../ToggleKey.h"
-
+#include "../Renderer/RenderMaster.h"
 #include "../Player/Player.h"
 
 
@@ -66,10 +65,10 @@ void World::update(const Camera& camera)
 
     if (key.isKeyPressed())
     {
-        m_mutex.lock();
+        m_mainMutex.lock();
         m_chunkManager.deleteMeshes();
         m_loadDistance = 2;
-        m_mutex.unlock();
+        m_mainMutex.unlock();
     }
 
 
@@ -104,12 +103,12 @@ void World::loadChunks(const Camera& camera)
             {
                 for (int z = minZ; z < maxZ; ++z)
                 {
-                    m_mutex.lock();
+                    m_mainMutex.lock();
                     isMeshMade = m_chunkManager.makeMesh(x, z, camera);
-                    m_mutex.unlock();
+                    m_mainMutex.unlock();
                 }
-                if (isMeshMade)
-                    break;
+                //if (isMeshMade)
+                 //   break;
             }
 
             if (isMeshMade)
@@ -130,7 +129,7 @@ void World::loadChunks(const Camera& camera)
 
 void World::updateChunk(int blockX, int blockY, int blockZ)
 {
-    m_mutex.lock();
+    m_mainMutex.lock();
 
     auto addChunkToUpdateBatch = [&](const sf::Vector3i& key, ChunkSection& section)
     {
@@ -179,12 +178,12 @@ void World::updateChunk(int blockX, int blockY, int blockZ)
         addChunkToUpdateBatch(newKey, m_chunkManager.getChunk(newKey.x, newKey.z).getSection(newKey.y));
     }
 
-    m_mutex.unlock();
+    m_mainMutex.unlock();
 }
 
 void World::renderWorld(RenderMaster& renderer, const Camera& camera)
 {
-    m_mutex.lock();
+    m_mainMutex.lock();
     renderer.drawSky();
 
     auto& chunkMap = m_chunkManager.getChunks();
@@ -216,7 +215,7 @@ void World::renderWorld(RenderMaster& renderer, const Camera& camera)
             itr++;
         }
     }
-    m_mutex.unlock();
+    m_mainMutex.unlock();
 }
 
 ChunkManager& World::getChunkManager()
@@ -244,14 +243,14 @@ VectorXZ World::getChunkXZ(int x, int z)
 
 void World::updateChunks()
 {
-    m_mutex.lock();
+    m_mainMutex.lock();
     for (auto& c : m_chunkUpdates)
     {
         ChunkSection& s = *c.second;
         s.makeMesh();
     }
     m_chunkUpdates.clear();
-    m_mutex.unlock();
+    m_mainMutex.unlock();
 }
 
 
@@ -260,8 +259,8 @@ void World::setSpawnPoint()
     sf::Clock timer;
     std::cout << "Searching for spawn...\n";
     int attempts = 0;
-    int chunkX;
-    int chunkZ;
+    int chunkX = -1;
+    int chunkZ = -1;
     int blockX;
     int blockZ;
     int blockY = 0;
@@ -269,10 +268,12 @@ void World::setSpawnPoint()
     while(blockY <= WATER_LEVEL)
     {
         m_chunkManager.unloadChunk(chunkX, chunkZ);
+
         chunkX = RandomSingleton::get().intInRange(100, 200);
         chunkZ = RandomSingleton::get().intInRange(100, 200);
         blockX = RandomSingleton::get().intInRange(0, 15);
         blockZ = RandomSingleton::get().intInRange(0, 15);
+
         m_chunkManager.loadChunk(chunkX, chunkZ);
         blockY = m_chunkManager.getChunk(chunkX, chunkZ).getHeightAt(blockX, blockZ);
         attempts++;
