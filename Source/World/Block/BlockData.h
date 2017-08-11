@@ -2,7 +2,7 @@
 #define BLOCKDATA_H_INCLUDED
 
 #include "../../Util/NonCopyable.h"
-#include "BlockID.h"
+#include "BlockId.h"
 #include <SFML/Graphics.hpp>
 
 enum class BlockMeshType
