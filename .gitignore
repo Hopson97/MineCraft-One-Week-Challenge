@@ -6,6 +6,10 @@
 bin/
 obj/
 
+#Makefile stuff
+*.o
+MinecraftWeek
+
 #.dll stuff
 *.dll
 
