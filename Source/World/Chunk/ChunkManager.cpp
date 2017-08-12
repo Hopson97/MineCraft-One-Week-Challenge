@@ -8,7 +8,7 @@
 ChunkManager::ChunkManager(World& world)
 :   m_world (&world)
 {
-    m_terrainGenerator = std::make_unique<SuperFlatGenerator>();
+    m_terrainGenerator = std::make_unique<ClassicOverWorldGenerator>();
 }
 
 

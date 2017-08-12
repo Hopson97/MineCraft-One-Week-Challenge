@@ -132,7 +132,6 @@ void Player::update(float dt, World& world)
 
 void Player::collide(World& world, const glm::vec3& vel, float dt)
 {
-    bool isXZcollide = false;
     for (int x = position.x - box.dimensions.x; x < position.x + box.dimensions.x; x++)
     for (int y = position.y - box.dimensions.y; y < position.y + 0.7             ; y++)
     for (int z = position.z - box.dimensions.z; z < position.z + box.dimensions.z; z++)
@@ -150,36 +149,26 @@ void Player::collide(World& world, const glm::vec3& vel, float dt)
             {
                 position.y = y + box.dimensions.y + 1;
                 velocity.y = 0;
-                m_isOnGround = true;
             }
 
             if (vel.x > 0)
             {
-                isXZcollide = true;
                 position.x = x - box.dimensions.x;
             }
             else if (vel.x < 0)
             {
-                isXZcollide = true;
                 position.x = x + box.dimensions.x + 1;
             }
 
             if (vel.z > 0)
             {
-                isXZcollide = true;
                 position.z = z - box.dimensions.z;
             }
             else if (vel.z < 0)
             {
-                isXZcollide = true;
                 position.z = z + box.dimensions.z + 1;
             }
         }
-    }
-
-    if (isXZcollide)
-    {
-        jump();
     }
 }
 
