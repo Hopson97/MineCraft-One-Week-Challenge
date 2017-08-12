@@ -5,6 +5,11 @@ I challenged myself to see if I could create Minecraft in just one week... So le
 Video: https://www.youtube.com/watch?v=okQhOgGxAOg
 
 Note: I continued to edit after the 7 days, however the version seen in the video is found here https://github.com/Hopson97/MineCraft-One-Week-Challenge/tree/eb01640580cc5ad403f6a8b9fb58af37e2f03f0c
+
+# Deps
+
+I use GLEW, GLM and SFML libaries, and this also requires C++14 (or newer) with threads
+
 # Day One
 
 End of day one commit: https://github.com/Hopson97/MineCraft-One-Week-Challenge/tree/44ace72573833796da05a97972be5765b05ce94f
