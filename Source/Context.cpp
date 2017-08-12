@@ -21,8 +21,8 @@ Context::Context(const Config& config)
         window.create(winMode, "MineCraft Week", sf::Style::Close, settings);
     }
 
-    glewInit();
     glewExperimental = GL_TRUE;
+    glewInit();
     glViewport(0, 0, window.getSize().x, window.getSize().y);
 
     glCullFace(GL_BACK);
