@@ -6,9 +6,18 @@ Video: https://www.youtube.com/watch?v=okQhOgGxAOg
 
 Note: I continued to edit after the 7 days, however the version seen in the video is found here https://github.com/Hopson97/MineCraft-One-Week-Challenge/tree/eb01640580cc5ad403f6a8b9fb58af37e2f03f0c
 
-# Deps
+# Building
 
-I use GLEW, GLM and SFML libaries, and this also requires C++14 (or newer) with threads
+I use GLEW (opengl 3.3), GLM and SFML (2.4.1) libaries, and this also requires C++14 (or newer) with threads
+
+On Ubuntu, this is as easy as:
+
+`sudo apt-get install libsfml-dev libglew-dev libglm-dev`
+
+and then
+
+`make`
+
 
 # Day One
 
