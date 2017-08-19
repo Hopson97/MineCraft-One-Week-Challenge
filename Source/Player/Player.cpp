@@ -147,6 +147,7 @@ void Player::collide(World& world, const glm::vec3& vel, float dt)
             }
             else if (vel.y < 0)
             {
+                m_isOnGround = true;
                 position.y = y + box.dimensions.y + 1;
                 velocity.y = 0;
             }

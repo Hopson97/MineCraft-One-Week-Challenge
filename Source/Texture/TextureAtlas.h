@@ -8,7 +8,7 @@ class TextureAtlas : public BasicTexture
     public:
         TextureAtlas(const std::string& textureFileName);
 
-        std::vector<GLfloat> getTexture(const sf::Vector2i& coords);
+        std::array<GLfloat, 8> getTexture(const sf::Vector2i& coords);
 
     private:
         int m_imageSize;

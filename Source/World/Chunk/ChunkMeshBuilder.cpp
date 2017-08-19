@@ -12,7 +12,7 @@
 
 namespace
 {
-    const std::vector<GLfloat> frontFace
+    const std::array<GLfloat, 12> frontFace
     {
         0, 0, 1,
         1, 0, 1,
@@ -20,7 +20,7 @@ namespace
         0, 1, 1,
     };
 
-    const std::vector<GLfloat> backFace
+    const std::array<GLfloat, 12> backFace
     {
         1, 0, 0,
         0, 0, 0,
@@ -28,7 +28,7 @@ namespace
         1, 1, 0,
     };
 
-    const std::vector<GLfloat> leftFace
+    const std::array<GLfloat, 12> leftFace
     {
         0, 0, 0,
         0, 0, 1,
@@ -36,7 +36,7 @@ namespace
         0, 1, 0,
     };
 
-    const std::vector<GLfloat> rightFace
+    const std::array<GLfloat, 12> rightFace
     {
         1, 0, 1,
         1, 0, 0,
@@ -44,7 +44,7 @@ namespace
         1, 1, 1,
     };
 
-    const std::vector<GLfloat> topFace
+    const std::array<GLfloat, 12> topFace
     {
         0, 1, 1,
         1, 1, 1,
@@ -52,7 +52,7 @@ namespace
         0, 1, 0,
     };
 
-    const std::vector<GLfloat> bottomFace
+    const std::array<GLfloat, 12> bottomFace
     {
         0, 0, 0,
         1, 0, 0,
@@ -60,7 +60,7 @@ namespace
         0, 0, 1
     };
 
-    const std::vector<GLfloat> xFace1
+    const std::array<GLfloat, 12> xFace1
     {
         0, 0, 0,
         1, 0, 1,
@@ -68,13 +68,12 @@ namespace
         0, 1, 0,
     };
 
-    const std::vector<GLfloat> xFace2
+    const std::array<GLfloat, 12> xFace2
     {
         0, 0, 1,
         1, 0, 0,
         1, 1, 0,
         0, 1, 1,
-
     };
 
     constexpr GLfloat LIGHT_TOP = 1.0f;
@@ -172,7 +171,8 @@ void ChunkMeshBuilder::setActiveMesh(ChunkBlock block)
     }
 }
 
-void ChunkMeshBuilder::addXBlockToMesh(const sf::Vector2i& textureCoords, const sf::Vector3i& blockPosition)
+void ChunkMeshBuilder::addXBlockToMesh(const sf::Vector2i& textureCoords,
+                                       const sf::Vector3i& blockPosition)
 {
     faces++;
     auto texCoords = BlockDatabase::get().textureAtlas.getTexture(textureCoords);
@@ -191,7 +191,7 @@ void ChunkMeshBuilder::addXBlockToMesh(const sf::Vector2i& textureCoords, const 
 }
 
 
-void ChunkMeshBuilder::tryAddFaceToMesh(const std::vector<GLfloat>& blockFace,
+void ChunkMeshBuilder::tryAddFaceToMesh(const std::array<GLfloat, 12>& blockFace,
                                         const sf::Vector2i& textureCoords,
                                         const sf::Vector3i& blockPosition,
                                         const sf::Vector3i& blockFacing,

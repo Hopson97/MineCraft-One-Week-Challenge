@@ -13,7 +13,7 @@ TextureAtlas::TextureAtlas(const std::string& textureFileName)
     m_individualTextureSize = 16;
 }
 
-std::vector<GLfloat> TextureAtlas::getTexture(const sf::Vector2i& coords)
+std::array<GLfloat, 8> TextureAtlas::getTexture(const sf::Vector2i& coords)
 {
     static const GLfloat TEX_PER_ROW      = (GLfloat)m_imageSize / (GLfloat)m_individualTextureSize;
     static const GLfloat INDV_TEX_SIZE    = 1.0f / TEX_PER_ROW;

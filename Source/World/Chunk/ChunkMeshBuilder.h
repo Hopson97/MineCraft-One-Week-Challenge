@@ -27,7 +27,7 @@ class ChunkMeshBuilder
         void addXBlockToMesh(const sf::Vector2i& textureCoords,
                              const sf::Vector3i& blockPosition);
 
-        void tryAddFaceToMesh(const std::vector<GLfloat>& blockFace,
+        void tryAddFaceToMesh(const std::array<GLfloat, 12>& blockFace,
                               const sf::Vector2i& textureCoords,
                               const sf::Vector3i& blockPosition,
                               const sf::Vector3i& blockFacing,

@@ -3,6 +3,7 @@
 
 #include "../../Model.h"
 
+#include <array>
 #include <vector>
 #include <SFML/Graphics.hpp>
 
@@ -11,8 +12,8 @@ class ChunkMesh
     public:
         ChunkMesh() = default;
 
-        void addFace(const std::vector<GLfloat>& blockFace,
-                     const std::vector<GLfloat>& textureCoords,
+        void addFace(const std::array<GLfloat, 12>& blockFace,
+                     const std::array<GLfloat, 8>& textureCoords,
                      const sf::Vector3i&         chunkPosition,
                      const sf::Vector3i&         blockPosition,
                      GLfloat cardinalLight);
