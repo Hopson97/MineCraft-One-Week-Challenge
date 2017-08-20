@@ -1,5 +1,0 @@
-This was created in 1 week using C++, OpenGL/ GLEW, SFML and GLM libs.
-
-The performance, CPU usage, etc is not optimal, but this is what I managed to get done in a week.
-
-The code is open source, and can be found at: https://github.com/Hopson97/MineCraft-One-Week-Challenge
