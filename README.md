@@ -10,16 +10,23 @@ Note: I continued to edit after the 7 days, however the version seen in the vide
 
 You will need GLEW (OpenGL 3.3), GLM and SFML 2.4.1+ libraries w/headers, and this also requires a compiler that supports C++14 (or newer) with threads.
 
-On Ubuntu 17.04+, this is as easy as:
+### macOS
+
+Install macports from https://www.macports.org 
+
+`sudo port install glew sfml glm`
+
+### Ubuntu 17.04+ :
 
 `sudo apt-get install libsfml-dev libglew-dev libglm-dev`
 
-and then
+### Ubuntu 16.04
+
+You will need to manually get SFML 2.4.1 or above, as the version in the repos is too old.
+
+## Compile Source
 
 `make`
-
-On Ubuntu 16.04, you will need to manually get SFML 2.4.1 or above, as the version in the repos is too old.
-
 
 # Day One
 
