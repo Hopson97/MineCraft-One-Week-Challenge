@@ -16,11 +16,6 @@ Install macports from https://www.macports.org
 
 `sudo port install glew sfml glm`
 
-Change Makefile to suit this configuration:
-
-`FLAGS=-lGL -lpthread -lsfml-system -lsfml-window -lsfml-graphics -lGLEW -L/opt/local/bin`  
-`CC_FLAGS=-std=c++1y -I/opt/local/include`
-
 ### Ubuntu 17.04+ :
 
 `sudo apt-get install libsfml-dev libglew-dev libglm-dev`
