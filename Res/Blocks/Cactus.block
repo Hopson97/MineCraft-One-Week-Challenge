@@ -4,14 +4,17 @@ Cactus
 Id
 8
 
-TexAll
+TexTop
+9 0
+
+TexSide
+9 1
+
+TexBottom
 9 0
 
 Opaque
 1
-
-MeshType
-0
 
 MeshType
 0
