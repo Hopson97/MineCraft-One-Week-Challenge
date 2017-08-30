@@ -93,13 +93,14 @@ void ClassicOverWorldGenerator::getHeightIn (int xMin, int zMin, int xMax, int z
         if (z == CHUNK_SIZE)
             continue;
 
-        int h = bilinearInterpolation(bottomLeft, topLeft, bottomRight, topRight,
+        float h = smoothInterpolation(bottomLeft, topLeft, bottomRight, topRight,
                                       xMin, xMax,
                                       zMin, zMax,
                                       x, z);
 
         m_heightMap.get(x, z) = h;
     }
+    //exit(0);
 }
 
 
