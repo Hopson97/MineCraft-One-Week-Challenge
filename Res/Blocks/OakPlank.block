@@ -1,17 +1,14 @@
 Name
-Cactus
+OakPlank
 
 Id
-8
+11
 
 TexTop
-9 0
+5 0
 
-TexSide
-9 1
-
-TexBottom
-9 0
+TexAll
+4 0
 
 Opaque
 1
