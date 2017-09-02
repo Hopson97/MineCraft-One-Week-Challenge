@@ -6,6 +6,8 @@ Video: https://www.youtube.com/watch?v=okQhOgGxAOg
 
 Note: I continued to edit after the 7 days, however the version seen in the video is found here https://github.com/Hopson97/MineCraft-One-Week-Challenge/tree/eb01640580cc5ad403f6a8b9fb58af37e2f03f0c
 
+If you want to see a larger MC Clone for C++, you can check out MineTest here: https://github.com/minetest/minetest
+
 # Building
 
 You will need GLEW (OpenGL 3.3), GLM and SFML 2.4.1+ libraries w/headers, and this also requires a compiler that supports C++14 (or newer) with threads.
