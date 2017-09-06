@@ -63,6 +63,8 @@ class ChunkSection : public IChunk
 
         void deleteMeshes();
 
+        const ChunkBlock* begin() { return &m_blocks[0]; }
+
     private:
         sf::Vector3i toWorldPosition (int x, int y, int z) const;
 

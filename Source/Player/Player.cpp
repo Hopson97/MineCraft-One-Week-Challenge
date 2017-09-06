@@ -49,7 +49,7 @@ void Player::addItem(const Material& material)
     {
         if (m_items[i].getMaterial().id == id)
         {
-            int leftOver = m_items[i].add(1);
+            /*int leftOver =*/ m_items[i].add(1);
 
             return;
         }

@@ -16,12 +16,12 @@ struct ChunkBlock
     const BlockDataHolder& getData() const;
     const BlockType& getType() const;
 
-    bool operator ==(ChunkBlock other)
+    bool operator ==(ChunkBlock other) const
     {
         return id == other.id;
     }
 
-    bool operator !=(ChunkBlock other)
+    bool operator !=(ChunkBlock other) const
     {
         return id != other.id;
     }
