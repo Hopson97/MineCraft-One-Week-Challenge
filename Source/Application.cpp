@@ -6,6 +6,7 @@
 Application::Application(const Config& config)
 :   m_context   (config)
 ,   m_camera    (config)
+,   conf (config)
 {
     BlockDatabase::get();
     pushState<StatePlaying>(*this, config);
@@ -14,7 +15,7 @@ Application::Application(const Config& config)
 void Application::runLoop()
 {
     sf::Clock dtTimer;
-
+    m_masterRenderer.setConfig(conf);
     while (m_context.window.isOpen() && !m_states.empty())
     {
         auto deltaTime = dtTimer.restart();

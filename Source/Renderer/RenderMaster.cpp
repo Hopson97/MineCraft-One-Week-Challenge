@@ -39,6 +39,10 @@ void RenderMaster::drawSky()
     m_drawBox = true;
 }
 
+void RenderMaster::setConfig(const Config con){
+    m_conf = con;
+}
+
 void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
 {
     glClearColor(0.1, 0.5, 1.0, 1.0);
@@ -48,8 +52,8 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
 
     //m_quadRenderer  .render (camera);
     //m_cubeRenderer  .render (camera);
-    m_chunkRenderer .render (camera);
-    m_waterRenderer .render (camera);
+    m_chunkRenderer .render (camera, &m_conf);
+    m_waterRenderer .render (camera, &m_conf);
 
     if (m_drawBox)
     {

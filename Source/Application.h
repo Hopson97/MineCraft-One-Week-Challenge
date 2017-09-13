@@ -44,6 +44,7 @@ class Application
         RenderMaster m_masterRenderer;
         Camera m_camera;
 
+        const Config& conf;
 
         bool m_isPopState = false;
 };

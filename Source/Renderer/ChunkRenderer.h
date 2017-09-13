@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "../Shaders/ChunkShader.h"
+#include "../Config.h"
 
 class ChunkMesh;
 class Camera;
@@ -12,7 +13,7 @@ class ChunkRenderer
 {
     public:
         void add(const ChunkMesh& mesh);
-        void render(const Camera& camera);
+        void render(const Camera& camera, Config* conf);
 
     private:
         std::vector<const ChunkMesh*> m_chunks;

@@ -12,7 +12,7 @@ void ChunkRenderer::add(const ChunkMesh& mesh)
     m_chunks.push_back(&mesh);
 }
 
-void ChunkRenderer::render(const Camera& camera)
+void ChunkRenderer::render(const Camera& camera, Config* conf)
 {
     if (m_chunks.empty())
     {
@@ -26,6 +26,9 @@ void ChunkRenderer::render(const Camera& camera)
     BlockDatabase::get().textureAtlas.bindTexture();
 
     m_shader.loadProjectionViewMatrix(camera.getProjectionViewMatrix());
+    m_shader.loadBrightness(conf->brightness);
+    m_shader.loadContrast(conf->contrast);
+    m_shader.loadGamma(conf->gamma);
 
     for (const ChunkMesh* mesh : m_chunks)
     {
