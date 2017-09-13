@@ -10,6 +10,7 @@ TextureAtlas::TextureAtlas(const std::string& textureFileName)
     }
     loadFromImage(i);
 
+    
     m_imageSize             = 256;
     m_individualTextureSize = 16;
 }
