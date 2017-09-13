@@ -112,7 +112,7 @@ int faces;
 void ChunkMeshBuilder::buildMesh()
 {
     AdjacentBlockPositions directions;
-    const ChunkBlock* blockPointer = m_pChunk->begin();
+    m_pBlockPtr = m_pChunk->begin();
     faces = 0;
     for (int8_t y = 0; y < CHUNK_SIZE; ++y)
     {
@@ -125,8 +125,8 @@ void ChunkMeshBuilder::buildMesh()
         for (int8_t z = 0; z < CHUNK_SIZE; ++z)
         for (int8_t x = 0; x < CHUNK_SIZE; ++x)
         {
-            ChunkBlock block = *blockPointer;
-            blockPointer++;
+            ChunkBlock block = *m_pBlockPtr;
+            m_pBlockPtr++;
 
             sf::Vector3i position(x, y, z);
             setActiveMesh(block);

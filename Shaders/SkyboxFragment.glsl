@@ -19,9 +19,9 @@ vec3 gamma(vec3 value, float param)
 
 void main()
 {
-     color = texture(texSampler, passTextureCoord);
-    color = vec4(brightnessContrast(color.xyz, 1.15f, 1.1f), color.w);
-    color = vec4(gamma(color.xyz, 3.3f),color.w);
+    color = texture(texSampler, passTextureCoord);
+    //color = vec4(brightnessContrast(color.xyz, 1.15f, 1.1f), color.w);
+    //color = vec4(gamma(color.xyz, 3.3f),color.w);
 
     outColour = color;
     if (outColour.a == 0) discard;

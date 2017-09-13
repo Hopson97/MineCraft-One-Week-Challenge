@@ -38,6 +38,7 @@ class ChunkMeshBuilder
 
         bool shouldMakeLayer(int y);
 
+        const ChunkBlock*       m_pBlockPtr = nullptr;
         ChunkSection*           m_pChunk    = nullptr;
         ChunkMeshCollection*    m_pMeshes   = nullptr;
         ChunkMesh*              m_pActiveMesh   = nullptr;
