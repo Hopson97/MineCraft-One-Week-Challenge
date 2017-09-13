@@ -60,6 +60,10 @@ int main()
                 configFile >> config.contrast;
                 std::cout << "Config: Contrast: " << config.contrast << std::endl;
             }
+            else if (key == "fog"){
+                configFile >> config.fog;
+                std::cout << "Config: Fog: " << config.fog << std::endl;
+            }
         }
     }
     else
