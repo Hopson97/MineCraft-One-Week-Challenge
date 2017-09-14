@@ -41,6 +41,15 @@ void RenderMaster::drawSky()
 
 void RenderMaster::setConfig(const Config con){
     m_conf = con;
+    if(m_conf.gamma > 2.0f){
+        m_conf.gamma = 1.3f;
+    }
+    if(m_conf.brightness > 1.5f){
+        m_conf.brightness = 1.15f;
+    }
+    if(m_conf.contrast > 2.5f){
+        m_conf.contrast = 1.1f;
+    }
 }
 
 void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)

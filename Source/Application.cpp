@@ -17,17 +17,8 @@ void Application::runLoop()
     sf::Clock dtTimer;
     m_masterRenderer.setConfig(m_config);
 
-    if(m_config.fog){
-        GLfloat fogColor[4] = {1.0f,1.0f,1.0f,1.0f}; 
-        glEnable(GL_FOG);
-        glFogi(GL_FOG_MODE, GL_EXP2);
-        glFogfv(GL_FOG_COLOR, fogColor);
-        glFogf(GL_FOG_DENSITY, 1.0f);
-        glFogf(GL_FOG_START, 32.0f); //2 Chunks before render distance
-        glFogf(GL_FOG_END, 128.0f); //Render distance 
-        glHint(GL_FOG_HINT, GL_NICEST);
-    }
 
+    
     while (m_context.window.isOpen() && !m_states.empty())
     {
         auto deltaTime = dtTimer.restart();
