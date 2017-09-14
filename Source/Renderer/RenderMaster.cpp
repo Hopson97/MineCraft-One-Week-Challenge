@@ -6,6 +6,8 @@
 
 #include "../World/Chunk/ChunkMesh.h"
 #include "../World/Chunk/ChunkSection.h"
+#include "../Application.h"
+
 
 void RenderMaster::drawSFML(const sf::Drawable& drawable)
 {

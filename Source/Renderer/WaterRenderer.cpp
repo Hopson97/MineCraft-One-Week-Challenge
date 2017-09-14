@@ -2,7 +2,7 @@
 
 #include "../World/Chunk/ChunkMesh.h"
 #include "../World/Block/BlockDatabase.h"
-
+#include "../Application.h"
 #include "../Camera.h"
 
 #include <iostream>
@@ -28,13 +28,15 @@ void WaterRenderer::render(const Camera& camera, Config* conf)
     m_shader.loadBrightness(conf->brightness);
     m_shader.loadContrast(conf->contrast);
     m_shader.loadGamma(conf->gamma);
-
+    m_shader.loadTime(g_timeElapsed);
+    
     for (const auto& mesh : m_chunks)
     {
         const ChunkMesh& m = *mesh;
 
         m.getModel().bindVAO();
         GL::drawElements(m.getModel().getIndicesCount());
+        
     }
 
     m_chunks.clear();

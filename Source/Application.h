@@ -10,9 +10,11 @@
 #include "Context.h"
 #include "Camera.h"
 
+float extern g_timeElapsed;
 
 class Application
 {
+    
     public:
         Application(const Config& config);
 
