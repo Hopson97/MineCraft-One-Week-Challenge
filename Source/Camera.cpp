@@ -12,7 +12,7 @@ Camera::Camera(const Config& config) noexcept
 
 void Camera::update() noexcept
 {
-    position = {m_pEntity->position.x, m_pEntity->position.y + 0.8f, m_pEntity->position.z};
+    position = {m_pEntity->position.x, m_pEntity->position.y + 0.6f, m_pEntity->position.z};
     rotation = m_pEntity->rotation;
 
     m_viewMatrix = makeViewMatrix(*this);
