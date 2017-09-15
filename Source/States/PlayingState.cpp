@@ -34,7 +34,7 @@ void StatePlaying::handleInput()
     static sf::Clock timer;
     glm::vec3 lastPosition;
 
-    for (Ray ray(m_player.position, m_player.rotation);
+    for (Ray ray({m_player.position.x, m_player.position.y + 0.6f, m_player.position.z}, m_player.rotation); //Corrected for camera offset
              ray.getLength() < 6;
              ray.step(0.05))
     {
