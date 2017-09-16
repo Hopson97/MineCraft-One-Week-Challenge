@@ -22,6 +22,10 @@ void PostProcessShader::loadPostProcess(float p){
     loadFloat(m_p, p);
 }
 
+void PostProcessShader::loadResolution(glm::vec2 resolution){
+    loadVector2(m_res, resolution);
+}
+
 void PostProcessShader::getUniforms()
 {
     BasicShader::getUniforms();
@@ -29,4 +33,5 @@ void PostProcessShader::getUniforms()
     m_b = glGetUniformLocation(m_id, "brightness");
     m_g = glGetUniformLocation(m_id, "gamma");
     m_p = glGetUniformLocation(m_id, "postProcess");
+    m_res = glGetUniformLocation(m_id, "resolution");
 }
