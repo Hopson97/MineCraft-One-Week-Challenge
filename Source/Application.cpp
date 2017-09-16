@@ -20,7 +20,7 @@ void Application::runLoop()
 {
     sf::Clock dtTimer;
     sf::Clock dt;
-    if(!setupFrameBuffers(m_config)){
+    if(!setupFrameBuffers()){
         throw std::runtime_error("Frame Buffer Failure");
     }
 

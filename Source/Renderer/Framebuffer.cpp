@@ -5,7 +5,7 @@ GLuint g_FBO;
 GLuint g_Tex;
 GLuint g_RBO;
 
-bool setupFrameBuffers(const Config& c){
+bool setupFrameBuffers(){
 
     glGenFramebuffers(1, &g_FBO);
     glBindFramebuffer(GL_FRAMEBUFFER, g_FBO);
@@ -14,7 +14,7 @@ bool setupFrameBuffers(const Config& c){
     glGenTextures(1, &g_Tex);
     glBindTexture(GL_TEXTURE_2D, g_Tex);
       
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, c.windowX, c.windowY, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, g_X, g_Y, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
     
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);  
@@ -25,7 +25,7 @@ bool setupFrameBuffers(const Config& c){
     //Render Buffer
     glGenRenderbuffers(1, &g_RBO);
     glBindRenderbuffer(GL_RENDERBUFFER, g_RBO); 
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, c.windowX, c.windowY);  
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, g_X, g_Y);  
     glBindRenderbuffer(GL_RENDERBUFFER, 0);
 
     //Bind render buffer to framebuffer

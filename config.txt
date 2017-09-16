@@ -1,6 +1,6 @@
 renderdistance 8
-fullscreen 0
-windowsize 1024 768
+fullscreen 1
+windowsize 1440 900
 fov 100
 gamma 1.3
 contrast 1.1

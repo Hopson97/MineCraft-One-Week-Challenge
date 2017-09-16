@@ -2,6 +2,9 @@
 
 #include <GL/glew.h>
 
+unsigned int g_X;
+unsigned int g_Y;
+
 Context::Context(const Config& config)
 {
     sf::ContextSettings settings;
@@ -14,11 +17,15 @@ Context::Context(const Config& config)
     if(config.isFullscreen)
     {
         window.create(sf::VideoMode::getDesktopMode(), "MineCraft Week", sf::Style::Fullscreen, settings);
+        g_X = sf::VideoMode::getDesktopMode().width;
+        g_Y = sf::VideoMode::getDesktopMode().height;
     }
     else
     {
         sf::VideoMode winMode(config.windowX, config.windowY);
         window.create(winMode, "MineCraft Week", sf::Style::Close, settings);
+        g_X = config.windowX;
+        g_Y = config.windowY;
     }
 
     glewExperimental = GL_TRUE;
