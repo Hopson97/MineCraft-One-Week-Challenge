@@ -5,7 +5,7 @@
 
 #include "../Model.h"
 #include "../Maths/glm.h"
-#include "../Shaders/BasicShader.h"
+#include "../Shaders/PostProcessShader.h"
 #include "../Texture/BasicTexture.h"
 #include "../Config.h"
 
@@ -24,7 +24,7 @@ class QuadRenderer
         std::vector<glm::vec3> m_quads;
 
         Model m_quadModel;
-        BasicShader m_shader;
+        PostProcessShader m_shader;
         BasicTexture m_basicTexture;
 };
 

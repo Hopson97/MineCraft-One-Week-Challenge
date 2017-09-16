@@ -41,6 +41,10 @@ void QuadRenderer::render(const Camera& camera, Config* conf)
     }
 
     m_shader.useProgram();
+    m_shader.loadGamma(conf->gamma);
+    m_shader.loadContrast(conf->contrast);
+    m_shader.loadBrightness(conf->brightness);
+    m_shader.loadPostProcess(conf->postProcess);
     
     m_quadModel.bindVAO();
     //m_basicTexture.bindTexture();

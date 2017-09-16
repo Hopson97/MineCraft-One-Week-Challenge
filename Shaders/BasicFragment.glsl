@@ -5,11 +5,6 @@ in  vec2 passTextureCoord;
 
 uniform sampler2D texSampler;
 
-uniform float brightness;
-uniform float contrast;
-uniform float gamma;
-uniform int postProcess;
-
 void main()
 {
     vec4 color = texture(texSampler, passTextureCoord);
