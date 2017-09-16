@@ -14,10 +14,6 @@ uniform float contrast;
 
 uniform float globalTime;
 
-out float f_brightness;
-out float f_gamma;
-out float f_contrast;
-
 void main()
 {
     vec4 pos = vec4(inVertexPosition, 1.0);
@@ -30,7 +26,4 @@ void main()
 
     passTextureCoord    = inTextureCoord;
     passCardinalLight   = inCardinalLight;
-    f_brightness        = brightness;
-    f_contrast          = contrast;
-    f_gamma             = gamma;
 }

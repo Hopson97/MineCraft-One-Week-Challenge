@@ -22,13 +22,10 @@ void ChunkRenderer::render(const Camera& camera, Config* conf)
     glDisable(GL_BLEND);
     glDisable(GL_CULL_FACE);
 
-    m_shader.useProgram();
+    m_shader.useProgram(); 
     BlockDatabase::get().textureAtlas.bindTexture();
 
     m_shader.loadProjectionViewMatrix(camera.getProjectionViewMatrix());
-    m_shader.loadBrightness(conf->brightness);
-    m_shader.loadContrast(conf->contrast);
-    m_shader.loadGamma(conf->gamma);
 
     for (const ChunkMesh* mesh : m_chunks)
     {

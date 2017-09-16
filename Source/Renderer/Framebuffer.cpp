@@ -14,7 +14,7 @@ bool setupFrameBuffers(const Config& c){
     glGenTextures(1, &g_Tex);
     glBindTexture(GL_TEXTURE_2D, g_Tex);
       
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, c.windowX/(144/90), c.windowY/(144/90), 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, c.windowX, c.windowY, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
     
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);  

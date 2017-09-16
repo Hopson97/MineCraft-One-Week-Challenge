@@ -82,7 +82,7 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
     glBindTexture(GL_TEXTURE_2D, g_Tex); //Set to texture
 
     m_quadRenderer.add(glm::vec3(-1, -1, -1));
-    m_quadRenderer.render(camera);
+    m_quadRenderer.render(camera, &m_conf);
 
     m_sfmlRenderer  .render (window);
 

@@ -7,6 +7,7 @@
 #include "../Maths/glm.h"
 #include "../Shaders/BasicShader.h"
 #include "../Texture/BasicTexture.h"
+#include "../Config.h"
 
 class Camera;
 
@@ -17,7 +18,7 @@ class QuadRenderer
 
         void add(const glm::vec3& position);
 
-        void render(const Camera& camera);
+        void render(const Camera& camera, Config* conf);
 
     private:
         std::vector<glm::vec3> m_quads;

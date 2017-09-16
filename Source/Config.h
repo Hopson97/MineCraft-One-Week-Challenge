@@ -11,6 +11,7 @@ struct Config
     float gamma         = 1.3f;
     float brightness    = 1.15f;
     float contrast      = 1.1f;
+    bool postProcess    = true;
 };
 
 #endif // CONFIG_H_INCLUDED

@@ -8,6 +8,13 @@ out vec2 passTextureCoord;
 uniform mat4 projViewMatrix;
 uniform mat4 modelMatrix;
 
+
+uniform float brightness;
+uniform float contrast;
+uniform float gamma;
+uniform int postProcess;
+
+
 void main()
 {
     gl_Position = projViewMatrix * modelMatrix * vec4(inVertexPosition, 1.0);

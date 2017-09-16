@@ -8,13 +8,6 @@ out vec2 passTextureCoord;
 out float passCardinalLight;
 
 uniform mat4 projViewMatrix;
-uniform float brightness;
-uniform float gamma;
-uniform float contrast;
-
-out float f_brightness;
-out float f_gamma;
-out float f_contrast;
 
 void main()
 {
@@ -22,7 +15,4 @@ void main()
 
     passTextureCoord    = inTextureCoord;
     passCardinalLight   = inCardinalLight;
-    f_brightness        = brightness;
-    f_contrast          = contrast;
-    f_gamma             = gamma;
 }

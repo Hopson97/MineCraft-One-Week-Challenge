@@ -60,6 +60,10 @@ int main()
                 configFile >> config.contrast;
                 std::cout << "Config: Contrast: " << config.contrast << std::endl;
             }
+            else if (key == "post process"){
+                configFile >> config.postProcess;
+                std::cout << "Post Processing: " << config.postProcess << std::endl;
+            }
         }
     }
     else

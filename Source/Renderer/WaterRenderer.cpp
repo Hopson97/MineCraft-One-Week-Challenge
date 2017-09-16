@@ -25,9 +25,6 @@ void WaterRenderer::render(const Camera& camera, Config* conf)
 
     m_shader.loadProjectionViewMatrix(camera.getProjectionViewMatrix());
     m_shader.loadProjectionViewMatrix(camera.getProjectionViewMatrix());
-    m_shader.loadBrightness(conf->brightness);
-    m_shader.loadContrast(conf->contrast);
-    m_shader.loadGamma(conf->gamma);
     m_shader.loadTime(g_timeElapsed);
     
     for (const auto& mesh : m_chunks)
