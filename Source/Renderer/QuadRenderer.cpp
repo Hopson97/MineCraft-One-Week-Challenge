@@ -7,14 +7,14 @@
 
 QuadRenderer::QuadRenderer()
 {
-    m_basicTexture.loadFromFile("test");
+    //m_basicTexture.loadFromFile("test");
 
     m_quadModel.addData({
     {
-        -0.5,  0.5, 0,
-         0.5,  0.5, 0,
-         0.5, -0.5, 0,
-        -0.5, -0.5, 0,
+        -0,  1, 0,
+         1,  1, 0,
+         1, -0, 0,
+        -0, -0, 0,
     },
     {
         0, 1,
@@ -42,13 +42,13 @@ void QuadRenderer::render(const Camera& camera)
 
     m_shader.useProgram();
     m_quadModel.bindVAO();
-    m_basicTexture.bindTexture();
+    //m_basicTexture.bindTexture();
 
-    m_shader.loadProjectionViewMatrix(camera.getProjectionViewMatrix());
+    m_shader.loadProjectionViewMatrix(glm::ortho(0, 1, 0, 1, 0, 1));
 
     for (auto& quad : m_quads)
     {
-        m_shader.loadModelMatrix(makeModelMatrix({quad, {0, 0, 0}}));
+        m_shader.loadModelMatrix(glm::mat4());
         GL::drawElements(m_quadModel.getIndicesCount());
     }
 
