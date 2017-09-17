@@ -12,7 +12,7 @@ CC_FLAGS=-std=c++1y
 endif
 
 $(TARGET): $(OFILES)
-	g++ -o $(TARGET) $(OFILES) $(FLAGS)
+	g++ -g -o $(TARGET) $(OFILES) $(FLAGS)
 
 %.o: %.cpp
 	g++ $(CC_FLAGS) -o $@ -c $<

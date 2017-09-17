@@ -5,7 +5,6 @@ in  vec2 passTextureCoord;
 in float passCardinalLight;
 
 uniform sampler2D texSampler;
-
 vec4 color;
 
 void main()

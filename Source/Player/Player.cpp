@@ -13,10 +13,16 @@
 sf::Font f;
 
 Player::Player()
-:   Entity  ({2500, 125, 2500}, {0, 0, 0}, {0.5, 1.5, 0.5})
+:   Entity  ({2500, 125, 2500}, {0, 0, 0}, {0.3, 1.0, 0.3})
 ,   m_itemDown  (sf::Keyboard::Down)
 ,   m_itemUp    (sf::Keyboard::Up)
 ,   m_flyKey    (sf::Keyboard::F)
+,   m_num1 (sf::Keyboard::Num1)
+,   m_num2 (sf::Keyboard::Num2)
+,   m_num3 (sf::Keyboard::Num3)
+,   m_num4 (sf::Keyboard::Num4)
+,   m_num5 (sf::Keyboard::Num5)
+
 {
     f.loadFromFile("Res/Fonts/rs.ttf");
 
@@ -93,6 +99,23 @@ void Player::handleInput(const sf::RenderWindow& window)
     {
         m_isFlying = !m_isFlying;
     }
+
+    if(m_num1.isKeyPressed()){
+        m_heldItem = 0;
+    }
+    if(m_num2.isKeyPressed()){
+        m_heldItem = 1;
+    }
+    if(m_num3.isKeyPressed()){
+        m_heldItem = 2;
+    }
+    if(m_num4.isKeyPressed()){
+        m_heldItem = 3;
+    }
+    if(m_num5.isKeyPressed()){
+        m_heldItem = 4;
+    }
+
 }
 
 void Player::update(float dt, World& world)
@@ -104,7 +127,7 @@ void Player::update(float dt, World& world)
     {
         if (!m_isOnGround)
         {
-            velocity.y -= 55 * dt;
+            velocity.y -= 40 * dt;
         }
         m_isOnGround = false;
     }
@@ -282,7 +305,7 @@ void Player::jump()
         if (m_isOnGround)
         {
             m_isOnGround = false;
-            m_acceleation.y += speed * 75;
+            m_acceleation.y += speed * 50;
         }
     }
     else

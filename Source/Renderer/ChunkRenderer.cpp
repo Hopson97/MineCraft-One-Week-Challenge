@@ -12,7 +12,7 @@ void ChunkRenderer::add(const ChunkMesh& mesh)
     m_chunks.push_back(&mesh);
 }
 
-void ChunkRenderer::render(const Camera& camera)
+void ChunkRenderer::render(const Camera& camera, Config* conf)
 {
     if (m_chunks.empty())
     {
@@ -22,7 +22,7 @@ void ChunkRenderer::render(const Camera& camera)
     glDisable(GL_BLEND);
     glDisable(GL_CULL_FACE);
 
-    m_shader.useProgram();
+    m_shader.useProgram(); 
     BlockDatabase::get().textureAtlas.bindTexture();
 
     m_shader.loadProjectionViewMatrix(camera.getProjectionViewMatrix());

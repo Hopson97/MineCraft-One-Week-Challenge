@@ -9,6 +9,8 @@
 #include "SkyboxRenderer.h"
 #include "SFMLRenderer.h"
 #include "WaterRenderer.h"
+#include "../Config.h"
+
 
 class Camera;
 class ChunkSection;
@@ -22,6 +24,8 @@ class RenderMaster
         void drawChunk(const ChunkSection& chunk);
         void drawSky();
 
+        void setConfig(const Config con);
+
         void finishRender(sf::RenderWindow& window, const Camera& camera);
 
     private:
@@ -31,6 +35,8 @@ class RenderMaster
         WaterRenderer   m_waterRenderer;
         SkyboxRenderer  m_skyboxRenderer;
         SFMLRenderer    m_sfmlRenderer;
+
+        Config m_conf;
 
         bool m_drawBox = false;
 };
