@@ -22,6 +22,9 @@ StatePlaying::StatePlaying(Application& app, const Config& config)
                           m_crosshair.getGlobalBounds().height / 2);
     m_crosshair.setPosition(app.getWindow().getSize().x / 2,
                             app.getWindow().getSize().y / 2);
+
+    tManager = new TickManager();
+    tickThread = new std::thread(std::bind(&TickManager::run, tManager));
 }
 
 void StatePlaying::handleEvent(sf::Event e)
@@ -82,6 +85,11 @@ void StatePlaying::update(float deltaTime)
     
 }
 
+StatePlaying::~StatePlaying(){
+    tickThread->join();
+    delete tManager;
+}
+
 void StatePlaying::render(RenderMaster& renderer)
 {
     static sf::Clock dt;
@@ -100,7 +108,6 @@ void StatePlaying::render(RenderMaster& renderer)
         renderer.drawSFML(m_crosshair);
         m_player.draw(renderer);
     }
-
 
     m_world.renderWorld(renderer, m_pApplication->getCamera());
 }

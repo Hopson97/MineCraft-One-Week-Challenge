@@ -8,13 +8,15 @@
 #include "../World/World.h"
 #include "../Util/FPSCounter.h"
 
-
+#include "../Tick/TickManager.h"
+#include <thread>
 
 class StatePlaying : public StateBase
 {
     public:
         StatePlaying(Application& app, const Config& config);
-
+        ~StatePlaying();
+        
         void handleEvent(sf::Event e) override;
         void handleInput() override;
 
@@ -32,6 +34,9 @@ class StatePlaying : public StateBase
         sf::Texture        m_chTexture;
 
         FPSCounter m_fpsCounter;
+
+        TickManager* tManager;
+        std::thread* tickThread;
 };
 
 #endif // PLAYINGSTATE_H_INCLUDED
