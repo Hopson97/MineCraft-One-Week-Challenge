@@ -14,7 +14,7 @@ void TickManager::run(){
     sf::Clock clock;
     sf::Time time;
 
-    while(true){
+    while(g_window->isOpen()){
         time = clock.getElapsedTime();
         
         if((int)(time.asMilliseconds() / 50) > m_tickTime){

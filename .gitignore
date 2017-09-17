@@ -20,6 +20,9 @@ Project/
 #Profiler
 *.out
 
+#Visual Studio
+.vscode/
+
 #exe
 *.exe
 MinecraftWeek/

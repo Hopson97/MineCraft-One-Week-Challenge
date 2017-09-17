@@ -4,6 +4,7 @@
 
 unsigned int g_X;
 unsigned int g_Y;
+sf::RenderWindow* g_window;
 
 Context::Context(const Config& config)
 {
@@ -28,6 +29,7 @@ Context::Context(const Config& config)
         g_Y = config.windowY;
     }
 
+    g_window = &window;
     glewExperimental = GL_TRUE;
     glewInit();
     glViewport(0, 0, window.getSize().x, window.getSize().y);

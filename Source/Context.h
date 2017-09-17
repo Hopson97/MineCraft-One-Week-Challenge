@@ -7,6 +7,7 @@
 
 extern unsigned int g_X;
 extern unsigned int g_Y;
+extern sf::RenderWindow* g_window;
 
 struct Context
 {

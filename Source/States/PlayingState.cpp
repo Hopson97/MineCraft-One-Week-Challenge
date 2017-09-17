@@ -30,6 +30,11 @@ StatePlaying::StatePlaying(Application& app, const Config& config)
 void StatePlaying::handleEvent(sf::Event e)
 { }
 
+StatePlaying::~StatePlaying(){
+    tickThread->join();
+    delete tickThread;
+}
+
 void StatePlaying::handleInput()
 {
     m_player.handleInput(m_pApplication->getWindow());
@@ -83,11 +88,6 @@ void StatePlaying::update(float deltaTime)
     m_world.update(m_pApplication->getCamera());
 
     
-}
-
-StatePlaying::~StatePlaying(){
-    tickThread->join();
-    delete tManager;
 }
 
 void StatePlaying::render(RenderMaster& renderer)
