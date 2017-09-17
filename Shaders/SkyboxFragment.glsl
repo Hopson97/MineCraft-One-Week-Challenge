@@ -21,7 +21,7 @@ void main()
 {
     color = texture(texSampler, passTextureCoord);
     color = vec4(brightnessContrast(color.xyz, 1.15f, 1.15f), color.w);
-    color = vec4(gamma(color.xyz, 6.0f),color.w);
+    color = vec4(gamma(color.xyz, 4.8f),color.w);
 
     outColour = color;
     if (outColour.a == 0) discard;

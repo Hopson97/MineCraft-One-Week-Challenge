@@ -104,7 +104,7 @@ void Player::update(float dt, World& world)
     {
         if (!m_isOnGround)
         {
-            velocity.y -= 55 * dt;
+            velocity.y -= 40 * dt;
         }
         m_isOnGround = false;
     }
@@ -282,7 +282,7 @@ void Player::jump()
         if (m_isOnGround)
         {
             m_isOnGround = false;
-            m_acceleation.y += speed * 75;
+            m_acceleation.y += speed * 50;
         }
     }
     else
