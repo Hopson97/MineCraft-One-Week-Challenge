@@ -13,7 +13,7 @@ class StateBase
         :   m_pApplication  (&app)
         { }
 
-        virtual ~StateBase()  = default;
+        //virtual ~StateBase()  = default;
 
         virtual void handleEvent(sf::Event e) = 0;
         virtual void handleInput() = 0;
