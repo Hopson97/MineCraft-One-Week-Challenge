@@ -17,6 +17,12 @@ Player::Player()
 ,   m_itemDown  (sf::Keyboard::Down)
 ,   m_itemUp    (sf::Keyboard::Up)
 ,   m_flyKey    (sf::Keyboard::F)
+,   m_num1 (sf::Keyboard::Num1)
+,   m_num2 (sf::Keyboard::Num2)
+,   m_num3 (sf::Keyboard::Num3)
+,   m_num4 (sf::Keyboard::Num4)
+,   m_num5 (sf::Keyboard::Num5)
+
 {
     f.loadFromFile("Res/Fonts/rs.ttf");
 
@@ -93,6 +99,23 @@ void Player::handleInput(const sf::RenderWindow& window)
     {
         m_isFlying = !m_isFlying;
     }
+
+    if(m_num1.isKeyPressed()){
+        m_heldItem = 0;
+    }
+    if(m_num2.isKeyPressed()){
+        m_heldItem = 1;
+    }
+    if(m_num3.isKeyPressed()){
+        m_heldItem = 2;
+    }
+    if(m_num4.isKeyPressed()){
+        m_heldItem = 3;
+    }
+    if(m_num5.isKeyPressed()){
+        m_heldItem = 4;
+    }
+
 }
 
 void Player::update(float dt, World& world)
