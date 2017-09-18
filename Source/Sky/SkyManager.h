@@ -10,6 +10,7 @@ class Camera;
 class SkyManager : public TickObject{
 public:
     SkyManager();
+    ~SkyManager();
     
     void TickUpdate(unsigned int tickTime);
     void Update(glm::vec3 playerPosition);

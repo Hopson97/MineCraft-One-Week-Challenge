@@ -94,20 +94,9 @@ void StatePlaying::render(RenderMaster& renderer)
 {
     static sf::Clock dt;
     
-    static bool drawGUI = false;
-    static ToggleKey drawKey(sf::Keyboard::F3);
-
-    if (drawKey.isKeyPressed())
-    {
-        drawGUI = !drawGUI;
-    }
-
-    if (drawGUI)
-    {
-        m_fpsCounter.draw(renderer);
-        renderer.drawSFML(m_crosshair);
-        m_player.draw(renderer);
-    }
+    m_fpsCounter.draw(renderer);
+    renderer.drawSFML(m_crosshair);
+    m_player.draw(renderer);
 
     m_world.renderWorld(renderer, m_pApplication->getCamera());
 }
