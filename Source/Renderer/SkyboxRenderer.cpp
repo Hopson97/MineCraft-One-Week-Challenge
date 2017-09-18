@@ -6,7 +6,7 @@
 
 SkyboxRenderer::SkyboxRenderer()
 {
-    constexpr GLfloat SIZE = 500;
+    constexpr GLfloat SIZE = 512;
     std::vector<GLfloat> vertexCoords
     {
         //Back

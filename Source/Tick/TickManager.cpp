@@ -21,7 +21,7 @@ void TickManager::run(){
             if(!m_tickObjects.empty()){
                 for(TickObject* t : m_tickObjects){
                     TickObject* g = t;
-                    g->TickUpdate(); 
+                    g->TickUpdate(m_tickTime); 
                 }
             }
         }

@@ -16,7 +16,7 @@ public:
 
 private:
     std::vector<TickObject*> m_tickObjects;
-    int m_tickTime;
+    unsigned int m_tickTime;
 };
 
 #endif

@@ -61,6 +61,7 @@ Source/Util/FPSCounter.cpp
 Source/Util/FileUtil.cpp
 Source/ToggleKey.cpp
 Source/Tick/TickManager.cpp
+Source/Sky/SkyManager.cpp
 Source/Physics/AABB.cpp)
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 set_property(TARGET minecraft PROPERTY CXX_STANDARD 17)

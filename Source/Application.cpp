@@ -97,7 +97,3 @@ void Application::turnOnMouse()
 {
     m_context.window.setMouseCursorVisible(true);
 }
-
-Context& Application::getContext(){
-    return m_context;
-}

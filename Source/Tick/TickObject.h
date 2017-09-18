@@ -3,9 +3,7 @@
 
 class TickObject{
 public:
-    TickObject();
-    
-    virtual void TickUpdate() = 0;
+    virtual void TickUpdate(unsigned int tickTime) = 0;
 };
 
 #endif
