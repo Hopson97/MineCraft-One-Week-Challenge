@@ -8,6 +8,7 @@
 
 #include <iostream>
 
+SkyManager* m_sky;
 
 StatePlaying::StatePlaying(Application& app, const Config& config)
 :   StateBase   (app)
@@ -25,6 +26,9 @@ StatePlaying::StatePlaying(Application& app, const Config& config)
 
     tManager = new TickManager();
     tickThread = new std::thread(std::bind(&TickManager::run, tManager));
+
+    m_sky = new SkyManager();
+    tManager->add(m_sky);
 }
 
 void StatePlaying::handleEvent(sf::Event e)
@@ -87,7 +91,7 @@ void StatePlaying::update(float deltaTime)
     m_player.update(deltaTime, m_world);
     m_world.update(m_pApplication->getCamera());
 
-    
+    m_sky->Update(m_player.position);
 }
 
 void StatePlaying::render(RenderMaster& renderer)

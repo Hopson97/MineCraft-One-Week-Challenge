@@ -1,8 +1,62 @@
 #include "SkyManager.h"
+#include <iostream>
 
-SkyManager::SkyManager(){
+#define degreesToRadians(x) x*(3.141592f/180.0f)
+
+SkyManager::SkyManager()
+: sun("Sun"), moon("Moon")
+{
     dayTime = 0; //Dawn
     m_prevTime = 0; //Time now
+
+    std::vector<GLfloat> svertexCoords
+    { 
+            -40,  40, 400,
+             40,  40, 400,
+             40, -40, 400,
+            -40, -40, 400
+        };
+
+    std::vector<GLfloat> stextureCoords
+        {
+            0, 1,
+            1, 1,
+            1, 0,
+            0, 0,
+        };
+
+    std::vector<GLuint> sindexCoords
+    {
+        0, 1, 2,
+        2, 3, 0
+    };
+
+    m_SunModel.addData({svertexCoords, stextureCoords, sindexCoords});
+
+    std::vector<GLfloat> mvertexCoords
+    { 
+            -40,  40, -400,
+             40,  40, -400,
+             40, -40, -400,
+            -40, -40, -400
+        };
+
+    std::vector<GLfloat> mtextureCoords
+        {
+            0, 1,
+            1, 1,
+            1, 0,
+            0, 0,
+        };
+
+    std::vector<GLuint> mindexCoords
+    {
+        0, 1, 2,
+        2, 3, 0
+    };
+
+    m_MoonModel.addData({mvertexCoords, mtextureCoords, mindexCoords});
+
 }
 
 void SkyManager::TickUpdate(unsigned int tickTime){
@@ -14,9 +68,12 @@ void SkyManager::TickUpdate(unsigned int tickTime){
         dayTime = 0;
     }
 
-    //Update Sun/Moon models
-
-
+    //Update Sun/Moon matrix
+    glm::mat4 tran = glm::translate(glm::mat4(1.0f), glm::vec3(playerPos.x, playerPos.y, playerPos.z));
+    glm::mat4 rot = glm::rotate(glm::mat4(1.0f), degreesToRadians(((float)dayTime / 240000) * 360), glm::vec3(-1.0f, 0.0f, 0.0f));
+    glm::mat4 mrot = glm::rotate(glm::mat4(1.0f), degreesToRadians(((float)dayTime / 240000) * 360), glm::vec3(1.0f, 0.0f, 0.0f));
+    stransformMatrix = rot * tran;
+    mtransformMatrix = mrot * tran;
 }
 
 void SkyManager::setTime(unsigned int tickTime){
@@ -29,4 +86,27 @@ unsigned int SkyManager::getTime(){
 
 void SkyManager::Update(glm::vec3 position){
     playerPos = position;
+}
+
+void SkyManager::render(const Camera& camera){
+    
+    glEnable(GL_BLEND);  
+    m_shader.useProgram();
+    m_SunModel.bindVAO();
+    sun.bindTexture();
+
+    m_shader.loadModelMatrix(stransformMatrix);
+    m_shader.loadProjectionViewMatrix   (camera.getProjectionViewMatrix());
+
+    GL::drawElements(m_SunModel.getIndicesCount());
+
+    m_shader.useProgram();
+    m_MoonModel.bindVAO();
+    moon.bindTexture();
+
+    m_shader.loadModelMatrix(mtransformMatrix);
+    m_shader.loadProjectionViewMatrix   (camera.getProjectionViewMatrix());
+
+    GL::drawElements(m_MoonModel.getIndicesCount());
+    glDisable(GL_BLEND);
 }

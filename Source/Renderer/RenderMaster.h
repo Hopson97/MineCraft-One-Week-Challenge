@@ -10,7 +10,10 @@
 #include "SFMLRenderer.h"
 #include "WaterRenderer.h"
 #include "../Config.h"
+#include "../Sky/SkyManager.h"
 
+
+#include "../States/PlayingState.h"
 
 class Camera;
 class ChunkSection;

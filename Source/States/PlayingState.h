@@ -10,6 +10,10 @@
 
 #include "../Tick/TickManager.h"
 #include <thread>
+#include "../Sky/SkyManager.h"
+
+
+extern SkyManager* m_sky;
 
 class StatePlaying : public StateBase
 {
@@ -37,6 +41,7 @@ class StatePlaying : public StateBase
 
         TickManager* tManager;
         std::thread* tickThread;
+
 };
 
 #endif // PLAYINGSTATE_H_INCLUDED
