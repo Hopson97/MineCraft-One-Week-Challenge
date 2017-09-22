@@ -31,7 +31,12 @@ Context::Context(const Config& config)
 
     g_window = &window;
     glewExperimental = GL_TRUE;
-    glewInit();
+    GLenum err = glewInit();
+
+    if(err != GLEW_OK){
+        throw std::runtime_error("GLEW Init failed.");
+    }
+
     glViewport(0, 0, window.getSize().x, window.getSize().y);
 
     glCullFace(GL_BACK);
