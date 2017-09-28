@@ -8,21 +8,21 @@ out vec2 passTextureCoord;
 out float passCardinalLight;
 
 uniform mat4 projViewMatrix;
-uniform float brightness;
-uniform float gamma;
-uniform float contrast;
-
 uniform float globalTime;
+
+
+vec4 getWorldPos()
+{
+    vec3 inVert = inVertexPosition.xyz;
+    inVert.y += sin((globalTime + inVert.x) * 1.5) / 8.8f;
+    inVert.y += cos((globalTime + inVert.z) * 1.5) / 8.1f;
+    inVert.y -= 0.2;
+    return vec4(inVert, 1);
+}
 
 void main()
 {
-    vec4 pos = vec4(inVertexPosition, 1.0);
-    pos.y -= 0.2f;
-
-    float posYbuf = (pos.z / 0.6f + globalTime * 5.0f * 0.6f);
-    pos.y -= sin(posYbuf) * 0.06f * 1.2f + sin(posYbuf / -7.0) * 0.06f;
-
-    gl_Position = projViewMatrix * pos;
+    gl_Position = projViewMatrix * getWorldPos();
 
     passTextureCoord    = inTextureCoord;
     passCardinalLight   = inCardinalLight;
