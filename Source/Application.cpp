@@ -7,7 +7,7 @@
 Application::Application(const Config& config)
 :   m_context   (config)
 ,   m_camera    (config)
-,   m_config (config)
+,   m_config    (config)
 {
     BlockDatabase::get();
     pushState<StatePlaying>(*this, config);
@@ -20,19 +20,16 @@ void Application::runLoop()
 {
     sf::Clock dtTimer;
     sf::Clock dt;
-    if(!setupFrameBuffers()){
-        throw std::runtime_error("Frame Buffer Failure");
-    }
 
     m_masterRenderer.setConfig(m_config);
 
     sf::Time m;
-    
+
     while (m_context.window.isOpen() && !m_states.empty())
     {
         auto deltaTime = dtTimer.restart();
         auto& state = *m_states.back();
-        
+
         state.handleInput();
         state.update(deltaTime.asSeconds());
         m_camera.update();
@@ -48,7 +45,7 @@ void Application::runLoop()
         }
 
         m = dt.restart();
-        
+
         g_timeElapsed += m.asSeconds();
     }
 }
