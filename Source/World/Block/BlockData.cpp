@@ -50,6 +50,10 @@ BlockData::BlockData(const std::string& fileName)
         {
             inFile >> m_data.isOpaque;
         }
+        else if (line == "Collidable")
+        {
+            inFile >> m_data.isCollidable;
+        }
         else if (line == "MeshType")
         {
             int id;

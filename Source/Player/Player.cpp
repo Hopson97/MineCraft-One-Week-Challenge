@@ -161,7 +161,7 @@ void Player::collide(World& world, const glm::vec3& vel, float dt)
     {
         auto block = world.getBlock(x, y, z);
 
-        if (block != 0)
+        if (block != 0 && block.getData().isCollidable)
         {
             if (vel.y > 0)
             {

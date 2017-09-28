@@ -74,10 +74,5 @@ void main()
     color = vec4(brightnessContrast(color.xyz, brightness, contrast), 1.0);
     color = vec4(gammaCorrect(color.xyz, gamma),color.w);
 
-    color.r = 1 - color.r;
-    color.g = 0;//1 - color.g;
-    color.b = 0;//1 - color.b
-
-
     outColour = color;
 }
