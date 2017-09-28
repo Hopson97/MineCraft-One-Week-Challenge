@@ -11,10 +11,10 @@ SkyManager::SkyManager()
 
     std::vector<GLfloat> svertexCoords
     { 
-            -40,  40, 400,
-             40,  40, 400,
-             40, -40, 400,
-            -40, -40, 400
+            -70,  70, 400,
+             70,  70, 400,
+             70, -70, 400,
+            -70, -70, 400
         };
 
     std::vector<GLfloat> stextureCoords
@@ -35,10 +35,10 @@ SkyManager::SkyManager()
 
     std::vector<GLfloat> mvertexCoords
     { 
-            -40,  40, -400,
-             40,  40, -400,
-             40, -40, -400,
-            -40, -40, -400
+            -70,  70, -400,
+             70,  70, -400,
+             70, -70, -400,
+            -70, -70, -400
         };
 
     std::vector<GLfloat> mtextureCoords
@@ -69,8 +69,8 @@ void SkyManager::TickUpdate(unsigned int tickTime){
     }
 
     //Update Sun/Moon matrix
-    glm::mat4 rot = glm::rotate(glm::mat4(1.0f), degreesToRadians(((float)dayTime / 24000) * 360), glm::vec3(-1.0f, 0.0f, 0.0f));
-    glm::mat4 mrot = glm::rotate(glm::mat4(1.0f), degreesToRadians(((float)dayTime / 24000) * 360), glm::vec3(1.0f, 0.0f, 0.0f));
+    glm::mat4 rot = glm::rotate(glm::mat4(1.0f), degreesToRadians(((float)dayTime / 240000) * 360), glm::vec3(-1.0f, 0.0f, 0.0f));
+    glm::mat4 mrot = glm::rotate(glm::mat4(1.0f), degreesToRadians(((float)dayTime / 240000) * 360), glm::vec3(1.0f, 0.0f, 0.0f));
     stransformMatrix = glm::translate(rot, playerPos);
     mtransformMatrix = glm::translate(mrot, playerPos);
 }
