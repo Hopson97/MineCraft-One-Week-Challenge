@@ -19,7 +19,7 @@ void main()
     vec4 pos = vec4(inVertexPosition, 1.0);
     pos.y -= 0.2f;
 
-    float posYbuf = (pos.z / 0.6f + globalTime * 5f * 0.6f);
+    float posYbuf = (pos.z / 0.6f + globalTime * 5.0f * 0.6f);
     pos.y -= sin(posYbuf) * 0.06f * 1.2f + sin(posYbuf / -7.0) * 0.06f;
 
     gl_Position = projViewMatrix * pos;
