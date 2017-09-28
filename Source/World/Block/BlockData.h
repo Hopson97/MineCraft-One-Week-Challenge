@@ -21,6 +21,7 @@ struct BlockDataHolder : public NonCopyable
     BlockMeshType meshType;
 
     bool isOpaque;
+    bool isCollidable;
 };
 
 class BlockData : public NonCopyable

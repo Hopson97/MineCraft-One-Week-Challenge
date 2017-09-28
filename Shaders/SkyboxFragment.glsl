@@ -5,7 +5,8 @@ in  vec3 passTextureCoord;
 
 uniform samplerCube texSampler;
 
-vec3 brightnessContrast(vec3 value, float brightness, float contrast){
+vec3 brightnessContrast(vec3 value, float brightness, float contrast)
+{
     return (value - 0.5) * contrast + 0.5 + (brightness-1);
 }
 

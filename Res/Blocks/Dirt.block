@@ -12,3 +12,6 @@ Opaque
 
 MeshType
 0
+
+Collidable
+1
