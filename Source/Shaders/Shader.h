@@ -16,7 +16,7 @@ class Shader : NonCopyable
         void useProgram() const;
 
         void loadInt(GLuint location,   int value);
-        void loadFloat(GLuint location, int value);
+        void loadFloat(GLuint location, float value);
 
         void loadVector2(GLuint location, const glm::vec2& vect);
         void loadVector3(GLuint location, const glm::vec3& vect);

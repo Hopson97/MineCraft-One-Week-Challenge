@@ -8,6 +8,7 @@
 
 #include <iostream>
 
+
 StatePlaying::StatePlaying(Application& app, const Config& config)
 :   StateBase   (app)
 ,   m_world     (app.getCamera(), config, m_player)
@@ -33,7 +34,7 @@ void StatePlaying::handleInput()
     static sf::Clock timer;
     glm::vec3 lastPosition;
 
-    for (Ray ray(m_player.position, m_player.rotation);
+    for (Ray ray({m_player.position.x, m_player.position.y + 0.6f, m_player.position.z}, m_player.rotation); //Corrected for camera offset
              ray.getLength() < 6;
              ray.step(0.05))
     {
@@ -64,20 +65,27 @@ void StatePlaying::handleInput()
         }
         lastPosition = ray.getEnd();
     }
+
+    
 }
 
 void StatePlaying::update(float deltaTime)
 {
+
     if (m_player.position.x < 0) m_player.position.x = 0;
     if (m_player.position.z < 0) m_player.position.z = 0;
 
     m_fpsCounter.update();
     m_player.update(deltaTime, m_world);
     m_world.update(m_pApplication->getCamera());
+
+    
 }
 
 void StatePlaying::render(RenderMaster& renderer)
 {
+    static sf::Clock dt;
+    
     static bool drawGUI = false;
     static ToggleKey drawKey(sf::Keyboard::F3);
 

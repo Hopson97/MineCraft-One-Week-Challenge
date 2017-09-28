@@ -10,9 +10,11 @@
 #include "Context.h"
 #include "Camera.h"
 
+float extern g_timeElapsed;
 
 class Application
 {
+    
     public:
         Application(const Config& config);
 
@@ -44,6 +46,7 @@ class Application
         RenderMaster m_masterRenderer;
         Camera m_camera;
 
+        const Config& m_config;
 
         bool m_isPopState = false;
 };
