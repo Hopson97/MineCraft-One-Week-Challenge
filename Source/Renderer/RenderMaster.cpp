@@ -87,12 +87,8 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
         m_skyboxRenderer.render (camera);
         m_drawBox = false;
     }
-<<<<<<< HEAD
     
     m_sky->render(camera);
-=======
-
->>>>>>> b3656f04a6d2cb3c96bfe35275fc1cf96f7a43fe
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0); //Set to screen
     glViewport(0, 0, g_X, g_Y);

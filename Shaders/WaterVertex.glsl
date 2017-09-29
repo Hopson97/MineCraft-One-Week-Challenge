@@ -11,8 +11,14 @@ uniform mat4 projViewMatrix;
 uniform float globalTime;
 
 
-    float posYbuf = (pos.z / 0.6f + globalTime * 2.5f * 0.6f) + (pos.x / 0.6f + globalTime * 1.5f * 0.6f);
-    pos.y -= sin(posYbuf) * 0.06f * 1.2f + sin(posYbuf / -7.0) * 0.06f;
+vec4 getWorldPos()
+{
+    vec3 inVert = inVertexPosition.xyz;
+    inVert.y += sin((globalTime + inVert.x) * 1.5) / 8.8f;
+    inVert.y += cos((globalTime + inVert.z) * 1.5) / 8.1f;
+    inVert.y -= 0.2;
+    return vec4(inVert, 1);
+}
 
 void main()
 {
