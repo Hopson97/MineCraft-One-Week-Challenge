@@ -14,8 +14,8 @@ uniform float globalTime;
 vec4 getWorldPos()
 {
     vec3 inVert = inVertexPosition.xyz;
-    inVert.y += sin((globalTime + inVert.x) * 1.5) / 8.8f;
-    inVert.y += cos((globalTime + inVert.z) * 1.5) / 8.1f;
+    inVert.y += sin((globalTime + inVert.x) * 2.3) / 16.8f;
+    inVert.y += cos((globalTime + inVert.z) * 2.3) / 16.1f;
     inVert.y -= 0.2;
     return vec4(inVert, 1);
 }
