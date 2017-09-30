@@ -2,10 +2,13 @@
 
 layout(location = 0) in vec3  inVertexPosition;
 layout(location = 1) in vec2  inTextureCoord;
+layout(location = 2) in vec3  inNormal;
+
 out vec2 passTextureCoord;
-out float passCardinalLight;
+out vec3 normal;
 
 uniform mat4 projViewMatrix;
+uniform mat4 normalMatrix;
 uniform float globalTime;
 
 
@@ -23,4 +26,5 @@ void main()
     gl_Position = projViewMatrix * getWorldPos();
 
     passTextureCoord    = inTextureCoord;
+    normal              = vec3(normalMatrix * vec4(inNormal, 1.0));
 }
