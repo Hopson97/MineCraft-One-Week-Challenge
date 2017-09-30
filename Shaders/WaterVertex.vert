@@ -2,8 +2,6 @@
 
 layout(location = 0) in vec3  inVertexPosition;
 layout(location = 1) in vec2  inTextureCoord;
-layout(location = 2) in float inCardinalLight;
-
 out vec2 passTextureCoord;
 out float passCardinalLight;
 
@@ -25,5 +23,4 @@ void main()
     gl_Position = projViewMatrix * getWorldPos();
 
     passTextureCoord    = inTextureCoord;
-    passCardinalLight   = inCardinalLight;
 }

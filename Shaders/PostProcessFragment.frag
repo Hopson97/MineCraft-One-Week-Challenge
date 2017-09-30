@@ -22,7 +22,7 @@ vec3 gammaCorrect(vec3 value, float param)
 }
 
 #define FXAA_REDUCE_MIN (1.0/128.0)
-#define FXAA_REDUCE_MUL (1.0/16.0) // ?x antialiasing. Switch values to get higher/lower default is 4x FXAA
+#define FXAA_REDUCE_MUL (1.0/4.0) // ?x antialiasing. Switch values to get higher/lower default is 4x FXAA
 #define FXAA_SPAN_MAX 8.0
 
 vec3 fxaa(vec2 resolution, sampler2D sampler0, vec2 texcoord)
