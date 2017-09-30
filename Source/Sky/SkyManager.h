@@ -30,8 +30,7 @@ private:
 
     unsigned int m_prevTime; //Ticks can skip around sometimes so...
     glm::vec3 playerPos;
-    glm::mat4 mtransformMatrix;
-    glm::mat4 stransformMatrix;
+    glm::mat4 transformMatrix;
 
     Model m_SunModel;
     Model m_MoonModel;

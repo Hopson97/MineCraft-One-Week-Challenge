@@ -17,7 +17,7 @@ void TickManager::run(){
     while(g_window->isOpen()){
         time = clock.getElapsedTime();
         
-        if((int)(time.asMilliseconds() / 5) > m_tickTime){
+        if((int)(time.asMilliseconds() / 50) > m_tickTime){
             if(!m_tickObjects.empty()){
                 for(TickObject* t : m_tickObjects){
                     TickObject* g = t;

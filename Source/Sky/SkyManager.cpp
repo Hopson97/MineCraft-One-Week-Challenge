@@ -69,10 +69,7 @@ void SkyManager::TickUpdate(unsigned int tickTime){
     }
 
     //Update Sun/Moon matrix
-    glm::mat4 rot = glm::rotate(glm::mat4(1.0f), degreesToRadians(((float)dayTime / 240000) * 360), glm::vec3(-1.0f, 0.0f, 0.0f));
-    glm::mat4 mrot = glm::rotate(glm::mat4(1.0f), degreesToRadians(((float)dayTime / 240000) * 360), glm::vec3(1.0f, 0.0f, 0.0f));
-    stransformMatrix = glm::translate(rot, playerPos);
-    mtransformMatrix = glm::translate(mrot, playerPos);
+    transformMatrix = glm::translate(glm::mat4(1.0f), playerPos);
 }
 
 void SkyManager::setTime(unsigned int tickTime){
@@ -94,8 +91,9 @@ void SkyManager::render(const Camera& camera){
     m_SunModel.bindVAO();
     sun.bindTexture();
 
-    m_shader.loadModelMatrix(stransformMatrix);
+    m_shader.loadModelMatrix(transformMatrix);
     m_shader.loadProjectionViewMatrix   (camera.getProjectionViewMatrix());
+    m_shader.loadTime((float)dayTime/24000);
 
     GL::drawElements(m_SunModel.getIndicesCount());
 
@@ -103,8 +101,9 @@ void SkyManager::render(const Camera& camera){
     m_MoonModel.bindVAO();
     moon.bindTexture();
 
-    m_shader.loadModelMatrix(mtransformMatrix);
+    m_shader.loadModelMatrix(transformMatrix);
     m_shader.loadProjectionViewMatrix   (camera.getProjectionViewMatrix());
+    m_shader.loadTime((float)dayTime/24000);
 
     GL::drawElements(m_MoonModel.getIndicesCount());
     glDisable(GL_BLEND);
