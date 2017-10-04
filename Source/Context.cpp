@@ -14,6 +14,7 @@ Context::Context(const Config& config)
     settings.minorVersion = 3;
     settings.depthBits = 24;
     settings.stencilBits = 8;
+    settings.attributeFlags = sf::ContextSettings::Core;
 
     if(config.isFullscreen)
     {
