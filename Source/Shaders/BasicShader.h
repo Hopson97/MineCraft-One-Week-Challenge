@@ -6,8 +6,8 @@
 class BasicShader : public Shader
 {
     public:
-        BasicShader(const std::string& vertexFile   = "BasicVertex",
-                    const std::string& fragmentFile = "BasicFragment");
+        BasicShader(const std::string& vertexFile   = "Basic",
+                    const std::string& fragmentFile = "Basic");
 
         void loadProjectionViewMatrix   (const glm::mat4& pvMatrix);
         void loadModelMatrix            (const glm::mat4& matrix);

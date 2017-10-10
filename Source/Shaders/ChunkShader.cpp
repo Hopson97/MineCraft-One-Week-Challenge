@@ -1,7 +1,7 @@
 #include "ChunkShader.h"
 
 ChunkShader::ChunkShader()
-:   BasicShader ("ChunkVertex", "ChunkFragment")
+:   BasicShader ("Chunk", "Chunk")
 {
     getUniforms();
 }

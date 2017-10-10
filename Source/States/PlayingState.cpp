@@ -66,7 +66,7 @@ void StatePlaying::handleInput()
         lastPosition = ray.getEnd();
     }
 
-    
+
 }
 
 void StatePlaying::update(float deltaTime)
@@ -79,13 +79,13 @@ void StatePlaying::update(float deltaTime)
     m_player.update(deltaTime, m_world);
     m_world.update(m_pApplication->getCamera());
 
-    
+
 }
 
 void StatePlaying::render(RenderMaster& renderer)
 {
     static sf::Clock dt;
-    
+
     static bool drawGUI = false;
     static ToggleKey drawKey(sf::Keyboard::F3);
 
@@ -94,7 +94,7 @@ void StatePlaying::render(RenderMaster& renderer)
         drawGUI = !drawGUI;
     }
 
-    if (drawGUI)
+    //if (drawGUI)
     {
         m_fpsCounter.draw(renderer);
         renderer.drawSFML(m_crosshair);
