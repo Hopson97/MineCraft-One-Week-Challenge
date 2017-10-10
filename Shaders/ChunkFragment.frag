@@ -3,6 +3,8 @@
 out vec4 outColour;
 in  vec2 passTextureCoord;
 
+uniform float lighting;
+
 uniform sampler2D texSampler;
 
 in vec3 normal;
@@ -13,6 +15,6 @@ void main()
 {
     color = texture(texSampler, passTextureCoord);
     //Lighting calculations
-    outColour = color;
+    outColour = color * lighting;
     if (outColour.a == 0) discard;
 }

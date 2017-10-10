@@ -4,6 +4,7 @@
 #include "../World/Block/BlockDatabase.h"
 
 #include "../Camera.h"
+#include "../Sky/SkyManager.h"
 
 #include <iostream>
 
@@ -26,6 +27,7 @@ void ChunkRenderer::render(const Camera& camera, Config* conf)
     BlockDatabase::get().textureAtlas.bindTexture();
 
     m_shader.loadProjectionViewMatrix(camera.getProjectionViewMatrix());
+    m_shader.loadLighting(g_light);
 
     for (const ChunkMesh* mesh : m_chunks)
     {

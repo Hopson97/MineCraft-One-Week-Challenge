@@ -81,12 +81,6 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
     m_chunkRenderer .render (camera, &m_conf);
     m_waterRenderer .render (camera, &m_conf);
 
-    if (m_drawBox)
-    {
-        glDisable(GL_CULL_FACE);
-        m_skyboxRenderer.render (camera);
-        m_drawBox = false;
-    }
     
     m_sky->render(camera);
 

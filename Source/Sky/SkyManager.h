@@ -10,6 +10,8 @@
 #include "../Shaders/SunShader.h"
 #include "../Texture/BasicTexture.h"
 
+extern float g_light;
+
 class Camera;
 
 class SkyManager : public TickObject{
