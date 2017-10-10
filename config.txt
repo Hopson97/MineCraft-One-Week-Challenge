@@ -1,12 +1,7 @@
-<<<<<<< HEAD
 renderdistance 8
 fullscreen 0
-=======
-renderdistance 20
-fullscreen 1
->>>>>>> df325bf9fe597a842c7664415af99a52114a2297
 windowsize 1280 720
-fov 105
+fov 90
 gamma 1.3
 contrast 1.1
 brightness 1.15

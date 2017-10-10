@@ -1,7 +1,7 @@
 #include "SunShader.h"
 
 SunShader::SunShader()
-:   BasicShader ("SunShaderVertex", "SunShaderFragment")
+:   BasicShader ("Sun", "Sun")
 {
     getUniforms();
 }

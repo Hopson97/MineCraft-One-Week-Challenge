@@ -2,16 +2,19 @@
 
 out vec4 outColour;
 in  vec2 passTextureCoord;
-in float passCardinalLight;
+
+uniform float lighting;
 
 uniform sampler2D texSampler;
+
+in vec3 normal;
 
 vec4 color;
 
 void main()
 {
     color = texture(texSampler, passTextureCoord);
-
-    outColour = color * passCardinalLight;
+    //Lighting calculations
+    outColour = color * lighting;
     if (outColour.a == 0) discard;
 }

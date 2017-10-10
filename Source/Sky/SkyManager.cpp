@@ -78,7 +78,6 @@ void SkyManager::TickUpdate(unsigned int tickTime){
     //Ambient light
     //0 = 6am
     //12000 = 6pm
-    std::cout << dayTime << std::endl;
     if(dayTime < 3000){ //6am - 9am sun gets brighter
         g_light = blend(0.4f, 0.9f, (float)dayTime / 3000); 
     }
