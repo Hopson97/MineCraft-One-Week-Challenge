@@ -27,8 +27,21 @@ void PlayerDigEvent::dig(World& world)
             auto block = world.getBlock(m_digSpot.x, m_digSpot.y, m_digSpot.z);
             const auto& material = Material::toMaterial((BlockId)block.id);
             m_pPlayer->addItem(material);
+/*
+            auto r = 1;
+            for (int y = -r; y < r; y++)
+            for (int x = -r; x < r;x++)
+            for (int z = -r; z < r; z++)
+            {
+                int newX = m_digSpot.x + x;
+                int newY = m_digSpot.y + y;
+                int newZ = m_digSpot.z + z;
+                world.updateChunk   (newX, newY, newZ);
+                world.setBlock      (newX, newY, newZ, 0);
+*/
             world.updateChunk   (m_digSpot.x, m_digSpot.y, m_digSpot.z);
             world.setBlock      (m_digSpot.x, m_digSpot.y, m_digSpot.z, 0);
+            //}
             break;
         }
 

@@ -68,11 +68,22 @@ void main()
 
     if(postProcess == 1)
     {
+
         color = vec4(fxaa(resolution, texSampler, passTextureCoord), color.w);
     }
 
     color = vec4(brightnessContrast(color.xyz, brightness, contrast), 1.0);
     color = vec4(gammaCorrect(color.xyz, gamma),color.w);
-
+    /*
+    color.r = 1 - color.r;
+    color.g = 1 - color.g;
+    color.b = 1 - color.b;
+*/
+/*
+    float col = max(color.r, max(color.g, color.b));
+    color.r = col;
+    color.g = col;
+    color.b = col;
+*/
     outColour = color;
 }
