@@ -28,11 +28,11 @@ vec3 gammaCorrect(vec3 value, float param)
 vec3 fxaa(vec2 resolution, sampler2D sampler0, vec2 texcoord)
 {
     vec2 inverse_resolution=vec2(1.0/resolution.x,1.0/resolution.y);
-    vec3 rgbNW = texture2D(sampler0, texcoord.xy + (vec2(-1.0,-1.0)) * inverse_resolution).xyz;
-    vec3 rgbNE = texture2D(sampler0, texcoord.xy + (vec2(1.0,-1.0)) * inverse_resolution).xyz;
-    vec3 rgbSW = texture2D(sampler0, texcoord.xy + (vec2(-1.0,1.0)) * inverse_resolution).xyz;
-    vec3 rgbSE = texture2D(sampler0, texcoord.xy + (vec2(1.0,1.0)) * inverse_resolution).xyz;
-    vec3 rgbM  = texture2D(sampler0,  texcoord.xy).xyz;
+    vec3 rgbNW = texture(sampler0, texcoord.xy + (vec2(-1.0,-1.0)) * inverse_resolution).xyz;
+    vec3 rgbNE = texture(sampler0, texcoord.xy + (vec2(1.0,-1.0)) * inverse_resolution).xyz;
+    vec3 rgbSW = texture(sampler0, texcoord.xy + (vec2(-1.0,1.0)) * inverse_resolution).xyz;
+    vec3 rgbSE = texture(sampler0, texcoord.xy + (vec2(1.0,1.0)) * inverse_resolution).xyz;
+    vec3 rgbM  = texture(sampler0,  texcoord.xy).xyz;
     vec3 luma = vec3(0.299, 0.587, 0.114);
     float lumaNW = dot(rgbNW, luma);
     float lumaNE = dot(rgbNE, luma);
@@ -47,8 +47,8 @@ vec3 fxaa(vec2 resolution, sampler2D sampler0, vec2 texcoord)
     float dirReduce = max((lumaNW + lumaNE + lumaSW + lumaSE) * (0.25 * FXAA_REDUCE_MUL),FXAA_REDUCE_MIN);
     float rcpDirMin = 1.0/(min(abs(dir.x), abs(dir.y)) + dirReduce);
     dir = min(vec2( FXAA_SPAN_MAX,  FXAA_SPAN_MAX),max(vec2(-FXAA_SPAN_MAX, -FXAA_SPAN_MAX),dir * rcpDirMin)) * inverse_resolution;
-    vec3 rgbA = 0.5 * (texture2D(sampler0,   texcoord.xy   + dir * (1.0/3.0 - 0.5)).xyz + texture2D(sampler0,   texcoord.xy   + dir * (2.0/3.0 - 0.5)).xyz);
-    vec3 rgbB = rgbA * 0.5 + 0.25 * (texture2D(sampler0,  texcoord.xy   + dir *  - 0.5).xyz + texture2D(sampler0,  texcoord.xy   + dir * 0.5).xyz);
+    vec3 rgbA = 0.5 * (texture(sampler0,   texcoord.xy   + dir * (1.0/3.0 - 0.5)).xyz + texture(sampler0,   texcoord.xy   + dir * (2.0/3.0 - 0.5)).xyz);
+    vec3 rgbB = rgbA * 0.5 + 0.25 * (texture(sampler0,  texcoord.xy   + dir *  - 0.5).xyz + texture(sampler0,  texcoord.xy   + dir * 0.5).xyz);
     float lumaB = dot(rgbB, luma);
     vec3 res;
     if((lumaB < lumaMin) || (lumaB > lumaMax))

@@ -4,8 +4,8 @@ TARGET=MinecraftWeek
 
 OS := $(shell uname)
 ifeq ($(OS),Darwin)
-FLAGS=-lGL -lpthread -lsfml-system -lsfml-window -lsfml-graphics -lGLEW -L/opt/local/lib
-CC_FLAGS=-std=c++1y -I/opt/local/include
+FLAGS=-framework OpenGL -lpthread -lsfml-system -lsfml-window -lsfml-graphics -lGLEW -L/usr/local/lib
+CC_FLAGS=-std=c++1y -I/usr/local/include
 else
 FLAGS=-lGL -lpthread -lsfml-system -lsfml-window -lsfml-graphics -lGLEW
 CC_FLAGS=-std=c++1y
