@@ -1,7 +1,7 @@
 #include "SkyboxShader.h"
 
 SkyboxShader::SkyboxShader()
-:   Shader ("SkyboxVertex", "SkyboxFragment")
+:   Shader ("Skybox", "Skybox")
 {
     getUniforms();
 }

@@ -1,7 +1,7 @@
 #include "PostProcessShader.h"
 
 PostProcessShader::PostProcessShader()
-:   BasicShader ("PostProcessVertex", "PostProcessFragment")
+:   BasicShader ("PostProcess", "PostProcess")
 {
     getUniforms();
 }

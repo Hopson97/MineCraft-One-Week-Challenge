@@ -1,7 +1,7 @@
 #include "WaterShader.h"
 
 WaterShader::WaterShader()
-:   BasicShader ("WaterVertex", "WaterFragment")
+:   BasicShader ("Water", "Chunk")
 {
     getUniforms();
 }

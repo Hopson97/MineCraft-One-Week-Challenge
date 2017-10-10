@@ -1,0 +1,26 @@
+
+============WELCOME TO MINECRAFT IN A WEEK============
+This is a very simple Minecraft clone (mostly) created in one week
+
+
+Because it was made in a week, some major features were missing:
+-Level loading (Chunks do not save! So, I wouldn't commit to a build here for now)
+-Caves
+-Mobs
+-Crafting
+
+However, I did manage to implement some other important things:
+-World generation
+-Simple resource collection
+-Biomes
+-Collision detection
+-Block breaking/ placing
+
+
+For now, the game it pretty much entirely a community-driven project.
+Source code can be found at https://github.com/Hopson97/MineCraft-One-Week-Challenge
+Feel free to contribute!
+
+Please view 'controls.txt for controls!
+
+============Press enter to begin ============

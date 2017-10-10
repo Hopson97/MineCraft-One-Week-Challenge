@@ -46,7 +46,7 @@ void QuadRenderer::render(const Camera& camera, Config* conf)
     m_shader.loadBrightness(conf->brightness);
     m_shader.loadPostProcess(conf->postProcess);
     m_shader.loadResolution(glm::vec2(conf->windowX, conf->windowY));
-    
+
     m_quadModel.bindVAO();
     //m_basicTexture.bindTexture();
 
@@ -54,7 +54,7 @@ void QuadRenderer::render(const Camera& camera, Config* conf)
 
     for (auto& quad : m_quads)
     {
-        m_shader.loadModelMatrix(glm::mat4());
+        m_shader.loadModelMatrix(glm::mat4() );
         GL::drawElements(m_quadModel.getIndicesCount());
     }
 

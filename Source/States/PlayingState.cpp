@@ -78,7 +78,7 @@ void StatePlaying::handleInput()
         lastPosition = ray.getEnd();
     }
 
-    
+
 }
 
 void StatePlaying::update(float deltaTime)
@@ -91,16 +91,39 @@ void StatePlaying::update(float deltaTime)
     m_player.update(deltaTime, m_world);
     m_world.update(m_pApplication->getCamera());
 
+<<<<<<< HEAD
     m_sky->Update(m_player.position);
+=======
+
+>>>>>>> df325bf9fe597a842c7664415af99a52114a2297
 }
 
 void StatePlaying::render(RenderMaster& renderer)
 {
     static sf::Clock dt;
+<<<<<<< HEAD
     
     m_fpsCounter.draw(renderer);
     renderer.drawSFML(m_crosshair);
     m_player.draw(renderer);
+=======
+
+    static bool drawGUI = false;
+    static ToggleKey drawKey(sf::Keyboard::F3);
+
+    if (drawKey.isKeyPressed())
+    {
+        drawGUI = !drawGUI;
+    }
+
+    //if (drawGUI)
+    {
+        m_fpsCounter.draw(renderer);
+        renderer.drawSFML(m_crosshair);
+        m_player.draw(renderer);
+    }
+
+>>>>>>> df325bf9fe597a842c7664415af99a52114a2297
 
     m_world.renderWorld(renderer, m_pApplication->getCamera());
 }
