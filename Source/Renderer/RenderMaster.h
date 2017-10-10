@@ -6,7 +6,6 @@
 #include "QuadRenderer.h"
 #include "CubeRenderer.h"
 #include "ChunkRenderer.h"
-#include "SkyboxRenderer.h"
 #include "SFMLRenderer.h"
 #include "WaterRenderer.h"
 #include "../Config.h"
@@ -40,7 +39,6 @@ class RenderMaster
         CubeRenderer    m_cubeRenderer;
         ChunkRenderer   m_chunkRenderer;
         WaterRenderer   m_waterRenderer;
-        SkyboxRenderer  m_skyboxRenderer;
         SFMLRenderer    m_sfmlRenderer;
 
         Config m_conf;

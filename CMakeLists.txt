@@ -9,14 +9,12 @@ Source/Camera.cpp
 Source/Context.cpp
 Source/Controller.cpp
 Source/Renderer/Framebuffer.cpp
-Source/Renderer/SkyboxRenderer.cpp
 Source/Renderer/WaterRenderer.cpp
 Source/Renderer/CubeRenderer.cpp
 Source/Renderer/SFMLRenderer.cpp
 Source/Renderer/ChunkRenderer.cpp
 Source/Renderer/RenderMaster.cpp
 Source/Renderer/QuadRenderer.cpp
-Source/Shaders/SkyboxShader.cpp
 Source/Shaders/WaterShader.cpp
 Source/Shaders/Shader.cpp
 Source/Shaders/BasicShader.cpp
