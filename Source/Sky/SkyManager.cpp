@@ -6,9 +6,6 @@ float g_light;
 
 //blend
 float blend(float x, float y, float factor){
-    std::cout << "X: " << x << std::endl;
-    std::cout << "Y: " << y << std::endl;
-    std::cout << "Fact: " << factor << std::endl;
     return x + ((y-x) * factor);
 }
 
