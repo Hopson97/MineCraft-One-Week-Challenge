@@ -14,13 +14,9 @@ Context::Context(const Config& config)
     settings.minorVersion = 3;
     settings.depthBits = 24;
     settings.stencilBits = 8;
-<<<<<<< HEAD
-
-=======
     //settings.attributeFlags = sf::ContextSettings::Core;
     //This is no longer necessary due to the Mac Support update.
     
->>>>>>> f3e97e016195af4996ca915e5d58c4322ad581d1
     if(config.isFullscreen)
     {
         window.create(sf::VideoMode::getDesktopMode(), "MineCraft Week", sf::Style::Fullscreen, settings);

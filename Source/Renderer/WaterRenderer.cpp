@@ -26,12 +26,8 @@ void WaterRenderer::render(const Camera& camera, Config* conf)
 
     m_shader.loadProjectionViewMatrix(camera.getProjectionViewMatrix());
     m_shader.loadTime(g_timeElapsed);
-<<<<<<< HEAD
     m_shader.loadLighting(g_light);
     
-=======
-
->>>>>>> f3e97e016195af4996ca915e5d58c4322ad581d1
     for (const auto& mesh : m_chunks)
     {
         mesh->getModel().bindVAO();
