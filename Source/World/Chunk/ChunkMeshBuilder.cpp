@@ -164,13 +164,19 @@ void ChunkMeshBuilder::buildMesh()
 
 void ChunkMeshBuilder::setActiveMesh(ChunkBlock block)
 {
-    if (block.id == (int)BlockId::Water)
+    switch (block.getData().shaderType)
     {
-        m_pActiveMesh = &m_pMeshes->waterMesh;
-    }
-    else
-    {
-        m_pActiveMesh = &m_pMeshes->solidMesh;
+        case BlockShaderType::Chunk:
+            m_pActiveMesh = &m_pMeshes->solidMesh;
+            break;
+
+        case BlockShaderType::Liquid:
+            m_pActiveMesh = &m_pMeshes->waterMesh;
+            break;
+
+        case BlockShaderType::Flora:
+            m_pActiveMesh = &m_pMeshes->floraMesh;
+            break;
     }
 }
 

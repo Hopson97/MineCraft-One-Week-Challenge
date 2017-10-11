@@ -15,7 +15,7 @@ void Camera::update() noexcept
     position = {m_pEntity->position.x, m_pEntity->position.y + 0.6f, m_pEntity->position.z};
     rotation = m_pEntity->rotation;
 
-    m_viewMatrix = makeViewMatrix(*this);
+    m_viewMatrix    = makeViewMatrix(*this);
     m_projViewMatrx = m_projectionMatrix * m_viewMatrix;
     m_frustum.update(m_projViewMatrx);
 }

@@ -8,6 +8,7 @@
 #include "ChunkRenderer.h"
 #include "SFMLRenderer.h"
 #include "WaterRenderer.h"
+#include "FloraRenderer.h"
 #include "../Config.h"
 #include "../Sky/SkyManager.h"
 
@@ -35,12 +36,19 @@ class RenderMaster
     private:
         bool setupFrameBuffers();
 
+        //Primitives
         QuadRenderer    m_quadRenderer;
         CubeRenderer    m_cubeRenderer;
+
+        //Chunks
         ChunkRenderer   m_chunkRenderer;
         WaterRenderer   m_waterRenderer;
+        FloraRenderer   m_floraRenderer;
+
+        //Detail
         SFMLRenderer    m_sfmlRenderer;
 
+        //Other
         Config m_conf;
 
         GLuint m_fbo;
