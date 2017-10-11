@@ -81,6 +81,7 @@ void ChunkSection::bufferMesh()
 {
     m_meshes.solidMesh.bufferMesh();
     m_meshes.waterMesh.bufferMesh();
+    m_meshes.waterMesh.bufferMesh();
     m_hasBufferedMesh = true;
 }
 
@@ -116,6 +117,7 @@ void ChunkSection::deleteMeshes()
         m_hasMesh = false;
         m_meshes.solidMesh.deleteData();
         m_meshes.waterMesh.deleteData();
+        m_meshes.floraMesh.deleteData();
     }
 }
 
