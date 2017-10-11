@@ -34,14 +34,18 @@ void RenderMaster::drawCube(const Entity& cube)
 
 void RenderMaster::drawChunk(const ChunkSection& chunk)
 {
-    const ChunkMesh& solidMesh = chunk.getMeshes().solidMesh;
-    const ChunkMesh& waterMesh = chunk.getMeshes().waterMesh;
+    const auto& solidMesh = chunk.getMeshes().solidMesh;
+    const auto& waterMesh = chunk.getMeshes().waterMesh;
+    const auto& floraMesh = chunk.getMeshes().floraMesh;
 
     if (solidMesh.faces > 0)
         m_chunkRenderer.add(solidMesh);
 
     if (waterMesh.faces > 0)
         m_waterRenderer.add(waterMesh);
+
+    if (floraMesh.faces > 0)
+        m_floraRenderer.add(floraMesh);
 }
 
 void RenderMaster::drawSky()
@@ -80,6 +84,7 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
     //m_cubeRenderer  .render (camera);
     m_chunkRenderer .render (camera, &m_conf);
     m_waterRenderer .render (camera, &m_conf);
+    m_floraRenderer .render (camera, &m_conf);
 
     if (m_drawBox)
     {

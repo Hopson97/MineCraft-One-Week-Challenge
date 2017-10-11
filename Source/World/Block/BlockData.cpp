@@ -60,6 +60,12 @@ BlockData::BlockData(const std::string& fileName)
             inFile >> id;
             m_data.meshType = static_cast<BlockMeshType>(id);
         }
+        else if (line == "ShaderType")
+        {
+            int id;
+            inFile >> id;
+            m_data.shaderType = static_cast<BlockShaderType>(id);
+        }
     }
 }
 

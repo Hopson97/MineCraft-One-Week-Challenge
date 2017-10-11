@@ -13,5 +13,8 @@ Opaque
 MeshType
 1
 
+ShaderType
+2
+
 Collidable
 0
