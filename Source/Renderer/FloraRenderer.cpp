@@ -1,38 +1,38 @@
-#include "ChunkRenderer.h"
+#include "FloraRenderer.h"
 
 #include "../World/Chunk/ChunkMesh.h"
 #include "../World/Block/BlockDatabase.h"
-
+#include "../Application.h"
 #include "../Camera.h"
 
 #include <iostream>
 
-void ChunkRenderer::add(const ChunkMesh& mesh)
+void FloraRenderer::add(const ChunkMesh& mesh)
 {
     m_chunks.push_back(&mesh);
 }
 
-void ChunkRenderer::render(const Camera& camera, Config* conf)
+void FloraRenderer::render(const Camera& camera, Config* conf)
 {
     if (m_chunks.empty())
     {
         return;
     }
 
-    glDisable(GL_BLEND);
-    glEnable(GL_CULL_FACE);
-
+    glEnable(GL_BLEND);
+    glDisable(GL_CULL_FACE);
     m_shader.useProgram();
-    BlockDatabase::get().textureAtlas.bindTexture();
 
     m_shader.loadProjectionViewMatrix(camera.getProjectionViewMatrix());
+    m_shader.loadTime(g_timeElapsed);
 
-    for (const ChunkMesh* mesh : m_chunks)
+    for (const auto& mesh : m_chunks)
     {
         const ChunkMesh& m = *mesh;
 
         m.getModel().bindVAO();
         GL::drawElements(m.getModel().getIndicesCount());
+
     }
 
     m_chunks.clear();
