@@ -12,7 +12,6 @@
 #include "FloraRenderer.h"
 #include "../Config.h"
 
-
 class Camera;
 class ChunkSection;
 

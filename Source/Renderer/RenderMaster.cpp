@@ -84,6 +84,7 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
     //m_cubeRenderer  .render (camera);
     m_chunkRenderer .render (camera, &m_conf);
     m_waterRenderer .render (camera, &m_conf);
+    m_floraRenderer .render (camera, &m_conf);
 
     if (m_drawBox)
     {

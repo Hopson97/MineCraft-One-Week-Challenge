@@ -32,7 +32,6 @@ void FloraRenderer::render(const Camera& camera, Config* conf)
 
         m.getModel().bindVAO();
         GL::drawElements(m.getModel().getIndicesCount());
-
     }
 
     m_chunks.clear();
