@@ -94,7 +94,7 @@ void StatePlaying::render(RenderMaster& renderer)
         drawGUI = !drawGUI;
     }
 
-    //if (drawGUI)
+    if (drawGUI)
     {
         m_fpsCounter.draw(renderer);
         renderer.drawSFML(m_crosshair);
