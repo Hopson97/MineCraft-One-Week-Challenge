@@ -79,22 +79,22 @@ void SkyManager::TickUpdate(unsigned int tickTime){
     //0 = 6am
     //12000 = 6pm
     if(dayTime < 3000){ //6am - 9am sun gets brighter
-        g_light = blend(0.4f, 0.9f, (float)dayTime / 3000); 
+        g_light = blend(0.7f, 1.0f, (float)dayTime / 3000); 
     }
     if(dayTime > 3000 && dayTime < 9000){ //9am - 3pm sun is brightest
-        g_light = 0.9f;
+        g_light = 1.0f;
     }
     if(dayTime > 9000 && dayTime < 12000){ //3pm - 6pm sun gets dimmer
-        g_light = blend(1.0f, 0.4f,(float)((float)dayTime - 9000) / 3000);
+        g_light = blend(1.0f, 0.7f,(float)((float)dayTime - 9000) / 3000);
     }
     if(dayTime > 12000 && dayTime < 15000){ //6pm - 9pm sun light fades
-        g_light = blend(0.4f, 0.05f, (float)((float)dayTime - 12000)/ 3000);
+        g_light = blend(0.7f, 0.1f, (float)((float)dayTime - 12000)/ 3000);
     }
     if(dayTime > 15000 && dayTime < 21000){//9pm - 3am is night
         g_light = 0.1f;
     }
     if(dayTime > 21000 && dayTime < 24000){
-        g_light = blend(0.05f, 0.4f, (float)((float)dayTime-21000) / 3000);
+        g_light = blend(0.1f, 0.7f, (float)((float)dayTime-21000) / 3000);
     }
     
     //Update Sun/Moon matrix
