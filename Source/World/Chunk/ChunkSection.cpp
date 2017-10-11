@@ -81,7 +81,7 @@ void ChunkSection::bufferMesh()
 {
     m_meshes.solidMesh.bufferMesh();
     m_meshes.waterMesh.bufferMesh();
-    m_meshes.waterMesh.bufferMesh();
+    m_meshes.floraMesh.bufferMesh();
     m_hasBufferedMesh = true;
 }
 

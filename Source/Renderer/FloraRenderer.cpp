@@ -19,7 +19,7 @@ void FloraRenderer::render(const Camera& camera, Config* conf)
         return;
     }
 
-    glEnable(GL_BLEND);
+    glDisable(GL_BLEND);
     glDisable(GL_CULL_FACE);
     m_shader.useProgram();
 
