@@ -28,10 +28,8 @@ void FloraRenderer::render(const Camera& camera, Config* conf)
 
     for (const auto& mesh : m_chunks)
     {
-        const ChunkMesh& m = *mesh;
-
-        m.getModel().bindVAO();
-        GL::drawElements(m.getModel().getIndicesCount());
+        mesh->getModel().bindVAO();
+        GL::drawElements(mesh->getModel().getIndicesCount());
     }
 
     m_chunks.clear();
