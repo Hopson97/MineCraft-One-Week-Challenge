@@ -28,6 +28,8 @@ class Model : public NonCopyable
 
         int getIndicesCount() const;
 
+        const RenderInfo& getRenderInfo() const;
+
     private:
         RenderInfo m_renderInfo;
 

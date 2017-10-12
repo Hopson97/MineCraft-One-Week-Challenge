@@ -107,3 +107,7 @@ int Model::getIndicesCount() const
     return m_renderInfo.indicesCount;
 }
 
+const RenderInfo& Model::getRenderInfo() const
+{
+    return m_renderInfo;
+}
