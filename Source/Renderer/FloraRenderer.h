@@ -7,7 +7,7 @@
 #include "../Shaders/FloraShader.h"
 #include "../Config.h"
 
-
+struct RenderInfo;
 class ChunkMesh;
 class Camera;
 
@@ -18,7 +18,7 @@ class FloraRenderer
         void render(const Camera& camera, Config* conf);
 
     private:
-        std::vector<const ChunkMesh*> m_chunks;
+        std::vector<const RenderInfo*> m_chunks;
 
         FloraShader m_shader;
 };

@@ -6,6 +6,8 @@
 #include "../Shaders/ChunkShader.h"
 #include "../Config.h"
 
+
+struct RenderInfo;
 class ChunkMesh;
 class Camera;
 
@@ -16,7 +18,7 @@ class ChunkRenderer
         void render(const Camera& camera, Config* conf);
 
     private:
-        std::vector<const ChunkMesh*> m_chunks;
+        std::vector<const RenderInfo*> m_chunks;
 
         ChunkShader m_shader;
 

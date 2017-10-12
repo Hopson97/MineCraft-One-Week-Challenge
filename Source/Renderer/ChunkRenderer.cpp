@@ -10,7 +10,7 @@
 
 void ChunkRenderer::add(const ChunkMesh& mesh)
 {
-    m_chunks.push_back(&mesh);
+    m_chunks.push_back(&mesh.getModel().getRenderInfo());
 }
 
 void ChunkRenderer::render(const Camera& camera, Config* conf)
@@ -29,10 +29,10 @@ void ChunkRenderer::render(const Camera& camera, Config* conf)
     m_shader.loadProjectionViewMatrix(camera.getProjectionViewMatrix());
     m_shader.loadLighting(g_light);
 
-    for (const ChunkMesh* mesh : m_chunks)
+    for (const auto& mesh : m_chunks)
     {
-        mesh->getModel().bindVAO();
-        GL::drawElements(mesh->getModel().getIndicesCount());
+        GL::bindVAO(mesh->vao);
+        GL::drawElements(mesh->indicesCount);
     }
 
     m_chunks.clear();

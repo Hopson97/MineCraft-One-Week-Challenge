@@ -5,7 +5,8 @@
 
 namespace GL
 {
-    void drawElements(GLuint indicesCount) noexcept;
+    void drawElements   (GLuint indicesCount) noexcept;
+    void bindVAO        (GLuint vao) noexcept;
 
     namespace Enum
     {
