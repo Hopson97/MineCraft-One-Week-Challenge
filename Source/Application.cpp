@@ -2,7 +2,6 @@
 #include <iostream>
 #include "States/PlayingState.h"
 #include "World/Block/BlockDatabase.h"
-#include "Renderer/Framebuffer.h"
 
 Application::Application(const Config& config)
 :   m_context   (config)

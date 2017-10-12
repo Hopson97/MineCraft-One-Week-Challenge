@@ -8,7 +8,6 @@ Source/Texture/BasicTexture.cpp
 Source/Camera.cpp
 Source/Context.cpp
 Source/Controller.cpp
-Source/Renderer/Framebuffer.cpp
 Source/Renderer/WaterRenderer.cpp
 Source/Renderer/CubeRenderer.cpp
 Source/Renderer/SFMLRenderer.cpp
