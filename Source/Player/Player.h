@@ -46,12 +46,6 @@ class Player : public Entity
 
         std::vector<ToggleKey> m_inventoryJumps;
 
-        ToggleKey m_num1;
-        ToggleKey m_num2;
-        ToggleKey m_num3;
-        ToggleKey m_num4;
-        ToggleKey m_num5;
-
         glm::vec3 m_acceleation;
 };
 
