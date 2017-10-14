@@ -27,7 +27,7 @@ void ChunkRenderer::render(const Camera& camera, Config* conf)
 
     m_shader.loadProjectionViewMatrix(camera.getProjectionViewMatrix());
 
-    for (const auto& mesh : m_chunks)
+    for (auto mesh : m_chunks)
     {
         GL::bindVAO(mesh->vao);
         GL::drawElements(mesh->indicesCount);

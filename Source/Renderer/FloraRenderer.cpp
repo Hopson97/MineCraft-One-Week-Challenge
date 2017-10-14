@@ -26,7 +26,7 @@ void FloraRenderer::render(const Camera& camera, Config* conf)
     m_shader.loadProjectionViewMatrix(camera.getProjectionViewMatrix());
     m_shader.loadTime(g_timeElapsed);
 
-    for (const auto& mesh : m_chunks)
+    for (auto mesh : m_chunks)
     {
         GL::bindVAO(mesh->vao);
         GL::drawElements(mesh->indicesCount);
