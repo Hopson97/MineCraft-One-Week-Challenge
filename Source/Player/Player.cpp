@@ -250,9 +250,14 @@ void Player::mouseInput(const sf::RenderWindow& window)
         return;
     }
 
+	 static sf::Vector2i center = {
+		 static_cast<int>(window.getSize().x / 2),
+		 static_cast<int>(window.getSize().y / 2)
+	 };
+
     static auto const BOUND = 89.9999;
     static auto lastMousePosition = sf::Mouse::getPosition(window);
-    auto change = sf::Mouse::getPosition() - lastMousePosition;
+    auto change = sf::Mouse::getPosition(window) - lastMousePosition;
 
     rotation.y += change.x * 0.05;
     rotation.x += change.y * 0.05;
@@ -263,12 +268,12 @@ void Player::mouseInput(const sf::RenderWindow& window)
     if      (rotation.y >  360) rotation.y = 0;
     else if (rotation.y <  0)   rotation.y = 360;
 
-    auto cx = static_cast<int>(window.getSize().x / 2);
-    auto cy = static_cast<int>(window.getSize().y / 2);
-
-    sf::Mouse::setPosition({cx, cy}, window);
-
-    lastMousePosition = sf::Mouse::getPosition();
+    lastMousePosition = sf::Mouse::getPosition(window);
+	
+	 if(lastMousePosition.x < 10 || lastMousePosition.x > window.getSize().x - 10 || lastMousePosition.y < 10 || lastMousePosition.y > window.getSize().y - 10 ) {
+		sf::Mouse::setPosition( center );
+		lastMousePosition = center;
+	 }
 }
 
 void Player::draw(RenderMaster& master)
