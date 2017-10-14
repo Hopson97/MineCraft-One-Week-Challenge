@@ -89,7 +89,7 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
     m_sky->render(camera);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0); //Set to screen
-    glViewport(0, 0, g_X, g_Y);
+    glViewport(0, 0, g_info.resolutionX, g_info.resolutionY);
     glBindTexture(GL_TEXTURE_2D, m_fboTex); //Set to texture
 
     m_quadRenderer.add(glm::vec3(-1, -1, -1));
@@ -109,7 +109,7 @@ bool RenderMaster::setupFrameBuffers()
     glGenTextures(1, &m_fboTex);
     glBindTexture(GL_TEXTURE_2D, m_fboTex);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, g_X, g_Y, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, g_info.resolutionX, g_info.resolutionY, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -120,7 +120,7 @@ bool RenderMaster::setupFrameBuffers()
     //Render Buffer
     glGenRenderbuffers(1, &m_fboRbo);
     glBindRenderbuffer(GL_RENDERBUFFER, m_fboRbo);
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, g_X, g_Y);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, g_info.resolutionX, g_info.resolutionY);
     glBindRenderbuffer(GL_RENDERBUFFER, 0);
 
     //Bind render buffer to framebuffer

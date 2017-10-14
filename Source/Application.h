@@ -9,9 +9,7 @@
 
 #include "Context.h"
 #include "Camera.h"
-
-float extern g_timeElapsed;
-extern float g_deltaTime;
+#include "GlobalInfo.h"
 
 class Application
 {
