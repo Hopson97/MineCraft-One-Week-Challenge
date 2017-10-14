@@ -9,9 +9,10 @@
 #include "../Model.h"
 #include "../Shaders/SunShader.h"
 #include "../Texture/BasicTexture.h"
+#include "ProcSky.h"
 
 extern float g_light;
-
+extern float g_ticks;
 class Camera;
 
 class SkyManager : public TickObject{
@@ -40,6 +41,8 @@ private:
     
     BasicTexture sun;
     BasicTexture moon;
+
+    ProcSky skyBox;
 };
 
 #endif

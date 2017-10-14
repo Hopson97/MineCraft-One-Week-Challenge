@@ -3,6 +3,7 @@
 
 #define degreesToRadians(x) x*(3.141592f/180.0f)
 float g_light;
+float g_ticks;
 
 //blend
 float blend(float x, float y, float factor){
@@ -78,27 +79,29 @@ void SkyManager::TickUpdate(unsigned int tickTime){
     //Ambient light
     //0 = 6am
     //12000 = 6pm
-    if(dayTime < 3000){ //6am - 9am sun gets brighter
-        g_light = blend(0.7f, 1.0f, (float)dayTime / 3000); 
+    if(dayTime < 1500){ //6am - 9am sun gets brighter
+        g_light = blend(0.6f, 1.0f, (float)dayTime / 1500); 
     }
-    if(dayTime > 3000 && dayTime < 9000){ //9am - 3pm sun is brightest
+    if(dayTime > 1500 && dayTime < 10500){ //9am - 3pm sun is brightest
         g_light = 1.0f;
     }
-    if(dayTime > 9000 && dayTime < 12000){ //3pm - 6pm sun gets dimmer
-        g_light = blend(1.0f, 0.7f,(float)((float)dayTime - 9000) / 3000);
+    if(dayTime > 10500 && dayTime < 12000){ //3pm - 6pm sun gets dimmer
+        g_light = blend(1.0f, 0.6f,(float)((float)dayTime - 10500) / 1500);
     }
-    if(dayTime > 12000 && dayTime < 15000){ //6pm - 9pm sun light fades
-        g_light = blend(0.7f, 0.1f, (float)((float)dayTime - 12000)/ 3000);
+    if(dayTime > 12000 && dayTime < 13500){ //6pm - 9pm sun light fades
+        g_light = blend(0.6f, 0.2f, (float)((float)dayTime - 12000)/ 1500);
     }
-    if(dayTime > 15000 && dayTime < 21000){//9pm - 3am is night
-        g_light = 0.1f;
+    if(dayTime > 13500 && dayTime < 22500){//9pm - 3am is night
+        g_light = 0.2f;
     }
-    if(dayTime > 21000 && dayTime < 24000){
-        g_light = blend(0.1f, 0.7f, (float)((float)dayTime-21000) / 3000);
+    if(dayTime > 22500 && dayTime < 24000){
+        g_light = blend(0.2f, 0.6f, (float)((float)dayTime-22500) / 1500);
     }
     
     //Update Sun/Moon matrix
     transformMatrix = glm::translate(glm::mat4(1.0f), playerPos);
+
+    g_ticks = dayTime;
 }
 
 void SkyManager::setTime(unsigned int tickTime){
@@ -115,6 +118,7 @@ void SkyManager::Update(glm::vec3 position){
 
 void SkyManager::render(const Camera& camera){
     
+    skyBox.Render(camera);
     glEnable(GL_BLEND);  
     m_shader.useProgram();
     m_SunModel.bindVAO();
@@ -136,4 +140,5 @@ void SkyManager::render(const Camera& camera){
 
     GL::drawElements(m_MoonModel.getIndicesCount());
     glDisable(GL_BLEND);
+
 }
