@@ -10,7 +10,9 @@ uniform mat4 modelMatrix;
 
 void main()
 {
-    gl_Position = projViewMatrix * modelMatrix * vec4(inVertexPosition, 1.0);
+    vec4 worldPos = modelMatrix * vec4(inVertexPosition, 1.0);
+    worldPos.y += 0.5;
+    gl_Position = projViewMatrix * worldPos;
 
     passTextureCoord    = inTextureCoord;
 }
