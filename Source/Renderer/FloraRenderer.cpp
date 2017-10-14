@@ -5,6 +5,8 @@
 #include "../Application.h"
 #include "../Camera.h"
 
+#include "../Sky/SkyManager.h"
+
 #include <iostream>
 
 void FloraRenderer::add(const ChunkMesh& mesh)
@@ -25,6 +27,7 @@ void FloraRenderer::render(const Camera& camera, Config* conf)
 
     m_shader.loadProjectionViewMatrix(camera.getProjectionViewMatrix());
     m_shader.loadTime(g_timeElapsed);
+    m_shader.loadLight(g_light);
 
     for (auto mesh : m_chunks)
     {

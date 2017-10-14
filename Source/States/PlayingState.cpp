@@ -8,6 +8,7 @@
 
 #include <iostream>
 
+SkyManager* m_sky;
 
 StatePlaying::StatePlaying(Application& app, const Config& config)
 :   StateBase   (app)
@@ -22,10 +23,21 @@ StatePlaying::StatePlaying(Application& app, const Config& config)
                           m_crosshair.getGlobalBounds().height / 2);
     m_crosshair.setPosition(app.getWindow().getSize().x / 2,
                             app.getWindow().getSize().y / 2);
+
+    tManager = new TickManager();
+    tickThread = new std::thread(std::bind(&TickManager::run, tManager));
+
+    m_sky = new SkyManager();
+    tManager->add(m_sky);
 }
 
 void StatePlaying::handleEvent(sf::Event e)
 { }
+
+StatePlaying::~StatePlaying(){
+    tickThread->join();
+    delete tickThread;
+}
 
 void StatePlaying::handleInput()
 {
@@ -79,28 +91,16 @@ void StatePlaying::update(float deltaTime)
     m_player.update(deltaTime, m_world);
     m_world.update(m_pApplication->getCamera());
 
-
+    m_sky->Update(m_player.position);
 }
 
 void StatePlaying::render(RenderMaster& renderer)
 {
     static sf::Clock dt;
-
-    static bool drawGUI = false;
-    static ToggleKey drawKey(sf::Keyboard::F3);
-
-    if (drawKey.isKeyPressed())
-    {
-        drawGUI = !drawGUI;
-    }
-
-    if (drawGUI)
-    {
-        m_fpsCounter.draw(renderer);
-        renderer.drawSFML(m_crosshair);
-        m_player.draw(renderer);
-    }
-
+    
+    m_fpsCounter.draw(renderer);
+    renderer.drawSFML(m_crosshair);
+    m_player.draw(renderer);
 
     m_world.renderWorld(renderer, m_pApplication->getCamera());
 }

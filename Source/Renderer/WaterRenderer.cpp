@@ -4,6 +4,7 @@
 #include "../World/Block/BlockDatabase.h"
 #include "../Application.h"
 #include "../Camera.h"
+#include "../Sky/SkyManager.h"
 
 #include <iostream>
 
@@ -18,19 +19,16 @@ void WaterRenderer::render(const Camera& camera, Config* conf)
     {
         return;
     }
-
     glEnable(GL_BLEND);
     glDisable(GL_CULL_FACE);
     m_shader.useProgram();
-
     m_shader.loadProjectionViewMatrix(camera.getProjectionViewMatrix());
     m_shader.loadTime(g_timeElapsed);
-
+    m_shader.loadLighting(g_light);
     for (auto mesh : m_chunks)
     {
         GL::bindVAO(mesh->vao);
         GL::drawElements(mesh->indicesCount);
     }
-
     m_chunks.clear();
 }

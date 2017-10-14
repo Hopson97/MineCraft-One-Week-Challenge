@@ -2,7 +2,6 @@
 #include <iostream>
 #include "States/PlayingState.h"
 #include "World/Block/BlockDatabase.h"
-#include "Renderer/Framebuffer.h"
 
 Application::Application(const Config& config)
 :   m_context   (config)
@@ -14,7 +13,7 @@ Application::Application(const Config& config)
 }
 
 float g_timeElapsed = 0;
-
+float g_deltaTime = 0;
 
 void Application::runLoop()
 {
@@ -28,6 +27,7 @@ void Application::runLoop()
     while (m_context.window.isOpen() && !m_states.empty())
     {
         auto deltaTime = dtTimer.restart();
+        g_deltaTime = deltaTime.asSeconds();
         auto& state = *m_states.back();
 
         state.handleInput();
@@ -45,7 +45,6 @@ void Application::runLoop()
         }
 
         m = dt.restart();
-
         g_timeElapsed += m.asSeconds();
     }
 }
@@ -94,4 +93,3 @@ void Application::turnOnMouse()
 {
     m_context.window.setMouseCursorVisible(true);
 }
-

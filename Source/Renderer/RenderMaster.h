@@ -6,11 +6,14 @@
 #include "QuadRenderer.h"
 #include "CubeRenderer.h"
 #include "ChunkRenderer.h"
-#include "SkyboxRenderer.h"
 #include "SFMLRenderer.h"
 #include "WaterRenderer.h"
 #include "FloraRenderer.h"
 #include "../Config.h"
+#include "../Sky/SkyManager.h"
+
+
+#include "../States/PlayingState.h"
 
 class Camera;
 class ChunkSection;
@@ -43,7 +46,6 @@ class RenderMaster
         FloraRenderer   m_floraRenderer;
 
         //Detail
-        SkyboxRenderer  m_skyboxRenderer;
         SFMLRenderer    m_sfmlRenderer;
 
         //Other

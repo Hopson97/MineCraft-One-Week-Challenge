@@ -1,7 +1,6 @@
 #include "RenderMaster.h"
 
 #include <SFML/Graphics.hpp>
-#include "Framebuffer.h"
 #include <iostream>
 
 #include "../World/Chunk/ChunkMesh.h"
@@ -86,13 +85,8 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
     m_waterRenderer .render (camera, &m_conf);
     m_floraRenderer .render (camera, &m_conf);
 
-    if (m_drawBox)
-    {
-        glDisable(GL_CULL_FACE);
-        m_skyboxRenderer.render (camera);
-        m_drawBox = false;
-    }
-
+    
+    m_sky->render(camera);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0); //Set to screen
     glViewport(0, 0, g_X, g_Y);
