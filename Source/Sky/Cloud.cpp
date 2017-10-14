@@ -5,7 +5,7 @@
 
 Clouds::Clouds():cloud("clouds"){
     std::vector<GLfloat> mvertexCoords
-    { 
+    {
             -1024,  128, 1024,
              1024,  128, 1024,
              1024,  128, -1024,
@@ -27,12 +27,12 @@ Clouds::Clouds():cloud("clouds"){
     };
 
     m_cloud.addData({mvertexCoords, mtextureCoords, mindexCoords});
-    
+
 }
 
 void Clouds::Render(const Camera& camera, glm::vec3 pos){
     m_shader.useProgram();
-    m_cloud.bindVAO(); 
+    m_cloud.bindVAO();
     cloud.bindTexture();
 
     movement += g_deltaTime; //Move
@@ -45,5 +45,5 @@ void Clouds::Render(const Camera& camera, glm::vec3 pos){
     m_shader.loadProjectionViewMatrix(camera.getProjectionViewMatrix());
     m_shader.loadLighting(g_light);
 
-    GL::drawElements(m_cloud.getIndicesCount());
+    //GL::drawElements(m_cloud.getIndicesCount());
 }

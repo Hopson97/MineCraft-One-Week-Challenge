@@ -3,6 +3,7 @@
 
 #include "TickObject.h"
 #include <vector>
+#include <memory>
 #include "../Context.h"
 
 class TickManager
@@ -10,13 +11,13 @@ class TickManager
     public:
         TickManager();
 
-        void add(TickObject* tick);
+        void add(std::shared_ptr<TickObject> tick);
         void run();
 
         int getTickTime();
 
     private:
-        std::vector<TickObject*> m_tickObjects;
+        std::vector<std::shared_ptr<TickObject>> m_tickObjects;
         unsigned int m_tickTime;
 };
 

@@ -8,7 +8,7 @@
 
 #include <iostream>
 
-SkyManager* m_sky;
+std::shared_ptr<SkyManager> m_sky;
 
 StatePlaying::StatePlaying(Application& app, const Config& config)
 :   StateBase   (app)
@@ -24,19 +24,19 @@ StatePlaying::StatePlaying(Application& app, const Config& config)
     m_crosshair.setPosition(app.getWindow().getSize().x / 2,
                             app.getWindow().getSize().y / 2);
 
-    tManager = new TickManager();
-    tickThread = new std::thread(std::bind(&TickManager::run, tManager));
+    m_tickManager   = std::make_unique<TickManager>();
+    m_tickThread    = std::make_unique<std::thread>(std::bind(&TickManager::run, m_tickManager.get()));
 
-    m_sky = new SkyManager();
-    tManager->add(m_sky);
+    m_sky = std::make_unique<SkyManager>();
+    m_tickManager->add(m_sky);
 }
 
 void StatePlaying::handleEvent(sf::Event e)
 { }
 
-StatePlaying::~StatePlaying(){
-    tickThread->join();
-    delete tickThread;
+StatePlaying::~StatePlaying()
+{
+    m_tickThread->join();
 }
 
 void StatePlaying::handleInput()
@@ -97,11 +97,10 @@ void StatePlaying::update(float deltaTime)
 void StatePlaying::render(RenderMaster& renderer)
 {
     static sf::Clock dt;
-    
+
     m_fpsCounter.draw(renderer);
     renderer.drawSFML(m_crosshair);
     m_player.draw(renderer);
-
     m_world.renderWorld(renderer, m_pApplication->getCamera());
 }
 
