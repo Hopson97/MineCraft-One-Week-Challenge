@@ -11,6 +11,6 @@ void main()
 {
     color = texture(texSampler, passTextureCoord);
     //Lighting Calculations
-    outColour = vec4(color.rgb * lighting, color.a);
+    outColour = vec4(color.rgb * lighting, color.a * 0.75);
     if (outColour.a == 0) discard;
 }
