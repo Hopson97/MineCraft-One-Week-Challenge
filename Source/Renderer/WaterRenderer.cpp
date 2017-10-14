@@ -23,8 +23,8 @@ void WaterRenderer::render(const Camera& camera, Config* conf)
     glDisable(GL_CULL_FACE);
     m_shader.useProgram();
     m_shader.loadProjectionViewMatrix(camera.getProjectionViewMatrix());
-    m_shader.loadTime(g_timeElapsed);
-    m_shader.loadLighting(g_light);
+    m_shader.loadTime(g_info.elapsedTime);
+    m_shader.loadLighting(g_info.lighting);
     for (auto mesh : m_chunks)
     {
         GL::bindVAO(mesh->vao);

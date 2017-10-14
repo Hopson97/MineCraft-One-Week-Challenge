@@ -1,9 +1,7 @@
 #include "Context.h"
-
+#include "GlobalInfo.h"
 #include <GL/glew.h>
 
-unsigned int g_X;
-unsigned int g_Y;
 sf::RenderWindow* g_window;
 
 Context::Context(const Config& config)
@@ -20,15 +18,15 @@ Context::Context(const Config& config)
     if(config.isFullscreen)
     {
         window.create(sf::VideoMode::getDesktopMode(), "MineCraft Week", sf::Style::Fullscreen, settings);
-        g_X = sf::VideoMode::getDesktopMode().width;
-        g_Y = sf::VideoMode::getDesktopMode().height;
+        g_info.resolutionX = sf::VideoMode::getDesktopMode().width;
+        g_info.resolutionY = sf::VideoMode::getDesktopMode().height;
     }
     else
     {
         sf::VideoMode winMode(config.windowX, config.windowY);
         window.create(winMode, "MineCraft Week", sf::Style::Close, settings);
-        g_X = config.windowX;
-        g_Y = config.windowY;
+        g_info.resolutionX = config.windowX;
+        g_info.resolutionY = config.windowY;
     }
 
     g_window = &window;

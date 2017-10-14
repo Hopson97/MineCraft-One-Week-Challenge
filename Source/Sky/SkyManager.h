@@ -11,9 +11,7 @@
 #include "../Texture/BasicTexture.h"
 #include "ProcSky.h"
 #include "Cloud.h"
-
-extern float g_light;
-extern float g_ticks;
+#include "../GlobalInfo.h"
 class Camera;
 
 class SkyManager : public TickObject

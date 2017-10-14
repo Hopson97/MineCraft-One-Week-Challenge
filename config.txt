@@ -1,7 +1,7 @@
-renderdistance 25
+renderdistance 16
 fullscreen 1
 windowsize 1280 720
-fov 105
+fov 90
 gamma 1.3
 contrast 1.1
 brightness 1.15
