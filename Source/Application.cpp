@@ -6,18 +6,17 @@
 Application::Application(const Config& config)
 :   m_context   (config)
 ,   m_camera    (config)
-,   m_config    (config)
 {
     BlockDatabase::get();
     pushState<StatePlaying>(*this, config);
+
+    g_Config = config;
 }
 
 void Application::runLoop()
 {
     sf::Clock dtTimer;
     sf::Clock dt;
-
-    m_masterRenderer.setConfig(m_config);
 
     sf::Time m;
 

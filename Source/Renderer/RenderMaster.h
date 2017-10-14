@@ -29,8 +29,6 @@ class RenderMaster
         void drawChunk(const ChunkSection& chunk);
         void drawSky();
 
-        void setConfig(const Config& con);
-
         void finishRender(sf::RenderWindow& window, const Camera& camera);
 
     private:
@@ -47,9 +45,6 @@ class RenderMaster
 
         //Detail
         SFMLRenderer    m_sfmlRenderer;
-
-        //Other
-        Config m_conf;
 
         GLuint m_fbo;
         GLuint m_fboTex;

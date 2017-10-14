@@ -7,6 +7,7 @@
 #include "../World/Chunk/ChunkSection.h"
 #include "../Application.h"
 #include "../Context.h"
+#include "../Config.h"
 
 RenderMaster::RenderMaster()
 {
@@ -33,6 +34,20 @@ void RenderMaster::drawCube(const Entity& cube)
 
 void RenderMaster::drawChunk(const ChunkSection& chunk)
 {
+    //Since this pertains to here...
+    if(g_Config.gamma > 2.0f)
+    {
+        g_Config.gamma = 1.3f;
+    }
+    if(g_Config.brightness > 1.5f)
+    {
+        g_Config.brightness = 1.15f;
+    }
+    if(g_Config.contrast > 2.5f)
+    {
+        g_Config.contrast = 1.1f;
+    }
+    
     const auto& solidMesh = chunk.getMeshes().solidMesh;
     const auto& waterMesh = chunk.getMeshes().waterMesh;
     const auto& floraMesh = chunk.getMeshes().floraMesh;
@@ -52,23 +67,6 @@ void RenderMaster::drawSky()
     m_drawBox = true;
 }
 
-void RenderMaster::setConfig(const Config& con)
-{
-    m_conf = con;
-    if(m_conf.gamma > 2.0f)
-    {
-        m_conf.gamma = 1.3f;
-    }
-    if(m_conf.brightness > 1.5f)
-    {
-        m_conf.brightness = 1.15f;
-    }
-    if(m_conf.contrast > 2.5f)
-    {
-        m_conf.contrast = 1.1f;
-    }
-}
-
 void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
 {
     glClearColor(0.0, 0.0, 0.0, 1.0);
@@ -81,9 +79,9 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
     glEnable(GL_CULL_FACE);
     //m_quadRenderer  .render (camera);
     //m_cubeRenderer  .render (camera);
-    m_chunkRenderer .render (camera, &m_conf);
-    m_waterRenderer .render (camera, &m_conf);
-    m_floraRenderer .render (camera, &m_conf);
+    m_chunkRenderer .render (camera, &g_Config);
+    m_waterRenderer .render (camera, &g_Config);
+    m_floraRenderer .render (camera, &g_Config);
 
     
     m_sky->render(camera);
@@ -93,7 +91,7 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
     glBindTexture(GL_TEXTURE_2D, m_fboTex); //Set to texture
 
     m_quadRenderer.add(glm::vec3(-1, -1, -1));
-    m_quadRenderer.render(camera, &m_conf);
+    m_quadRenderer.render(camera, &g_Config);
 
     m_sfmlRenderer  .render (window);
 
