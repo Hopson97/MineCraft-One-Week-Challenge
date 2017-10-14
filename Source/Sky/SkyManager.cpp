@@ -138,6 +138,8 @@ void SkyManager::render(const Camera& camera){
     m_shader.loadProjectionViewMatrix   (camera.getProjectionViewMatrix());
     m_shader.loadTime(degreesToRadians(((float)dayTime/24000) * 360));
 
+    clouds.Render(camera, playerPos);
+
     GL::drawElements(m_MoonModel.getIndicesCount());
     glDisable(GL_BLEND);
 

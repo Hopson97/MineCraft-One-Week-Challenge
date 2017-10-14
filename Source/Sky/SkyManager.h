@@ -10,6 +10,7 @@
 #include "../Shaders/SunShader.h"
 #include "../Texture/BasicTexture.h"
 #include "ProcSky.h"
+#include "Cloud.h"
 
 extern float g_light;
 extern float g_ticks;
@@ -43,6 +44,7 @@ private:
     BasicTexture moon;
 
     ProcSky skyBox;
+    Clouds clouds;
 };
 
 #endif

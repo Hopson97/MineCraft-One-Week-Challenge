@@ -11,6 +11,7 @@
 #include "Camera.h"
 
 float extern g_timeElapsed;
+extern float g_deltaTime;
 
 class Application
 {

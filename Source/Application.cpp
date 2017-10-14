@@ -13,7 +13,7 @@ Application::Application(const Config& config)
 }
 
 float g_timeElapsed = 0;
-
+float g_deltaTime = 0;
 
 void Application::runLoop()
 {
@@ -27,6 +27,7 @@ void Application::runLoop()
     while (m_context.window.isOpen() && !m_states.empty())
     {
         auto deltaTime = dtTimer.restart();
+        g_deltaTime = deltaTime.asSeconds();
         auto& state = *m_states.back();
 
         state.handleInput();
@@ -44,7 +45,6 @@ void Application::runLoop()
         }
 
         m = dt.restart();
-
         g_timeElapsed += m.asSeconds();
     }
 }
