@@ -44,6 +44,8 @@ class Player : public Entity
         ToggleKey m_itemUp;
         ToggleKey m_flyKey;
 
+        std::vector<ToggleKey> m_inventoryJumps;
+
         ToggleKey m_num1;
         ToggleKey m_num2;
         ToggleKey m_num3;

@@ -24,6 +24,13 @@ Player::Player()
 ,   m_num5 (sf::Keyboard::Num5)
 
 {
+    for (int i = 0; i < 5; i++)
+    {
+        m_inventoryJumps.emplace_back
+            ((sf::Keyboard::Key(sf::Keyboard::Num1 + i)));
+    }
+
+
     f.loadFromFile("Res/Fonts/rs.ttf");
 
 
@@ -92,6 +99,14 @@ void Player::handleInput(const sf::RenderWindow& window)
         if (m_heldItem == -1)
         {
             m_heldItem = m_items.size() - 1;
+        }
+    }
+
+    for (int i = 0; i < 5; i++)
+    {
+        if(m_inventoryJumps[i].isKeyPressed())
+        {
+            m_heldItem = i;
         }
     }
 
@@ -269,7 +284,7 @@ void Player::mouseInput(const sf::RenderWindow& window)
     else if (rotation.y <  0)   rotation.y = 360;
 
     lastMousePosition = sf::Mouse::getPosition(window);
-	
+
 	 if(lastMousePosition.x < 10 || lastMousePosition.x > window.getSize().x - 10 || lastMousePosition.y < 10 || lastMousePosition.y > window.getSize().y - 10 ) {
 		sf::Mouse::setPosition( center );
 		lastMousePosition = center;

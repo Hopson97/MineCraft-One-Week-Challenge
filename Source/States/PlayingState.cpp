@@ -77,8 +77,6 @@ void StatePlaying::handleInput()
         }
         lastPosition = ray.getEnd();
     }
-
-
 }
 
 void StatePlaying::update(float deltaTime)
