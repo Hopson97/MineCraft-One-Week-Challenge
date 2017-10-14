@@ -16,35 +16,35 @@ extern float g_light;
 extern float g_ticks;
 class Camera;
 
-class SkyManager : public TickObject{
-public:
-    SkyManager();
-    ~SkyManager();
-    
-    void TickUpdate(unsigned int tickTime);
-    void Update(glm::vec3 playerPosition);
+class SkyManager : public TickObject
+{
+    public:
+        SkyManager();
 
-    void setTime(unsigned int time);
-    unsigned int getTime();
+        void TickUpdate(unsigned int tickTime);
+        void Update(glm::vec3 playerPosition);
 
-    void render(const Camera& camera);
+        void setTime(unsigned int time);
+        unsigned int getTime();
 
-private:
-    unsigned int dayTime;
+        void render(const Camera& camera);
 
-    unsigned int m_prevTime; //Ticks can skip around sometimes so...
-    glm::vec3 playerPos;
-    glm::mat4 transformMatrix;
+    private:
+        unsigned int dayTime;
 
-    Model m_SunModel;
-    Model m_MoonModel;
-    SunShader m_shader;
-    
-    BasicTexture sun;
-    BasicTexture moon;
+        unsigned int m_prevTime; //Ticks can skip around sometimes so...
+        glm::vec3 playerPos;
+        glm::mat4 transformMatrix;
 
-    ProcSky skyBox;
-    Clouds clouds;
+        Model m_SunModel;
+        Model m_MoonModel;
+        SunShader m_shader;
+
+        BasicTexture sun;
+        BasicTexture moon;
+
+        ProcSky skyBox;
+        Clouds clouds;
 };
 
 #endif

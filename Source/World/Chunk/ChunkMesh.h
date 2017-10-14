@@ -15,7 +15,8 @@ class ChunkMesh
         void addFace(const std::array<GLfloat, 12>& blockFace,
                      const std::array<GLfloat, 8>& textureCoords,
                      const sf::Vector3i&         chunkPosition,
-                     const sf::Vector3i&         blockPosition);
+                     const sf::Vector3i&         blockPosition,
+                     GLfloat cardinalLight);
 
 
         void bufferMesh();
@@ -30,6 +31,7 @@ class ChunkMesh
     private:
         Mesh  m_mesh;
         Model m_model;
+        std::vector<GLfloat> m_cardinalLight;
         GLuint m_indexIndex = 0;
 
 

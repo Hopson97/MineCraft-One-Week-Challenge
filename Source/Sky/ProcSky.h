@@ -8,7 +8,8 @@
 
 class Camera;
 
-class ProcSky{
+class ProcSky
+{
 public:
     ProcSky();
 

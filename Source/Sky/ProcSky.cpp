@@ -2,21 +2,23 @@
 #include <vector>
 #include "SkyManager.h"
 
-ProcSky::ProcSky(){
+ProcSky::ProcSky()
+{
     GLfloat SIZE = 500;
 
 
     std::vector<GLfloat> vertexCoords =
         //Back
-         {SIZE, -SIZE, -SIZE, 3,
+    {
+        SIZE, -SIZE, -SIZE, 3,
         -SIZE, -SIZE, -SIZE, 0,
         -SIZE,  SIZE, -SIZE, 1,
-         SIZE,  SIZE, -SIZE, 2,
+        SIZE,  SIZE, -SIZE, 2,
 
         //Front
         -SIZE, -SIZE, SIZE, 4,
-         SIZE, -SIZE, SIZE, 7,
-         SIZE,  SIZE, SIZE, 5,
+        SIZE, -SIZE, SIZE, 7,
+        SIZE,  SIZE, SIZE, 5,
         -SIZE,  SIZE, SIZE, 6,
 
         //Right
@@ -33,18 +35,19 @@ ProcSky::ProcSky(){
 
         //Top
         -SIZE, SIZE,  SIZE, 6,
-         SIZE, SIZE,  SIZE, 5,
-         SIZE, SIZE, -SIZE, 2,
+        SIZE, SIZE,  SIZE, 5,
+        SIZE, SIZE, -SIZE, 2,
         -SIZE, SIZE, -SIZE, 1,
 
         //Bottom
         -SIZE, -SIZE, -SIZE, 0,
-         SIZE, -SIZE, -SIZE, 3,
-         SIZE, -SIZE,  SIZE, 7,
+        SIZE, -SIZE, -SIZE, 3,
+        SIZE, -SIZE,  SIZE, 7,
         -SIZE, -SIZE,  SIZE, 4,
     };
 
-    std::vector<GLuint> indices{
+    std::vector<GLuint> indices
+    {
         0, 1, 2,
         2, 3, 0,
 
@@ -70,9 +73,10 @@ ProcSky::ProcSky(){
 
 }
 
-void ProcSky::Render(const Camera& camera){
+void ProcSky::Render(const Camera& camera)
+{
     m_shader.useProgram();
-    m_skybox.bindVAO(); 
+    m_skybox.bindVAO();
 
     m_shader.loadViewMatrix         (camera.getViewMatrix());
     m_shader.loadProjectionMatrix   (camera.getProjMatrix());

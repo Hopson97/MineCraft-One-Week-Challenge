@@ -30,7 +30,8 @@ class ChunkMeshBuilder
         void tryAddFaceToMesh(const std::array<GLfloat, 12>& blockFace,
                               const sf::Vector2i& textureCoords,
                               const sf::Vector3i& blockPosition,
-                              const sf::Vector3i& blockFacing);
+                              const sf::Vector3i& blockFacing,
+                              GLfloat cardinalLight);
 
         bool shouldMakeFace (const sf::Vector3i& blockPosition,
                              const BlockDataHolder& blockData);

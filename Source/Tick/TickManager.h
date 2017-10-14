@@ -5,18 +5,19 @@
 #include <vector>
 #include "../Context.h"
 
-class TickManager{
-public:
-    TickManager();
+class TickManager
+{
+    public:
+        TickManager();
 
-    void add(TickObject* tick);
-    void run();
+        void add(TickObject* tick);
+        void run();
 
-    int getTickTime();
+        int getTickTime();
 
-private:
-    std::vector<TickObject*> m_tickObjects;
-    unsigned int m_tickTime;
+    private:
+        std::vector<TickObject*> m_tickObjects;
+        unsigned int m_tickTime;
 };
 
 #endif
