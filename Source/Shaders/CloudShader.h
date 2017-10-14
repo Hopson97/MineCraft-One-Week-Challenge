@@ -1,12 +1,12 @@
-#ifndef CHUNKSHADER_H_INCLUDED
-#define CHUNKSHADER_H_INCLUDED
+#ifndef CLOUDSHADER_H
+#define CLOUDSHADER_H
 
 #include "BasicShader.h"
 
-class ChunkShader : public BasicShader
+class CloudShader : public BasicShader
 {
     public:
-        ChunkShader();
+        CloudShader();
 
         void loadLighting(float light);
     private:
@@ -14,4 +14,4 @@ class ChunkShader : public BasicShader
         GLuint lighting;
 };
 
-#endif // CHUNKSHADER_H_INCLUDED
+#endif

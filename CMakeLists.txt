@@ -8,15 +8,12 @@ Source/Texture/BasicTexture.cpp
 Source/Camera.cpp
 Source/Context.cpp
 Source/Controller.cpp
-Source/Renderer/Framebuffer.cpp
-Source/Renderer/SkyboxRenderer.cpp
 Source/Renderer/WaterRenderer.cpp
 Source/Renderer/CubeRenderer.cpp
 Source/Renderer/SFMLRenderer.cpp
 Source/Renderer/ChunkRenderer.cpp
 Source/Renderer/RenderMaster.cpp
 Source/Renderer/QuadRenderer.cpp
-Source/Shaders/SkyboxShader.cpp
 Source/Shaders/WaterShader.cpp
 Source/Shaders/Shader.cpp
 Source/Shaders/BasicShader.cpp
@@ -60,6 +57,8 @@ Source/Util/Random.cpp
 Source/Util/FPSCounter.cpp
 Source/Util/FileUtil.cpp
 Source/ToggleKey.cpp
+Source/Tick/TickManager.cpp
+Source/Sky/SkyManager.cpp
 Source/Physics/AABB.cpp)
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 set_property(TARGET minecraft PROPERTY CXX_STANDARD 17)
