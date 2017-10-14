@@ -25,7 +25,6 @@ class QuadRenderer
 
         Model m_quadModel;
         PostProcessShader m_shader;
-        BasicTexture m_basicTexture;
 };
 
 #endif // QUADRENDERER_H_INCLUDED

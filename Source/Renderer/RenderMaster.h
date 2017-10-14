@@ -4,7 +4,6 @@
 #include <SFML/Graphics.hpp>
 
 #include "QuadRenderer.h"
-#include "CubeRenderer.h"
 #include "ChunkRenderer.h"
 #include "SFMLRenderer.h"
 #include "WaterRenderer.h"
@@ -24,8 +23,6 @@ class RenderMaster
         RenderMaster();
 
         void drawSFML(const sf::Drawable& drawable);
-        void drawQuad(const glm::vec3& pos);
-        void drawCube(const Entity& cube);
         void drawChunk(const ChunkSection& chunk);
         void drawSky();
 
@@ -36,7 +33,6 @@ class RenderMaster
 
         //Primitives
         QuadRenderer    m_quadRenderer;
-        CubeRenderer    m_cubeRenderer;
 
         //Chunks
         ChunkRenderer   m_chunkRenderer;

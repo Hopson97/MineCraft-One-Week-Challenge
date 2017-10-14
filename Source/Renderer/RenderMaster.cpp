@@ -22,16 +22,6 @@ void RenderMaster::drawSFML(const sf::Drawable& drawable)
     m_sfmlRenderer.add(drawable);
 }
 
-void RenderMaster::drawQuad(const glm::vec3& pos)
-{
-    m_quadRenderer.add(pos);
-}
-
-void RenderMaster::drawCube(const Entity& cube)
-{
-    m_cubeRenderer.add(cube);
-}
-
 void RenderMaster::drawChunk(const ChunkSection& chunk)
 {
     //Since this pertains to here...
