@@ -50,7 +50,6 @@ void QuadRenderer::render(const Camera& camera, Config* conf)
     m_shader.enableFxaa(1.0f);
 
     m_quadModel.bindVAO();
-    //m_basicTexture.bindTexture();
 
     m_shader.loadProjectionViewMatrix(glm::ortho(0, 1, 0, 1, 0, 1));
 

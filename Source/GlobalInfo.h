@@ -2,8 +2,6 @@
 #define GLOBAL_INFO_H
 
 struct GlobalInfo{
-    int resolutionX;
-    int resolutionY;
     float lighting;
     int tickTime;
     int dayTime;
