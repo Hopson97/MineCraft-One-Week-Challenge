@@ -12,6 +12,7 @@ out vec3    passNormal;
 uniform mat4 projViewMatrix;
 uniform mat4 normalMatrix;
 uniform float globalTime;
+uniform int dayTime;
 
 
 vec4 getWorldPos()

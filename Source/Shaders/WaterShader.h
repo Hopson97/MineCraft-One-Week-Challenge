@@ -13,6 +13,7 @@ class WaterShader : public BasicShader
         void getUniforms() override;
         GLuint m_time;
         GLuint lighting;
+        GLuint dtime;
 };
 
 #endif // WATERSHADER_H_INCLUDED

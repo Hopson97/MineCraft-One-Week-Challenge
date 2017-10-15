@@ -12,6 +12,7 @@ class ChunkShader : public BasicShader
     private:
         void getUniforms() override;
         GLuint lighting;
+        GLuint dtime;
 };
 
 #endif // CHUNKSHADER_H_INCLUDED

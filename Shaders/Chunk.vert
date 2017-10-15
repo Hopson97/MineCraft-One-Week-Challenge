@@ -11,6 +11,7 @@ out vec3    passNormal;
 
 uniform mat4 projViewMatrix;
 uniform mat4 normalMatrix;
+uniform int dayTime;
 
 void main()
 {

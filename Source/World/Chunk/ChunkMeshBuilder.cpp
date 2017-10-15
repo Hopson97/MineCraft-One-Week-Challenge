@@ -77,9 +77,11 @@ namespace
     };
 
     constexpr GLfloat LIGHT_TOP = 1.0f;
-    constexpr GLfloat LIGHT_X   = 0.8f;
-    constexpr GLfloat LIGHT_Z   = 0.6f;
-    constexpr GLfloat LIGHT_BOT = 0.4f;
+    constexpr GLfloat LIGHT_LEFT   = 0.9f;
+    constexpr GLfloat LIGHT_RIGHT   = 0.8f;
+    constexpr GLfloat LIGHT_BACK = 0.7f;
+    constexpr GLfloat LIGHT_FRONT   = 0.6f;
+    constexpr GLfloat LIGHT_BOT = 0.5f;
 }
 
 ChunkMeshBuilder::ChunkMeshBuilder(ChunkSection& chunk, ChunkMeshCollection& mesh)
@@ -153,12 +155,12 @@ void ChunkMeshBuilder::buildMesh()
             tryAddFaceToMesh(topFace,    data.texTopCoord,          position, directions.up, LIGHT_TOP);
 
             //Left/ Right
-            tryAddFaceToMesh(leftFace,  data.texSideCoord, position, directions.left,   LIGHT_X);
-            tryAddFaceToMesh(rightFace, data.texSideCoord, position, directions.right,  LIGHT_X);
+            tryAddFaceToMesh(leftFace,  data.texSideCoord, position, directions.left,   LIGHT_LEFT);
+            tryAddFaceToMesh(rightFace, data.texSideCoord, position, directions.right,  LIGHT_RIGHT);
 
             //Front/ Back
-            tryAddFaceToMesh(frontFace, data.texSideCoord, position, directions.front, LIGHT_Z);
-            tryAddFaceToMesh(backFace,  data.texSideCoord, position, directions.back,  LIGHT_Z);
+            tryAddFaceToMesh(frontFace, data.texSideCoord, position, directions.front, LIGHT_FRONT);
+            tryAddFaceToMesh(backFace,  data.texSideCoord, position, directions.back,  LIGHT_BACK);
         }
     }
 }
@@ -191,13 +193,13 @@ void ChunkMeshBuilder::addXBlockToMesh(const sf::Vector2i& textureCoords,
                             texCoords,
                             m_pChunk->getLocation(),
                             blockPosition,
-                            LIGHT_X);
+                            LIGHT_LEFT);
 
     m_pActiveMesh->addFace( xFace2,
                         texCoords,
                         m_pChunk->getLocation(),
                         blockPosition,
-                        LIGHT_X);
+                        LIGHT_RIGHT);
 }
 
 

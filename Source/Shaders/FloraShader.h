@@ -13,6 +13,7 @@ class FloraShader : public BasicShader
         void getUniforms() override;
         GLuint m_time;
         GLuint m_light;
+        GLuint dtime;
 };
 
 
