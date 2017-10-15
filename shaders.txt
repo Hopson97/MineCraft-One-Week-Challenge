@@ -1,0 +1,10 @@
+fxaa 1
+shadow 1
+bloom 1
+motionblur 0
+colorcorrect 1
+crossprocess 1
+parallax 0 
+tonemap 1
+volumetric 1
+godrays 1
