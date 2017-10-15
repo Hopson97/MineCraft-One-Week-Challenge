@@ -26,6 +26,10 @@ void PostProcessShader::loadResolution(glm::vec2 resolution){
     loadVector2(m_res, resolution);
 }
 
+void PostProcessShader::enableFxaa(float b){
+    loadFloat(m_fxaa, b);
+}
+
 void PostProcessShader::getUniforms()
 {
     BasicShader::getUniforms();
@@ -34,4 +38,8 @@ void PostProcessShader::getUniforms()
     m_g = glGetUniformLocation(m_id, "gamma");
     m_p = glGetUniformLocation(m_id, "postProcess");
     m_res = glGetUniformLocation(m_id, "resolution");
+    
+
+    //FX
+    m_fxaa = glGetUniformLocation(m_id, "fxaaEnable");
 }

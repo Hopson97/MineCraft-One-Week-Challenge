@@ -8,6 +8,7 @@
 #include "../Shaders/PostProcessShader.h"
 #include "../Texture/BasicTexture.h"
 #include "../Config.h"
+#include "../ShaderData.h"
 
 class Camera;
 

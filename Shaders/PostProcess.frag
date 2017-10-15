@@ -11,6 +11,8 @@ uniform float contrast;
 uniform float postProcess;
 uniform float gamma;
 
+uniform float fxaaEnable;
+
 vec3 brightnessContrast(vec3 value, float brightness, float contrast)
 {
     return (value - 0.5) * contrast + 0.5 + (brightness-1);
@@ -22,8 +24,8 @@ vec3 gammaCorrect(vec3 value, float param)
 }
 
 #define FXAA_REDUCE_MIN (1.0/128.0)
-#define FXAA_REDUCE_MUL (1.0/4.0) // ?x antialiasing. Switch values to get higher/lower default is 4x FXAA
-#define FXAA_SPAN_MAX 8.0
+#define FXAA_REDUCE_MUL (1.0/8.0)
+#define FXAA_SPAN_MAX 16.0
 
 vec3 fxaa(vec2 resolution, sampler2D sampler0, vec2 texcoord)
 {
@@ -68,8 +70,10 @@ void main()
 
     if(postProcess == 1)
     {
-
-        color = vec4(fxaa(resolution, texSampler, passTextureCoord), color.w);
+        if(fxaaEnable == 1){
+            color = vec4(fxaa(resolution, texSampler, passTextureCoord), color.w);
+        }
+        
     }
 
     color = vec4(brightnessContrast(color.xyz, brightness, contrast), 1.0);
@@ -92,5 +96,9 @@ void main()
     color.g = col;
     color.b = col;
 */
+    if(fxaaEnable == 1){
     outColour = color;
+    }else{
+        outColour = vec4(1);
+    }
 }

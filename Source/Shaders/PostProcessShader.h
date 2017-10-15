@@ -13,6 +13,7 @@ class PostProcessShader : public BasicShader
         void loadBrightness(float b);
         void loadPostProcess(float p);
         void loadResolution(glm::vec2 resolution);
+        void enableFxaa(float b);
 
     private:
         void getUniforms() override;
@@ -22,6 +23,10 @@ class PostProcessShader : public BasicShader
         GLuint m_g;
         GLuint m_p;
         GLuint m_res;
+
+        //FX
+
+        GLuint m_fxaa;
 };
 
 #endif // CHUNKSHADER_H_INCLUDED
