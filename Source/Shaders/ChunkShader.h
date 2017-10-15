@@ -9,6 +9,7 @@ class ChunkShader : public BasicShader
         ChunkShader();
 
         void loadLighting(float light);
+        void loadDTime(float dayTime);
     private:
         void getUniforms() override;
         GLuint lighting;

@@ -22,5 +22,8 @@ void WaterShader::getUniforms()
 
 void WaterShader::loadLighting(float light){
     loadFloat(lighting, light);
-    loadInt(dtime, g_info.dayTime);
 } 
+
+void WaterShader::loadDTime(float time){
+    loadFloat(dtime, g_info.dayTime);
+}

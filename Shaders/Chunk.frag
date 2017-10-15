@@ -14,6 +14,6 @@ void main()
 {
     color = texture(texSampler, passTextureCoord);
     //Lighting Calculations
-    outColour = vec4(color.rgb * lighting, color.a) * passCardinalLight;
+    outColour = vec4(color.rgb * lighting * passCardinalLight, color.a);
     if (outColour.a == 0) discard;
 }

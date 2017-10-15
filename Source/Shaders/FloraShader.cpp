@@ -14,7 +14,10 @@ void FloraShader::loadTime (const float& time){
 
 void FloraShader::loadLight(float lighting){
     loadFloat(m_light, lighting);
-    loadInt(dtime, g_info.dayTime);
+}
+
+void FloraShader::loadDTime(float time){
+    loadFloat(dtime, time);
 }
 
 void FloraShader::getUniforms()
