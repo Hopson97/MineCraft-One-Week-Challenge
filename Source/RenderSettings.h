@@ -8,6 +8,7 @@ struct RenderSettings{
     GLuint fbo;
     GLuint colorBuffer;
     GLuint depthBuffer;
+    GLuint rbo;
     GLuint colorTex;
     GLuint depthTex;
 };

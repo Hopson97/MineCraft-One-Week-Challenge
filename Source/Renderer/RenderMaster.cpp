@@ -64,7 +64,7 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
 
-    glBindFramebuffer(GL_FRAMEBUFFER, m_fbo); //Render to texture
+    glBindFramebuffer(GL_FRAMEBUFFER, g_renderSettings.fbo); //Render to texture
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
@@ -79,7 +79,7 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0); //Set to screen
     glViewport(0, 0, g_renderSettings.resolutionX, g_renderSettings.resolutionY);
-    glBindTexture(GL_TEXTURE_2D, m_fboTex); //Set to texture
+    glBindTexture(GL_TEXTURE_2D, g_renderSettings.colorTex); //Set to texture
 
     m_quadRenderer.add(glm::vec3(-1, -1, -1));
     m_quadRenderer.render(camera, &g_Config);
@@ -91,12 +91,12 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
 
 bool RenderMaster::setupFrameBuffers()
 {
-    glGenFramebuffers(1, &m_fbo);
-    glBindFramebuffer(GL_FRAMEBUFFER, m_fbo);
+    glGenFramebuffers(1, &g_renderSettings.fbo);
+    glBindFramebuffer(GL_FRAMEBUFFER, g_renderSettings.fbo);
 
     //Render texture
-    glGenTextures(1, &m_fboTex);
-    glBindTexture(GL_TEXTURE_2D, m_fboTex);
+    glGenTextures(1, &g_renderSettings.colorTex);
+    glBindTexture(GL_TEXTURE_2D, g_renderSettings.colorTex);
 
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, g_renderSettings.resolutionX, g_renderSettings.resolutionY, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
 
@@ -104,17 +104,23 @@ bool RenderMaster::setupFrameBuffers()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
     //Bind render texture to framebuffer
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_fboTex, 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, g_renderSettings.colorTex, 0);
 
-    //Render Buffer
-    glGenRenderbuffers(1, &m_fboRbo);
-    glBindRenderbuffer(GL_RENDERBUFFER, m_fboRbo);
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, g_renderSettings.resolutionX, g_renderSettings.resolutionY);
-    glBindRenderbuffer(GL_RENDERBUFFER, 0);
+    glGenTextures(1, &g_renderSettings.depthTex);
+    glBindTexture(GL_TEXTURE_2D, g_renderSettings.depthTex);
 
-    //Bind render buffer to framebuffer
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, m_fboRbo);
+    glTexImage2D(
+        GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, g_renderSettings.resolutionX, g_renderSettings.resolutionY, 0, 
+        GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, NULL
+      );
+      
+    
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    
 
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, g_renderSettings.depthTex, 0);  
+    
     if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
     {
         glBindFramebuffer(GL_FRAMEBUFFER, 0);

@@ -41,11 +41,7 @@ class RenderMaster
 
         //Detail
         SFMLRenderer    m_sfmlRenderer;
-
-        GLuint m_fbo;
-        GLuint m_fboTex;
-        GLuint m_fboRbo;
-
+        
         bool m_drawBox = false;
 };
 
