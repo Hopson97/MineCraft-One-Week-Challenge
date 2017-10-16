@@ -110,8 +110,8 @@ bool RenderMaster::setupFrameBuffers()
     glBindTexture(GL_TEXTURE_2D, g_renderSettings.depthTex);
 
     glTexImage2D(
-        GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, g_renderSettings.resolutionX, g_renderSettings.resolutionY, 0, 
-        GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, NULL
+        GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32  , g_renderSettings.resolutionX, g_renderSettings.resolutionY, 0, 
+        GL_DEPTH_COMPONENT, GL_FLOAT, NULL
       );
       
     
@@ -119,7 +119,7 @@ bool RenderMaster::setupFrameBuffers()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     
 
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, g_renderSettings.depthTex, 0);  
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, g_renderSettings.depthTex, 0);  
     
     if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
     {
