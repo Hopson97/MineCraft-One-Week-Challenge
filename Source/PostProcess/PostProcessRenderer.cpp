@@ -1,14 +1,12 @@
-#include "QuadRenderer.h"
+#include "PostProcessRenderer.h"
 
 #include <iostream>
 
 #include "../Camera.h"
 #include "../Maths/Matrix.h"
 
-QuadRenderer::QuadRenderer()
+PostProcessRender::PostProcessRender()
 {
-    //m_basicTexture.loadFromFile("test");
-
     m_quadModel.addData({
     {
         -0,  1, 0,
@@ -28,12 +26,12 @@ QuadRenderer::QuadRenderer()
     }});
 }
 
-void QuadRenderer::add(const glm::vec3& position)
+void PostProcessRender::add(const glm::vec3& position)
 {
     m_quads.push_back(position);
 }
 
-void QuadRenderer::render(const Camera& camera, Config* conf)
+void PostProcessRender::render(const Camera& camera, Config* conf)
 {
     if (m_quads.empty())
     {

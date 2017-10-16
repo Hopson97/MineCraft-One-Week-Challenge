@@ -1,5 +1,6 @@
-#ifndef QUADRENDERER_H_INCLUDED
-#define QUADRENDERER_H_INCLUDED
+#ifndef POST_PROCESS_RENDERER_H
+#define POST_PROCESS_RENDERER_H
+
 
 #include <vector>
 
@@ -12,13 +13,12 @@
 
 class Camera;
 
-class QuadRenderer
+class PostProcessRender
 {
     public:
-        QuadRenderer();
-
+        PostProcessRender();
+        
         void add(const glm::vec3& position);
-
         void render(const Camera& camera, Config* conf);
 
     private:
@@ -28,4 +28,4 @@ class QuadRenderer
         PostProcessShader m_shader;
 };
 
-#endif // QUADRENDERER_H_INCLUDED
+#endif

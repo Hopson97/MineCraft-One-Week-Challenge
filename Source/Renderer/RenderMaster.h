@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "QuadRenderer.h"
+#include "../PostProcess/PostProcessRenderer.h"
 #include "ChunkRenderer.h"
 #include "SFMLRenderer.h"
 #include "WaterRenderer.h"
@@ -32,7 +32,7 @@ class RenderMaster
         bool setupFrameBuffers();
 
         //Primitives
-        QuadRenderer    m_quadRenderer;
+        PostProcessRender   m_postRenderer;
 
         //Chunks
         ChunkRenderer   m_chunkRenderer;

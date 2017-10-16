@@ -68,8 +68,7 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
-    //m_quadRenderer  .render (camera);
-    //m_cubeRenderer  .render (camera);
+
     m_chunkRenderer .render (camera, &g_Config);
     m_waterRenderer .render (camera, &g_Config);
     m_floraRenderer .render (camera, &g_Config);
@@ -81,8 +80,8 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
     glViewport(0, 0, g_renderSettings.resolutionX, g_renderSettings.resolutionY);
     glBindTexture(GL_TEXTURE_2D, g_renderSettings.colorTex); //Set to texture
 
-    m_quadRenderer.add(glm::vec3(-1, -1, -1));
-    m_quadRenderer.render(camera, &g_Config);
+    m_postRenderer.add(glm::vec3(-1, -1, -1));
+    m_postRenderer.render(camera, &g_Config);
 
     m_sfmlRenderer  .render (window);
 
