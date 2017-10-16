@@ -11,6 +11,24 @@ uniform float contrast;
 uniform float gamma;
 
 
+float kernel[9]=float[9]
+(-1/9, -1/9, -1/9,
+ -1/9, 1, -1/9,
+ -1/9, -1/9, -1/9);
+vec2 offset[9]=vec2[9]
+(
+    vec2(-1.0, -1.0),
+    vec2( 0.0, -1.0),
+    vec2( 1.0, -1.0),
+    vec2(-1.0,  0.0),
+    vec2( 0.0,  0.0),
+    vec2( 1.0,  0.0),
+    vec2(-1.0,  1.0),
+    vec2( 0.0,  1.0),
+    vec2( 1.0,  1.0)
+
+);
+
 vec3 brightnessContrast(vec3 value, float brightness, float contrast)
 {
     return (value - 0.5) * contrast + 0.5 + (brightness-1);
@@ -64,11 +82,30 @@ vec3 fxaa(vec2 resolution, sampler2D sampler0, vec2 texcoord)
 
 void main()
 {
-    vec4 color = texture(texSampler, passTextureCoord);
+    vec4 color = vec4(0.0);
 
 
-    color = vec4(brightnessContrast(color.xyz, brightness, contrast), 1.0);
-    color = vec4(gammaCorrect(color.xyz, gamma),color.w);
+
+    vec4 result = vec4(0.0);
+
+    vec4 color2 = textureLod(texSampler, passTextureCoord + offset[0]*resolution.xy,0);
+    result += color2 * kernel[0];
+    color = textureLod(texSampler, passTextureCoord + offset[1]*resolution.xy,0);
+    result += color2 * kernel[1];
+    color = textureLod(texSampler, passTextureCoord + offset[2]*resolution.xy,0);
+    result += color2 * kernel[2];
+    color = textureLod(texSampler, passTextureCoord + offset[3]*resolution.xy,0);
+    result += color2 * kernel[3];
+    color = textureLod(texSampler, passTextureCoord + offset[4]*resolution.xy,0);
+    result += color2 * kernel[4];
+    color = textureLod(texSampler, passTextureCoord + offset[5]*resolution.xy,0);
+    result += color2 * kernel[5];
+    color = textureLod(texSampler, passTextureCoord + offset[6]*resolution.xy,0);
+    result += color2 * kernel[6];
+    color = textureLod(texSampler, passTextureCoord + offset[7]*resolution.xy,0);
+    result += color2 * kernel[7];
+    color = textureLod(texSampler, passTextureCoord + offset[8]*resolution.xy,0);
+    result += color2 * kernel[8];
 
 /*
 //Spooky Shader
@@ -87,5 +124,9 @@ void main()
     color.g = col;
     color.b = col;
 */
-    outColour = color;
+
+    color = vec4(brightnessContrast(result.xyz, brightness, contrast), 1.0);
+    color = vec4(gammaCorrect(color.xyz, gamma),color.w);
+
+    outColour = result;
 }

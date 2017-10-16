@@ -8,11 +8,7 @@ sf::RenderWindow* g_window;
 Context::Context(const Config& config)
 {
     sf::ContextSettings settings;
-    if(g_ShaderSettings.msaa){
-        settings.antialiasingLevel = 8;
-    }else{
-        settings.antialiasingLevel = 0;
-    }
+    settings.antialiasingLevel = 0;
     settings.majorVersion = 3;
     settings.minorVersion = 3;
     settings.depthBits = 24;
