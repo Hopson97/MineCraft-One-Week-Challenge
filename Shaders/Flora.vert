@@ -18,7 +18,7 @@ uniform mat4 viewMatrix;
 
 out float visibility;
 const float density = 0.005;
-const float gradient = 1.75;
+const float gradient = 1.55;
 void getDirectional(float pl){
     if(pl == 0.5){ //bot
         passCardinalLight =  0.5f; //The bottom of a block is never lit

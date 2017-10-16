@@ -18,7 +18,7 @@ uniform float dayTime;
 
 out float visibility;
 const float density = 0.005;
-const float gradient = 1.75;
+const float gradient = 1.55;
 uniform mat4 projMatrix;
 uniform mat4 viewMatrix;
 void getDirectional(float pl){
