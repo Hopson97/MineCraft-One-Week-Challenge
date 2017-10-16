@@ -4,6 +4,7 @@
 
 #include "../Camera.h"
 #include "../Maths/Matrix.h"
+#include "../RenderSettings.h"
 
 PostProcessRender::PostProcessRender()
 {
@@ -31,21 +32,23 @@ void PostProcessRender::add(const glm::vec3& position)
     m_quads.push_back(position);
 }
 
-void PostProcessRender::render(const Camera& camera, Config* conf)
+void PostProcessRender::render(const Camera& camera)
 {
+    add(glm::vec3(-1, -1, -1));
     if (m_quads.empty())
     {
         return;
     }
+    glBindFramebuffer(GL_FRAMEBUFFER, 0); //Set to screen
+    glViewport(0, 0, g_renderSettings.resolutionX, g_renderSettings.resolutionY);
+    glBindTexture(GL_TEXTURE_2D, g_renderSettings.colorTex); //Set to texture
 
     m_shader.useProgram();
-    m_shader.loadGamma(conf->gamma);
-    m_shader.loadContrast(conf->contrast);
-    m_shader.loadBrightness(conf->brightness);
-    m_shader.loadPostProcess(conf->postProcess);
-    m_shader.loadResolution(glm::vec2(conf->windowX, conf->windowY));
+    m_shader.loadGamma(g_Config.gamma);
+    m_shader.loadContrast(g_Config.contrast);
+    m_shader.loadBrightness(g_Config.brightness);
+    m_shader.loadResolution(glm::vec2(g_Config.windowX, g_Config.windowY));
     
-    m_shader.enableFxaa(1.0f);
 
     m_quadModel.bindVAO();
 

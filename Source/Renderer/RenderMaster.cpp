@@ -76,12 +76,7 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
     
     m_sky->render(camera);
 
-    glBindFramebuffer(GL_FRAMEBUFFER, 0); //Set to screen
-    glViewport(0, 0, g_renderSettings.resolutionX, g_renderSettings.resolutionY);
-    glBindTexture(GL_TEXTURE_2D, g_renderSettings.colorTex); //Set to texture
-
-    m_postRenderer.add(glm::vec3(-1, -1, -1));
-    m_postRenderer.render(camera, &g_Config);
+    m_postRenderer.render(camera);
 
     m_sfmlRenderer  .render (window);
 

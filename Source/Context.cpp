@@ -9,7 +9,7 @@ Context::Context(const Config& config)
 {
     sf::ContextSettings settings;
     if(g_ShaderSettings.msaa){
-        settings.antialiasingLevel = 4;
+        settings.antialiasingLevel = 8;
     }else{
         settings.antialiasingLevel = 0;
     }

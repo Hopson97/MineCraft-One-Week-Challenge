@@ -1,4 +1,5 @@
 #ifndef RENDER_SETTINGS_H
+#define RENDER_SETTINGS_H
 
 #include <GL/glew.h>
 

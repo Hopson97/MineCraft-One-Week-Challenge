@@ -8,10 +8,8 @@ uniform vec2 resolution;
 
 uniform float brightness;
 uniform float contrast;
-uniform float postProcess;
 uniform float gamma;
 
-uniform float fxaaEnable;
 
 vec3 brightnessContrast(vec3 value, float brightness, float contrast)
 {
@@ -68,13 +66,6 @@ void main()
 {
     vec4 color = texture(texSampler, passTextureCoord);
 
-    if(postProcess == 1)
-    {
-        if(fxaaEnable == 1){
-            color = vec4(fxaa(resolution, texSampler, passTextureCoord), color.w);
-        }
-        
-    }
 
     color = vec4(brightnessContrast(color.xyz, brightness, contrast), 1.0);
     color = vec4(gammaCorrect(color.xyz, gamma),color.w);
@@ -96,9 +87,5 @@ void main()
     color.g = col;
     color.b = col;
 */
-    if(fxaaEnable == 1){
     outColour = color;
-    }else{
-        outColour = vec4(1);
-    }
 }
