@@ -14,6 +14,11 @@ uniform mat4 normalMatrix;
 uniform float globalTime;
 uniform float dayTime;
 
+out float visibility;
+const float density = 0.005;
+const float gradient = 1.75;
+uniform mat4 projMatrix;
+uniform mat4 viewMatrix;
 void getDirectional(float pl){
     if(pl == 0.5){ //bot
         passCardinalLight =  0.4f; //The bottom of a block is never lit
@@ -70,8 +75,13 @@ vec4 getWorldPos()
 void main()
 {
     gl_Position = projViewMatrix * getWorldPos();
-
+    vec4 positionRelative = viewMatrix * vec4(inVertexPosition, 1.0);
     passTextureCoord    = inTextureCoord;
     passNormal          = vec3(normalMatrix * vec4(inNormal, 1.0));
     getDirectional(inCardinalLight);
+
+
+    float distance = length(positionRelative.xyz);
+    visibility = exp(-pow((distance*density), gradient));
+    visibility = clamp(visibility, 0, 1);
 }

@@ -9,7 +9,13 @@ out vec2    passTextureCoord;
 out float   passCardinalLight;
 out vec3    passNormal;
 
-uniform mat4 projViewMatrix;
+out float visibility;
+
+const float density = 0.005;
+const float gradient = 1.75;
+
+uniform mat4 projMatrix;
+uniform mat4 viewMatrix;
 uniform mat4 normalMatrix;
 uniform float dayTime;
 
@@ -58,9 +64,13 @@ void getDirectional(float pl){
 
 void main()
 {
-    gl_Position = projViewMatrix * vec4(inVertexPosition, 1.0);
-
+    gl_Position = projMatrix * viewMatrix * vec4(inVertexPosition, 1.0);
+    vec4 positionRelative = viewMatrix * vec4(inVertexPosition, 1.0);
     passTextureCoord    = inTextureCoord;
     passNormal          = vec3(normalMatrix * vec4(inNormal, 1.0));
     getDirectional(inCardinalLight);
+
+    float distance = length(positionRelative.xyz);
+    visibility = exp(-pow((distance*density), gradient));
+    visibility = clamp(visibility, 0, 1);
 }

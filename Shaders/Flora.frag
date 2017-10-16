@@ -10,10 +10,12 @@ uniform sampler2D texSampler;
 vec4 color;
 uniform float lighting;
 
+in float visibility; 
 void main()
 {
     color = texture(texSampler, passTextureCoord);
     //Lighting Calculations
     outColour = vec4(color.rgb * lighting * passCardinalLight, color.a);
+    outColour = vec4(mix(vec3(0.3f, 0.3f, 0.4f) * lighting,outColour.rgb, visibility),outColour.a);
     if (outColour.a == 0) discard;
 }

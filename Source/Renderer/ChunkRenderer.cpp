@@ -27,6 +27,8 @@ void ChunkRenderer::render(const Camera& camera, Config* conf)
     BlockDatabase::get().textureAtlas.bindTexture();
 
     m_shader.loadProjectionViewMatrix(camera.getProjectionViewMatrix());
+    m_shader.loadProjectionMatrix(camera.getProjMatrix());
+    m_shader.loadViewMatrix(camera.getViewMatrix());
     m_shader.loadLighting(g_info.lighting);
     m_shader.loadDTime(g_info.dayTime);
 
