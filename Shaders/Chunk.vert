@@ -12,7 +12,7 @@ out vec3    passNormal;
 out float visibility;
 
 const float density = 0.005;
-const float gradient = 1.55;
+const float gradient = 1.6;
 
 uniform mat4 projMatrix;
 uniform mat4 viewMatrix;
