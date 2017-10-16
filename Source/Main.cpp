@@ -132,6 +132,9 @@ namespace
                 }else if(key == "godrays"){
                     shaderFile >> g_ShaderSettings.godrays;
                     std::cout << "Shader: Godrays: " << g_ShaderSettings.godrays << std::endl; 
+                }else if(key == "msaa"){
+                    shaderFile >> g_ShaderSettings.msaa;
+                    std::cout << "Shader: MSAA: " << g_ShaderSettings.msaa << std::endl;
                 }
             }
         }

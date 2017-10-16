@@ -77,8 +77,8 @@ vec4 getWorldPos()
 	float Dynamic_wavingWater = 1.0f;
 
     inVert.y += displacement * 1.0 * Dynamic_wavingWater;
-    inVert.y += displacement * 1.8 * 0.2;
-    inVert.y -= 0.1f;
+    inVert.y += displacement * 1.8 * 0.25;
+    inVert.y -= 0.15f;
     return vec4(inVert, 1);
 }
 

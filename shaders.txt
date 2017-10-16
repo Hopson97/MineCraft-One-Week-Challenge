@@ -8,3 +8,4 @@ parallax 0
 tonemap 1
 volumetric 1
 godrays 1
+msaa 1

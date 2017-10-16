@@ -1,5 +1,6 @@
 #include "Context.h"
 #include "RenderSettings.h"
+#include "ShaderData.h"
 #include <GL/glew.h>
 
 sf::RenderWindow* g_window;
@@ -7,7 +8,11 @@ sf::RenderWindow* g_window;
 Context::Context(const Config& config)
 {
     sf::ContextSettings settings;
-    settings.antialiasingLevel = 0;
+    if(g_ShaderSettings.msaa){
+        settings.antialiasingLevel = 4;
+    }else{
+        settings.antialiasingLevel = 0;
+    }
     settings.majorVersion = 3;
     settings.minorVersion = 3;
     settings.depthBits = 24;

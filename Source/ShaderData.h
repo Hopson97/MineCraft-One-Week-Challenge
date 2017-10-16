@@ -31,6 +31,9 @@ struct ShaderData{
 
     //GodRays
     bool godrays;
+
+    //MSAA
+    bool msaa;
 };
 
 extern ShaderData g_ShaderSettings;
