@@ -5,10 +5,12 @@ layout(location = 1) in vec2  inTextureCoord;
 layout(location = 2) in float inCardinalLight;
 layout(location = 3) in vec3  inNormal;
 
+const float PI = 3.1415927;
 out vec2    passTextureCoord;
 out float   passCardinalLight;
 out vec3    passNormal;
-
+#define Water_WaveSpeed1	0.25	
+#define Water_WaveSpeed2	0.10
 uniform mat4 projViewMatrix;
 uniform mat4 normalMatrix;
 uniform float globalTime;
@@ -66,9 +68,17 @@ void getDirectional(float pl){
 vec4 getWorldPos()
 {
     vec3 inVert = inVertexPosition.xyz;
-    inVert.y += sin((globalTime + inVert.x) * 2.3) / 16.8f;
-    inVert.y += cos((globalTime + inVert.z) * 2.3) / 16.1f;
-    inVert.y -= 0.2;
+    
+    float fy = fract(inVert.y + 0.001);
+    float wave = 0.05 * sin(2 * PI * (globalTime*2 * Water_WaveSpeed1 - inVert.x /  7.0 - inVert.z / 13.0))
+				   + 0.05 * sin(2 * PI * (globalTime * Water_WaveSpeed2 - inVert.x / 11.0 - inVert.z /  5.0));
+		
+    float displacement = clamp(wave, -fy, 1.0-fy);
+	float Dynamic_wavingWater = 1.0f;
+
+    inVert.y += displacement * 1.0 * Dynamic_wavingWater;
+    inVert.y += displacement * 1.8 * 0.2;
+    inVert.y -= 0.1f;
     return vec4(inVert, 1);
 }
 
@@ -79,7 +89,7 @@ void main()
     passTextureCoord    = inTextureCoord;
     passNormal          = vec3(normalMatrix * vec4(inNormal, 1.0));
     getDirectional(inCardinalLight);
-
+    
 
     float distance = length(positionRelative.xyz);
     visibility = exp(-pow((distance*density), gradient));

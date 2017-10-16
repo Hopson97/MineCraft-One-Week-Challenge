@@ -45,3 +45,6 @@ void BasicTexture::bindTexture() const
 }
 
 
+GLuint BasicTexture::getID() const{
+    return m_id;
+}
