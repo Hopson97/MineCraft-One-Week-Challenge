@@ -13,6 +13,7 @@
 
 
 #include "../States/PlayingState.h"
+#include "../PostProcess/Framebuffer.h"
 
 class Camera;
 class ChunkSection;
@@ -42,6 +43,10 @@ class RenderMaster
         //Detail
         SFMLRenderer    m_sfmlRenderer;
         
+        FrameBufferObject fbo;
+        FrameBufferObject fboMSAA;
+        
+
         bool m_drawBox = false;
 };
 

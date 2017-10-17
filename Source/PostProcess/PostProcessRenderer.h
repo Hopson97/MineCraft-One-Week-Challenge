@@ -10,6 +10,7 @@
 #include "../Texture/BasicTexture.h"
 #include "../Config.h"
 #include "../ShaderData.h"
+#include "../PostProcess/Framebuffer.h"
 
 class Camera;
 
@@ -19,7 +20,7 @@ class PostProcessRender
         PostProcessRender();
         
         void add(const glm::vec3& position);
-        void render(const Camera& camera);
+        void render(const Camera& camera, FrameBufferObject& fbo);
 
     private:
         std::vector<glm::vec3> m_quads;

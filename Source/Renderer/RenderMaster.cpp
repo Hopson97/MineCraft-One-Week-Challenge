@@ -9,8 +9,12 @@
 #include "../Context.h"
 #include "../Config.h"
 #include "../RenderSettings.h"
+#include "../PostProcess/Framebuffer.h"
 #include "../ShaderData.h"
-RenderMaster::RenderMaster()
+
+
+
+RenderMaster::RenderMaster(): fbo(false), fboMSAA(true)
 {
     if (!setupFrameBuffers())
     {
@@ -66,9 +70,9 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
 
      //Render to texture
     if(g_ShaderSettings.msaa){
-        glBindFramebuffer(GL_FRAMEBUFFER, g_renderSettings.fboMSAA);
+        glBindFramebuffer(GL_FRAMEBUFFER,fboMSAA.m_fbo);
     }else{
-        glBindFramebuffer(GL_FRAMEBUFFER, g_renderSettings.fbo);
+        glBindFramebuffer(GL_FRAMEBUFFER,fbo.m_fbo );
     }
 
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
@@ -83,12 +87,11 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
     m_sky->render(camera);
 
     if(g_ShaderSettings.msaa){
-        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, g_renderSettings.fbo);
-        glBindFramebuffer(GL_READ_FRAMEBUFFER, g_renderSettings.fboMSAA);
-        glBlitFramebuffer(0, 0, g_renderSettings.resolutionX, g_renderSettings.resolutionY, 0, 0, g_renderSettings.resolutionX, g_renderSettings.resolutionY, GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT, GL_NEAREST);
+        //MSAA
+        fbo.resolve(fboMSAA.m_fbo);
     }
 
-    m_postRenderer.render(camera);
+    m_postRenderer.render(camera, fbo);
 
     m_sfmlRenderer  .render (window);
 
@@ -97,69 +100,5 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
 
 bool RenderMaster::setupFrameBuffers()
 {
-    glGenFramebuffers(1, &g_renderSettings.fbo);
-    glBindFramebuffer(GL_FRAMEBUFFER, g_renderSettings.fbo);
-
-    //Render texture
-    glGenTextures(1, &g_renderSettings.colorTex);
-    glBindTexture(GL_TEXTURE_2D, g_renderSettings.colorTex);
-
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16, g_renderSettings.resolutionX, g_renderSettings.resolutionY, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-    //Bind render texture to framebuffer
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, g_renderSettings.colorTex, 0);
-
-    glGenTextures(1, &g_renderSettings.depthTex);
-    glBindTexture(GL_TEXTURE_2D, g_renderSettings.depthTex);
-
-    glTexImage2D(
-        GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32  , g_renderSettings.resolutionX, g_renderSettings.resolutionY, 0, 
-        GL_DEPTH_COMPONENT, GL_FLOAT, NULL
-      );
-      
-    
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    
-
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, g_renderSettings.depthTex, 0);  
-    
-
-    if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-    {
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        return false;
-    }
-
-    //Disable new framebuffer
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-
-    if(g_ShaderSettings.msaa){
-        glGenFramebuffers(1, &g_renderSettings.fboMSAA);
-        glBindFramebuffer(GL_FRAMEBUFFER, g_renderSettings.fboMSAA);
-        
-        glGenRenderbuffers(1, &g_renderSettings.colorBuffer);
-        glBindRenderbuffer(GL_RENDERBUFFER, g_renderSettings.colorBuffer);    
-              
-        glRenderbufferStorageMultisample(GL_RENDERBUFFER, 16, GL_RGBA16, g_renderSettings.resolutionX, g_renderSettings.resolutionY);
-        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, g_renderSettings.colorBuffer);
-
-        glGenRenderbuffers(1, &g_renderSettings.depthBuffer);
-        glBindRenderbuffer(GL_RENDERBUFFER, g_renderSettings.depthBuffer);    
-        glRenderbufferStorageMultisample(GL_RENDERBUFFER, 16, GL_DEPTH_COMPONENT32,g_renderSettings.resolutionX, g_renderSettings.resolutionY);
-        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, g_renderSettings.depthBuffer);
-        
-    }
-
-    if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-    {
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        return false;
-    }
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    return true;
+        return true;
 }
