@@ -27,7 +27,7 @@ void BasicTexture::loadFromImage(const sf::Image& i)
     if(GLEW_EXT_texture_filter_anisotropic){
         float max;
         glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &max);
-        float amount = std::min(8.0f, max);
+        float amount = std::min(16.0f, max);
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, amount);
     }else{
         std::cout << "Anisotropic Filtering not allowed" << std::endl;

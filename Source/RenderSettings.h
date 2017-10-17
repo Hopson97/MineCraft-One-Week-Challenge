@@ -7,11 +7,14 @@ struct RenderSettings{
     int resolutionX;
     int resolutionY;
     GLuint fbo;
-    GLuint colorBuffer;
-    GLuint depthBuffer;
-    GLuint rbo;
     GLuint colorTex;
     GLuint depthTex;
+
+    //MSAA
+    GLuint fboMSAA;
+    GLuint rbo;
+    GLuint colorBuffer;
+    GLuint depthBuffer;
 };
 extern RenderSettings g_renderSettings;
 
