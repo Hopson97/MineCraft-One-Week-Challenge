@@ -8,16 +8,16 @@ uniform float dayTime;
 
 out vec3 passColor;
 
-const vec3 zenithColorDay = vec3(0.1, 0.4, 1.0);
-const vec3 horizonColorDay = vec3(0.6, 0.85, 1.0);
+const vec3 zenithColorDay = vec3(0.5, 0.7, 1.0);
+const vec3 horizonColorDay = vec3(0.85, 0.91, 1.0);
 
-const vec3 zenithColorNight = vec3(0.03, 0.04, 0.04);
-const vec3 horizonColorNight = vec3(0.05, 0.04, 0.08);
+const vec3 zenithColorNight = vec3(0.07, 0.1, 0.08);
+const vec3 horizonColorNight = vec3(0.07, 0.06, 0.1);
 
-const vec3 zenithColorSunRise = vec3(0.5, 0.4, 0.5);
-const vec3 horizonColorSunRise = vec3(0.8, 0.55, 0.15);
-const vec3 zenithColorMoonRise = vec3(0.4, 0.4, 0.7);
-const vec3 horizonColorMoonRise = vec3(0.5, 0.45, 0.65);
+const vec3 zenithColorSunRise = vec3(0.45, 0.5, 0.7);
+const vec3 horizonColorSunRise = vec3(0.825, 0.5, 0.15);
+const vec3 zenithColorMoonRise = vec3(0.45, 0.5, 0.7);
+const vec3 horizonColorMoonRise = vec3(0.5, 0.45, 0.6);
 
 vec3 getColor(float time, vec4 vertex){
     if(vertex.w == 1 || vertex.w == 2){
