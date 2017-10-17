@@ -106,7 +106,7 @@ void main()
     result = vec4(gammaCorrect(result.xyz, gamma),result.w);
 
     result = vec4(rgb2hsv(result.xyz), result.w);
-    result.y *= 1.45;
+    result.y *= 1.3;
     result = vec4(hsv2rgb(result.xyz), result.w);   
 
     outColour = result;
