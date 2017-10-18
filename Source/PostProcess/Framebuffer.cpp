@@ -9,14 +9,22 @@ FrameBufferObject::FrameBufferObject(bool msaa, int resolutionX, int resolutionY
     if(msaa){
         if(resolutionX == 0 && resolutionY == 0){
             initMSAA(g_renderSettings.resolutionX, g_renderSettings.resolutionY);
+            width = g_renderSettings.resolutionX;
+            height = g_renderSettings.resolutionY;
         }else{
             initMSAA(resolutionX, resolutionY);
+            width = resolutionX;
+            height = resolutionY;
         }
     }else{
         if(resolutionX == 0 && resolutionY == 0){
             init(g_renderSettings.resolutionX, g_renderSettings.resolutionY);
+            width = g_renderSettings.resolutionX;
+            height = g_renderSettings.resolutionY;
         }else{
             init(resolutionX, resolutionY);
+            width = resolutionX;
+            height = resolutionY;
         }
     }
 }
@@ -86,4 +94,8 @@ void FrameBufferObject::initMSAA(int resolutionX, int resolutionY){
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_depTex);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+GLuint FrameBufferObject::getDepthTex(){
+    return m_depTex;
 }

@@ -10,12 +10,14 @@ public:
 
     void bind();
     GLuint getColorTex();
+    GLuint getDepthTex();
     
     //Only available with MSAA
     void resolve(const FrameBufferObject& fbo);
 
 
     GLuint m_fbo;
+    int width, height;
 private:
     void init(int resolutionX, int resolutionY);
     void initMSAA(int resolutionX, int resolutionY);
