@@ -1,6 +1,6 @@
 #include "GVShader.h"
 
-GVShader::GVShader():BasicShader("GaussianV", "Gaussian"){
+GVShader::GVShader():BasicShader("GaussianV", "GaussianV"){
     getUniforms();
 }
 

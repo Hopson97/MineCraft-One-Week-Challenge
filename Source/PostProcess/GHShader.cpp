@@ -1,6 +1,6 @@
 #include "GHShader.h"
 
-GHShader::GHShader():BasicShader("GaussianH", "Gaussian"){
+GHShader::GHShader():BasicShader("GaussianH", "GaussianH"){
     getUniforms();
 }
 
