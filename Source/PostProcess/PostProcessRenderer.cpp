@@ -56,12 +56,9 @@ void PostProcessRender::render(const Camera& camera, FrameBufferObject& fbo, Fra
 
     m_shader.loadProjectionViewMatrix(glm::ortho(0, 1, 0, 1, 0, 1));
 
-    for (auto& quad : m_quads)
-    {
-        m_shader.loadModelMatrix(glm::mat4() );
-        GL::drawElements(m_quadModel.getIndicesCount());
-    }
-
+    m_shader.loadModelMatrix(glm::mat4() );
+    GL::drawElements(m_quadModel.getIndicesCount());
+    
 
     //Blit framebuffer
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
