@@ -14,7 +14,7 @@
 
 
 
-RenderMaster::RenderMaster(): fbo(false), fboMSAA(true), postProcess(false)
+RenderMaster::RenderMaster(): fbo(false), fboMSAA(true)
 {
     
 }
@@ -88,7 +88,7 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
         fbo.resolve(fboMSAA.m_fbo);
     }
 
-    m_postRenderer.render(camera, fbo, postProcess);
+    m_postRenderer.render(camera, fbo);
 
     m_sfmlRenderer  .render (window);
 

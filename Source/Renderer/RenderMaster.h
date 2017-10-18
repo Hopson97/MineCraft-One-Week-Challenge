@@ -44,7 +44,6 @@ class RenderMaster
         
         FrameBufferObject fbo;
         FrameBufferObject fboMSAA;
-        FrameBufferObject postProcess;
 
         bool m_drawBox = false;
 };

@@ -11,8 +11,6 @@
 #include "../Config.h"
 #include "../ShaderData.h"
 #include "Framebuffer.h"
-#include "GHShader.h"
-#include "GVShader.h"
 
 class Camera;
 
@@ -22,15 +20,13 @@ class PostProcessRender
         PostProcessRender();
         
         void add(const glm::vec3& position);
-        void render(const Camera& camera, FrameBufferObject& fbo, FrameBufferObject& pfbo);
+        void render(const Camera& camera, FrameBufferObject& fbo);
 
     private:
         std::vector<glm::vec3> m_quads;
 
         Model m_quadModel;
         PostProcessShader m_shader;
-        GHShader gh_shader;
-        GVShader gv_shader;
 };
 
 #endif
