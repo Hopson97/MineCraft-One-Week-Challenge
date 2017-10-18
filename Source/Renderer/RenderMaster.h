@@ -30,7 +30,6 @@ class RenderMaster
         void finishRender(sf::RenderWindow& window, const Camera& camera);
 
     private:
-        bool setupFrameBuffers();
 
         //Primitives
         PostProcessRender   m_postRenderer;
@@ -45,7 +44,7 @@ class RenderMaster
         
         FrameBufferObject fbo;
         FrameBufferObject fboMSAA;
-        
+        FrameBufferObject postProcess;
 
         bool m_drawBox = false;
 };

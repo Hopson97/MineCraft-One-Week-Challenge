@@ -14,12 +14,9 @@
 
 
 
-RenderMaster::RenderMaster(): fbo(false), fboMSAA(true)
+RenderMaster::RenderMaster(): fbo(false), fboMSAA(true), postProcess(false)
 {
-    if (!setupFrameBuffers())
-    {
-        throw std::runtime_error("FRAME BUFFER ERROR: NOT COMPLETE");
-    }
+    
 }
 
 void RenderMaster::drawSFML(const sf::Drawable& drawable)
@@ -71,10 +68,11 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
      //Render to texture
     if(g_ShaderSettings.msaa){
         fboMSAA.bind();
+        fboMSAA.clear();
     }else{
         fbo.bind();
+        fbo.clear();
     }
-    fbo.clear();
     
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
@@ -90,14 +88,9 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
         fbo.resolve(fboMSAA.m_fbo);
     }
 
-    m_postRenderer.render(camera, fbo);
+    m_postRenderer.render(camera, fbo, postProcess);
 
     m_sfmlRenderer  .render (window);
 
     window.display();
-}
-
-bool RenderMaster::setupFrameBuffers()
-{
-        return true;
 }

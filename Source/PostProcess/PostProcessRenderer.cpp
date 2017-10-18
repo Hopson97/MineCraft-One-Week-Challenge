@@ -32,9 +32,8 @@ void PostProcessRender::add(const glm::vec3& position)
     m_quads.push_back(position);
 }
 
-void PostProcessRender::render(const Camera& camera, FrameBufferObject& fbo)
+void PostProcessRender::render(const Camera& camera, FrameBufferObject& fbo, FrameBufferObject& pfbo)
 {
-    bloom.render(camera, fbo.getColorTex());
     add(glm::vec3(-1, -1, -1));
     if (m_quads.empty())
     {
@@ -45,15 +44,14 @@ void PostProcessRender::render(const Camera& camera, FrameBufferObject& fbo)
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
     glViewport(0, 0, g_renderSettings.resolutionX, g_renderSettings.resolutionY);
-    glBindTexture(GL_TEXTURE_2D, bloom.fbo.getColorTex()); //Set to texture
+    glBindTexture(GL_TEXTURE_2D, fbo.getColorTex()); //Set to texture
+    fbo.bind();
 
-    m_shader.useProgram();
     m_shader.loadGamma(g_Config.gamma);
     m_shader.loadContrast(g_Config.contrast);
     m_shader.loadBrightness(g_Config.brightness);
     m_shader.loadResolution(glm::vec2(g_Config.windowX, g_Config.windowY));
     
-
     m_quadModel.bindVAO();
 
     m_shader.loadProjectionViewMatrix(glm::ortho(0, 1, 0, 1, 0, 1));
@@ -63,6 +61,12 @@ void PostProcessRender::render(const Camera& camera, FrameBufferObject& fbo)
         m_shader.loadModelMatrix(glm::mat4() );
         GL::drawElements(m_quadModel.getIndicesCount());
     }
+
+
+    //Blit framebuffer
+    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+    glBindFramebuffer(GL_READ_FRAMEBUFFER, fbo.m_fbo);
+    glBlitFramebuffer(0, 0, g_renderSettings.resolutionX, g_renderSettings.resolutionY, 0, 0, g_renderSettings.resolutionX, g_renderSettings.resolutionY, GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT, GL_NEAREST);
 
     m_quads.clear();
 }

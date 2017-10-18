@@ -53,7 +53,7 @@ void FrameBufferObject::init(int resolutionX, int resolutionY){
     glGenTextures(1, &m_colTex);
     glBindTexture(GL_TEXTURE_2D, m_colTex);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16, resolutionX, resolutionY, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, resolutionX, resolutionY, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -86,7 +86,7 @@ void FrameBufferObject::initMSAA(int resolutionX, int resolutionY){
     glGenRenderbuffers(1, &m_colTex);
     glBindRenderbuffer(GL_RENDERBUFFER, m_colTex);    
           
-    glRenderbufferStorageMultisample(GL_RENDERBUFFER, 16, GL_RGBA16, resolutionX, resolutionY);
+    glRenderbufferStorageMultisample(GL_RENDERBUFFER, 16, GL_RGBA32F, resolutionX, resolutionY);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, m_colTex);
 
     glGenRenderbuffers(1, &m_depTex);
