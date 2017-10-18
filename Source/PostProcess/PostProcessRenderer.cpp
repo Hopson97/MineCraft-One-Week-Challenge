@@ -40,7 +40,10 @@ void PostProcessRender::render(const Camera& camera, FrameBufferObject& fbo)
     {
         return;
     }
+
     glBindFramebuffer(GL_FRAMEBUFFER, 0); //Set to screen
+    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
     glViewport(0, 0, g_renderSettings.resolutionX, g_renderSettings.resolutionY);
     glBindTexture(GL_TEXTURE_2D, bloom.fbo.getColorTex()); //Set to texture
 
