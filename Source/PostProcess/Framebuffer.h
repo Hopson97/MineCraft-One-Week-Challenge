@@ -9,6 +9,7 @@ public:
     FrameBufferObject(bool msaa, int resolutionX=0, int resolutionY=0);
 
     void bind();
+    void clear(); //I didn't figure this out for 2 days........
     GLuint getColorTex();
     GLuint getDepthTex();
     

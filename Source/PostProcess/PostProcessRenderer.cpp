@@ -34,6 +34,7 @@ void PostProcessRender::add(const glm::vec3& position)
 
 void PostProcessRender::render(const Camera& camera, FrameBufferObject& fbo)
 {
+    bloom.render(camera, fbo.getColorTex());
     add(glm::vec3(-1, -1, -1));
     if (m_quads.empty())
     {
@@ -41,7 +42,7 @@ void PostProcessRender::render(const Camera& camera, FrameBufferObject& fbo)
     }
     glBindFramebuffer(GL_FRAMEBUFFER, 0); //Set to screen
     glViewport(0, 0, g_renderSettings.resolutionX, g_renderSettings.resolutionY);
-    glBindTexture(GL_TEXTURE_2D, fbo.getColorTex()); //Set to texture
+    glBindTexture(GL_TEXTURE_2D, bloom.fbo.getColorTex()); //Set to texture
 
     m_shader.useProgram();
     m_shader.loadGamma(g_Config.gamma);

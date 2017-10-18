@@ -10,7 +10,8 @@
 #include "../Texture/BasicTexture.h"
 #include "../Config.h"
 #include "../ShaderData.h"
-#include "../PostProcess/Framebuffer.h"
+#include "Framebuffer.h"
+#include "BloomFilter.h"
 
 class Camera;
 
@@ -27,6 +28,7 @@ class PostProcessRender
 
         Model m_quadModel;
         PostProcessShader m_shader;
+        BloomFilter bloom;
 };
 
 #endif

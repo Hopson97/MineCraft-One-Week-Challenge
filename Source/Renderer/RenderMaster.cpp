@@ -70,15 +70,14 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
 
      //Render to texture
     if(g_ShaderSettings.msaa){
-        glBindFramebuffer(GL_FRAMEBUFFER,fboMSAA.m_fbo);
+        fboMSAA.bind();
     }else{
-        glBindFramebuffer(GL_FRAMEBUFFER,fbo.m_fbo );
+        fbo.bind();
     }
-
-    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+    fbo.clear();
+    
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
-
     m_chunkRenderer .render (camera, &g_Config);
     m_waterRenderer .render (camera, &g_Config);
     m_floraRenderer .render (camera, &g_Config);
