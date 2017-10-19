@@ -14,6 +14,6 @@ void main()
     vec2 center = inVertexPosition.xy * 0.5 + 0.5;
     float pixelSize = 1.0 / target;
     for(int i = -5; i<=5; i++){
-        passTextureCoord[i+5] = center + vec2(pixelSize*i, 0.0f);
+        passTextureCoord[i+5] = inVertexPosition.xy + vec2(pixelSize*i, 0.0f);
     }
 }

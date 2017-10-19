@@ -8,6 +8,6 @@ void ImageRenderer::render(){
     fbo.bind();
     fbo.clear();
 
-    GL::drawElements(4);
+    GL::drawElements(6);
     glBindFramebuffer(GL_FRAMEBUFFER, 0); //Unbind
 }

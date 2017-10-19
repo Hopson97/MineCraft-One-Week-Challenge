@@ -11,9 +11,8 @@ uniform float target;
 void main()
 {
     gl_Position = projViewMatrix * modelMatrix * vec4(inVertexPosition, 1.0);
-    vec2 center = inVertexPosition.xy * 0.5 + 0.5;
     float pixelSize = 1.0 / target;
     for(int i = -5; i<=5; i++){
-        passTextureCoord[i+5] = center + vec2(0.0f, pixelSize*i);
+        passTextureCoord[i+5] = inVertexPosition.xy + vec2(0.0f, pixelSize*i);
     }
 }
