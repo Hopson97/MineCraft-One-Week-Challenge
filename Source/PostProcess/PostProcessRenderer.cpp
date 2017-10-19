@@ -60,7 +60,6 @@ void PostProcessRender::render(const Camera& camera, FrameBufferObject& fbo)
 
     m_shader.loadModelMatrix(glm::mat4() );
     GL::drawElements(m_quadModel.getIndicesCount());
-    
     m_quads.clear();
 }
 

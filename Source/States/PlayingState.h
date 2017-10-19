@@ -37,7 +37,8 @@ class StatePlaying : public StateBase
 
         sf::RectangleShape m_crosshair;
         sf::Texture        m_chTexture;
-
+        sf::Texture         m_vignette;
+        sf::RectangleShape screen;
         FPSCounter m_fpsCounter;
 
         std::unique_ptr<TickManager> m_tickManager;
