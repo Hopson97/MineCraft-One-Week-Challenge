@@ -38,7 +38,7 @@ void PostProcessRender::render(const Camera& camera, FrameBufferObject& fbo)
 
     gblur.render(fbo.getColorTex());
 
-    glBindTexture(GL_TEXTURE_2D, gblur.renderer2.getOutputTexture()); //Bind final image
+    glBindTexture(GL_TEXTURE_2D, fbo.getColorTex()); //Bind final image
     finalize();
     end();
 }
