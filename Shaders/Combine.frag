@@ -10,5 +10,5 @@ void main()
     vec4 color = texture(tex, passTextureCoord);
     vec4 color2 = texture(other, passTextureCoord);
     
-    outColour = vec4( color2.rgb, 1.0);
+    outColour = vec4( color.rgb, 1.0);
 }

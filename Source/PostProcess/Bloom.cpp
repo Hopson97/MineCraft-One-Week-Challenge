@@ -21,12 +21,12 @@ void Bloom::render(GLuint texture){
     c_shader.loadModelMatrix(glm::mat4());
 
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, gblur.renderer.getOutputTexture());
-    c_shader.loadTex(gblur.renderer.getOutputTexture());
-    
-    glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, texture);
-    c_shader.loadTex2(texture);
+    c_shader.loadTex(texture);
+    
+    glActiveTexture(GL_TEXTURE0 + 2);
+    glBindTexture(GL_TEXTURE_2D, gblur.renderer.getOutputTexture());
+    c_shader.loadTex2(gblur.renderer.getOutputTexture());
     
     renderer.render();
 }
