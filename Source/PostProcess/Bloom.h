@@ -2,7 +2,7 @@
 #define BLOOM_H
 
 #include "Mask.h"
-//#include "Combine.h"
+#include "Combine.h"
 #include "ImageRenderer.h"
 #include "GaussianBlur.h"
 #include "../RenderSettings.h"
@@ -16,7 +16,7 @@ public:
     GaussianBlur gblur;
 private:
     MaskShader m_shader;
-    //CombineShader c_shader;
+    CombineShader c_shader;
 };
 
 

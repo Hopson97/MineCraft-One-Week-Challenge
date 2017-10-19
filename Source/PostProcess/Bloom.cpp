@@ -14,17 +14,17 @@ void Bloom::render(GLuint texture){
     
     renderer.render();
 
-    //gblur.render(renderer.getOutputTexture());
+    gblur.render(renderer.getOutputTexture());
 
-    //c_shader.useProgram();
-    //c_shader.loadProjectionViewMatrix(glm::ortho(0, 1, 0, 1, 0, 1));
-    //c_shader.loadModelMatrix(glm::mat4());
-    
-    //glActiveTexture(GL_TEXTURE0);
-    //glBindTexture(GL_TEXTURE_2D, gblur.renderer.getOutputTexture());
+    c_shader.useProgram();
+    c_shader.loadProjectionViewMatrix(glm::ortho(0, 1, 0, 1, 0, 1));
+    c_shader.loadModelMatrix(glm::mat4());
 
-    //glActiveTexture(GL_TEXTURE1);
-    //glActiveTexture(GL_TEXTURE_2D, gblur.renderer.getOutputTexture());
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, texture);
 
-    //renderer.render();
+    glActiveTexture(GL_TEXTURE0 + 1);
+    glBindTexture(GL_TEXTURE_2D, gblur.renderer.getOutputTexture());
+
+    renderer.render();
 }
