@@ -29,4 +29,6 @@ void Bloom::render(GLuint texture){
     c_shader.loadTex2(gblur.renderer.getOutputTexture());
     
     renderer.render();
+
+    glActiveTexture(GL_TEXTURE0);
 }
