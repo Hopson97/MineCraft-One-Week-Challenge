@@ -36,7 +36,8 @@ void PostProcessRender::render(const Camera& camera, FrameBufferObject& fbo)
 {
     begin();
 
-    bloom.render(fbo.getColorTex());
+    antialias.render(fbo.getColorTex());
+    bloom.render(antialias.renderer.getOutputTexture());
 
     glBindTexture(GL_TEXTURE_2D, bloom.renderer.getOutputTexture()); //Bind final image
     finalize();

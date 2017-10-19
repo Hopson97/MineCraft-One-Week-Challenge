@@ -12,6 +12,7 @@
 #include "../ShaderData.h"
 #include "Framebuffer.h"
 #include "Bloom.h"
+#include "Antialiasing.h"
 
 class Camera;
 
@@ -33,6 +34,7 @@ class PostProcessRender
         Model m_quadModel;
         PostProcessShader m_shader;
         Bloom bloom;
+        Antialiasing antialias;
 };
 
 #endif
