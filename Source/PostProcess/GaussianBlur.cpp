@@ -1,7 +1,7 @@
 #include "GaussianBlur.h"
 #include "../RenderSettings.h"
 
-GaussianBlur::GaussianBlur(): renderer((int)g_renderSettings.resolutionX/2,(int)g_renderSettings.resolutionY/2), renderer2((int)g_renderSettings.resolutionX/2,(int)g_renderSettings.resolutionY/2){
+GaussianBlur::GaussianBlur(): renderer((int)g_renderSettings.resolutionX/2,(int)g_renderSettings.resolutionY/2){
     
 }
 
