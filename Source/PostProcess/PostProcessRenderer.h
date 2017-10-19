@@ -23,6 +23,10 @@ class PostProcessRender
         void render(const Camera& camera, FrameBufferObject& fbo);
 
     private:
+
+        void begin();
+        void end();
+        void finalize();
         std::vector<glm::vec3> m_quads;
 
         Model m_quadModel;

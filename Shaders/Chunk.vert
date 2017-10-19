@@ -44,10 +44,10 @@ void getDirectional(float pl){
             passCardinalLight =  mix(1.0f, 0.8f, (dayTime-6000)/6000);
         }
         if(dayTime >= 12000 && dayTime < 18000){
-            passCardinalLight =  mix(0.8f, 1.0f, (dayTime-12000)/6000);
+            passCardinalLight =  0.8f;
         }
         if(dayTime >= 18000 && dayTime < 24000){
-            passCardinalLight =  mix(1.0f, 0.8f, (dayTime-18000)/6000);
+            passCardinalLight =  0.8f;
         }
     }else if(pl == 0.7){ 
         if(dayTime < 10500 || dayTime >= 13500){
