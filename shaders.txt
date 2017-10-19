@@ -1,9 +1,10 @@
 fxaa 1
 shadow 1
 bloom 1
-motionblur 0
+motionblur 1
+aniso 0
 crossprocess 1
-parallax 0 
+parallax 1
 tonemap 1
 volumetric 1
 godrays 1

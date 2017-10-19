@@ -1,6 +1,7 @@
 #include "BasicTexture.h"
 #include <iostream>
 #include <cmath>
+#include "../ShaderData.h"
 
 BasicTexture::BasicTexture(const std::string& file)
 {
@@ -24,13 +25,11 @@ void BasicTexture::loadFromImage(const sf::Image& i)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 1);
 
-    if(GLEW_EXT_texture_filter_anisotropic){
+    if(GLEW_EXT_texture_filter_anisotropic && g_ShaderSettings.aniso){
         float max;
         glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &max);
         float amount = std::min(16.0f, max);
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, amount);
-    }else{
-        std::cout << "Anisotropic Filtering not allowed" << std::endl;
     }
 }
 void BasicTexture::loadFromFile(const std::string& file)

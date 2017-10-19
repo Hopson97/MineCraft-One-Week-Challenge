@@ -114,9 +114,9 @@ namespace
                 }else if(key == "motionblur"){
                     shaderFile >> g_ShaderSettings.motionblur;
                     std::cout << "Shader: Motion Blur: " << g_ShaderSettings.motionblur << std::endl;
-                }else if(key == "colorcorrect"){
-                    shaderFile >> g_ShaderSettings.colorCorrection;
-                    std::cout << "Shader: Color Correction: " << g_ShaderSettings.colorCorrection << std::endl;
+                }else if(key == "aniso"){
+                    shaderFile >> g_ShaderSettings.aniso;
+                    std::cout << "Shader: Anisotropic Filtering: " << g_ShaderSettings.aniso << std::endl;
                 }else if(key == "crossprocess"){
                     shaderFile >> g_ShaderSettings.crossProcess;
                     std::cout << "Shader: Cross Process: " << g_ShaderSettings.crossProcess << std::endl;

@@ -13,9 +13,8 @@ struct ShaderData{
 
     //Motion Blur
     bool motionblur;
-
-    //Color Correction
-    bool colorCorrection;
+    
+    bool aniso;
 
     //Cross Processing
     bool crossProcess;
