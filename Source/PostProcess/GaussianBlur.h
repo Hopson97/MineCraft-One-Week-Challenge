@@ -11,7 +11,6 @@ public:
 
     void render(GLuint texture);
     ImageRenderer renderer;
-    ImageRenderer renderer2;
 private:
 
     GaussianH gh_shader;

@@ -23,6 +23,6 @@ void GaussianBlur::render(GLuint texture){
     gh_shader.loadModelMatrix(glm::mat4());
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, renderer.getOutputTexture());
-    renderer2.render();
+    renderer.render();
 
 }
