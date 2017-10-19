@@ -10,7 +10,7 @@ public:
     ImageRenderer(int width, int height);
     void render();
 
-    inline GLuint getOutputTexture(){
+    GLuint getOutputTexture(){
         return fbo.getColorTex();
     }
 

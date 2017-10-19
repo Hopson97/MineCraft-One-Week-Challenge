@@ -11,7 +11,7 @@
 #include "../Config.h"
 #include "../ShaderData.h"
 #include "Framebuffer.h"
-#include "GaussianBlur.h"
+#include "Bloom.h"
 
 class Camera;
 
@@ -32,8 +32,7 @@ class PostProcessRender
 
         Model m_quadModel;
         PostProcessShader m_shader;
-
-        GaussianBlur gblur;
+        Bloom bloom;
 };
 
 #endif

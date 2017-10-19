@@ -61,8 +61,7 @@ void main()
 {
     vec4 color = vec4(0.0);
 
-
-
+    //Sharpen
     vec4 result = vec4(0.0);
 
     vec4 color2 = textureLod(texSampler, passTextureCoord + offset[0]*resolution.xy,0);
@@ -101,10 +100,12 @@ void main()
     color.g = col;
     color.b = col;
 */
-
+    //Brightness & Contrast
     result = vec4(brightnessContrast(result.xyz, brightness, contrast), 1.0);
+    //Gamma
     result = vec4(gammaCorrect(result.xyz, gamma),result.w);
 
+    //Color correct
     result = vec4(rgb2hsv(result.xyz), result.w);
     result.y *= 1.3;
     result.z *= 1.1;
