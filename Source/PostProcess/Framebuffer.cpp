@@ -102,7 +102,5 @@ GLuint FrameBufferObject::getDepthTex(){
 }
 
 void FrameBufferObject::clear(){
-    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_CULL_FACE);
+    glClear(GL_DEPTH_BUFFER_BIT);
 }

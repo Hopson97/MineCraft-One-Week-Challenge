@@ -6,14 +6,16 @@
 //A lil based off thinmatrix
 
 class ImageRenderer{
+public:
     ImageRenderer(int width, int height);
-    void render(GLuint texture);
+    void render();
 
     inline GLuint getOutputTexture(){
         return fbo.getColorTex();
     }
-private:
+
     FrameBufferObject fbo;
+private:
 };
 
 #endif

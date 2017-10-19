@@ -1,10 +1,10 @@
 #include "ImageRenderer.h"
-
+#include <iostream>
 ImageRenderer::ImageRenderer(int width, int height){
-    fbo = FrameBufferObject(width, height);
+    fbo = FrameBufferObject(false, width, height);
 }
 
-void ImageRenderer::render(GLuint texture){
+void ImageRenderer::render(){
     fbo.bind();
     fbo.clear();
 

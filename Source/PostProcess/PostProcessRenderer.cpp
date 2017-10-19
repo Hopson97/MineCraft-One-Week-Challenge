@@ -36,16 +36,22 @@ void PostProcessRender::render(const Camera& camera, FrameBufferObject& fbo)
 {
     begin();
 
-    
-    glBindTexture(GL_TEXTURE_2D, fbo.getColorTex()); //Bind final image
-    finalize();
+    gblur.render(fbo.getColorTex());
+        
+    //glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+    //glBindFramebuffer(GL_READ_FRAMEBUFFER, fbo.m_fbo);
+    //glBlitFramebuffer(0, 0, g_renderSettings.resolutionX, g_renderSettings.resolutionY, 0, 0, g_renderSettings.resolutionX, g_renderSettings.resolutionY, GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT, GL_NEAREST);
+
+
+    glBindTexture(GL_TEXTURE_2D, gblur.renderer2.getOutputTexture()); //Bind final image
+    //finalize();
     end();
 }
 
 void PostProcessRender::begin(){
     //Clear Screen
     glBindFramebuffer(GL_FRAMEBUFFER, 0); //Set to screen
-    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glClearColor(0.0, 0.0, 0.0, 1.0);
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
     glViewport(0, 0, g_renderSettings.resolutionX, g_renderSettings.resolutionY);
 
