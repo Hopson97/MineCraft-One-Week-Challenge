@@ -7,9 +7,15 @@ CombineShader::CombineShader():BasicShader("Combine", "Combine"){
 void CombineShader::getUniforms(){
     BasicShader::getUniforms();
 
-    GLuint t1 = glGetUniformLocation(m_id, "tex");
-    GLuint t2 = glGetUniformLocation(m_id, "other");
+    t1 = glGetUniformLocation(m_id, "tex");
+    t2 = glGetUniformLocation(m_id, "other");
     useProgram();
-    glUniform1i(t1, 0);
-    glUniform1i(t2, 1);
+}
+
+void CombineShader::loadTex(GLuint tt1){
+    loadInt(t1, tt1);
+}
+
+void CombineShader::loadTex2(GLuint tt2){
+    loadInt(t2, tt2);
 }

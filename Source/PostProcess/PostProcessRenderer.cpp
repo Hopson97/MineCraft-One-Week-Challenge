@@ -70,6 +70,6 @@ void PostProcessRender::finalize(){
     m_shader.loadBrightness(g_Config.brightness);
     m_shader.loadResolution(glm::vec2(g_Config.windowX, g_Config.windowY));
     m_shader.loadProjectionViewMatrix(glm::ortho(0, 1, 0, 1, 0, 1));
-    m_shader.loadModelMatrix(glm::mat4() );
+    m_shader.loadModelMatrix(glm::mat4());
     GL::drawElements(m_quadModel.getIndicesCount());
 }

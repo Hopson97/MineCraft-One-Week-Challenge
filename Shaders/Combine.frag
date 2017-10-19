@@ -8,7 +8,7 @@ uniform sampler2D other;
 void main()
 {
     vec4 color = texture(tex, passTextureCoord);
-    vec4 other = texture(other, passTextureCoord);
+    vec4 color2 = texture(other, passTextureCoord);
     
-    outColour = color + other;
+    outColour = vec4( color2.rgb, 1.0);
 }

@@ -6,8 +6,13 @@
 class CombineShader : public BasicShader{
 public:
     CombineShader();
+
+    void loadTex(GLuint t1);
+    void loadTex2(GLuint t2);
 private:
     void getUniforms() override;
+    GLuint t1;
+    GLuint t2;
 };
 
 #endif
