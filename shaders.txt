@@ -2,7 +2,7 @@ fxaa 1
 shadow 1
 bloom 1
 motionblur 1
-aniso 0
+aniso 1
 crossprocess 1
 parallax 1
 tonemap 1

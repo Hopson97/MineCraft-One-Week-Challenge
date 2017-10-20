@@ -124,5 +124,5 @@ void main()
 
     vec3 curr = Uncharted2Tonemap(result.rgb);
 	
-	outColour = vec4(curr * 2.62, result.a);
+	outColour = vec4(curr * 2.42, result.a);
 }
