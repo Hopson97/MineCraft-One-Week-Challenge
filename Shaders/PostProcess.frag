@@ -57,6 +57,16 @@ vec3 hsv2rgb(vec3 c)
     return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
 }
 
+vec3 Uncharted2Tonemap(vec3 x) {
+	float A = 0.28;		
+	float B = 0.29;		
+	float C = 0.10;
+	float D = 0.175; //0.04 - 0.35 color boost
+	float E = 0.025;
+	float F = 0.35;
+	return ((x*(A*x+C*B)+D*E)/(x*(A*x+B)+D*F))-E/F;
+}
+
 void main()
 {
     vec4 color = vec4(0.0);
@@ -111,5 +121,9 @@ void main()
     result.z *= 1.1;
     result = vec4(hsv2rgb(result.xyz), result.w);   
 
-	outColour = result;
+
+    vec3 curr = Uncharted2Tonemap(result.rgb);
+	//result = vec4(pow(curr/Uncharted2Tonemap(vec3(4.7)),vec3(0.454)), result.a);
+
+	outColour = vec4(curr * 2.43, result.a);
 }
