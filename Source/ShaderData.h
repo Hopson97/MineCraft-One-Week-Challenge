@@ -16,15 +16,6 @@ struct ShaderData{
     
     bool aniso;
 
-    //Cross Processing
-    bool crossProcess;
-
-    //Parallax Mapping
-    bool parallaxMap;
-
-    //Tone Mapping
-    bool toneMap;
-
     //Volumetric Clouds
     bool volumetricClouds;
 

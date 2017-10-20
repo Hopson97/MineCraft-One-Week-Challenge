@@ -3,9 +3,6 @@ shadow 1
 bloom 1
 motionblur 1
 aniso 1
-crossprocess 1
-parallax 1
-tonemap 1
 volumetric 1
 godrays 1
 msaa 0
