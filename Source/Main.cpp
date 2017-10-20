@@ -117,16 +117,6 @@ namespace
                 }else if(key == "aniso"){
                     shaderFile >> g_ShaderSettings.aniso;
                     std::cout << "Shader: Anisotropic Filtering: " << g_ShaderSettings.aniso << std::endl;
-                }else if(key == "crossprocess"){
-                    shaderFile >> g_ShaderSettings.crossProcess;
-                    std::cout << "Shader: Cross Process: " << g_ShaderSettings.crossProcess << std::endl;
-                }else if(key == "parallax"){
-                    shaderFile >> g_ShaderSettings.parallaxMap;
-                    std::cout << "Shader: Parallax Map: " << g_ShaderSettings.parallaxMap << std::endl;                    
-                }else if(key == "tonemap"){
-                    shaderFile >> g_ShaderSettings.toneMap;
-                    std::cout << "Shader: Tone Map: " << g_ShaderSettings.toneMap << std::endl;                    
-                }else if(key == "volumetric"){
                     shaderFile >> g_ShaderSettings.volumetricClouds;
                     std::cout << "Shader: Volumetric Clouds: " << g_ShaderSettings.volumetricClouds << std::endl; 
                 }else if(key == "godrays"){
