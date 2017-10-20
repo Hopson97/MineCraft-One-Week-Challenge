@@ -21,7 +21,7 @@ void TickManager::run()
     {
         time = clock.getElapsedTime();
 
-        if((time.asMilliseconds() / 5) > m_tickTime)
+        if((time.asMilliseconds() / 50) > m_tickTime)
         {
             if(!m_tickObjects.empty())
             {
@@ -32,7 +32,7 @@ void TickManager::run()
             }
         }
 
-        m_tickTime = (time.asMilliseconds() / 5);
+        m_tickTime = (time.asMilliseconds() / 50);
 
         if(m_tickTime > 23999)
         {
