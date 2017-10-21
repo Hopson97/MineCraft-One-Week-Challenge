@@ -49,12 +49,6 @@ void PostProcessRender::render(const Camera& camera, FrameBufferObject& fbo)
         glBindFramebuffer(GL_READ_FRAMEBUFFER, bloom.renderer.fbo.m_fbo);
         glBlitFramebuffer(0, 0, g_renderSettings.resolutionX, g_renderSettings.resolutionY, 0, 0, g_renderSettings.resolutionX, g_renderSettings.resolutionY, GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT, GL_NEAREST);
     }
-    /*if(g_ShaderSettings.godrays){
-        godrays.render(fbo.getColorTex());
-        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo.m_fbo);
-        glBindFramebuffer(GL_READ_FRAMEBUFFER, godrays.renderer.fbo.m_fbo);
-        glBlitFramebuffer(0, 0, g_renderSettings.resolutionX, g_renderSettings.resolutionY, 0, 0, g_renderSettings.resolutionX, g_renderSettings.resolutionY, GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT, GL_NEAREST);
-    }*/
     glBindTexture(GL_TEXTURE_2D, fbo.getColorTex()); //Bind final image
     finalize();
     end();

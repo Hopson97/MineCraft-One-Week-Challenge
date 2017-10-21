@@ -12,8 +12,7 @@
 #include "../ShaderData.h"
 #include "Framebuffer.h"
 #include "Bloom.h"
-#include "Antialiasing.h"
-#include "Godrays.h"
+#include "Antialiasing.h"   
 
 class Camera;
 
@@ -36,7 +35,6 @@ class PostProcessRender
         PostProcessShader m_shader;
         Bloom bloom;
         Antialiasing antialias;
-        Godrays godrays;
 };
 
 #endif
