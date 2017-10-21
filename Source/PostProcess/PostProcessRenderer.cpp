@@ -36,7 +36,12 @@ void PostProcessRender::add(const glm::vec3& position)
 void PostProcessRender::render(const Camera& camera, FrameBufferObject& fbo)
 {
     begin();
-
+    if(g_ShaderSettings.motionblur){
+        mblur.render(camera, fbo);
+        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo.m_fbo);
+        glBindFramebuffer(GL_READ_FRAMEBUFFER, mblur.renderer.fbo.m_fbo);
+        glBlitFramebuffer(0, 0, g_renderSettings.resolutionX, g_renderSettings.resolutionY, 0, 0, g_renderSettings.resolutionX, g_renderSettings.resolutionY, GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT, GL_NEAREST);
+    }
     if(g_ShaderSettings.fxaa){
         antialias.render(fbo.getColorTex());
         glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo.m_fbo);

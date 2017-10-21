@@ -13,6 +13,7 @@
 #include "Framebuffer.h"
 #include "Bloom.h"
 #include "Antialiasing.h"   
+#include "MBlur.h"
 
 class Camera;
 
@@ -35,6 +36,7 @@ class PostProcessRender
         PostProcessShader m_shader;
         Bloom bloom;
         Antialiasing antialias;
+        MBlur mblur;
 };
 
 #endif
