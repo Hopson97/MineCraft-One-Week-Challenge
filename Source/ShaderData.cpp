@@ -1,3 +1,3 @@
 #include "ShaderData.h"
 
-ShaderData g_ShaderSettings = {true, true, true, true, true, true, true, true};
+ShaderData g_ShaderSettings = {true, true, true, true, true, true, true, false};
