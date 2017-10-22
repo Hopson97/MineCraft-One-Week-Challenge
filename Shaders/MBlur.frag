@@ -9,7 +9,7 @@ uniform sampler2D depth;
 uniform mat4 currProjViewMatrix;
 uniform mat4 prevProjViewMatrix;
 
-#define SAMPLES 16
+#define SAMPLES 60
 
 void main()
 {
@@ -24,7 +24,7 @@ void main()
 
     previousPos /= previousPos.w;
 
-    vec2 velocity = (currentPos.xy - previousPos.xy) / (SAMPLES*SAMPLES*SAMPLES)/4;
+    vec2 velocity = (currentPos.xy - previousPos.xy) / (SAMPLES*SAMPLES*SAMPLES/4);
 
     vec4 color = texture(texSampler, uv);
 
