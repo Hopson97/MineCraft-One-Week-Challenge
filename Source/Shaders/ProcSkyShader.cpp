@@ -9,12 +9,14 @@ ProcSkyShader::ProcSkyShader()
 void ProcSkyShader::loadTime(float tick){
     loadFloat(m_day, tick);
 }
-void ProcSkyShader::loadViewMatrix(glm::mat4 viewMatrix)
+
+void ProcSkyShader::loadViewMatrix(const glm::mat4& viewMatrix)
 {
-    viewMatrix[3][0] = 0;
-    viewMatrix[3][1] = 0;
-    viewMatrix[3][2] = 0;
-    Shader::loadMatrix4(m_locationView, viewMatrix);
+	glm::mat4 _viewMatrix = viewMatrix; // make a copy
+	_viewMatrix[3][0] = 0;
+	_viewMatrix[3][1] = 0;
+	_viewMatrix[3][2] = 0;
+    Shader::loadMatrix4(m_locationView, _viewMatrix);
 }
 
 

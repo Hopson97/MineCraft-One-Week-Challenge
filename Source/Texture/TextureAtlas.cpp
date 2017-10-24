@@ -1,16 +1,11 @@
 #include "TextureAtlas.h"
 #include <array>
+#include <Windows.h>
 
 TextureAtlas::TextureAtlas(const std::string& textureFileName)
 {
-    sf::Image i;
-    if (!i.loadFromFile("Res/Textures/" + textureFileName + ".png"))
-    {
-        throw std::runtime_error("Unable to open image: " + textureFileName);
-    }
-    loadFromImage(i);
+	loadFromFile(textureFileName);
 
-    
     m_imageSize             = 256;
     m_individualTextureSize = 16;
 }

@@ -7,7 +7,7 @@ class ProcSkyShader : public BasicShader{
 public:
     ProcSkyShader();
     void loadTime(float ticks);
-    void loadViewMatrix         (glm::mat4 viewMatrix);
+    void loadViewMatrix         (const glm::mat4& viewMatrix);
     void loadProjectionMatrix   (const glm::mat4& proj);
 
 private:
