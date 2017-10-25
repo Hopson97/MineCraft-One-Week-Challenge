@@ -11,7 +11,7 @@ out vec3 passColor;
 const vec3 zenithColorDay = vec3(0.5, 0.7, 1.0);
 const vec3 horizonColorDay = vec3(0.85, 0.91, 1.0);
 
-const vec3 zenithColorNight = vec3(0.07, 0.1, 0.08);
+const vec3 zenithColorNight = vec3(0.06, 0.05, 0.09);
 const vec3 horizonColorNight = vec3(0.07, 0.06, 0.1);
 
 const vec3 zenithColorSunRise = vec3(0.45, 0.5, 0.7);
