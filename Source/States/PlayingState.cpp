@@ -101,10 +101,10 @@ void StatePlaying::render(RenderMaster& renderer)
 {
     static sf::Clock dt;
 
-    //renderer.drawSFML(m_crosshair);
+    renderer.drawSFML(m_crosshair);
     renderer.drawSFML(screen);
     
-    //m_fpsCounter.draw(renderer);
+    m_fpsCounter.draw(renderer);
     //m_player.draw(renderer);
     m_world.renderWorld(renderer, m_pApplication->getCamera());
 }
