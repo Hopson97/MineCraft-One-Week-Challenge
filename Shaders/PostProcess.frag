@@ -117,12 +117,12 @@ void main()
 
     //Color correct
     result = vec4(rgb2hsv(result.xyz), result.w);
-    result.y *= 1.3;
-    result.z *= 1.1;
+    result.y *= 1.35;
+    result.z *= 1.15;
     result = vec4(hsv2rgb(result.xyz), result.w);   
 
-    //Don't use tonemaps for color boost
-    //vec3 curr = Uncharted2Tonemap(result.rgb);
+    
+    //result.rgb = Uncharted2Tonemap(result.rgb) * 2.21;
 	
     float colorBoost = 0.21f;
 	
