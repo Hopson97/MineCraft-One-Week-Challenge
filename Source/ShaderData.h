@@ -16,9 +16,6 @@ struct ShaderData{
     
     bool aniso;
 
-    //Volumetric Clouds
-    bool volumetricClouds;
-
     //GodRays
     bool godrays;
 

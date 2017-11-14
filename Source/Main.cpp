@@ -117,9 +117,6 @@ namespace
                 }else if(key == "aniso"){
                     shaderFile >> g_ShaderSettings.aniso;
                     std::cout << "Shader: Anisotropic Filtering: " << g_ShaderSettings.aniso << std::endl;
-                }else if(key == "volumetic"){
-                    shaderFile >> g_ShaderSettings.volumetricClouds;
-                    std::cout << "Shader: Volumetric Clouds: " << g_ShaderSettings.volumetricClouds << std::endl; 
                 }else if(key == "godrays"){
                     shaderFile >> g_ShaderSettings.godrays;
                     std::cout << "Shader: Godrays: " << g_ShaderSettings.godrays << std::endl; 

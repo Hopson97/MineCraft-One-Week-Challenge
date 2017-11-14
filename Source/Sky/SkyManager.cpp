@@ -16,10 +16,10 @@ SkyManager::SkyManager()
 
     std::vector<GLfloat> svertexCoords
     {
-        -50,  50, 400,
-        50,  50, 400,
-        50, -50, 400,
-        -50, -50, 400
+        -30,  30, 400,
+        30,  30, 400,
+        30, -30, 400,
+        -30, -30, 400
     };
 
     std::vector<GLfloat> stextureCoords
@@ -40,10 +40,10 @@ SkyManager::SkyManager()
 
     std::vector<GLfloat> mvertexCoords
     {
-        -50,  50, -400,
-        50,  50, -400,
-        50, -50, -400,
-        -50, -50, -400
+        -30,  30, -400,
+        30,  30, -400,
+        30, -30, -400,
+        -30, -30, -400
     };
 
     std::vector<GLfloat> mtextureCoords

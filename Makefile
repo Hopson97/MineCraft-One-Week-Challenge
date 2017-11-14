@@ -5,10 +5,10 @@ TARGET=MinecraftWeek
 OS := $(shell uname)
 ifeq ($(OS),Darwin)
 FLAGS=-framework OpenGL -lpthread -lsfml-system -lsfml-window -lsfml-graphics -lGLEW -L/Users/19nbourgeois_68/homebrew/lib
-CC_FLAGS=-std=c++1y -I/Users/19nbourgeois_68/homebrew/include
+CC_FLAGS=-std=c++1y -O3 -ffast-math -funroll-loops -mfpmath=sse -flto -fno-omit-frame-pointer -march=native -mtune=native -I/Users/19nbourgeois_68/homebrew/include
 else
 FLAGS=-lGL -lpthread -lsfml-system -lsfml-window -lsfml-graphics -lGLEW
-CC_FLAGS=-std=c++1y
+CC_FLAGS=-std=c++1y -O3 -ffast-math -funroll-loops -mfpmath=sse -flto -fno-omit-frame-pointer -march=native -mtune=native
 endif
 
 $(TARGET): $(OFILES)
