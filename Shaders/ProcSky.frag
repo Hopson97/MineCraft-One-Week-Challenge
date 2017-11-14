@@ -7,7 +7,7 @@ void main(){
     //Process the color later
     vec4 skyColor = vec4(passColor, 1.0f);
 
-    float skyColorBoost = -0.1f;
+    float skyColorBoost = -0.15f;
 	
 	skyColor.r = skyColor.r * (1.0f + skyColorBoost) - (skyColor.g * skyColorBoost / 2.0f) - (skyColor.b * skyColorBoost / 2.0f);
 	skyColor.g = skyColor.g * (1.0f + skyColorBoost) - (skyColor.r * skyColorBoost / 2.0f) - (skyColor.b * skyColorBoost / 2.0f);
