@@ -6,4 +6,9 @@ MaskShader::MaskShader(): BasicShader("Mask", "Mask"){
 
 void MaskShader::getUniforms(){
     BasicShader::getUniforms();
+    m_luma = glGetUniformLocation(m_id, "requestedLuminance");
+}
+
+void MaskShader::loadLuma(float luma){
+    loadFloat(m_luma, luma);
 }
