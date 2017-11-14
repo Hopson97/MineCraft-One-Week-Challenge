@@ -73,6 +73,9 @@ vec4 getWorldPos()
     float wave = 0.05 * sin(2 * PI * (globalTime*2 * Water_WaveSpeed1 - inVert.x /  7.0 - inVert.z / 13.0))
 				   + 0.05 * sin(2 * PI * (globalTime * Water_WaveSpeed2 - inVert.x / 11.0 - inVert.z /  5.0));
 		
+
+    inVert.y += sin((globalTime + inVert.x) * 2.3) / 64.8f;
+    inVert.y += cos((globalTime + inVert.z) * 2.3) / 64.1f;
     float displacement = clamp(wave, -fy, 1.0-fy);
 	float Dynamic_wavingWater = 1.0f;
 
@@ -80,6 +83,7 @@ vec4 getWorldPos()
     inVert.y += displacement * 1.8 * 0.25;
     inVert.y -= 0.15f;
     return vec4(inVert, 1);
+
 }
 
 void main()
