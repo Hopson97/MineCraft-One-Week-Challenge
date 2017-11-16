@@ -9,7 +9,7 @@ void GaussianBlur::render(GLuint texture){
     
     
     gh_shader.useProgram();
-    gh_shader.loadTarget((float)g_renderSettings.resolutionX);
+    gh_shader.loadTarget((float)g_renderSettings.resolutionX/2);
     gh_shader.loadProjectionViewMatrix(glm::ortho(0, 1, 0, 1, 0, 1));
     gh_shader.loadModelMatrix(glm::mat4());
     //Bind shader
@@ -18,7 +18,7 @@ void GaussianBlur::render(GLuint texture){
     renderer.render();
 
     gv_shader.useProgram();
-    gv_shader.loadTarget((float)g_renderSettings.resolutionY);
+    gv_shader.loadTarget((float)g_renderSettings.resolutionY/2);
     gv_shader.loadProjectionViewMatrix(glm::ortho(0, 1, 0, 1, 0, 1));
     gv_shader.loadModelMatrix(glm::mat4());
     glActiveTexture(GL_TEXTURE0);
