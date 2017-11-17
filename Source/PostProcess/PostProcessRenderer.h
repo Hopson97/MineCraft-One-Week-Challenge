@@ -14,6 +14,7 @@
 #include "Bloom.h"
 #include "Antialiasing.h"   
 #include "MBlur.h"
+#include "GodRays.h"
 
 class Camera;
 
@@ -37,6 +38,7 @@ class PostProcessRender
         Bloom bloom;
         Antialiasing antialias;
         MBlur mblur;
+        GodRays godRays;
 };
 
 #endif
