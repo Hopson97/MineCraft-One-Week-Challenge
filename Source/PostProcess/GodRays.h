@@ -5,6 +5,8 @@
 #include "Combine.h"
 #include "ImageRenderer.h"
 #include "../RenderSettings.h"
+#include "GodRayShader.h"
+
 class GodRays{
 public:
     GodRays();
@@ -12,10 +14,10 @@ public:
     void render(GLuint texture);
     ImageRenderer renderer;
 
-    //Godrays gblur;
 private:
     MaskShader m_shader;
     CombineShader c_shader;
+    GodRayShader g_shader;
 };
 
 

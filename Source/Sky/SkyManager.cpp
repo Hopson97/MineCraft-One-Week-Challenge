@@ -151,4 +151,5 @@ void SkyManager::render(const Camera& camera)
 
     glDisable(GL_BLEND);
 
+    g_info.cam = (Camera* ) &camera;
 }
