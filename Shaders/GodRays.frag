@@ -2,40 +2,32 @@
 
 out vec4 outColour;
 in  vec2 passTextureCoord;
-in vec2 screenSpaceSun;
 uniform sampler2D texSampler;
 
-#define SAMPLES 100
-
-vec4 godrays(float density, float weight, float decay, float exposure){
-    vec4 fragColor = vec4(0.0,0.0,0.0, 0.0);
-
-	vec2 deltaTextCoord = vec2( passTextureCoord - screenSpaceSun.xy );
-
-	vec2 textCoo = passTextureCoord.xy ;
-	deltaTextCoord *= (1.0 /  float(SAMPLES)) * density;
-    float illuminationDecay = 1.0;
-
-    for(int i=0; i < 100 ; i++){
-	    if(SAMPLES < i) {
-            break;
-	    }
-
-		textCoo -= deltaTextCoord;
-		vec4 samp = texture(texSampler, textCoo);
-		samp *= illuminationDecay * weight;
-		fragColor += samp;
-		illuminationDecay *= decay;
-    }
-
-    fragColor *= exposure;
-
-    return fragColor;
-}
+const float sampleDist = 1.2;
+const float sampleStrength = 1.6/8; 
 
 void main()
 {
-    vec4 color = godrays(1.15f, 1.0f, 1.0f, 1.0f);
-    
-    outColour = color;
+    float samples[8];
+    for(int i = 0; i < 8; i++){
+        samples[i] = 0 + (i * -0.02);
+    }
+
+    vec2 dir = 0.5 - passTextureCoord; 
+    float dist = sqrt(dir.x*dir.x + dir.y*dir.y); 
+    dir = dir/dist; 
+
+    vec4 color = texture(texSampler,passTextureCoord); 
+    vec4 sum = color;
+
+    for (int i = 0; i < 8; i++)
+        sum += texture( texSampler, passTextureCoord + dir * samples[i] * sampleDist );
+
+    sum *= 1.0/11.0;
+    float t = dist * sampleStrength;
+    t = clamp( t ,0.0,1.0);
+
+    outColour = mix( color, sum, t );
+
 }

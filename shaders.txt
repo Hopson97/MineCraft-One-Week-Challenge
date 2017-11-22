@@ -1,7 +1,7 @@
 fxaa 1
 shadow 1
 bloom 1
-motionblur 0
+motionblur 1
 aniso 0
 godrays 1
 msaa 0

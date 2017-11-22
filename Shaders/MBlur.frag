@@ -24,7 +24,7 @@ void main()
 
     previousPos /= previousPos.w;
 
-    vec2 velocity = (currentPos.xy - previousPos.xy) / (SAMPLES*SAMPLES*SAMPLES/4);
+    vec2 velocity = (currentPos.xy - previousPos.xy) / 8192;
 
     vec4 color = texture(texSampler, uv);
 
