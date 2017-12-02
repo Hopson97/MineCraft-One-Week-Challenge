@@ -119,7 +119,14 @@ void Player::update(float dt, World& world)
     {
         if (!m_isOnGround)
         {
-            velocity.y -= 40 * dt;
+			if (m_isInWater)
+			{
+				velocity.y -= 8 * dt;
+			}
+			else
+			{
+				velocity.y -= 40 * dt;
+			}
         }
         m_isOnGround = false;
     }
@@ -147,13 +154,25 @@ void Player::update(float dt, World& world)
 
 void Player::collide(World& world, const glm::vec3& vel, float dt)
 {
+	bool isTouching_Water = false;
+	
     for (int x = position.x - box.dimensions.x; x < position.x + box.dimensions.x; x++)
     for (int y = position.y - box.dimensions.y; y < position.y + 0.7             ; y++)
     for (int z = position.z - box.dimensions.z; z < position.z + box.dimensions.z; z++)
     {
         auto block = world.getBlock(x, y, z);
-
-        if (block != 0 && block.getData().isCollidable)
+	    
+		if (block == 0)
+		{
+			return;
+		}
+		
+		if (block.getData().id == 7)
+		{
+			isTouchingWater = true;
+		}
+		
+        if (block.getData().isCollidable)
         {
             if (vel.y > 0)
             {
@@ -186,6 +205,9 @@ void Player::collide(World& world, const glm::vec3& vel, float dt)
             }
         }
     }
+	
+	m_isInWater = isTouchinWater;
+	isTouchinWater = false;
 }
 
 ///@TODO Move this
