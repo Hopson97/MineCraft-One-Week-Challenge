@@ -225,11 +225,13 @@ void Player::keyboardInput()
 
 void Player::mouseInput(const sf::RenderWindow& window)
 {
+    static sf::Vector2i lastMousePosition;
     static bool useMouse = true;
     static ToggleKey useMouseKey (sf::Keyboard::L);
 
     if (useMouseKey.isKeyPressed())
     {
+        sf::Mouse::setPosition( lastUsedMousePosition );
         useMouse = !useMouse;
     }
 
@@ -244,7 +246,7 @@ void Player::mouseInput(const sf::RenderWindow& window)
 	 };
 
     static auto const BOUND = 89.9999;
-    static auto lastMousePosition = sf::Mouse::getPosition(window);
+    lastMousePosition = sf::Mouse::getPosition(window);
     auto change = sf::Mouse::getPosition(window) - lastMousePosition;
 
     rotation.y += change.x * 0.05;
