@@ -47,7 +47,7 @@ class Player : public Entity
 
         std::vector<ToggleKey> m_inventoryJumps;
 
-        glm::vec3 m_acceleation;
+        glm::vec3 m_acceleration;
 };
 
 
