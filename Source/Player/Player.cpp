@@ -188,33 +188,29 @@ void Player::collide(World& world, const glm::vec3& vel, float dt)
     }
 }
 
-///@TODO Move this
-float speed = 0.2f;
-
-
 void Player::keyboardInput()
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
-        float s = speed;
+        float s = m_speed;
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) s *= 5;
         m_acceleation.x += -glm::cos(glm::radians(rotation.y + 90)) * s;
         m_acceleation.z += -glm::sin(glm::radians(rotation.y + 90)) * s;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
-        m_acceleation.x += glm::cos(glm::radians(rotation.y + 90)) * speed;
-        m_acceleation.z += glm::sin(glm::radians(rotation.y + 90)) * speed;
+        m_acceleation.x += glm::cos(glm::radians(rotation.y + 90)) * m_speed;
+        m_acceleation.z += glm::sin(glm::radians(rotation.y + 90)) * m_speed;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
-        m_acceleation.x += -glm::cos(glm::radians(rotation.y)) * speed;
-        m_acceleation.z += -glm::sin(glm::radians(rotation.y)) * speed;
+        m_acceleation.x += -glm::cos(glm::radians(rotation.y)) * m_speed;
+        m_acceleation.z += -glm::sin(glm::radians(rotation.y)) * m_speed;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
-        m_acceleation.x += glm::cos(glm::radians(rotation.y)) * speed;
-        m_acceleation.z += glm::sin(glm::radians(rotation.y)) * speed;
+        m_acceleation.x += glm::cos(glm::radians(rotation.y)) * m_speed;
+        m_acceleation.z += glm::sin(glm::radians(rotation.y)) * m_speed;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
@@ -223,7 +219,7 @@ void Player::keyboardInput()
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && m_isFlying)
     {
-        m_acceleation.y -= speed * 3;
+        m_acceleation.y -= m_speed * 3;
     }
 }
 
@@ -302,12 +298,12 @@ void Player::jump()
         if (m_isOnGround)
         {
             m_isOnGround = false;
-            m_acceleation.y += speed * 50;
+            m_acceleation.y += m_speed * 50;
         }
     }
     else
     {
-        m_acceleation.y += speed * 3;
+        m_acceleation.y += m_speed * 3;
     }
 }
 
