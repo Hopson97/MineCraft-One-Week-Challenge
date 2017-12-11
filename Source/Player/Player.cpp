@@ -197,7 +197,11 @@ void Player::keyboardInput()
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
         float s = speed;
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) s *= 5;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) 
+        {
+            if (m_isFlying) s *= 5;
+            else s *= 1.75;
+        }
         m_acceleation.x += -glm::cos(glm::radians(rotation.y + 90)) * s;
         m_acceleation.z += -glm::sin(glm::radians(rotation.y + 90)) * s;
     }
