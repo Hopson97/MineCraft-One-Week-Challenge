@@ -31,14 +31,14 @@ void main()
     velocity = clamp(velocity, vec2(-maxVelocity), vec2(maxVelocity));
     vec2 sampleStep = velocity / SAMPLES;
 
-    vec3 color = texture2D(texSampler, uv).rgb;
+    vec3 color = texture(texSampler, uv).rgb;
     color *= 0.001;
     
     uv += velocity;
 
     for(float i = 1.0; i <= SAMPLES; i++) {
 		vec2 coord = passTextureCoord - sampleStep * i;
-		color += texture2D(texSampler, 	clamp(coord, pixel, 1.0 - pixel)).rgb;
+		color += texture(texSampler, 	clamp(coord, pixel, 1.0 - pixel)).rgb;
 	}
 
     outColour = vec4(color /= max(SAMPLES + 1.0, 1.0), 1.0);
