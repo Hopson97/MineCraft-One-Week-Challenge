@@ -20,5 +20,6 @@ void main()
     outColour.xy *= 1.1f;
     
     outColour.xyz += lighting * (0.04, 0.03, 0.02);
+    
     if (outColour.a == 0) discard;
 }

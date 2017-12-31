@@ -4,6 +4,7 @@
 #include "../../../Maths/NoiseGenerator.h"
 #include "../../../Util/Random.h"
 #include "../../Block/ChunkBlock.h"
+#include "../../Block/BlockDB.h"
 
 using Rand = Random<std::minstd_rand>;
 

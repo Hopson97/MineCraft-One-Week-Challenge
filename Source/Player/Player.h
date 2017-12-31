@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "../Entity.h"
-#include "../Item/ItemStack.h"
+//#include "../Item/ItemStack.h"
 #include "../ToggleKey.h"
 
 class World;
@@ -21,11 +21,11 @@ class Player : public Entity
         void update(float dt, World& wolrd);
         void collide(World& world, const glm::vec3& vel, float dt);
 
-        void addItem(const Material& material);
+        //void addItem(const Block& block);
 
         void draw(RenderMaster& master);
 
-        ItemStack& getHeldItems();
+       //ItemStack& getHeldItems();
 
     private:
         void jump();
@@ -36,7 +36,7 @@ class Player : public Entity
         bool m_isFlying   = false;
         bool m_isInWater  = false;
 
-        std::vector<ItemStack> m_items;
+        //std::vector<ItemStack> m_items;
         std::vector<sf::Text>  m_itemText;
         sf::Text m_posPrint;
         int m_heldItem = 0;

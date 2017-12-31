@@ -43,8 +43,10 @@ ChunkBlock World::getBlock(int x, int y, int z)
 {
     auto bp = getBlockXZ(x, z);
     auto chunkPosition = getChunkXZ(x, z);
+    auto& chunk = m_chunkManager.getChunk(chunkPosition.x, chunkPosition.z);
+    auto chunkblock = chunk.getBlock(bp.x, y, bp.z);
 
-    return m_chunkManager.getChunk(chunkPosition.x, chunkPosition.z).getBlock(bp.x, y, bp.z);
+    return chunkblock;
 }
 
 void World::setBlock(int x, int y, int z, ChunkBlock block)

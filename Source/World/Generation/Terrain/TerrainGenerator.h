@@ -1,6 +1,8 @@
 #ifndef TERRAINGENERATOR_H_INCLUDED
 #define TERRAINGENERATOR_H_INCLUDED
 
+#include "../../Block/BlockDB.h"
+
 class Chunk;
 
 class TerrainGenerator

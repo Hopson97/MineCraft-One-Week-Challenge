@@ -1,13 +1,14 @@
 #include "Application.h"
 #include <iostream>
 #include "States/PlayingState.h"
-#include "World/Block/BlockDatabase.h"
+//#include "World/Block/BlockDatabase.h"
+#include "World/Block/BlockDB.h"
 
 Application::Application(const Config& config)
 :   m_context   (config)
 ,   m_camera    (config)
 {
-    BlockDatabase::get();
+    BlockDB::get();
     pushState<StatePlaying>(*this, config);
 
     g_Config = config;

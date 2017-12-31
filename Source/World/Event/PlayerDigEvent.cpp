@@ -1,7 +1,7 @@
 #include "PlayerDigEvent.h"
 
 #include "../World.h"
-#include "../../Item/Material.h"
+// #include "../../Item/Material.h"
 #include "../../Player/Player.h"
 
 PlayerDigEvent::PlayerDigEvent(sf::Mouse::Button button, const glm::vec3& location, Player& player)
@@ -21,12 +21,13 @@ void PlayerDigEvent::handle(World& world)
 
 void PlayerDigEvent::dig(World& world)
 {
+    /*
     switch (m_buttonPress)
     {
         case sf::Mouse::Button::Left:{
             auto block = world.getBlock(m_digSpot.x, m_digSpot.y, m_digSpot.z);
-            const auto& material = Material::toMaterial((BlockId)block.id);
-            m_pPlayer->addItem(material);
+            // const auto& material = Material::toMaterial((BlockId)block.id);
+            //m_pPlayer->addItem(block.getData());
 /*
             auto r = 1;
             for (int y = -r; y < r; y++)
@@ -38,18 +39,18 @@ void PlayerDigEvent::dig(World& world)
                 int newZ = m_digSpot.z + z;
                 world.updateChunk   (newX, newY, newZ);
                 world.setBlock      (newX, newY, newZ, 0);
-*/
+
             world.updateChunk   (m_digSpot.x, m_digSpot.y, m_digSpot.z);
-            world.setBlock      (m_digSpot.x, m_digSpot.y, m_digSpot.z, 0);
+            world.setBlock      (m_digSpot.x, m_digSpot.y, m_digSpot.z, 0/*Air);
             //}
             break;
         }
 
         case sf::Mouse::Button::Right:{
-            auto& stack = m_pPlayer->getHeldItems();
-            auto& material = stack.getMaterial();
+            //auto& stack = m_pPlayer->getHeldItems();
+            //auto& block = stack.getBlocktype();
 
-            if (material.id == Material::ID::Nothing)
+            /*if (block.id == 2/*Nothing)
             {
                 return;
             }
@@ -57,11 +58,12 @@ void PlayerDigEvent::dig(World& world)
             {
                 stack.remove();
                 world.updateChunk   (m_digSpot.x, m_digSpot.y, m_digSpot.z);
-                world.setBlock      (m_digSpot.x, m_digSpot.y, m_digSpot.z, material.toBlockID());
+                world.setBlock      (m_digSpot.x, m_digSpot.y, m_digSpot.z, block.id);
                 break;
             }
         }
         default:
             break;
     }
+    */
 }

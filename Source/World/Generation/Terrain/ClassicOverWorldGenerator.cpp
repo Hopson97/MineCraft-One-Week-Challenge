@@ -133,6 +133,9 @@ void ClassicOverWorldGenerator::setBlocks(int maxHeight)
     std::vector<sf::Vector3i> trees;
     std::vector<sf::Vector3i> plants;
 
+    ChunkBlock dirt = BlockDB::get()["Dirt"].id;
+    ChunkBlock stone = BlockDB::get()["Stone"].id;
+
     for (int y = 0; y < maxHeight + 1; y++)
     for (int x = 0; x < CHUNK_SIZE; x++)
     for (int z = 0; z < CHUNK_SIZE; z++)
@@ -144,7 +147,7 @@ void ClassicOverWorldGenerator::setBlocks(int maxHeight)
         {
             if (y <= WATER_LEVEL)
             {
-                m_pChunk->setBlock(x, y, z, BlockId::Water);
+                m_pChunk->setBlock(x, y, z, 1/*Water*/);
             }
             continue;
         }
@@ -175,11 +178,11 @@ void ClassicOverWorldGenerator::setBlocks(int maxHeight)
         }
         else if (y > height - 3)
         {
-            m_pChunk->setBlock(x, y, z, BlockId::Dirt);
+            m_pChunk->setBlock(x, y, z, dirt);
         }
         else
         {
-            m_pChunk->setBlock(x, y, z, BlockId::Stone);
+            m_pChunk->setBlock(x, y, z, stone);
         }
     }
 

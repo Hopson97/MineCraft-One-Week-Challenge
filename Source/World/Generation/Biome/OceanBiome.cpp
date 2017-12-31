@@ -10,12 +10,12 @@ OceanBiome::OceanBiome(int seed)
 
 ChunkBlock OceanBiome::getTopBlock(Rand& rand) const
 {
-    return BlockId::Grass;
+    return BlockDB::get()["Grass"].id;
 }
 
 ChunkBlock OceanBiome::getUnderWaterBlock(Rand& rand) const
 {
-    return BlockId::Sand;
+    return BlockDB::get()["Sand"].id;
 }
 
 void OceanBiome::makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) const
@@ -40,6 +40,6 @@ NoiseParameters OceanBiome::getNoiseParameters()
 ChunkBlock OceanBiome::getPlant(Rand& rand) const
 {
     return rand.intInRange(0, 10) > 6 ?
-        BlockId::Rose :
-        BlockId::TallGrass;
+        BlockDB::get()["Rose"].id :
+        BlockDB::get()["TallGrass"].id;
 }

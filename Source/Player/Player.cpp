@@ -13,10 +13,7 @@
 sf::Font f;
 
 Player::Player()
-:   Entity  ({2500, 125, 2500}, {0, 0, 0}, {0.3, 1.0, 0.3})
-,   m_itemDown  (sf::Keyboard::Down)
-,   m_itemUp    (sf::Keyboard::Up)
-,   m_flyKey    (sf::Keyboard::F)
+:   Entity  ({2500, 125, 2500}, {0, 0, 0}, {0.3, 1.0, 0.3}),   m_flyKey    (sf::Keyboard::F), m_itemUp(sf::Keyboard::F), m_itemDown(sf::Keyboard::F)
 {
     for (int i = 0; i < 5; i++)
     {
@@ -27,11 +24,12 @@ Player::Player()
 
     f.loadFromFile("Res/Fonts/rs.ttf");
 
+    Block& no_block = BlockDB::get()[2]/*Nothing*/;
 
-    for (int i = 0; i < 5; i++)
+    /*for (int i = 0; i < 5; i++)
     {
-        m_items.emplace_back(Material::NOTHING, 0);
-    }
+        m_items.emplace_back(no_block, 0);
+    }*/
 
     for (float i = 0; i < 5; i++)
     {
@@ -47,22 +45,22 @@ Player::Player()
     m_posPrint.setCharacterSize(25);
     m_posPrint.setPosition(20.0f, 20.0f * 6.0f + 100.0f);
 }
-
-void Player::addItem(const Material& material)
+/*
+void Player::addItem(const Block& block)
 {
-    Material::ID id = material.id;
+    auto id = block.id;
 
     for (unsigned i = 0; i < m_items.size(); i++)
     {
-        if (m_items[i].getMaterial().id == id)
+        if (m_items[i].getBlocktype().id == id)
         {
-            /*int leftOver =*/ m_items[i].add(1);
+            int leftOver = m_items[i].add(1);
 
             return;
         }
-        else if (m_items[i].getMaterial().id == Material::ID::Nothing)
+        else if (m_items[i].getBlocktype().id == 2Nothing)
         {
-            m_items[i] = {material, 1};
+            m_items[i] = {block, 1};
             return;
         }
     }
@@ -71,14 +69,14 @@ void Player::addItem(const Material& material)
 ItemStack& Player::getHeldItems()
 {
     return m_items[m_heldItem];
-}
+}*/
 
 
 void Player::handleInput(const sf::RenderWindow& window)
 {
     keyboardInput();
     mouseInput(window);
-
+/*
     if(m_itemDown.isKeyPressed())
     {
         m_heldItem++;
@@ -103,7 +101,7 @@ void Player::handleInput(const sf::RenderWindow& window)
             m_heldItem = i;
         }
     }
-
+*/
     if (m_flyKey.isKeyPressed())
     {
         m_isFlying = !m_isFlying;
@@ -274,6 +272,7 @@ void Player::mouseInput(const sf::RenderWindow& window)
 
 void Player::draw(RenderMaster& master)
 {
+    /*
     for (unsigned i = 0; i < m_items.size(); i++)
     {
         sf::Text& t = m_itemText[i];
@@ -285,9 +284,9 @@ void Player::draw(RenderMaster& master)
         {
             t.setFillColor(sf::Color::White);
         }
-        t.setString((m_items[i].getMaterial().name) + " " + std::to_string(m_items[i].getNumInStack()) + " ");
+        t.setString((m_items[i].getBlocktype().name) + " " + std::to_string(m_items[i].getNumInStack()) + " ");
         master.drawSFML(t);
-    }
+    }*/
     std::ostringstream stream;
     stream  << " X: " << position.x
             << " Y: " << position.y
