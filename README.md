@@ -12,6 +12,10 @@ This was made in a week, as a challenge for a video. There do exist other, more 
 
 MineTest here: https://github.com/minetest/minetest
 
+#Discords
+Hopson Official: https://discord.gg/feKbBwS
+Minecraft One Week: https://discord.gg/mjSutWm
+
 # Building
 
 You will need GLEW (OpenGL 3.3), GLM and SFML 2.4.1+ libraries w/headers, and this also requires a compiler that supports C++14 (or newer) with threads.
