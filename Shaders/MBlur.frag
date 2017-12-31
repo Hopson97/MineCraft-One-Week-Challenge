@@ -8,8 +8,9 @@ uniform sampler2D depth;
 
 uniform mat4 currProjViewMatrix;
 uniform mat4 prevProjViewMatrix;
+uniform vec2 resolution;
 
-#define SAMPLES 60
+#define SAMPLES 8
 
 void main()
 {
@@ -24,16 +25,22 @@ void main()
 
     previousPos /= previousPos.w;
 
-    vec2 velocity = (currentPos.xy - previousPos.xy) / 8192;
+    float maxVelocity = 0.05;
+    vec2 pixel = 1.0 / resolution;
+    vec2 velocity = (currentPos.xy - previousPos.xy) * 0.0025;
+    velocity = clamp(velocity, vec2(-maxVelocity), vec2(maxVelocity));
+    vec2 sampleStep = velocity / SAMPLES;
 
-    vec4 color = texture(texSampler, uv);
-
+    vec3 color = texture2D(texSampler, uv).rgb;
+    color *= 0.001;
+    
     uv += velocity;
 
-    for(int i = 1; i<SAMPLES; ++i, uv+=velocity){
-        vec4 currentColor = texture(texSampler, uv);
-        color += currentColor;
-    }
+    for(float i = 1.0; i <= SAMPLES; i++) {
+		vec2 coord = passTextureCoord - sampleStep * i;
+		color += texture2D(texSampler, 	clamp(coord, pixel, 1.0 - pixel)).rgb;
+	}
 
-    outColour = color / SAMPLES;
+    outColour = vec4(color /= max(SAMPLES + 1.0, 1.0), 1.0);
+
 }

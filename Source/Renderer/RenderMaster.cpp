@@ -14,7 +14,7 @@
 
 
 
-RenderMaster::RenderMaster(): fbo(false), fboMSAA(true)
+RenderMaster::RenderMaster(): fbo(false)
 {
     
 }
@@ -65,14 +65,8 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
 
-     //Render to texture
-    if(g_ShaderSettings.msaa){
-        fboMSAA.bind();
-        fboMSAA.clear();
-    }else{
-        fbo.bind();
-        fbo.clear();
-    }
+    fbo.bind();
+    fbo.clear();
     
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
@@ -82,13 +76,6 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
 
     
     m_sky->render(camera);
-
-    if(g_ShaderSettings.msaa){
-        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo.m_fbo);
-        glBindFramebuffer(GL_READ_FRAMEBUFFER, fboMSAA.m_fbo);
-        glBlitFramebuffer(0, 0, g_renderSettings.resolutionX, g_renderSettings.resolutionY, 0, 0, g_renderSettings.resolutionX, g_renderSettings.resolutionY, GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT, GL_NEAREST);
-    }
-
     m_postRenderer.render(camera, fbo);
 
     m_sfmlRenderer  .render (window);

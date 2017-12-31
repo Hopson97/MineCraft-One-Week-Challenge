@@ -5,9 +5,6 @@ struct ShaderData{
     //FXAA
     bool fxaa;
 
-    //Shadows
-    bool shadow;
-
     //Bloom
     bool bloom;
 
@@ -18,9 +15,6 @@ struct ShaderData{
 
     //GodRays
     bool godrays;
-
-    //MSAA
-    bool msaa;
 };
 
 extern ShaderData g_ShaderSettings;

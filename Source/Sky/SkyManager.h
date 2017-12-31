@@ -10,6 +10,7 @@
 #include "../Shaders/SunShader.h"
 #include "../Texture/BasicTexture.h"
 #include "ProcSky.h"
+#include "Cloud.h"
 #include "../GlobalInfo.h"
 class Camera;
 
@@ -41,6 +42,7 @@ class SkyManager : public TickObject
         BasicTexture moon;
 
         ProcSky skyBox;
+        Clouds clouds;
 };
 
 #endif

@@ -16,10 +16,10 @@ SkyManager::SkyManager()
 
     std::vector<GLfloat> svertexCoords
     {
-        -30,  30, 400,
-        30,  30, 400,
-        30, -30, 400,
-        -30, -30, 400
+        -50,  50, 400,
+        50,  50, 400,
+        50, -50, 400,
+        -50, -50, 400
     };
 
     std::vector<GLfloat> stextureCoords
@@ -40,10 +40,10 @@ SkyManager::SkyManager()
 
     std::vector<GLfloat> mvertexCoords
     {
-        -30,  30, -400,
-        30,  30, -400,
-        30, -30, -400,
-        -30, -30, -400
+        -50,  50, -400,
+        50,  50, -400,
+        50, -50, -400,
+        -50, -50, -400
     };
 
     std::vector<GLfloat> mtextureCoords
@@ -149,6 +149,7 @@ void SkyManager::render(const Camera& camera)
     m_shader.loadTime(degreesToRadians(((float)dayTime/24000) * 360));
     GL::drawElements(m_MoonModel.getIndicesCount());
 
+    clouds.Render(camera, playerPos);
     glDisable(GL_BLEND);
 
     g_info.cam = (Camera* ) &camera;

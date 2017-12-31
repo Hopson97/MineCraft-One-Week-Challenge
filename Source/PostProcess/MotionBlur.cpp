@@ -11,6 +11,7 @@ void MotionBlur::getUniforms(){
     t2 = glGetUniformLocation(m_id, "other");
     m_prev = glGetUniformLocation(m_id, "prevProjViewMatrix");
     m_curr = glGetUniformLocation(m_id, "currProjViewMatrix");
+    m_res = glGetUniformLocation(m_id, "resolution");
 }
 
 void MotionBlur::loadT1(){
@@ -26,3 +27,7 @@ void MotionBlur::loadPrevProj(glm::mat4 prev){
 void MotionBlur::loadCurrProj(glm::mat4 curr){
     loadMatrix4(m_curr, curr);
 }
+
+void MotionBlur::loadRes(glm::vec2 v){
+    loadVector2(m_res, v);
+} 

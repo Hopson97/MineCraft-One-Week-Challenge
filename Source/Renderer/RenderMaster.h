@@ -43,7 +43,6 @@ class RenderMaster
         SFMLRenderer    m_sfmlRenderer;
         
         FrameBufferObject fbo;
-        FrameBufferObject fboMSAA;
 
         bool m_drawBox = false;
 };

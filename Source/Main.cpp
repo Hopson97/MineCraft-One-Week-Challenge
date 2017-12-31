@@ -105,9 +105,6 @@ namespace
                 if(key == "fxaa"){
                     shaderFile >> g_ShaderSettings.fxaa;
                     std::cout << "Shader: FXAA: " << g_ShaderSettings.fxaa << std::endl;
-                }else if(key == "shadow"){
-                    shaderFile >> g_ShaderSettings.shadow;
-                    std::cout << "Shader: Shadows: " << g_ShaderSettings.shadow << std::endl;
                 }else if(key == "bloom"){
                     shaderFile >> g_ShaderSettings.bloom;
                     std::cout << "Shader: Bloom: " << g_ShaderSettings.bloom << std::endl;
@@ -120,9 +117,6 @@ namespace
                 }else if(key == "godrays"){
                     shaderFile >> g_ShaderSettings.godrays;
                     std::cout << "Shader: Godrays: " << g_ShaderSettings.godrays << std::endl; 
-                }else if(key == "msaa"){
-                    shaderFile >> g_ShaderSettings.msaa;
-                    std::cout << "Shader: MSAA: " << g_ShaderSettings.msaa << std::endl;
                 }
             }
         }

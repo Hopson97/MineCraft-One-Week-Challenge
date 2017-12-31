@@ -10,6 +10,7 @@ void MBlur::render(const Camera& cam, FrameBufferObject& fbo){
     m_shader.loadModelMatrix(glm::mat4());
     m_shader.loadCurrProj(cam.getProjectionViewMatrix());
     m_shader.loadPrevProj(prev);
+    m_shader.loadRes(glm::vec2(g_renderSettings.resolutionX,g_renderSettings.resolutionY));
     prev = cam.getProjectionViewMatrix();
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, fbo.getColorTex());

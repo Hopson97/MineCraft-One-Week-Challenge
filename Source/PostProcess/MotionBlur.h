@@ -11,10 +11,11 @@ public:
     void loadT2();
     void loadPrevProj(glm::mat4 prev);
     void loadCurrProj(glm::mat4 curr);
+    void loadRes(glm::vec2 res);
 
 private:
     void getUniforms();
-    GLuint t1, t2, m_prev, m_curr;
+    GLuint t1, t2, m_prev, m_curr, m_res;
 };
 
 #endif
