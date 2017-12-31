@@ -12,7 +12,7 @@ void StructureBuilder::build(Chunk& chunk)
     }
 }
 
-void StructureBuilder::makeColumn(int x, int z, int yStart, int height, BlockId block)
+void StructureBuilder::makeColumn(int x, int z, int yStart, int height, unsigned block)
 {
     for (int y = yStart; y < yStart + height; y++)
     {
@@ -20,7 +20,7 @@ void StructureBuilder::makeColumn(int x, int z, int yStart, int height, BlockId 
     }
 }
 
-void StructureBuilder::makeRowX(int xStart, int xEnd, int y, int z, BlockId block)
+void StructureBuilder::makeRowX(int xStart, int xEnd, int y, int z, unsigned block)
 {
     for (int x = xStart; x <= xEnd; ++x)
     {
@@ -28,7 +28,7 @@ void StructureBuilder::makeRowX(int xStart, int xEnd, int y, int z, BlockId bloc
     }
 }
 
-void StructureBuilder::makeRowZ(int zStart, int zEnd, int x, int y, BlockId block)
+void StructureBuilder::makeRowZ(int zStart, int zEnd, int x, int y, unsigned block)
 {
     for (int z = zStart; z <= zEnd; ++z)
     {
@@ -38,7 +38,7 @@ void StructureBuilder::makeRowZ(int zStart, int zEnd, int x, int y, BlockId bloc
 
 
 
-void StructureBuilder::fill(int y, int xStart, int xEnd, int zStart, int zEnd, BlockId block)
+void StructureBuilder::fill(int y, int xStart, int xEnd, int zStart, int zEnd, unsigned block)
 {
     for (int x = xStart; x < xEnd; ++x)
     for (int z = zStart; z < zEnd; ++z)
@@ -47,7 +47,7 @@ void StructureBuilder::fill(int y, int xStart, int xEnd, int zStart, int zEnd, B
     }
 }
 
-void StructureBuilder::addBlock(int x, int y, int z, BlockId block)
+void StructureBuilder::addBlock(int x, int y, int z, unsigned block)
 {
     m_blocks.emplace_back(block, x, y, z);
 }

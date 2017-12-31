@@ -10,7 +10,7 @@
 #include "IChunk.h"
 
 #include "../../Physics/AABB.h"
-#include "../Block/BlockData.h"
+// #include "../Block/BlockData.h"
 
 class World;
 

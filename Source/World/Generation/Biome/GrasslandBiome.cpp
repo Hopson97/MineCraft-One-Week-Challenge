@@ -10,21 +10,21 @@ GrasslandBiome::GrasslandBiome(int seed)
 
 ChunkBlock GrasslandBiome::getTopBlock(Rand& rand) const
 {
-    return BlockId::Grass;
+    return BlockDB::get()["Grass"].id;
 }
 
 ChunkBlock GrasslandBiome::getUnderWaterBlock(Rand& rand) const
 {
     return rand.intInRange(0, 10) > 8 ?
-        BlockId::Dirt :
-        BlockId::Sand;
+        BlockDB::get()["Dirt"].id :
+        BlockDB::get()["Sand"].id;
 }
 
 ChunkBlock GrasslandBiome::getBeachBlock (Rand& rand) const
 {
     return rand.intInRange(0, 10) > 2 ?
-        BlockId::Grass :
-        BlockId::Dirt;
+        BlockDB::get()["Dirt"].id :
+        BlockDB::get()["Sand"].id;
 }
 
 void GrasslandBiome::makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) const
@@ -47,6 +47,6 @@ NoiseParameters GrasslandBiome::getNoiseParameters()
 ChunkBlock GrasslandBiome::getPlant(Rand& rand) const
 {
     return rand.intInRange(0, 10) > 6 ?
-        BlockId::Rose :
-        BlockId::TallGrass;
+        BlockDB::get()["Rose"].id :
+        BlockDB::get()["TallGrass"].id;
 }

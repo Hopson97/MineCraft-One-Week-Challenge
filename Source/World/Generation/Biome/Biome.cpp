@@ -10,7 +10,7 @@ Biome::Biome(const NoiseParameters& parameters, int treeFreq, int plantFreq, int
 
 ChunkBlock Biome::getBeachBlock(Rand& rand) const
 {
-    return BlockId::Sand;
+    return BlockDB::get()["Sand"].id;
 }
 
 

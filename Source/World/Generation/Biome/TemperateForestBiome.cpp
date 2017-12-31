@@ -11,15 +11,15 @@ TemperateForestBiome::TemperateForestBiome(int seed)
 ChunkBlock TemperateForestBiome::getTopBlock(Rand& rand) const
 {
     return rand.intInRange(0, 10) < 8 ?
-        BlockId::Grass :
-        BlockId::Dirt;
+        BlockDB::get()["Grass"].id :
+        BlockDB::get()["Dirt"].id;
 }
 
 ChunkBlock TemperateForestBiome::getUnderWaterBlock(Rand& rand) const
 {
     return rand.intInRange(0, 10) > 8 ?
-        BlockId::Dirt :
-        BlockId::Sand;
+        BlockDB::get()["Grass"].id :
+        BlockDB::get()["Dirt"].id;
 }
 
 void TemperateForestBiome::makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) const
@@ -41,5 +41,5 @@ NoiseParameters TemperateForestBiome::getNoiseParameters()
 
 ChunkBlock TemperateForestBiome::getPlant(Rand& rand) const
 {
-    return BlockId::TallGrass;
+    return BlockDB::get()["TallGrass"].id;
 }

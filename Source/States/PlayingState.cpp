@@ -60,9 +60,9 @@ void StatePlaying::handleInput()
         int z = ray.getEnd().z;
 
         auto block  = m_world.getBlock(x, y, z);
-        auto id     = (BlockId)block.id;
+        auto id     = block.id;
 
-        if(id != BlockId::Air && id != BlockId::Water)
+        if(id != 0/*Air*/ && id != 1/*Water*/)
         {
             if (timer.getElapsedTime().asSeconds() > 0.2)
             {

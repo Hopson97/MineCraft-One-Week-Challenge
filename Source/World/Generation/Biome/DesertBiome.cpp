@@ -11,12 +11,12 @@ DesertBiome::DesertBiome(int seed)
 
 ChunkBlock DesertBiome::getTopBlock(Rand& rand) const
 {
-    return BlockId::Sand;
+    return BlockDB::get()["Sand"].id;
 }
 
 ChunkBlock DesertBiome::getUnderWaterBlock(Rand& rand) const
 {
-    return BlockId::Sand;
+    return BlockDB::get()["Sand"].id;
 }
 
 
@@ -54,5 +54,5 @@ NoiseParameters DesertBiome::getNoiseParameters()
 
 ChunkBlock DesertBiome::getPlant(Rand& rand) const
 {
-    return BlockId::DeadShrub;
+    return BlockDB::get()["DeadShrub"].id;
 }

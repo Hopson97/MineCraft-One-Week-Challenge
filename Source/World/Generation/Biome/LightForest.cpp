@@ -10,14 +10,14 @@ LightForest::LightForest(int seed)
 
 ChunkBlock LightForest::getTopBlock(Rand& rand) const
 {
-    return BlockId::Grass;
+    return BlockDB::get()["Grass"].id;
 }
 
 ChunkBlock LightForest::getUnderWaterBlock(Rand& rand) const
 {
     return rand.intInRange(0, 10) > 9 ?
-        BlockId::Sand :
-        BlockId::Dirt;
+        BlockDB::get()["Sand"].id :
+        BlockDB::get()["Dirt"].id;
 }
 
 void LightForest::makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) const
@@ -40,6 +40,6 @@ NoiseParameters LightForest::getNoiseParameters()
 ChunkBlock LightForest::getPlant(Rand& rand) const
 {
     return rand.intInRange(0, 10) > 8 ?
-        BlockId::Rose :
-        BlockId::TallGrass;
+        BlockDB::get()["Rose"].id :
+        BlockDB::get()["TallGrass"].id;
 }

@@ -61,12 +61,15 @@ ChunkBlock Chunk::getBlock(int x, int y, int z) const noexcept
 {
     if (outOfBound(x, y, z))
     {
-        return BlockId::Air;
+        return 1/*Air*/;
     }
 
     int bY = y % CHUNK_SIZE;
 
-    return m_chunks[y / CHUNK_SIZE].getBlock(x, bY, z);
+    auto& chunksection = m_chunks[y / CHUNK_SIZE];
+    auto chunkblock = chunksection.getBlock(x, bY, z);
+
+    return chunkblock;
 }
 
 int Chunk::getHeightAt(int x, int z)

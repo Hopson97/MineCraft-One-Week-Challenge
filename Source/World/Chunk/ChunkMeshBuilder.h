@@ -6,13 +6,14 @@
 #include <GL/glew.h>
 
 #include "../Block/ChunkBlock.h"
+#include "../Block/BlockDB.h"
 
 class ChunkSection;
 class ChunkMesh;
-class BlockData;
+// class BlockData;
 
 struct ChunkMeshCollection;
-struct BlockDataHolder;
+// struct BlockDataHolder;
 
 class ChunkMeshBuilder
 {
@@ -34,7 +35,7 @@ class ChunkMeshBuilder
                               GLfloat cardinalLight);
 
         bool shouldMakeFace (const sf::Vector3i& blockPosition,
-                             const BlockDataHolder& blockData);
+                             const Block& block);
 
         bool shouldMakeLayer(int y);
 
@@ -42,7 +43,7 @@ class ChunkMeshBuilder
         ChunkSection*           m_pChunk    = nullptr;
         ChunkMeshCollection*    m_pMeshes   = nullptr;
         ChunkMesh*              m_pActiveMesh   = nullptr;
-        const BlockDataHolder*  m_pBlockData    = nullptr;
+        const Block*            m_pBlock    = nullptr;
 
 };
 

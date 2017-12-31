@@ -5,6 +5,7 @@
 
 #include "../Shaders/ChunkShader.h"
 #include "../Config.h"
+#include "../World/Block/BlockDB.h"
 
 
 struct RenderInfo;

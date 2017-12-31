@@ -1,7 +1,7 @@
 #include "ChunkRenderer.h"
 
 #include "../World/Chunk/ChunkMesh.h"
-#include "../World/Block/BlockDatabase.h"
+//#include "../World/Block/BlockDatabase.h"
 
 #include "../Camera.h"
 #include "../Sky/SkyManager.h"
@@ -24,7 +24,7 @@ void ChunkRenderer::render(const Camera& camera, Config* conf)
     glEnable(GL_CULL_FACE);
 
     m_shader.useProgram();
-    BlockDatabase::get().textureAtlas.bindTexture();
+    BlockDB::get().textureAtlas.bindTexture();
 
     m_shader.loadProjectionViewMatrix(camera.getProjectionViewMatrix());
     m_shader.loadProjectionMatrix(camera.getProjMatrix());
