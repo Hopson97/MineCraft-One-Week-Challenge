@@ -26,3 +26,6 @@ Project/
 #exe
 *.exe
 MinecraftWeek/
+
+#Mac stuff
+*.DS_STORE

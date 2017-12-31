@@ -93,15 +93,15 @@ void SkyManager::TickUpdate(unsigned int tickTime)
     }
     if(dayTime > 12000 && dayTime < 13500)  //6pm - 9pm sun light fades
     {
-        g_info.lighting = blend(0.6f, 0.2f, (float)((float)dayTime - 12000)/ 1500);
+        g_info.lighting = blend(0.6f, 0.1f, (float)((float)dayTime - 12000)/ 1500);
     }
     if(dayTime > 13500 && dayTime < 22500) //9pm - 3am is night
     {
-        g_info.lighting = 0.2f;
+        g_info.lighting = 0.1f;
     }
     if(dayTime > 22500 && dayTime < 24000)
     {
-        g_info.lighting = blend(0.2f, 0.6f, (float)((float)dayTime-22500) / 1500);
+        g_info.lighting = blend(0.1f, 0.6f, (float)((float)dayTime-22500) / 1500);
     }
 
     //Update Sun/Moon matrix
@@ -152,4 +152,5 @@ void SkyManager::render(const Camera& camera)
     clouds.Render(camera, playerPos);
     glDisable(GL_BLEND);
 
+    g_info.cam = (Camera* ) &camera;
 }

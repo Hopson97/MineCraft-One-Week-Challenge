@@ -26,8 +26,11 @@ void FloraRenderer::render(const Camera& camera, Config* conf)
     m_shader.useProgram();
 
     m_shader.loadProjectionViewMatrix(camera.getProjectionViewMatrix());
+    m_shader.loadProjectionMatrix(camera.getProjMatrix());
+    m_shader.loadViewMatrix(camera.getViewMatrix());
     m_shader.loadTime(g_info.elapsedTime);
     m_shader.loadLight(g_info.lighting);
+    m_shader.loadDTime(g_info.dayTime);
 
     for (auto mesh : m_chunks)
     {

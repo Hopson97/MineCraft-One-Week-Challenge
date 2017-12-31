@@ -14,4 +14,6 @@ struct Config
     bool postProcess    = true;
 };
 
+extern Config g_Config;
+
 #endif // CONFIG_H_INCLUDED

@@ -1,5 +1,5 @@
-renderdistance 16
-fullscreen 1
+renderdistance 8
+fullscreen 0
 windowsize 1280 720
 fov 90
 gamma 1.3

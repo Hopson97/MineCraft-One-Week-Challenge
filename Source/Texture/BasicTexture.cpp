@@ -1,5 +1,7 @@
 #include "BasicTexture.h"
-
+#include <iostream>
+#include <cmath>
+#include "../ShaderData.h"
 
 BasicTexture::BasicTexture(const std::string& file)
 {
@@ -16,12 +18,19 @@ void BasicTexture::loadFromImage(const sf::Image& i)
                  0, GL_RGBA, GL_UNSIGNED_BYTE, i.getPixelsPtr());
 
     glGenerateMipmap(GL_TEXTURE_2D);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_LOD_BIAS, -4);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST); //No mipmaps nearby
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 1);
 
+    if(GLEW_EXT_texture_filter_anisotropic && g_ShaderSettings.aniso){
+        float max;
+        glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &max);
+        float amount = std::min(16.0f, max);
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, amount);
+    }
 }
 void BasicTexture::loadFromFile(const std::string& file)
 {
@@ -45,3 +54,6 @@ void BasicTexture::bindTexture() const
 }
 
 
+GLuint BasicTexture::getID() const{
+    return m_id;
+}

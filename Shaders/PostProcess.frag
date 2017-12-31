@@ -8,8 +8,26 @@ uniform vec2 resolution;
 
 uniform float brightness;
 uniform float contrast;
-uniform float postProcess;
 uniform float gamma;
+
+
+float kernel[9]=float[9]
+(2/9, 2/9, 2/9,
+ 2/9, 16/9 , 2/9,
+ 2/9, 2/9, 2/9);
+vec2 offset[9]=vec2[9]
+(
+    vec2(-1.0, -1.0),
+    vec2( 0.0, -1.0),
+    vec2( 1.0, -1.0),
+    vec2(-1.0,  0.0),
+    vec2( 0.0,  0.0),
+    vec2( 1.0,  0.0),
+    vec2(-1.0,  1.0),
+    vec2( 0.0,  1.0),
+    vec2( 1.0,  1.0)
+
+);
 
 vec3 brightnessContrast(vec3 value, float brightness, float contrast)
 {
@@ -21,59 +39,59 @@ vec3 gammaCorrect(vec3 value, float param)
     return vec3(pow(abs(value.r), param),pow(abs(value.g), param),pow(abs(value.b), param));
 }
 
-#define FXAA_REDUCE_MIN (1.0/128.0)
-#define FXAA_REDUCE_MUL (1.0/4.0) // ?x antialiasing. Switch values to get higher/lower default is 4x FXAA
-#define FXAA_SPAN_MAX 8.0
-
-vec3 fxaa(vec2 resolution, sampler2D sampler0, vec2 texcoord)
+vec3 rgb2hsv(vec3 c)
 {
-    vec2 inverse_resolution=vec2(1.0/resolution.x,1.0/resolution.y);
-    vec3 rgbNW = texture(sampler0, texcoord.xy + (vec2(-1.0,-1.0)) * inverse_resolution).xyz;
-    vec3 rgbNE = texture(sampler0, texcoord.xy + (vec2(1.0,-1.0)) * inverse_resolution).xyz;
-    vec3 rgbSW = texture(sampler0, texcoord.xy + (vec2(-1.0,1.0)) * inverse_resolution).xyz;
-    vec3 rgbSE = texture(sampler0, texcoord.xy + (vec2(1.0,1.0)) * inverse_resolution).xyz;
-    vec3 rgbM  = texture(sampler0,  texcoord.xy).xyz;
-    vec3 luma = vec3(0.299, 0.587, 0.114);
-    float lumaNW = dot(rgbNW, luma);
-    float lumaNE = dot(rgbNE, luma);
-    float lumaSW = dot(rgbSW, luma);
-    float lumaSE = dot(rgbSE, luma);
-    float lumaM  = dot(rgbM,  luma);
-    float lumaMin = min(lumaM, min(min(lumaNW, lumaNE), min(lumaSW, lumaSE)));
-    float lumaMax = max(lumaM, max(max(lumaNW, lumaNE), max(lumaSW, lumaSE)));
-    vec2 dir;
-    dir.x = -((lumaNW + lumaNE) - (lumaSW + lumaSE));
-    dir.y =  ((lumaNW + lumaSW) - (lumaNE + lumaSE));
-    float dirReduce = max((lumaNW + lumaNE + lumaSW + lumaSE) * (0.25 * FXAA_REDUCE_MUL),FXAA_REDUCE_MIN);
-    float rcpDirMin = 1.0/(min(abs(dir.x), abs(dir.y)) + dirReduce);
-    dir = min(vec2( FXAA_SPAN_MAX,  FXAA_SPAN_MAX),max(vec2(-FXAA_SPAN_MAX, -FXAA_SPAN_MAX),dir * rcpDirMin)) * inverse_resolution;
-    vec3 rgbA = 0.5 * (texture(sampler0,   texcoord.xy   + dir * (1.0/3.0 - 0.5)).xyz + texture(sampler0,   texcoord.xy   + dir * (2.0/3.0 - 0.5)).xyz);
-    vec3 rgbB = rgbA * 0.5 + 0.25 * (texture(sampler0,  texcoord.xy   + dir *  - 0.5).xyz + texture(sampler0,  texcoord.xy   + dir * 0.5).xyz);
-    float lumaB = dot(rgbB, luma);
-    vec3 res;
-    if((lumaB < lumaMin) || (lumaB > lumaMax))
-    {
-        res = rgbA;
-    }
-    else
-    {
-        res = rgbB;
-    }
-    return res;
+    vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+    vec4 p = mix(vec4(c.bg, K.wz), vec4(c.gb, K.xy), step(c.b, c.g));
+    vec4 q = mix(vec4(p.xyw, c.r), vec4(c.r, p.yzx), step(p.x, c.r));
+
+    float d = q.x - min(q.w, q.y);
+    float e = 1.0e-10;
+    return vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+}
+
+vec3 hsv2rgb(vec3 c)
+{
+    vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+    vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+    return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+}
+
+vec3 Uncharted2Tonemap(vec3 x) {
+	float A = 0.28;		
+	float B = 0.29;		
+	float C = 0.10;
+	float D = 0.175; //0.04 - 0.35 color boost
+	float E = 0.025;
+	float F = 0.35;
+	return ((x*(A*x+C*B)+D*E)/(x*(A*x+B)+D*F))-E/F;
 }
 
 void main()
 {
-    vec4 color = texture(texSampler, passTextureCoord);
+    vec4 color = vec4(0.0);
 
-    if(postProcess == 1)
-    {
+    //Sharpen
+    vec4 result = vec4(0.0);
 
-        color = vec4(fxaa(resolution, texSampler, passTextureCoord), color.w);
-    }
-
-    color = vec4(brightnessContrast(color.xyz, brightness, contrast), 1.0);
-    color = vec4(gammaCorrect(color.xyz, gamma),color.w);
+    vec4 color2 = textureLod(texSampler, passTextureCoord + offset[0]*resolution.xy,0);
+    result += color2 * kernel[0];
+    color = textureLod(texSampler, passTextureCoord + offset[1]*resolution.xy,0);
+    result += color2 * kernel[1];
+    color = textureLod(texSampler, passTextureCoord + offset[2]*resolution.xy,0);
+    result += color2 * kernel[2];
+    color = textureLod(texSampler, passTextureCoord + offset[3]*resolution.xy,0);
+    result += color2 * kernel[3];
+    color = textureLod(texSampler, passTextureCoord + offset[4]*resolution.xy,0);
+    result += color2 * kernel[4];
+    color = textureLod(texSampler, passTextureCoord + offset[5]*resolution.xy,0);
+    result += color2 * kernel[5];
+    color = textureLod(texSampler, passTextureCoord + offset[6]*resolution.xy,0);
+    result += color2 * kernel[6];
+    color = textureLod(texSampler, passTextureCoord + offset[7]*resolution.xy,0);
+    result += color2 * kernel[7];
+    color = textureLod(texSampler, passTextureCoord + offset[8]*resolution.xy,0);
+    result += color2 * kernel[8];
 
 /*
 //Spooky Shader
@@ -92,5 +110,26 @@ void main()
     color.g = col;
     color.b = col;
 */
-    outColour = color;
+    //Brightness & Contrast
+    result = vec4(brightnessContrast(result.xyz, brightness, contrast), 1.0);
+    //Gamma
+    result = vec4(gammaCorrect(result.xyz, gamma),result.w);
+
+    //Color correct
+    result = vec4(rgb2hsv(result.xyz), result.w);
+    result.y *= 1.35;
+    result.z *= 1.15;
+    result = vec4(hsv2rgb(result.xyz), result.w);   
+
+    
+    //result.rgb = Uncharted2Tonemap(result.rgb) * 2.21;
+	
+    float colorBoost = 0.21f;
+	
+	result.r = result.r * (1.0f + colorBoost) - (result.g * colorBoost / 2.0f) - (result.b * colorBoost / 2.0f);
+	result.g = result.g * (1.0f + colorBoost) - (result.r * colorBoost / 2.0f) - (result.b * colorBoost / 2.0f);
+	result.b = result.b * (1.0f + colorBoost) - (result.r * colorBoost / 2.0f) - (result.g * colorBoost / 2.0f);
+    
+
+	outColour = result;
 }

@@ -11,13 +11,16 @@ class BasicShader : public Shader
 
         void loadProjectionViewMatrix   (const glm::mat4& pvMatrix);
         void loadModelMatrix            (const glm::mat4& matrix);
-
+        void loadProjectionMatrix(const glm::mat4& matrix);
+        void loadViewMatrix(const glm::mat4& matrix);
     protected:
         virtual void getUniforms() override;
 
     private:
         GLuint m_locationProjectionViewMatrix;
         GLuint m_locationModelMatrix;
+        GLuint m_locationViewMatrix;
+        GLuint m_locationProjectionMatrix;
 };
 
 #endif // BASICSHADER_H_INCLUDED

@@ -23,6 +23,11 @@ StatePlaying::StatePlaying(Application& app, const Config& config)
                           m_crosshair.getGlobalBounds().height / 2);
     m_crosshair.setPosition(app.getWindow().getSize().x / 2,
                             app.getWindow().getSize().y / 2);
+    m_vignette.loadFromFile("Res/Textures/vignette.png");
+    screen.setTexture(&m_vignette);
+    screen.setSize({(float)app.getWindow().getSize().x, (float)app.getWindow().getSize().y});
+    screen.setOrigin(screen.getGlobalBounds().width / 2,screen.getGlobalBounds().height / 2);
+    screen.setPosition(app.getWindow().getSize().x / 2, app.getWindow().getSize().y / 2);
 
     m_tickManager   = std::make_unique<TickManager>();
     m_tickThread    = std::make_unique<std::thread>(std::bind(&TickManager::run, m_tickManager.get()));
@@ -96,9 +101,11 @@ void StatePlaying::render(RenderMaster& renderer)
 {
     static sf::Clock dt;
 
-    m_fpsCounter.draw(renderer);
     renderer.drawSFML(m_crosshair);
-    m_player.draw(renderer);
+    renderer.drawSFML(screen);
+    
+    m_fpsCounter.draw(renderer);
+    //m_player.draw(renderer);
     m_world.renderWorld(renderer, m_pApplication->getCamera());
 }
 

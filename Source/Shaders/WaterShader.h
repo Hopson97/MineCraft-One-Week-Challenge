@@ -9,10 +9,12 @@ class WaterShader : public BasicShader
         WaterShader();
         void loadTime (const float& time);
         void loadLighting(float light);
+        void loadDTime(float time);
     private:
         void getUniforms() override;
         GLuint m_time;
         GLuint lighting;
+        GLuint dtime;
 };
 
 #endif // WATERSHADER_H_INCLUDED

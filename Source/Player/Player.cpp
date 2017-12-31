@@ -9,7 +9,7 @@
 #include "../World/World.h"
 
 #include "../Renderer/RenderMaster.h"
-
+#include "../RenderSettings.h"
 sf::Font f;
 
 Player::Player()
@@ -225,6 +225,7 @@ void Player::keyboardInput()
 
 void Player::mouseInput(const sf::RenderWindow& window)
 {
+    
     static bool useMouse = true;
     static ToggleKey useMouseKey (sf::Keyboard::L);
 
@@ -239,8 +240,8 @@ void Player::mouseInput(const sf::RenderWindow& window)
     }
 
 	 static sf::Vector2i center = {
-		 static_cast<int>(window.getSize().x / 2),
-		 static_cast<int>(window.getSize().y / 2)
+		 static_cast<int>(g_renderSettings.resolutionX / 2),
+		 static_cast<int>(g_renderSettings.resolutionY / 2)
 	 };
 
     static auto const BOUND = 89.9999;
@@ -256,12 +257,19 @@ void Player::mouseInput(const sf::RenderWindow& window)
     if      (rotation.y >  360) rotation.y = 0;
     else if (rotation.y <  0)   rotation.y = 360;
 
-    lastMousePosition = sf::Mouse::getPosition(window);
+    auto windowSize = window.getSize();
 
-	 if(lastMousePosition.x < 10 || lastMousePosition.x > window.getSize().x - 10 || lastMousePosition.y < 10 || lastMousePosition.y > window.getSize().y - 10 ) {
-		sf::Mouse::setPosition( center );
-		lastMousePosition = center;
-	 }
+    int maxRadius = glm::min(windowSize.x, windowSize.y) / 3;
+    glm::vec2 delta = glm::vec2(lastMousePosition.x, lastMousePosition.y) - glm::vec2(center.x, center.y);
+    float len = glm::length(delta);
+    if (len > maxRadius) {
+        sf::Mouse::setPosition(sf::Vector2i((int)center.x, (int)center.y), window);
+        lastMousePosition = center;
+    }
+    else {
+        lastMousePosition = sf::Mouse::getPosition(window);
+    }
+
 }
 
 void Player::draw(RenderMaster& master)

@@ -3,8 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "QuadRenderer.h"
-#include "CubeRenderer.h"
+#include "../PostProcess/PostProcessRenderer.h"
 #include "ChunkRenderer.h"
 #include "SFMLRenderer.h"
 #include "WaterRenderer.h"
@@ -14,6 +13,7 @@
 
 
 #include "../States/PlayingState.h"
+#include "../PostProcess/Framebuffer.h"
 
 class Camera;
 class ChunkSection;
@@ -24,21 +24,15 @@ class RenderMaster
         RenderMaster();
 
         void drawSFML(const sf::Drawable& drawable);
-        void drawQuad(const glm::vec3& pos);
-        void drawCube(const Entity& cube);
         void drawChunk(const ChunkSection& chunk);
         void drawSky();
-
-        void setConfig(const Config& con);
 
         void finishRender(sf::RenderWindow& window, const Camera& camera);
 
     private:
-        bool setupFrameBuffers();
 
         //Primitives
-        QuadRenderer    m_quadRenderer;
-        CubeRenderer    m_cubeRenderer;
+        PostProcessRender   m_postRenderer;
 
         //Chunks
         ChunkRenderer   m_chunkRenderer;
@@ -47,13 +41,8 @@ class RenderMaster
 
         //Detail
         SFMLRenderer    m_sfmlRenderer;
-
-        //Other
-        Config m_conf;
-
-        GLuint m_fbo;
-        GLuint m_fboTex;
-        GLuint m_fboRbo;
+        
+        FrameBufferObject fbo;
 
         bool m_drawBox = false;
 };

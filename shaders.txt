@@ -1,0 +1,5 @@
+fxaa 1
+bloom 1
+motionblur 0
+aniso 1
+godrays 0

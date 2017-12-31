@@ -2,7 +2,7 @@
 
 #include <fstream>
 #include <iostream>
-
+#include "ShaderData.h"
 #include "Config.h"
 
 #ifdef __WIN32
@@ -17,6 +17,7 @@
 namespace
 {
     void loadConfig(Config& config);
+    void loadShaders();
     void displayInfo();
 }
 
@@ -24,6 +25,7 @@ int main()
 {
     Config config;
     loadConfig(config);
+    loadShaders();
     displayInfo();
 
     std::cin.ignore();
@@ -89,6 +91,38 @@ namespace
         else
         {
             std::cerr << "Error: Could not find config.txt file! Using defaults.\n";
+        }
+    }
+
+    void loadShaders(){
+        std::ifstream shaderFile("shaders.txt");
+        std::string key;
+
+        if (shaderFile.is_open())
+        {
+            while (shaderFile >> key)
+            {
+                if(key == "fxaa"){
+                    shaderFile >> g_ShaderSettings.fxaa;
+                    std::cout << "Shader: FXAA: " << g_ShaderSettings.fxaa << std::endl;
+                }else if(key == "bloom"){
+                    shaderFile >> g_ShaderSettings.bloom;
+                    std::cout << "Shader: Bloom: " << g_ShaderSettings.bloom << std::endl;
+                }else if(key == "motionblur"){
+                    shaderFile >> g_ShaderSettings.motionblur;
+                    std::cout << "Shader: Motion Blur: " << g_ShaderSettings.motionblur << std::endl;
+                }else if(key == "aniso"){
+                    shaderFile >> g_ShaderSettings.aniso;
+                    std::cout << "Shader: Anisotropic Filtering: " << g_ShaderSettings.aniso << std::endl;
+                }else if(key == "godrays"){
+                    shaderFile >> g_ShaderSettings.godrays;
+                    std::cout << "Shader: Godrays: " << g_ShaderSettings.godrays << std::endl; 
+                }
+            }
+        }
+        else
+        {
+            std::cerr << "Error: Could not find shaders.txt file! Using defaults.\n";
         }
     }
 
