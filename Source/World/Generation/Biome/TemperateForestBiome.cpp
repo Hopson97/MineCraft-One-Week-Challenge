@@ -3,7 +3,7 @@
 #include "../Structures/TreeGenerator.h"
 
 TemperateForestBiome::TemperateForestBiome(int seed)
-:   Biome  (getNoiseParameters(), 55, 75, seed)
+:   Biome  (getNoiseParameters(), 0, 0, seed)
 {
 
 }
@@ -30,11 +30,11 @@ void TemperateForestBiome::makeTree(Rand& rand, Chunk& chunk, int x, int y, int 
 NoiseParameters TemperateForestBiome::getNoiseParameters()
 {
     NoiseParameters heightParams;
-    heightParams.octaves       = 5;
-    heightParams.amplitude     = 100;
-    heightParams.smoothness    = 195;
-    heightParams.heightOffset  = -30;
-    heightParams.roughness     = 0.52;
+    heightParams.octaves       = 6;
+    heightParams.amplitude     = 64;
+    heightParams.smoothness    = 225;
+    heightParams.heightOffset  = -15;
+    heightParams.roughness     = 0.48;
 
     return heightParams;
 }
