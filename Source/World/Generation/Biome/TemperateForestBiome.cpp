@@ -3,7 +3,7 @@
 #include "../Structures/TreeGenerator.h"
 
 TemperateForestBiome::TemperateForestBiome(int seed)
-:   Biome  (getNoiseParameters(), 0, 0, seed)
+:   Biome  (getNoiseParameters(), 20, 1, seed)
 {
 
 }
