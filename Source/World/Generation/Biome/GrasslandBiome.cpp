@@ -3,7 +3,7 @@
 #include "../Structures/TreeGenerator.h"
 
 GrasslandBiome::GrasslandBiome(int seed)
-:   Biome  (getNoiseParameters(), 1000, 20, seed)
+:   Biome  (getNoiseParameters(), 20, 1000, seed)
 {
 
 }
@@ -36,7 +36,7 @@ NoiseParameters GrasslandBiome::getNoiseParameters()
 {
     NoiseParameters heightParams;
     heightParams.octaves       = 9;
-    heightParams.amplitude     = 85;
+    heightParams.amplitude     = 55;
     heightParams.smoothness    = 235;
     heightParams.heightOffset  = -20;
     heightParams.roughness     = 0.51;

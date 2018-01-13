@@ -12,9 +12,9 @@ This was made in a week, as a challenge for a video. There do exist other, more 
 
 MineTest here: https://github.com/minetest/minetest
 
-#Discords
+# Discords
 Hopson Official: https://discord.gg/feKbBwS
-Minecraft One Week: https://discord.gg/mjSutWm
+Minecraft One Week/Maxim-Z Rewrite: https://discord.gg/mjSutWm
 
 # Building
 

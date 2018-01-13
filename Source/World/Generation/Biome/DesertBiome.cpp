@@ -42,11 +42,11 @@ void DesertBiome::makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) const
 NoiseParameters DesertBiome::getNoiseParameters()
 {
     NoiseParameters heightParams;
-    heightParams.octaves       = 9;
-    heightParams.amplitude     = 80;
+    heightParams.octaves       = 7;
+    heightParams.amplitude     = 60;
     heightParams.smoothness    = 335;
-    heightParams.heightOffset  = -7;
-    heightParams.roughness = 0.56;
+    heightParams.heightOffset  = -50;
+    heightParams.roughness = 0.48;
 
 
     return heightParams;
