@@ -8,8 +8,8 @@
 #include "../Generation/Terrain/TerrainGenerator.h"
 
 Chunk::Chunk(World& world, const sf::Vector2i& location)
-:   m_location  (location)
-,   m_pWorld    (&world)
+    :   m_location  (location)
+    ,   m_pWorld    (&world)
 {
     m_highestBlocks.setAll(0);
 }
