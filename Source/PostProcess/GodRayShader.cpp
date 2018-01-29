@@ -1,9 +1,12 @@
 #include "GodRayShader.h"
 
-GodRayShader::GodRayShader(): BasicShader("GodRays","GodRays"){
+GodRayShader::GodRayShader()
+:   BasicShader("GodRays","GodRays")
+{
     getUniforms();
 }
 
-void GodRayShader::getUniforms(){
+void GodRayShader::getUniforms()
+{
     BasicShader::getUniforms();
 }

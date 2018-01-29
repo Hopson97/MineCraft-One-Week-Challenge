@@ -1,13 +1,14 @@
 #include "GaussianBlur.h"
 #include "../RenderSettings.h"
 
-GaussianBlur::GaussianBlur(): renderer((int)g_renderSettings.resolutionX/2,(int)g_renderSettings.resolutionY/2){
-    
+GaussianBlur::GaussianBlur()
+:   renderer((int)g_renderSettings.resolutionX/2, (int)g_renderSettings.resolutionY/2)
+{
+
 }
 
-void GaussianBlur::render(GLuint texture){
-    
-    
+void GaussianBlur::render(GLuint texture)
+{
     gh_shader.useProgram();
     gh_shader.loadTarget((float)g_renderSettings.resolutionX/2);
     gh_shader.loadProjectionViewMatrix(glm::ortho(0, 1, 0, 1, 0, 1));
