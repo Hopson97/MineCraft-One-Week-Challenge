@@ -7,41 +7,40 @@
 
 namespace
 {
-    GLuint compileShader(const GLchar* source, GLenum shaderType)
-    {
-        auto shaderID = glCreateShader(shaderType);
+GLuint compileShader(const GLchar* source, GLenum shaderType)
+{
+    auto shaderID = glCreateShader(shaderType);
 
-        glShaderSource(shaderID, 1, &source, nullptr);
-        glCompileShader(shaderID);
+    glShaderSource(shaderID, 1, &source, nullptr);
+    glCompileShader(shaderID);
 
-        GLint isSuccess = 0;
-        GLchar infoLog[512];
+    GLint isSuccess = 0;
+    GLchar infoLog[512];
 
-        glGetShaderiv(shaderID, GL_COMPILE_STATUS, &isSuccess);
-        if(!isSuccess)
-        {
-            glGetShaderInfoLog(shaderID, 512, nullptr, infoLog);
-            throw std::runtime_error ("Unable to load a shader: " + std::string(infoLog));
-        }
-
-        return shaderID;
+    glGetShaderiv(shaderID, GL_COMPILE_STATUS, &isSuccess);
+    if(!isSuccess) {
+        glGetShaderInfoLog(shaderID, 512, nullptr, infoLog);
+        throw std::runtime_error ("Unable to load a shader: " + std::string(infoLog));
     }
 
-    GLuint linkProgram(GLuint vertexShaderID, GLuint fragmentShaderID)
-    {
-        auto id = glCreateProgram();
+    return shaderID;
+}
 
-        glAttachShader(id, vertexShaderID);
-        glAttachShader(id, fragmentShaderID);
+GLuint linkProgram(GLuint vertexShaderID, GLuint fragmentShaderID)
+{
+    auto id = glCreateProgram();
 
-        glLinkProgram(id);
+    glAttachShader(id, vertexShaderID);
+    glAttachShader(id, fragmentShaderID);
 
-        return id;
-    }
+    glLinkProgram(id);
+
+    return id;
+}
 }
 
 GLuint loadShaders(const std::string& vertexShader,
-                 const std::string& fragmentShader)
+                   const std::string& fragmentShader)
 {
     auto vertexSource   = getFileContents("Shaders/" + vertexShader     + ".vert");
     auto fragmentSource = getFileContents("Shaders/" + fragmentShader   + ".frag");

@@ -1,12 +1,13 @@
 #include "CloudShader.h"
 
 CloudShader::CloudShader()
-:   BasicShader ("Cloud", "Cloud")
+    :   BasicShader ("Cloud", "Cloud")
 {
     getUniforms();
 }
 
-void CloudShader::loadLighting(float light){
+void CloudShader::loadLighting(float light)
+{
     loadFloat(lighting, light);
 }
 

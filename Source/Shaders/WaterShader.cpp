@@ -2,13 +2,14 @@
 #include "../GlobalInfo.h"
 
 WaterShader::WaterShader()
-:   BasicShader ("Water", "Water")
+    :   BasicShader ("Water", "Water")
 {
     getUniforms();
 }
 
 
-void WaterShader::loadTime (const float& time){
+void WaterShader::loadTime (const float& time)
+{
     loadFloat(m_time, time);
 }
 
@@ -20,10 +21,12 @@ void WaterShader::getUniforms()
     dtime= glGetUniformLocation(m_id, "dayTime");
 }
 
-void WaterShader::loadLighting(float light){
+void WaterShader::loadLighting(float light)
+{
     loadFloat(lighting, light);
-} 
+}
 
-void WaterShader::loadDTime(float time){
+void WaterShader::loadDTime(float time)
+{
     loadFloat(dtime, g_info.dayTime);
 }

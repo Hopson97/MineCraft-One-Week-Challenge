@@ -1,7 +1,7 @@
 #include "BasicShader.h"
 
 BasicShader::BasicShader(const std::string& vertexFile, const std::string& fragmentFile)
-:   Shader(vertexFile, fragmentFile)
+    :   Shader(vertexFile, fragmentFile)
 {
     getUniforms();
 }
@@ -28,9 +28,12 @@ void BasicShader::getUniforms()
 }
 
 
-void BasicShader::loadProjectionMatrix(const glm::mat4& matrix){
+void BasicShader::loadProjectionMatrix(const glm::mat4& matrix)
+{
     loadMatrix4(m_locationProjectionMatrix, matrix);
 }
-void BasicShader::loadViewMatrix(const glm::mat4& matrix){
+
+void BasicShader::loadViewMatrix(const glm::mat4& matrix)
+{
     loadMatrix4(m_locationViewMatrix, matrix);
 }

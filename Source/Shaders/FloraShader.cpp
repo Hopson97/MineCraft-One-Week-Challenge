@@ -2,21 +2,24 @@
 #include "../GlobalInfo.h"
 
 FloraShader::FloraShader()
-:   BasicShader ("Flora", "Flora")
+    :   BasicShader ("Flora", "Flora")
 {
     getUniforms();
 }
 
 
-void FloraShader::loadTime (const float& time){
+void FloraShader::loadTime (const float& time)
+{
     loadFloat(m_time, time);
 }
 
-void FloraShader::loadLight(float lighting){
+void FloraShader::loadLight(float lighting)
+{
     loadFloat(m_light, lighting);
 }
 
-void FloraShader::loadDTime(float time){
+void FloraShader::loadDTime(float time)
+{
     loadFloat(dtime, time);
 }
 

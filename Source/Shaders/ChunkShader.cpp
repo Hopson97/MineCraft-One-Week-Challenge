@@ -2,16 +2,18 @@
 #include "../GlobalInfo.h"
 
 ChunkShader::ChunkShader()
-:   BasicShader ("Chunk", "Chunk")
+    :   BasicShader ("Chunk", "Chunk")
 {
     getUniforms();
 }
 
-void ChunkShader::loadLighting(float light){
+void ChunkShader::loadLighting(float light)
+{
     loadFloat(lighting, light);
 }
 
-void ChunkShader::loadDTime(float dt){
+void ChunkShader::loadDTime(float dt)
+{
     loadFloat(dtime, dt);
 }
 
