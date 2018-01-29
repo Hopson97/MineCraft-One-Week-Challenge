@@ -15,15 +15,12 @@ Context::Context(const Config& config)
     settings.stencilBits = 8;
     //settings.attributeFlags = sf::ContextSettings::Core;
     //This is no longer necessary due to the Mac Support update.
-    
-    if(config.isFullscreen)
-    {
+
+    if(config.isFullscreen) {
         window.create(sf::VideoMode::getDesktopMode(), "MineCraft Week", sf::Style::Fullscreen, settings);
         g_renderSettings.resolutionX = sf::VideoMode::getDesktopMode().width;
         g_renderSettings.resolutionY = sf::VideoMode::getDesktopMode().height;
-    }
-    else
-    {
+    } else {
         sf::VideoMode winMode(config.windowX, config.windowY);
         window.create(winMode, "MineCraft Week", sf::Style::Close, settings);
         g_renderSettings.resolutionX = config.windowX;
@@ -34,7 +31,7 @@ Context::Context(const Config& config)
     glewExperimental = GL_TRUE;
     GLenum err = glewInit();
 
-    if(err != GLEW_OK){
+    if(err != GLEW_OK) {
         throw std::runtime_error("GLEW Init failed.");
     }
 

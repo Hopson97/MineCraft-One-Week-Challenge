@@ -5,8 +5,8 @@ struct Config
 {
     int windowX         = 1280;
     int windowY         = 720;
-    bool isFullscreen   = false;
-    int renderDistance  = 16;
+    bool isFullscreen   = true;
+    int renderDistance  = 30;
     int fov             = 90;
     float gamma         = 1.3f;
     float brightness    = 1.15f;
