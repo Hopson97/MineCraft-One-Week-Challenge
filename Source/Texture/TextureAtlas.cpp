@@ -4,13 +4,12 @@
 TextureAtlas::TextureAtlas(const std::string& textureFileName)
 {
     sf::Image i;
-    if (!i.loadFromFile("Res/Textures/" + textureFileName + ".png"))
-    {
+    if (!i.loadFromFile("Res/Textures/" + textureFileName + ".png")) {
         throw std::runtime_error("Unable to open image: " + textureFileName);
     }
     loadFromImage(i);
 
-    
+
     m_imageSize             = 256;
     m_individualTextureSize = 16;
 }
@@ -27,8 +26,7 @@ std::array<GLfloat, 8> TextureAtlas::getTexture(const sf::Vector2i& coords)
     GLfloat xMax = (xMin + INDV_TEX_SIZE) - 0.5 * PIXEL_SIZE;
     GLfloat yMax = (yMin + INDV_TEX_SIZE) - 0.5 * PIXEL_SIZE;
 
-    return
-    {
+    return {
         xMax, yMax,
         xMin, yMax,
         xMin, yMin,

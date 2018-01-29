@@ -25,7 +25,7 @@ void BasicTexture::loadFromImage(const sf::Image& i)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 1);
 
-    if(GLEW_EXT_texture_filter_anisotropic && g_ShaderSettings.aniso){
+    if(GLEW_EXT_texture_filter_anisotropic && g_ShaderSettings.aniso) {
         float max;
         glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &max);
         float amount = std::min(16.0f, max);
@@ -35,8 +35,7 @@ void BasicTexture::loadFromImage(const sf::Image& i)
 void BasicTexture::loadFromFile(const std::string& file)
 {
     sf::Image i;
-    if(!i.loadFromFile("Res/Textures/" + file + ".png"))
-    {
+    if(!i.loadFromFile("Res/Textures/" + file + ".png")) {
         throw std::runtime_error("Unable to load BasicTexture: " + file);
     }
 
@@ -54,6 +53,7 @@ void BasicTexture::bindTexture() const
 }
 
 
-GLuint BasicTexture::getID() const{
+GLuint BasicTexture::getID() const
+{
     return m_id;
 }
