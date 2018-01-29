@@ -15,8 +15,7 @@ void WaterRenderer::add(const ChunkMesh& mesh)
 
 void WaterRenderer::render(const Camera& camera, Config* conf)
 {
-    if (m_chunks.empty())
-    {
+    if (m_chunks.empty()) {
         return;
     }
     glEnable(GL_BLEND);
@@ -28,8 +27,7 @@ void WaterRenderer::render(const Camera& camera, Config* conf)
     m_shader.loadTime(g_info.elapsedTime);
     m_shader.loadLighting(g_info.lighting);
     m_shader.loadDTime(g_info.dayTime);
-    for (auto mesh : m_chunks)
-    {
+    for (auto mesh : m_chunks) {
         GL::bindVAO(mesh->vao);
         GL::drawElements(mesh->indicesCount);
     }

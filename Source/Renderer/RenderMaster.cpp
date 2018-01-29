@@ -16,7 +16,7 @@
 
 RenderMaster::RenderMaster(): fbo(false)
 {
-    
+
 }
 
 void RenderMaster::drawSFML(const sf::Drawable& drawable)
@@ -27,19 +27,16 @@ void RenderMaster::drawSFML(const sf::Drawable& drawable)
 void RenderMaster::drawChunk(const ChunkSection& chunk)
 {
     //Since this pertains to here...
-    if(g_Config.gamma > 2.0f)
-    {
+    if(g_Config.gamma > 2.0f) {
         g_Config.gamma = 1.3f;
     }
-    if(g_Config.brightness > 1.5f)
-    {
+    if(g_Config.brightness > 1.5f) {
         g_Config.brightness = 1.15f;
     }
-    if(g_Config.contrast > 2.5f)
-    {
+    if(g_Config.contrast > 2.5f) {
         g_Config.contrast = 1.1f;
     }
-    
+
     const auto& solidMesh = chunk.getMeshes().solidMesh;
     const auto& waterMesh = chunk.getMeshes().waterMesh;
     const auto& floraMesh = chunk.getMeshes().floraMesh;
@@ -67,14 +64,14 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
 
     fbo.bind();
     fbo.clear();
-    
+
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
     m_chunkRenderer .render (camera, &g_Config);
     m_waterRenderer .render (camera, &g_Config);
     m_floraRenderer .render (camera, &g_Config);
 
-    
+
     m_sky->render(camera);
     m_postRenderer.render(camera, fbo);
 

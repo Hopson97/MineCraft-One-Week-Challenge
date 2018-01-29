@@ -15,8 +15,7 @@ void ChunkRenderer::add(const ChunkMesh& mesh)
 
 void ChunkRenderer::render(const Camera& camera, Config* conf)
 {
-    if (m_chunks.empty())
-    {
+    if (m_chunks.empty()) {
         return;
     }
 
@@ -32,8 +31,7 @@ void ChunkRenderer::render(const Camera& camera, Config* conf)
     m_shader.loadLighting(g_info.lighting);
     m_shader.loadDTime(g_info.dayTime);
 
-    for (auto mesh : m_chunks)
-    {
+    for (auto mesh : m_chunks) {
         GL::bindVAO(mesh->vao);
         GL::drawElements(mesh->indicesCount);
     }
