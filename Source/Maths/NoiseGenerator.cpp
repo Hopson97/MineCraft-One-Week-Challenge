@@ -5,7 +5,7 @@
 #include <cmath>
 
 NoiseGenerator::NoiseGenerator(int seed)
-:   m_seed  (seed)
+    :   m_seed  (seed)
 {
     m_noiseParameters.octaves       = 7;
     m_noiseParameters.amplitude     = 70;
@@ -64,29 +64,27 @@ double NoiseGenerator::noise(double  x, double  z) const noexcept
 
 double NoiseGenerator::getHeight(int x, int z, int chunkX, int chunkZ) const noexcept
 {
-        auto newX = (x + (chunkX * CHUNK_SIZE));
-        auto newZ = (z + (chunkZ * CHUNK_SIZE));
+    auto newX = (x + (chunkX * CHUNK_SIZE));
+    auto newZ = (z + (chunkZ * CHUNK_SIZE));
 
-        if (newX < 0 || newZ < 0)
-        {
-            return WATER_LEVEL - 1;
-        }
+    if (newX < 0 || newZ < 0) {
+        return WATER_LEVEL - 1;
+    }
 
-        auto totalValue = 0.0;
+    auto totalValue = 0.0;
 
-        for (auto a = 0; a < m_noiseParameters.octaves - 1; a++)      //This loops trough the octaves.
-        {
-            auto frequency = pow(2.0, a);           //This increases the frequency with every loop of the octave.
-            auto amplitude = pow(m_noiseParameters.roughness, a);  //This decreases the amplitude with every loop of the octave.
-            totalValue += noise(((double)newX) * frequency / m_noiseParameters.smoothness,
-                                ((double)newZ) * frequency / m_noiseParameters.smoothness)
-                                * amplitude;
-        }
+    for (auto a = 0; a < m_noiseParameters.octaves - 1; a++) {    //This loops trough the octaves.
+        auto frequency = pow(2.0, a);           //This increases the frequency with every loop of the octave.
+        auto amplitude = pow(m_noiseParameters.roughness, a);  //This decreases the amplitude with every loop of the octave.
+        totalValue += noise(((double)newX) * frequency / m_noiseParameters.smoothness,
+                            ((double)newZ) * frequency / m_noiseParameters.smoothness)
+                      * amplitude;
+    }
 
-        auto val =
-            (((totalValue / 2.1) + 1.2) * m_noiseParameters.amplitude) + m_noiseParameters.heightOffset;
+    auto val =
+        (((totalValue / 2.1) + 1.2) * m_noiseParameters.amplitude) + m_noiseParameters.heightOffset;
 
-        return val > 0 ? val : 1;
+    return val > 0 ? val : 1;
 }
 
 

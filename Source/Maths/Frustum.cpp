@@ -55,8 +55,7 @@ void ViewFrustum::update(const glm::mat4& mat) noexcept
     m_planes[Planes::Far].normal.z      = mat[2][3] - mat[2][2];
     m_planes[Planes::Far].distanceToOrigin      = mat[3][3] - mat[3][2];
 
-    for (auto& plane : m_planes)
-    {
+    for (auto& plane : m_planes) {
         float length             =  glm::length(plane.normal);
         plane.normal            /= length;
         plane.distanceToOrigin  /= length;
@@ -67,14 +66,10 @@ void ViewFrustum::update(const glm::mat4& mat) noexcept
 bool ViewFrustum::isBoxInFrustum(const AABB& box) const noexcept
 {
     bool result = true;
-    for (auto& plane : m_planes)
-    {
-        if (plane.distanceToPoint(box.getVP(plane.normal)) < 0)
-        {
+    for (auto& plane : m_planes) {
+        if (plane.distanceToPoint(box.getVP(plane.normal)) < 0) {
             return false;
-        }
-        else if (plane.distanceToPoint(box.getVN(plane.normal)) < 0)
-        {
+        } else if (plane.distanceToPoint(box.getVN(plane.normal)) < 0) {
             result = true;
         }
     }
