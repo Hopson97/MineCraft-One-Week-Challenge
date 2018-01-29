@@ -12,17 +12,15 @@
 
 
 World::World(const Camera& camera, const Config& config, Player& player)
-:   m_chunkManager      (*this)
-,   m_renderDistance    (config.renderDistance)
+    :   m_chunkManager      (*this)
+    ,   m_renderDistance    (config.renderDistance)
 {
     setSpawnPoint();
     player.position = m_playerSpawnPoint;
 
-    for (int i = 0; i < 2; i++)
-    {
+    for (int i = 0; i < 2; i++) {
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
-        m_chunkLoadThreads.emplace_back([&]()
-        {
+        m_chunkLoadThreads.emplace_back([&]() {
             loadChunks(camera);
         });
     }
@@ -32,8 +30,7 @@ World::World(const Camera& camera, const Config& config, Player& player)
 World::~World()
 {
     m_isRunning = false;
-    for (auto& thread : m_chunkLoadThreads)
-    {
+    for (auto& thread : m_chunkLoadThreads) {
         thread.join();
     }
 }
@@ -64,8 +61,7 @@ void World::update(const Camera& camera)
 {
     static ToggleKey key(sf::Keyboard::C);
 
-    if (key.isKeyPressed())
-    {
+    if (key.isKeyPressed()) {
         m_mainMutex.lock();
         m_chunkManager.deleteMeshes();
         m_loadDistance = 2;
@@ -73,8 +69,7 @@ void World::update(const Camera& camera)
     }
 
 
-    for (auto& event : m_events)
-    {
+    for (auto& event : m_events) {
         event->handle(*this);
     }
     m_events.clear();
@@ -86,42 +81,36 @@ void World::update(const Camera& camera)
 ///Optimize for chunkPositionU usage :thinking:
 void World::loadChunks(const Camera& camera)
 {
-    while(m_isRunning)
-    {
+    while(m_isRunning) {
         bool isMeshMade = false;
         int cameraX = camera.position.x / CHUNK_SIZE;
         int cameraZ = camera.position.z / CHUNK_SIZE;
 
-        for (int i = 0; i < m_loadDistance; i++)
-        {
+        for (int i = 0; i < m_loadDistance; i++) {
             std::this_thread::sleep_for(std::chrono::milliseconds(1));
             int minX = std::max(cameraX  - i, 0);
             int minZ = std::max(cameraZ  - i, 0);
             int maxX = cameraX + i;
             int maxZ = cameraZ + i;
 
-            for (int x = minX; x < maxX; ++x)
-            {
-                for (int z = minZ; z < maxZ; ++z)
-                {
+            for (int x = minX; x < maxX; ++x) {
+                for (int z = minZ; z < maxZ; ++z) {
                     m_mainMutex.lock();
                     isMeshMade = m_chunkManager.makeMesh(x, z, camera);
                     m_mainMutex.unlock();
                 }
                 //if (isMeshMade)
-                 //   break;
+                //   break;
             }
 
             if (isMeshMade)
                 break;
         }
 
-        if (!isMeshMade)
-        {
+        if (!isMeshMade) {
             m_loadDistance++;
         }
-        if (m_loadDistance >= m_renderDistance)
-        {
+        if (m_loadDistance >= m_renderDistance) {
             m_loadDistance = 2;
         }
     }
@@ -132,8 +121,7 @@ void World::updateChunk(int blockX, int blockY, int blockZ)
 {
     m_mainMutex.lock();
 
-    auto addChunkToUpdateBatch = [&](const sf::Vector3i& key, ChunkSection& section)
-    {
+    auto addChunkToUpdateBatch = [&](const sf::Vector3i& key, ChunkSection& section) {
         m_chunkUpdates.emplace(key, &section);
     };
 
@@ -146,35 +134,26 @@ void World::updateChunk(int blockX, int blockY, int blockZ)
     auto sectionBlockXZ = getBlockXZ(blockX, blockZ);
     auto sectionBlockY  = blockY % CHUNK_SIZE;
 
-    if (sectionBlockXZ.x == 0)
-    {
+    if (sectionBlockXZ.x == 0) {
         sf::Vector3i newKey(chunkPosition.x - 1, chunkSectionY, chunkPosition.z);
         addChunkToUpdateBatch(newKey, m_chunkManager.getChunk(newKey.x, newKey.z).getSection(newKey.y));
-    }
-    else if (sectionBlockXZ.x == CHUNK_SIZE - 1)
-    {
+    } else if (sectionBlockXZ.x == CHUNK_SIZE - 1) {
         sf::Vector3i newKey(chunkPosition.x + 1, chunkSectionY, chunkPosition.z);
         addChunkToUpdateBatch(newKey, m_chunkManager.getChunk(newKey.x, newKey.z).getSection(newKey.y));
     }
 
-    if (sectionBlockY == 0)
-    {
+    if (sectionBlockY == 0) {
         sf::Vector3i newKey(chunkPosition.x, chunkSectionY - 1, chunkPosition.z);
         addChunkToUpdateBatch(newKey, m_chunkManager.getChunk(newKey.x, newKey.z).getSection(newKey.y));
-    }
-    else if (sectionBlockY == CHUNK_SIZE - 1)
-    {
+    } else if (sectionBlockY == CHUNK_SIZE - 1) {
         sf::Vector3i newKey(chunkPosition.x, chunkSectionY + 1, chunkPosition.z);
         addChunkToUpdateBatch(newKey, m_chunkManager.getChunk(newKey.x, newKey.z).getSection(newKey.y));
     }
 
-    if (sectionBlockXZ.z == 0)
-    {
+    if (sectionBlockXZ.z == 0) {
         sf::Vector3i newKey(chunkPosition.x, chunkSectionY, chunkPosition.z - 1);
         addChunkToUpdateBatch(newKey, m_chunkManager.getChunk(newKey.x, newKey.z).getSection(newKey.y));
-    }
-    else if (sectionBlockXZ.z == CHUNK_SIZE - 1)
-    {
+    } else if (sectionBlockXZ.z == CHUNK_SIZE - 1) {
         sf::Vector3i newKey(chunkPosition.x, chunkSectionY, chunkPosition.z + 1);
         addChunkToUpdateBatch(newKey, m_chunkManager.getChunk(newKey.x, newKey.z).getSection(newKey.y));
     }
@@ -188,8 +167,7 @@ void World::renderWorld(RenderMaster& renderer, const Camera& camera)
     renderer.drawSky();
 
     auto& chunkMap = m_chunkManager.getChunks();
-    for (auto itr = chunkMap.begin(); itr != chunkMap.end();)
-    {
+    for (auto itr = chunkMap.begin(); itr != chunkMap.end();) {
         Chunk& chunk = itr->second;
 
         int cameraX = camera.position.x;
@@ -203,15 +181,12 @@ void World::renderWorld(RenderMaster& renderer, const Camera& camera)
         auto location = chunk.getLocation();
 
         if (minX > location.x ||
-            minZ > location.y ||
-            maxZ < location.y ||
-            maxX < location.x)
-        {
+                minZ > location.y ||
+                maxZ < location.y ||
+                maxX < location.x) {
             itr = chunkMap.erase(itr);
             continue;
-        }
-        else
-        {
+        } else {
             chunk.drawChunks(renderer, camera);
             itr++;
         }
@@ -226,8 +201,7 @@ ChunkManager& World::getChunkManager()
 
 VectorXZ World::getBlockXZ(int x, int z)
 {
-    return
-    {
+    return {
         x % CHUNK_SIZE,
         z % CHUNK_SIZE
     };
@@ -235,8 +209,7 @@ VectorXZ World::getBlockXZ(int x, int z)
 
 VectorXZ World::getChunkXZ(int x, int z)
 {
-    return
-    {
+    return {
         x / CHUNK_SIZE,
         z / CHUNK_SIZE
     };
@@ -245,8 +218,7 @@ VectorXZ World::getChunkXZ(int x, int z)
 void World::updateChunks()
 {
     m_mainMutex.lock();
-    for (auto& c : m_chunkUpdates)
-    {
+    for (auto& c : m_chunkUpdates) {
         ChunkSection& s = *c.second;
         s.makeMesh();
     }
@@ -268,8 +240,7 @@ void World::setSpawnPoint()
 
     auto h = m_chunkManager.getTerrainGenerator().getMinimumSpawnHeight();
 
-    while(blockY <= h)
-    {
+    while(blockY <= h) {
         m_chunkManager.unloadChunk(chunkX, chunkZ);
 
         chunkX = RandomSingleton::get().intInRange(100, 200);
