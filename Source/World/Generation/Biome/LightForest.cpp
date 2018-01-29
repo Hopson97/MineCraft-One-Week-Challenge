@@ -3,7 +3,7 @@
 #include "../Structures/TreeGenerator.h"
 
 LightForest::LightForest(int seed)
-:   Biome  (getNoiseParameters(), 60, 80, seed)
+    :   Biome  (getNoiseParameters(), 60, 80, seed)
 {
 
 }
@@ -16,8 +16,8 @@ ChunkBlock LightForest::getTopBlock(Rand& rand) const
 ChunkBlock LightForest::getUnderWaterBlock(Rand& rand) const
 {
     return rand.intInRange(0, 10) > 9 ?
-        BlockId::Sand :
-        BlockId::Dirt;
+           BlockId::Sand :
+           BlockId::Dirt;
 }
 
 void LightForest::makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) const
@@ -40,6 +40,6 @@ NoiseParameters LightForest::getNoiseParameters()
 ChunkBlock LightForest::getPlant(Rand& rand) const
 {
     return rand.intInRange(0, 10) > 8 ?
-        BlockId::Rose :
-        BlockId::TallGrass;
+           BlockId::Rose :
+           BlockId::TallGrass;
 }

@@ -3,7 +3,7 @@
 #include "../Structures/TreeGenerator.h"
 
 TemperateForestBiome::TemperateForestBiome(int seed)
-:   Biome  (getNoiseParameters(), 55, 75, seed)
+    :   Biome  (getNoiseParameters(), 55, 75, seed)
 {
 
 }
@@ -11,15 +11,15 @@ TemperateForestBiome::TemperateForestBiome(int seed)
 ChunkBlock TemperateForestBiome::getTopBlock(Rand& rand) const
 {
     return rand.intInRange(0, 10) < 8 ?
-        BlockId::Grass :
-        BlockId::Dirt;
+           BlockId::Grass :
+           BlockId::Dirt;
 }
 
 ChunkBlock TemperateForestBiome::getUnderWaterBlock(Rand& rand) const
 {
     return rand.intInRange(0, 10) > 8 ?
-        BlockId::Dirt :
-        BlockId::Sand;
+           BlockId::Dirt :
+           BlockId::Sand;
 }
 
 void TemperateForestBiome::makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) const

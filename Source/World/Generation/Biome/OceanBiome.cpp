@@ -3,7 +3,7 @@
 #include "../Structures/TreeGenerator.h"
 
 OceanBiome::OceanBiome(int seed)
-:   Biome  (getNoiseParameters(), 50, 100, seed)
+    :   Biome  (getNoiseParameters(), 50, 100, seed)
 {
 
 }
@@ -21,8 +21,8 @@ ChunkBlock OceanBiome::getUnderWaterBlock(Rand& rand) const
 void OceanBiome::makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) const
 {
     rand.intInRange(0, 5) < 3 ?
-        makePalmTree(chunk, rand, x, y, z) :
-        makeOakTree (chunk, rand, x, y, z);
+    makePalmTree(chunk, rand, x, y, z) :
+    makeOakTree (chunk, rand, x, y, z);
 }
 
 NoiseParameters OceanBiome::getNoiseParameters()
@@ -40,6 +40,6 @@ NoiseParameters OceanBiome::getNoiseParameters()
 ChunkBlock OceanBiome::getPlant(Rand& rand) const
 {
     return rand.intInRange(0, 10) > 6 ?
-        BlockId::Rose :
-        BlockId::TallGrass;
+           BlockId::Rose :
+           BlockId::TallGrass;
 }
