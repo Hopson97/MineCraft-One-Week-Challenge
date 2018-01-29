@@ -46,8 +46,7 @@ ProcSky::ProcSky()
         -SIZE, -SIZE,  SIZE, 4,
     };
 
-    std::vector<GLuint> indices
-    {
+    std::vector<GLuint> indices {
         0, 1, 2,
         2, 3, 0,
 
