@@ -24,13 +24,13 @@ void BasicTexture::loadFromImage(const sf::Image& i)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 1);
-
+/**@TODO Add the extention `GLEW_EXT_texture_filter_anisotropic` to the GLAD gen file
     if(GLEW_EXT_texture_filter_anisotropic && g_ShaderSettings.aniso) {
         float max;
         glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &max);
         float amount = std::min(16.0f, max);
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, amount);
-    }
+    }*/
 }
 void BasicTexture::loadFromFile(const std::string& file)
 {

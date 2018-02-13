@@ -1,7 +1,7 @@
 #ifndef FRAMEBUFFER_H
 #define FRAMEBUFFER_H
 
-#include <GL/glew.h>
+#include "../GLAD/glad.h"
 
 class FrameBufferObject{
 public:
@@ -12,7 +12,7 @@ public:
     void clear(); //I didn't figure this out for 2 days........
     GLuint getColorTex();
     GLuint getDepthTex();
-    
+
     //Only available with MSAA
     void resolve(const FrameBufferObject& fbo);
 

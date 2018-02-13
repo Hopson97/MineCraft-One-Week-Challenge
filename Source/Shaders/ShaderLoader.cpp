@@ -2,7 +2,7 @@
 
 #include "../Util/FileUtil.h"
 
-#include <GL/glew.h>
+#include "../GLAD/glad.h"
 #include <stdexcept>
 
 namespace

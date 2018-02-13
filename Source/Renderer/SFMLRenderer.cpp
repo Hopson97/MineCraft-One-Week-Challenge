@@ -1,7 +1,6 @@
 #include "SFMLRenderer.h"
 
-#include <GL/glew.h>
-
+#include "../GLAD/glad.h"
 
 void SFMLRenderer::add(const sf::Drawable& drawable)
 {

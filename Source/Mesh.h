@@ -1,7 +1,7 @@
 #ifndef MESH_H_INCLUDED
 #define MESH_H_INCLUDED
 
-#include <GL/glew.h>
+#include "GLAD/glad.h"
 #include <vector>
 
 struct Mesh

@@ -1,7 +1,7 @@
 #ifndef TEXTURE_H_INCLUDED
 #define TEXTURE_H_INCLUDED
 
-#include <GL/glew.h>
+#include "../GLAD/glad.h"
 #include <string>
 #include <SFML/Graphics.hpp>
 

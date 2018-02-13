@@ -1,7 +1,9 @@
 #include "Context.h"
 #include "RenderSettings.h"
 #include "ShaderData.h"
-#include <GL/glew.h>
+#include "GLAD/glad.h"
+
+#include <iostream>
 
 sf::RenderWindow* g_window;
 
@@ -27,13 +29,21 @@ Context::Context(const Config& config)
         g_renderSettings.resolutionY = config.windowY;
     }
 
-    g_window = &window;
-    glewExperimental = GL_TRUE;
-    GLenum err = glewInit();
-
-    if(err != GLEW_OK) {
-        throw std::runtime_error("GLEW Init failed.");
+    if (!gladLoadGL()) {
+        std::cout << "Unable to load OpenGL libs.\n";
+        exit(-1);
     }
+
+    if (GLVersion.major < 3) {
+        std::cout << "Your system does not support the correct OpenGL Version.\n"
+                    << "Minimum version required: 3. Your version: " << GLVersion.major
+                    << "\n";
+        exit(-1);
+    }
+
+
+    g_window = &window;
+
 
     glViewport(0, 0, window.getSize().x, window.getSize().y);
 
