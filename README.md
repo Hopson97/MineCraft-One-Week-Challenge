@@ -6,6 +6,8 @@ Video: https://www.youtube.com/watch?v=Xq3isov6mZ8
 
 Note: I continued to edit after the 7 days, however the version seen in the video is found here https://github.com/Hopson97/MineCraft-One-Week-Challenge/tree/eb01640580cc5ad403f6a8b9fb58af37e2f03f0c
 
+And the "optimized" version can be found here: https://github.com/Hopson97/MineCraft-One-Week-Challenge/tree/792df07e9780b444be5290fd05a3c8598aacafc8 (~1 week later version) 
+
 # Other People's Projects
 
 This was made in a week, as a challenge for a video. There do exist other, more mature and developed Minecraft clones written in C++.
