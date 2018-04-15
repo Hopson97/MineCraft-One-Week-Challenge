@@ -37,13 +37,13 @@ Player::Player()
     for (float i = 0; i < 5; i++) {
         sf::Text t;
         t.setFont(f);
-        t.setOutlineColor(sf::Color::Black);
+        //t.setOutlineColor(sf::Color::Black);
         t.setCharacterSize(25);
         t.setPosition({20.0f, 20.0f * i + 100.0f});
         m_itemText.push_back(t);
     }
     m_posPrint.setFont(f);
-    m_posPrint.setOutlineColor(sf::Color::Black);
+    //m_posPrint.setOutlineColor(sf::Color::Black);
     m_posPrint.setCharacterSize(25);
     m_posPrint.setPosition(20.0f, 20.0f * 6.0f + 100.0f);
 }
@@ -246,9 +246,11 @@ void Player::draw(RenderMaster& master)
     for (unsigned i = 0; i < m_items.size(); i++) {
         sf::Text& t = m_itemText[i];
         if (i == (unsigned)m_heldItem) {
-            t.setFillColor(sf::Color::Red);
+            //t.setFillColor(sf::Color::Red);
+            t.setColor(sf::Color::Red);
         } else {
-            t.setFillColor(sf::Color::White);
+            //t.setFillColor(sf::Color::White);
+            t.setColor(sf::Color::Red);
         }
         t.setString((m_items[i].getMaterial().name) + " " + std::to_string(m_items[i].getNumInStack()) + " ");
         master.drawSFML(t);

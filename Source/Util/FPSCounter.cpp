@@ -7,8 +7,8 @@
 FPSCounter::FPSCounter()
 {
     m_text.move(10, 10);
-    m_text.setOutlineColor      (sf::Color::Black);
-    m_text.setOutlineThickness  (2);
+    //m_text.setOutlineColor      (sf::Color::Black);
+    //m_text.setOutlineThickness  (2);
 
     m_font.loadFromFile("Res/Fonts/rs.ttf");
     m_text.setFont(m_font);
