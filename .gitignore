@@ -29,3 +29,6 @@ MinecraftWeek/
 
 #Mac stuff
 *.DS_STORE
+
+#CMakeCache file
+CMakeCache.txt
