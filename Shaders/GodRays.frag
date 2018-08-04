@@ -11,7 +11,7 @@ void main()
 {
     float samples[8];
     for(int i = 0; i < 8; i++){
-        samples[i] = 0 + (i * -0.02);
+        samples[i] = (i * -0.02);
     }
 
     vec2 dir = 0.5 - passTextureCoord; 
