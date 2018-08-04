@@ -1,39 +1,29 @@
 #include "PostProcessShader.h"
 
 PostProcessShader::PostProcessShader()
-    :   BasicShader ("PostProcess", "PostProcess")
+:   BasicShader ("PostProcess", "PostProcess")
 {
     getUniforms();
 }
 
-void PostProcessShader::loadContrast(float c)
-{
+void PostProcessShader::loadContrast(float c){
     loadFloat(m_c, c);
 }
 
-void PostProcessShader::loadGamma(float g)
-{
+void PostProcessShader::loadGamma(float g){
     loadFloat(m_g, g);
 }
 
-void PostProcessShader::loadBrightness(float b)
-{
+void PostProcessShader::loadBrightness(float b){
     loadFloat(m_b, b);
 }
 
-void PostProcessShader::loadPostProcess(float p)
-{
+void PostProcessShader::loadPostProcess(float p){
     loadFloat(m_p, p);
 }
 
-void PostProcessShader::loadResolution(glm::vec2 resolution)
-{
+void PostProcessShader::loadResolution(glm::vec2 resolution){
     loadVector2(m_res, resolution);
-}
-
-void PostProcessShader::enableFxaa(float b)
-{
-    loadFloat(m_fxaa, b);
 }
 
 void PostProcessShader::getUniforms()
@@ -44,8 +34,4 @@ void PostProcessShader::getUniforms()
     m_g = glGetUniformLocation(m_id, "gamma");
     m_p = glGetUniformLocation(m_id, "postProcess");
     m_res = glGetUniformLocation(m_id, "resolution");
-
-
-    //FX
-    m_fxaa = glGetUniformLocation(m_id, "fxaaEnable");
 }

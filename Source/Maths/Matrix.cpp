@@ -33,9 +33,9 @@ glm::mat4 makeViewMatrix(const Camera& camera)
 
 glm::mat4 makeProjectionMatrix(const Config& config)
 {
-    float x = config.windowX;
-    float y = config.windowY;
-    float fov = config.fov;
+    float x = (float)config.windowX;
+    float y = (float)config.windowY;
+    float fov = (float)config.fov;
 
     return glm::perspective(glm::radians(fov), x / y, 0.1f, 2000.0f);
 }

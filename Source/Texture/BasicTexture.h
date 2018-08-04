@@ -1,7 +1,7 @@
 #ifndef TEXTURE_H_INCLUDED
 #define TEXTURE_H_INCLUDED
 
-#include "../GLAD/glad.h"
+#include <glad.h>
 #include <string>
 #include <SFML/Graphics.hpp>
 
@@ -21,7 +21,7 @@ class BasicTexture : public NonCopyable
 
         void bindTexture() const;
 
-        GLuint getID() const;
+
     private:
         GLuint m_id;
 };

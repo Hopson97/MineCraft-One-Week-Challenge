@@ -1,6 +1,7 @@
 #include "SFMLRenderer.h"
 
-#include "../GLAD/glad.h"
+#include <glad.h>
+
 
 void SFMLRenderer::add(const sf::Drawable& drawable)
 {
@@ -22,7 +23,8 @@ void SFMLRenderer::render(sf::RenderWindow& window)
     window.pushGLStates();
     window.resetGLStates();
 
-    for (const auto& draw : m_draws) {
+    for (const auto& draw : m_draws)
+    {
         window.draw(*draw);
     }
 

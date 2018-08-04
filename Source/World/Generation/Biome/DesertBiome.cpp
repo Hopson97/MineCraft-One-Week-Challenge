@@ -4,7 +4,7 @@
 #include "../../WorldConstants.h"
 
 DesertBiome::DesertBiome(int seed)
-    :   Biome  (getNoiseParameters(), 1350, 500, seed)
+:   Biome  (getNoiseParameters(), 1350, 500, seed)
 {
 
 }
@@ -22,13 +22,19 @@ ChunkBlock DesertBiome::getUnderWaterBlock(Rand& rand) const
 
 void DesertBiome::makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) const
 {
-    if (y < WATER_LEVEL + 15) {
-        if (rand.intInRange(0, 100) > 75) {
+    if (y < WATER_LEVEL + 15)
+    {
+        if (rand.intInRange(0, 100) > 75)
+        {
             makePalmTree(chunk, rand, x, y, z);
-        } else {
+        }
+        else
+        {
             makeCactus(chunk, rand, x, y, z);
         }
-    } else {
+    }
+    else
+    {
         makeCactus(chunk, rand, x, y, z);
     }
 }

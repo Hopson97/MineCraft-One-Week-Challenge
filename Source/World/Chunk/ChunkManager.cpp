@@ -6,7 +6,7 @@
 #include "../Generation/Terrain/SuperFlatGenerator.h"
 
 ChunkManager::ChunkManager(World& world)
-    :   m_world (&world)
+:   m_world (&world)
 {
     m_terrainGenerator = std::make_unique<ClassicOverWorldGenerator>();
 }
@@ -15,7 +15,8 @@ ChunkManager::ChunkManager(World& world)
 Chunk& ChunkManager::getChunk(int x, int z)
 {
     VectorXZ key {x, z};
-    if (!chunkExistsAt(x, z)) {
+    if (!chunkExistsAt(x, z))
+    {
         Chunk chunk {*m_world, {x, z}};
         m_chunks.emplace(key, std::move(chunk));
     }
@@ -31,9 +32,10 @@ ChunkMap& ChunkManager::getChunks()
 bool ChunkManager::makeMesh(int x, int z, const Camera& camera)
 {
     for (int nx = -1; nx <= 1; nx++)
-        for (int nz = -1; nz <= 1; nz++) {
-            loadChunk(x + nx, z + nz);//getChunk(x + nx, z + nz).load(*m_terrainGenerator);
-        }
+    for (int nz = -1; nz <= 1; nz++)
+    {
+        loadChunk(x + nx, z + nz);//getChunk(x + nx, z + nz).load(*m_terrainGenerator);
+    }
 
     return getChunk(x, z).makeMesh(camera);
 }
@@ -59,7 +61,8 @@ void ChunkManager::loadChunk(int x, int z)
 
 void ChunkManager::deleteMeshes()
 {
-    for (auto& chunk : m_chunks) {
+    for (auto& chunk : m_chunks)
+    {
         chunk.second.deleteMeshes();
     }
 }

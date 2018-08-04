@@ -9,7 +9,8 @@
 
 #include "Context.h"
 #include "Camera.h"
-#include "GlobalInfo.h"
+
+float extern g_timeElapsed;
 
 class Application
 {
@@ -44,6 +45,8 @@ class Application
         Context m_context;
         RenderMaster m_masterRenderer;
         Camera m_camera;
+
+        const Config& m_config;
 
         bool m_isPopState = false;
 };

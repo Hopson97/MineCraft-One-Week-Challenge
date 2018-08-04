@@ -19,14 +19,16 @@ void ChunkMesh::addFace(const std::array<GLfloat, 12>& blockFace,
 
     ///Vertex: The current vertex in the "blockFace" vector, 4 vertex in total hence "< 4"
     ///Index: X, Y, Z
-    for (int i = 0, index = 0; i < 4; ++i) {
+    for (int i = 0, index = 0; i < 4; ++i)
+    {
         verticies.push_back(blockFace[index++] + chunkPosition.x * CHUNK_SIZE + blockPosition.x);
         verticies.push_back(blockFace[index++] + chunkPosition.y * CHUNK_SIZE + blockPosition.y);
         verticies.push_back(blockFace[index++] + chunkPosition.z * CHUNK_SIZE + blockPosition.z);
-        m_cardinalLight.push_back(cardinalLight);
+        m_light  .push_back(cardinalLight);
     }
 
-    indices.insert(indices.end(), {
+    indices.insert(indices.end(),
+    {
         m_indexIndex,
         m_indexIndex + 1,
         m_indexIndex + 2,
@@ -41,17 +43,17 @@ void ChunkMesh::addFace(const std::array<GLfloat, 12>& blockFace,
 void ChunkMesh::bufferMesh()
 {
     m_model.addData(m_mesh);
-    m_model.addVBO(1, m_cardinalLight);
+    m_model.addVBO(1, m_light);
 
     m_mesh.vertexPositions.clear();
     m_mesh.textureCoords.clear();
     m_mesh.indices.clear();
-    m_cardinalLight.clear();
+    m_light.clear();
 
     m_mesh.vertexPositions.shrink_to_fit();
     m_mesh.textureCoords.shrink_to_fit();
     m_mesh.indices.shrink_to_fit();
-    m_cardinalLight.shrink_to_fit();
+    m_light.shrink_to_fit();
 
     m_indexIndex = 0;
 }

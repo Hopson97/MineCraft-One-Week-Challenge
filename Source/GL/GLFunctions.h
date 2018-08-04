@@ -1,7 +1,7 @@
 #ifndef GLFUNCTIONS_H_INCLUDED
 #define GLFUNCTIONS_H_INCLUDED
 
-#include "../GLAD/glad.h"
+#include <glad.h>
 
 namespace GL
 {

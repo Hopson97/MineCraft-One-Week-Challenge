@@ -15,91 +15,93 @@ const Material Material::DEAD_SHRUB (ID::DeadShrub, 99, true, "Dead Shrub");
 
 
 Material::Material(Material::ID id, int maxStack, bool isBlock, std::string&& name)
-    :   id              (id)
-    ,   maxStackSize    (maxStack)
-    ,   isBlock         (isBlock)
-    ,   name            (std::move(name))
+:   id              (id)
+,   maxStackSize    (maxStack)
+,   isBlock         (isBlock)
+,   name            (std::move(name))
 {
 
 }
 
 BlockId Material::toBlockID() const
 {
-    switch (id) {
-    case Nothing:
-        return BlockId::Air;
+    switch (id)
+    {
+        case Nothing:
+            return BlockId::Air;
 
-    case Grass:
-        return BlockId::Grass;
+        case Grass:
+            return BlockId::Grass;
 
-    case Dirt:
-        return BlockId::Dirt;
+        case Dirt:
+            return BlockId::Dirt;
 
-    case Stone:
-        return BlockId::Stone;
+        case Stone:
+            return BlockId::Stone;
 
-    case OakBark:
-        return BlockId::OakBark;
+        case OakBark:
+            return BlockId::OakBark;
 
-    case OakLeaf:
-        return BlockId::OakLeaf;
+        case OakLeaf:
+            return BlockId::OakLeaf;
 
-    case Sand:
-        return BlockId::Sand;
+        case Sand:
+            return BlockId::Sand;
 
-    case Cactus:
-        return BlockId::Cactus;
+        case Cactus:
+            return BlockId::Cactus;
 
-    case TallGrass:
-        return BlockId::TallGrass;
+        case TallGrass:
+            return BlockId::TallGrass;
 
-    case Rose:
-        return BlockId::Rose;
+        case Rose:
+            return BlockId::Rose;
 
-    case DeadShrub:
-        return BlockId::DeadShrub;
+        case DeadShrub:
+            return BlockId::DeadShrub;
 
-    default:
-        return BlockId::NUM_TYPES;
+        default:
+            return BlockId::NUM_TYPES;
     }
 }
 
 const Material& Material::toMaterial(BlockId id)
 {
-    switch (id) {
-    case BlockId::Grass:
-        return GRASS_BLOCK;
+    switch (id)
+    {
+        case BlockId::Grass:
+            return GRASS_BLOCK;
 
-    case BlockId::Dirt:
-        return DIRT_BLOCK;
+        case BlockId::Dirt:
+            return DIRT_BLOCK;
 
-    case BlockId::Stone:
-        return STONE_BLOCK;
+        case BlockId::Stone:
+            return STONE_BLOCK;
 
-    case BlockId::OakBark:
-        return OAK_BARK_BLOCK;
+        case BlockId::OakBark:
+            return OAK_BARK_BLOCK;
 
-    case BlockId::OakLeaf:
-        return OAK_LEAF_BLOCK;
+        case BlockId::OakLeaf:
+            return OAK_LEAF_BLOCK;
 
-    case BlockId::Sand:
-        return SAND_BLOCK;
+        case BlockId::Sand:
+            return SAND_BLOCK;
 
-    case BlockId::Cactus:
-        return CACTUS_BLOCK;
+        case BlockId::Cactus:
+            return CACTUS_BLOCK;
 
-    case BlockId::Rose:
-        return ROSE;
+        case BlockId::Rose:
+            return ROSE;
 
-    case BlockId::TallGrass:
-        return TALL_GRASS;
+        case BlockId::TallGrass:
+            return TALL_GRASS;
 
-    case BlockId::DeadShrub:
-        return DEAD_SHRUB;
+        case BlockId::DeadShrub:
+            return DEAD_SHRUB;
 
 
-    default:
-        return NOTHING;
+        default:
+            return NOTHING;
     }
 }
 

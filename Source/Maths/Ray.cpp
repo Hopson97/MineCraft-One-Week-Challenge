@@ -1,9 +1,9 @@
 #include "Ray.h"
 
 Ray::Ray(const glm::vec3& position, const glm::vec3& direction)
-    :   m_rayStart  (position)
-    ,   m_rayEnd    (position)
-    ,   m_direction (direction)
+:   m_rayStart  (position)
+,   m_rayEnd    (position)
+,   m_direction (direction)
 {
 
 }

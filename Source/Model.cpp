@@ -11,9 +11,9 @@ Model::~Model()
 }
 
 Model::Model(Model&& other)
-    :   m_renderInfo    (other.m_renderInfo)
-    ,   m_vboCount      (other.m_vboCount)
-    ,   m_buffers       (std::move(other.m_buffers))
+:   m_renderInfo    (other.m_renderInfo)
+,   m_vboCount      (other.m_vboCount)
+,   m_buffers       (std::move(other.m_buffers))
 {
     other.m_renderInfo.reset();
     other.m_vboCount        = 0;

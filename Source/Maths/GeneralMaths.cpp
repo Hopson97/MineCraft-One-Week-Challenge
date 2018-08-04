@@ -12,22 +12,19 @@ float smoothstep(float edge0, float edge1, float x)
     return (edge0 * x) + (edge1 * (1-x));
 }
 
-float clamp(float x, float lowerlimit, float upperlimit)
-{
-    if (x < lowerlimit)
-        x = lowerlimit;
-    if (x > upperlimit)
-        x = upperlimit;
+float clamp(float x, float lowerlimit, float upperlimit) {
+    if (x < lowerlimit) x = lowerlimit;
+    if (x > upperlimit) x = upperlimit;
     return x;
 }
 
 float smoothInterpolation(float bottomLeft, float topLeft, float bottomRight, float topRight,
-                          float xMin, float xMax,
-                          float zMin, float zMax,
-                          float x, float z)
+                            float xMin, float xMax,
+                            float zMin, float zMax,
+                            float x, float z)
 {
-    float   width               = xMax - xMin,
-            height              = zMax - zMin;
+        float   width               = xMax - xMin,
+                height              = zMax - zMin;
     float xValue = 1 - (x-xMin)/width;
     float zValue = 1 - (z-zMin)/height;
 
@@ -53,11 +50,11 @@ float bilinearInterpolation(float bottomLeft, float topLeft, float bottomRight, 
             zDistanceToMinValue = z - zMin;
 
     return 1.0f / (width * height) *
-           (
-               bottomLeft      *   xDistanceToMaxValue * zDistanceToMaxValue +
-               bottomRight     *   xDistanceToMinValue * zDistanceToMaxValue +
-               topLeft         *   xDistanceToMaxValue * zDistanceToMinValue +
-               topRight        *   xDistanceToMinValue * zDistanceToMinValue
-           );
+    (
+        bottomLeft      *   xDistanceToMaxValue * zDistanceToMaxValue +
+        bottomRight     *   xDistanceToMinValue * zDistanceToMaxValue +
+        topLeft         *   xDistanceToMaxValue * zDistanceToMinValue +
+        topRight        *   xDistanceToMinValue * zDistanceToMinValue
+    );
 }
 

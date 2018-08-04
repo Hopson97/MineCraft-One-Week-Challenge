@@ -1,7 +1,9 @@
 #ifndef MESH_H_INCLUDED
 #define MESH_H_INCLUDED
 
-#include "GLAD/glad.h"
+
+#include <glad.h>
+#include <glad.h>
 #include <vector>
 
 struct Mesh

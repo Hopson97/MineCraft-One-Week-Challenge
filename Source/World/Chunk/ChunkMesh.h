@@ -31,7 +31,7 @@ class ChunkMesh
     private:
         Mesh  m_mesh;
         Model m_model;
-        std::vector<GLfloat> m_cardinalLight;
+        std::vector<GLfloat> m_light;
         GLuint m_indexIndex = 0;
 
 

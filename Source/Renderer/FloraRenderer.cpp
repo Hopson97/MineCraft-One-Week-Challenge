@@ -5,8 +5,6 @@
 #include "../Application.h"
 #include "../Camera.h"
 
-#include "../Sky/SkyManager.h"
-
 #include <iostream>
 
 void FloraRenderer::add(const ChunkMesh& mesh)
@@ -16,7 +14,8 @@ void FloraRenderer::add(const ChunkMesh& mesh)
 
 void FloraRenderer::render(const Camera& camera, Config* conf)
 {
-    if (m_chunks.empty()) {
+    if (m_chunks.empty())
+    {
         return;
     }
 
@@ -25,13 +24,10 @@ void FloraRenderer::render(const Camera& camera, Config* conf)
     m_shader.useProgram();
 
     m_shader.loadProjectionViewMatrix(camera.getProjectionViewMatrix());
-    m_shader.loadProjectionMatrix(camera.getProjMatrix());
-    m_shader.loadViewMatrix(camera.getViewMatrix());
-    m_shader.loadTime(g_info.elapsedTime);
-    m_shader.loadLight(g_info.lighting);
-    m_shader.loadDTime(g_info.dayTime);
+    m_shader.loadTime(g_timeElapsed);
 
-    for (auto mesh : m_chunks) {
+    for (auto mesh : m_chunks)
+    {
         GL::bindVAO(mesh->vao);
         GL::drawElements(mesh->indicesCount);
     }

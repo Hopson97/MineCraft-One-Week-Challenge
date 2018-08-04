@@ -3,7 +3,7 @@
 #include "../Structures/TreeGenerator.h"
 
 GrasslandBiome::GrasslandBiome(int seed)
-    :   Biome  (getNoiseParameters(), 1000, 20, seed)
+:   Biome  (getNoiseParameters(), 1000, 20, seed)
 {
 
 }
@@ -16,15 +16,15 @@ ChunkBlock GrasslandBiome::getTopBlock(Rand& rand) const
 ChunkBlock GrasslandBiome::getUnderWaterBlock(Rand& rand) const
 {
     return rand.intInRange(0, 10) > 8 ?
-           BlockId::Dirt :
-           BlockId::Sand;
+        BlockId::Dirt :
+        BlockId::Sand;
 }
 
 ChunkBlock GrasslandBiome::getBeachBlock (Rand& rand) const
 {
     return rand.intInRange(0, 10) > 2 ?
-           BlockId::Grass :
-           BlockId::Dirt;
+        BlockId::Grass :
+        BlockId::Dirt;
 }
 
 void GrasslandBiome::makeTree(Rand& rand, Chunk& chunk, int x, int y, int z) const
@@ -47,6 +47,6 @@ NoiseParameters GrasslandBiome::getNoiseParameters()
 ChunkBlock GrasslandBiome::getPlant(Rand& rand) const
 {
     return rand.intInRange(0, 10) > 6 ?
-           BlockId::Rose :
-           BlockId::TallGrass;
+        BlockId::Rose :
+        BlockId::TallGrass;
 }

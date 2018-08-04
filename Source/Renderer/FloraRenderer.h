@@ -6,7 +6,6 @@
 
 #include "../Shaders/FloraShader.h"
 #include "../Config.h"
-#include "../GlobalInfo.h"
 
 struct RenderInfo;
 class ChunkMesh;

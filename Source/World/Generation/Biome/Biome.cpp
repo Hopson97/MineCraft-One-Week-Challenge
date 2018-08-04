@@ -1,9 +1,9 @@
 #include "Biome.h"
 
 Biome::Biome(const NoiseParameters& parameters, int treeFreq, int plantFreq, int seed)
-    :   m_heightGenerator   (seed)
-    ,   m_treeFreq      (treeFreq)
-    ,   m_plantFreq     (plantFreq)
+:   m_heightGenerator   (seed)
+,   m_treeFreq      (treeFreq)
+,   m_plantFreq     (plantFreq)
 {
     m_heightGenerator.setParameters(parameters);
 }

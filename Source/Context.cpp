@@ -1,11 +1,9 @@
 #include "Context.h"
-#include "RenderSettings.h"
-#include "ShaderData.h"
-#include "GLAD/glad.h"
 
-#include <iostream>
+#include <glad.h>
 
-sf::RenderWindow* g_window;
+unsigned int g_X;
+unsigned int g_Y;
 
 Context::Context(const Config& config)
 {
@@ -17,33 +15,25 @@ Context::Context(const Config& config)
     settings.stencilBits = 8;
     //settings.attributeFlags = sf::ContextSettings::Core;
     //This is no longer necessary due to the Mac Support update.
-
-    if(config.isFullscreen) {
+    
+    if(config.isFullscreen)
+    {
         window.create(sf::VideoMode::getDesktopMode(), "MineCraft Week", sf::Style::Fullscreen, settings);
-        g_renderSettings.resolutionX = sf::VideoMode::getDesktopMode().width;
-        g_renderSettings.resolutionY = sf::VideoMode::getDesktopMode().height;
-    } else {
+        g_X = sf::VideoMode::getDesktopMode().width;
+        g_Y = sf::VideoMode::getDesktopMode().height;
+    }
+    else
+    {
         sf::VideoMode winMode(config.windowX, config.windowY);
         window.create(winMode, "MineCraft Week", sf::Style::Close, settings);
-        g_renderSettings.resolutionX = config.windowX;
-        g_renderSettings.resolutionY = config.windowY;
+        g_X = config.windowX;
+        g_Y = config.windowY;
     }
 
     if (!gladLoadGL()) {
-        std::cout << "Unable to load OpenGL libs.\n";
+        
         exit(-1);
     }
-
-    if (GLVersion.major < 3) {
-        std::cout << "Your system does not support the correct OpenGL Version.\n"
-                    << "Minimum version required: 3. Your version: " << GLVersion.major
-                    << "\n";
-        exit(-1);
-    }
-
-
-    g_window = &window;
-
 
     glViewport(0, 0, window.getSize().x, window.getSize().y);
 

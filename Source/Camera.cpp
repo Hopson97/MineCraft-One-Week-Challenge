@@ -3,13 +3,13 @@
 #include "Maths/Matrix.h"
 
 Camera::Camera(const Config& config) noexcept
-    :   m_config    (config)
+:   m_config    (config)
 {
     m_projectionMatrix = makeProjectionMatrix(config);
 
     position = {0, 0, -3.5};
 }
-//
+
 void Camera::update() noexcept
 {
     position = {m_pEntity->position.x, m_pEntity->position.y + 0.6f, m_pEntity->position.z};

@@ -5,7 +5,8 @@
 
 #include "Config.h"
 
-extern sf::RenderWindow* g_window;
+extern unsigned int g_X;
+extern unsigned int g_Y;
 
 struct Context
 {
