@@ -17,6 +17,6 @@ void main()
     //Lighting Calculations
     outColour = vec4(color.rgb * lighting * passCardinalLight, color.a);
     outColour = vec4(mix(vec3(0.5f, 0.5f, 0.6f) * (lighting*0.8),outColour.rgb, visibility),outColour.a);
-    outColour.xyz += lighting * (0.04, 0.03, 0.02);
+    outColour.xyz += lighting * vec3    (0.04, 0.03, 0.02);
     if (outColour.a == 0) discard;
 }
