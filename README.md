@@ -8,6 +8,9 @@ Note: I continued to edit after the 7 days, however the version seen in the vide
 
 And the "optimized" version can be found here: https://github.com/Hopson97/MineCraft-One-Week-Challenge/tree/792df07e9780b444be5290fd05a3c8598aacafc8 (~1 week later version) 
 
+There also is a version of this game with very good graphics, and things like a day/night cycle. However, it was causing rendering issues for many people. This version can be found here:
+https://github.com/Hopson97/MineCraft-One-Week-Challenge/tree/aa50ad8077ef0e617a9cfc336bdb7db81c313017
+
 # Other People's Projects
 
 This was made in a week, as a challenge for a video. There do exist other, more mature and developed Minecraft clones written in C++.
