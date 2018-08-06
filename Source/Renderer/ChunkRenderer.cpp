@@ -12,7 +12,7 @@ void ChunkRenderer::add(const ChunkMesh& mesh)
     m_chunks.push_back(&mesh.getModel().getRenderInfo());
 }
 
-void ChunkRenderer::render(const Camera& camera, Config* conf)
+void ChunkRenderer::render(const Camera& camera)
 {
     if (m_chunks.empty())
     {

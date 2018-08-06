@@ -1,8 +1,4 @@
 renderdistance 16
-fullscreen 1
+fullscreen 0
 windowsize 1280 720
 fov 105
-gamma 1.3
-contrast 1.1
-brightness 1.15
-post process 1

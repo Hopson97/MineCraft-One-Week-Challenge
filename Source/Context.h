@@ -5,9 +5,6 @@
 
 #include "Config.h"
 
-extern unsigned int g_X;
-extern unsigned int g_Y;
-
 struct Context
 {
     Context(const Config& config);

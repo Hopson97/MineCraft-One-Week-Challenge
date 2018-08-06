@@ -19,15 +19,11 @@ Context::Context(const Config& config)
     if(config.isFullscreen)
     {
         window.create(sf::VideoMode::getDesktopMode(), "MineCraft Week", sf::Style::Fullscreen, settings);
-        g_X = sf::VideoMode::getDesktopMode().width;
-        g_Y = sf::VideoMode::getDesktopMode().height;
     }
     else
     {
         sf::VideoMode winMode(config.windowX, config.windowY);
         window.create(winMode, "MineCraft Week", sf::Style::Close, settings);
-        g_X = config.windowX;
-        g_Y = config.windowY;
     }
 
     if (!gladLoadGL()) {

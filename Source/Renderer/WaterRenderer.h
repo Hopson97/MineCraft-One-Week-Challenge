@@ -5,7 +5,6 @@
 #include <SFML/Graphics.hpp>
 
 #include "../Shaders/WaterShader.h"
-#include "../Config.h"
 
 struct RenderInfo;
 class ChunkMesh;
@@ -15,7 +14,7 @@ class WaterRenderer
 {
     public:
         void add(const ChunkMesh& mesh);
-        void render(const Camera& camera, Config* conf);
+        void render(const Camera& camera);
 
     private:
         std::vector<const RenderInfo*> m_chunks;

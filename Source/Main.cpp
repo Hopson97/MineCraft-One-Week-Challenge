@@ -68,22 +68,6 @@ namespace
                     std::cout   << "Config: Field of Vision: "
                                 << config.fov << '\n';
                 }
-                else if (key == "gamma"){
-                    configFile >> config.gamma;
-                    std::cout << "Config: Gamma: " << config.gamma << std::endl;
-                }
-                else if (key == "brightness"){
-                    configFile >> config.brightness;
-                    std::cout << "Config: Brightness: " << config.brightness << std::endl;
-                }
-                else if (key == "contrast"){
-                    configFile >> config.contrast;
-                    std::cout << "Config: Contrast: " << config.contrast << std::endl;
-                }
-                else if (key == "post process"){
-                    configFile >> config.postProcess;
-                    std::cout << "Post Processing: " << config.postProcess << std::endl;
-                }
             }
         }
         else

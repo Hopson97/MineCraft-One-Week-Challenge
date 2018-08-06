@@ -132,6 +132,10 @@ void Player::update(float dt, World& world)
         m_isOnGround = false;
     }
 
+    if (position.y <= 0 && !m_isFlying) {
+        position.y = 300;
+    }
+
 
     position.x += velocity.x * dt;
     collide (world, {velocity.x, 0, 0}, dt);
@@ -250,12 +254,12 @@ void Player::mouseInput(const sf::RenderWindow& window)
         return;
     }
 
-    static auto const BOUND = 89.9999;
+    static float const BOUND = 89.9999;
     static auto lastMousePosition = sf::Mouse::getPosition(window);
     auto change = sf::Mouse::getPosition() - lastMousePosition;
 
-    rotation.y += change.x * 0.05;
-    rotation.x += change.y * 0.05;
+    rotation.y += change.x * 0.05f;
+    rotation.x += change.y * 0.05f;
 
     if      (rotation.x >  BOUND) rotation.x =  BOUND;
     else if (rotation.x < -BOUND) rotation.x = -BOUND;

@@ -12,7 +12,7 @@ void WaterRenderer::add(const ChunkMesh& mesh)
     m_chunks.push_back(&mesh.getModel().getRenderInfo());
 }
 
-void WaterRenderer::render(const Camera& camera, Config* conf)
+void WaterRenderer::render(const Camera& camera)
 {
     if (m_chunks.empty())
     {

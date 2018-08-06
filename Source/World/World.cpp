@@ -66,10 +66,9 @@ void World::update(const Camera& camera)
 
     if (key.isKeyPressed())
     {
-        m_mainMutex.lock();
+        std::unique_lock<std::mutex> lock(m_mainMutex);
         m_chunkManager.deleteMeshes();
         m_loadDistance = 2;
-        m_mainMutex.unlock();
     }
 
 
@@ -104,9 +103,8 @@ void World::loadChunks(const Camera& camera)
             {
                 for (int z = minZ; z < maxZ; ++z)
                 {
-                    m_mainMutex.lock();
+                    std::unique_lock<std::mutex> lock(m_mainMutex);
                     isMeshMade = m_chunkManager.makeMesh(x, z, camera);
-                    m_mainMutex.unlock();
                 }
                 //if (isMeshMade)
                  //   break;
@@ -130,7 +128,7 @@ void World::loadChunks(const Camera& camera)
 
 void World::updateChunk(int blockX, int blockY, int blockZ)
 {
-    m_mainMutex.lock();
+    std::unique_lock<std::mutex> lock(m_mainMutex);
 
     auto addChunkToUpdateBatch = [&](const sf::Vector3i& key, ChunkSection& section)
     {
@@ -178,13 +176,11 @@ void World::updateChunk(int blockX, int blockY, int blockZ)
         sf::Vector3i newKey(chunkPosition.x, chunkSectionY, chunkPosition.z + 1);
         addChunkToUpdateBatch(newKey, m_chunkManager.getChunk(newKey.x, newKey.z).getSection(newKey.y));
     }
-
-    m_mainMutex.unlock();
 }
 
 void World::renderWorld(RenderMaster& renderer, const Camera& camera)
 {
-    m_mainMutex.lock();
+    std::unique_lock<std::mutex> lock(m_mainMutex);
     renderer.drawSky();
 
     auto& chunkMap = m_chunkManager.getChunks();
@@ -216,7 +212,6 @@ void World::renderWorld(RenderMaster& renderer, const Camera& camera)
             itr++;
         }
     }
-    m_mainMutex.unlock();
 }
 
 ChunkManager& World::getChunkManager()
@@ -244,14 +239,13 @@ VectorXZ World::getChunkXZ(int x, int z)
 
 void World::updateChunks()
 {
-    m_mainMutex.lock();
+    std::unique_lock<std::mutex> lock(m_mainMutex);
     for (auto& c : m_chunkUpdates)
     {
         ChunkSection& s = *c.second;
         s.makeMesh();
     }
     m_chunkUpdates.clear();
-    m_mainMutex.unlock();
 }
 
 
@@ -286,6 +280,18 @@ void World::setSpawnPoint()
     int worldZ = chunkZ * CHUNK_SIZE + blockZ;
 
     m_playerSpawnPoint = {worldX, blockY, worldZ};
+
+    for (int x = worldX - 1; x <= worldX + 1; ++x)
+    {
+        for (int z = worldZ - 1; z < worldZ + 1; ++z)
+        {
+            std::unique_lock<std::mutex> lock(m_mainMutex);
+            m_chunkManager.loadChunk(x, z);
+        }
+        //if (isMeshMade)
+        //   break;
+    }
+
     std::cout   << "Spawn found! Attempts: "    << attempts
                 << " Time Taken: "              << timer.getElapsedTime().asSeconds() << " seconds\n";
 }

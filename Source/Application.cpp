@@ -2,7 +2,6 @@
 #include <iostream>
 #include "States/PlayingState.h"
 #include "World/Block/BlockDatabase.h"
-#include "Renderer/Framebuffer.h"
 
 Application::Application(const Config& config)
 :   m_context   (config)
@@ -20,8 +19,6 @@ void Application::runLoop()
 {
     sf::Clock dtTimer;
     sf::Clock dt;
-
-    m_masterRenderer.setConfig(m_config);
 
     sf::Time m;
 
