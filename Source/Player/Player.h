@@ -50,7 +50,7 @@ class Player : public Entity
         ToggleKey m_num4;
         ToggleKey m_num5;
 
-        glm::vec3 m_acceleation;
+        glm::vec3 m_acceleration;
 };
 
 

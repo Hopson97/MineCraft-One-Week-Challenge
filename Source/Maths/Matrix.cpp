@@ -20,7 +20,7 @@ glm::mat4 makeModelMatrix(const Entity& entity)
 
 glm::mat4 makeViewMatrix(const Camera& camera)
 {
-    glm::mat4 matrix;
+    glm::mat4 matrix(1.f);
 
     matrix = glm::rotate(matrix, glm::radians(camera.rotation.x), {1, 0, 0});
     matrix = glm::rotate(matrix, glm::radians(camera.rotation.y), {0, 1, 0});

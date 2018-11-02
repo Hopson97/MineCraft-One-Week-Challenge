@@ -13,7 +13,7 @@
 sf::Font f;
 
 Player::Player()
-:   Entity  ({2500, 125, 2500}, {0, 0, 0}, {0.3, 1.0, 0.3})
+:   Entity  ({2500, 125, 2500}, {0.f, 0.f, 0.f}, {0.3f, 1.f, 0.3f})
 ,   m_itemDown  (sf::Keyboard::Down)
 ,   m_itemUp    (sf::Keyboard::Up)
 ,   m_flyKey    (sf::Keyboard::F)
@@ -22,6 +22,7 @@ Player::Player()
 ,   m_num3 (sf::Keyboard::Num3)
 ,   m_num4 (sf::Keyboard::Num4)
 ,   m_num5 (sf::Keyboard::Num5)
+,   m_acceleration (glm::vec3(0.f))
 
 {
     f.loadFromFile("Res/Fonts/rs.ttf");
@@ -120,8 +121,8 @@ void Player::handleInput(const sf::RenderWindow& window)
 
 void Player::update(float dt, World& world)
 {
-    velocity += m_acceleation;
-    m_acceleation = {0, 0, 0};
+    velocity += m_acceleration;
+    m_acceleration = {0, 0, 0};
 
     if (!m_isFlying)
     {
@@ -210,23 +211,23 @@ void Player::keyboardInput()
     {
         float s = speed;
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) s *= 5;
-        m_acceleation.x += -glm::cos(glm::radians(rotation.y + 90)) * s;
-        m_acceleation.z += -glm::sin(glm::radians(rotation.y + 90)) * s;
+        m_acceleration.x += -glm::cos(glm::radians(rotation.y + 90)) * s;
+        m_acceleration.z += -glm::sin(glm::radians(rotation.y + 90)) * s;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
-        m_acceleation.x += glm::cos(glm::radians(rotation.y + 90)) * speed;
-        m_acceleation.z += glm::sin(glm::radians(rotation.y + 90)) * speed;
+        m_acceleration.x += glm::cos(glm::radians(rotation.y + 90)) * speed;
+        m_acceleration.z += glm::sin(glm::radians(rotation.y + 90)) * speed;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
-        m_acceleation.x += -glm::cos(glm::radians(rotation.y)) * speed;
-        m_acceleation.z += -glm::sin(glm::radians(rotation.y)) * speed;
+        m_acceleration.x += -glm::cos(glm::radians(rotation.y)) * speed;
+        m_acceleration.z += -glm::sin(glm::radians(rotation.y)) * speed;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
-        m_acceleation.x += glm::cos(glm::radians(rotation.y)) * speed;
-        m_acceleation.z += glm::sin(glm::radians(rotation.y)) * speed;
+        m_acceleration.x += glm::cos(glm::radians(rotation.y)) * speed;
+        m_acceleration.z += glm::sin(glm::radians(rotation.y)) * speed;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
@@ -235,7 +236,7 @@ void Player::keyboardInput()
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && m_isFlying)
     {
-        m_acceleation.y -= speed * 3;
+        m_acceleration.y -= speed * 3;
     }
 }
 
@@ -309,12 +310,12 @@ void Player::jump()
         if (m_isOnGround)
         {
             m_isOnGround = false;
-            m_acceleation.y += speed * 50;
+            m_acceleration.y += speed * 50;
         }
     }
     else
     {
-        m_acceleation.y += speed * 3;
+        m_acceleration.y += speed * 3;
     }
 }
 
