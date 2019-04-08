@@ -21,12 +21,15 @@ include_directories(src/Dependencies/)
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 find_package(SFML REQUIRED graphics network audio window system)
 
+#glm
+find_package(glm REQUIRED)
+
 # glad
 # https://github.com/aaronmjacobs/InitGL
 set(GLAD_DIR "Source/glad")
 add_library("glad" "${GLAD_DIR}/glad.c")
 target_include_directories("glad" PRIVATE "${GLAD_DIR}")
-target_include_directories(${PROJECT_NAME} PRIVATE "${GLAD_DIR}")
+target_include_directories(${PROJECT_NAME} PUBLIC ${GLM_INCLUDE_DIRS} PRIVATE "${GLAD_DIR}")
 target_link_libraries(${PROJECT_NAME} "glad" "${CMAKE_DL_LIBS}")
 find_package(Threads)
 
