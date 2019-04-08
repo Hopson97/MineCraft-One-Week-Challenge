@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <SFML/Graphics.hpp>
-#include <glad.h>
+#include "../../glad/glad.h"
 
 #include "../Block/ChunkBlock.h"
 

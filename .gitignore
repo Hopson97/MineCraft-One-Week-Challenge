@@ -20,3 +20,7 @@ CTestTestfile.cmake
 MCOneWeek
 
 libglad.a
+
+.vscode/
+
+*.make

@@ -6,6 +6,8 @@
 #include "ChunkMeshBuilder.h"
 
 #include <iostream>
+#include <thread>
+#include <fstream>
 
 ChunkSection::ChunkSection(const sf::Vector3i& location, World& world)
 :   m_aabb      ({CHUNK_SIZE, CHUNK_SIZE, CHUNK_SIZE})

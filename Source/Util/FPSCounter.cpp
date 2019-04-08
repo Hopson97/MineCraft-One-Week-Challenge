@@ -25,6 +25,7 @@ void FPSCounter::update()
         m_fps = m_frameCount / m_fpsTimer.restart().asSeconds();
         m_frameCount = 0;
         m_delayTimer.restart();
+        std::cout << m_fps << '\n';
     }
 }
 

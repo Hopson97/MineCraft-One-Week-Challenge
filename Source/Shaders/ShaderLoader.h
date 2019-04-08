@@ -2,7 +2,7 @@
 #define SHADERLOADER_H_INCLUDED
 
 #include <string>
-#include <glad.h>
+#include "../glad/glad.h"
 
 GLuint loadShaders( const std::string& vertexShader,
                     const std::string& fragmentShader);

@@ -1,6 +1,6 @@
 #include "Context.h"
 
-#include <glad.h>
+#include "glad/glad.h"
 
 unsigned int g_X;
 unsigned int g_Y;

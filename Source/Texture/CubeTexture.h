@@ -1,7 +1,7 @@
 #ifndef CUBETEXTURE_H_INCLUDED
 #define CUBETEXTURE_H_INCLUDED
 
-#include <glad.h>
+#include "../glad/glad.h"
 #include <array>
 #include <string>
 #include <SFML/Graphics.hpp>
