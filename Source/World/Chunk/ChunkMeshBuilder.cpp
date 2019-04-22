@@ -9,6 +9,7 @@
 #include <vector>
 #include <iostream>
 #include <cassert>
+#include <SFML/System/Clock.hpp>
 
 namespace
 {
@@ -114,54 +115,53 @@ void ChunkMeshBuilder::buildMesh()
     AdjacentBlockPositions directions;
     m_pBlockPtr = m_pChunk->begin();
     faces = 0;
-    for (int8_t y = 0; y < CHUNK_SIZE; ++y)
-    {
-        //ChunkBlock block = *blockPointer;
-        //blockPointer++;
+    sf::Clock timer;
+    for (int16_t i = 0; i < CHUNK_VOLUME; i++) {
+        uint8_t x = i % CHUNK_SIZE;
+		uint8_t z = (i / CHUNK_SIZE) % CHUNK_SIZE;
+		uint8_t y = i / (CHUNK_SIZE * CHUNK_SIZE);
 
-        if (!shouldMakeLayer(y))
+        if (!shouldMakeLayer(y)) {
             continue;
-
-        for (int8_t z = 0; z < CHUNK_SIZE; ++z)
-        for (int8_t x = 0; x < CHUNK_SIZE; ++x)
-        {
-            ChunkBlock block = *m_pBlockPtr;
-            m_pBlockPtr++;
-
-            sf::Vector3i position(x, y, z);
-            setActiveMesh(block);
-
-            if (block == BlockId::Air)
-            {
-                continue;
-            }
-
-            m_pBlockData = &block.getData();
-            auto& data = *m_pBlockData;
-
-            if (data.meshType == BlockMeshType::X)
-            {
-                addXBlockToMesh(data.texTopCoord, position);
-                continue;
-            }
-
-
-            directions.update(x, y, z);
-
-            //Up/ Down
-            if ((m_pChunk->getLocation().y != 0) || y != 0)
-                tryAddFaceToMesh(bottomFace, data.texBottomCoord,    position, directions.down, LIGHT_BOT);
-            tryAddFaceToMesh(topFace,    data.texTopCoord,       position, directions.up, LIGHT_TOP);
-
-            //Left/ Right
-            tryAddFaceToMesh(leftFace,  data.texSideCoord, position, directions.left,  LIGHT_X);
-            tryAddFaceToMesh(rightFace, data.texSideCoord, position, directions.right, LIGHT_X);
-
-            //Front/ Back
-            tryAddFaceToMesh(frontFace, data.texSideCoord, position, directions.front, LIGHT_Z);
-            tryAddFaceToMesh(backFace,  data.texSideCoord, position, directions.back,  LIGHT_Z);
         }
+
+        ChunkBlock block = *m_pBlockPtr;
+        m_pBlockPtr++;
+
+        sf::Vector3i position(x, y, z);
+        setActiveMesh(block);
+
+        if (block == BlockId::Air)
+        {
+            continue;
+        }
+
+        m_pBlockData = &block.getData();
+        auto& data = *m_pBlockData;
+
+        if (data.meshType == BlockMeshType::X)
+        {
+            addXBlockToMesh(data.texTopCoord, position);
+            continue;
+        }
+
+
+        directions.update(x, y, z);
+
+        //Up/ Down
+        if ((m_pChunk->getLocation().y != 0) || y != 0)
+            tryAddFaceToMesh(bottomFace, data.texBottomCoord,    position, directions.down, LIGHT_BOT);
+        tryAddFaceToMesh(topFace,    data.texTopCoord,       position, directions.up, LIGHT_TOP);
+
+        //Left/ Right
+        tryAddFaceToMesh(leftFace,  data.texSideCoord, position, directions.left,  LIGHT_X);
+        tryAddFaceToMesh(rightFace, data.texSideCoord, position, directions.right, LIGHT_X);
+
+        //Front/ Back
+        tryAddFaceToMesh(frontFace, data.texSideCoord, position, directions.front, LIGHT_Z);
+        tryAddFaceToMesh(backFace,  data.texSideCoord, position, directions.back,  LIGHT_Z);
     }
+    std::cout <<"Time to make chunk: " << timer.getElapsedTime().asSeconds() * 1000 << "ms\n";
 }
 
 void ChunkMeshBuilder::setActiveMesh(ChunkBlock block)
