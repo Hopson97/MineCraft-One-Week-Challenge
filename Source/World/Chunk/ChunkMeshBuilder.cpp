@@ -118,8 +118,8 @@ void ChunkMeshBuilder::buildMesh()
     sf::Clock timer;
     for (int16_t i = 0; i < CHUNK_VOLUME; i++) {
         uint8_t x = i % CHUNK_SIZE;
+        uint8_t y = i / (CHUNK_SIZE * CHUNK_SIZE);
 		uint8_t z = (i / CHUNK_SIZE) % CHUNK_SIZE;
-		uint8_t y = i / (CHUNK_SIZE * CHUNK_SIZE);
 
         if (!shouldMakeLayer(y)) {
             continue;
