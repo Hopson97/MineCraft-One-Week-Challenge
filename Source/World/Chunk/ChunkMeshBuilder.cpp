@@ -161,7 +161,6 @@ void ChunkMeshBuilder::buildMesh()
         tryAddFaceToMesh(frontFace, data.texSideCoord, position, directions.front, LIGHT_Z);
         tryAddFaceToMesh(backFace,  data.texSideCoord, position, directions.back,  LIGHT_Z);
     }
-    std::cout <<"Time to make chunk: " << timer.getElapsedTime().asSeconds() * 1000 << "ms\n";
 }
 
 void ChunkMeshBuilder::setActiveMesh(ChunkBlock block)
