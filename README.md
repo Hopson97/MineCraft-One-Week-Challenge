@@ -11,13 +11,13 @@ And the "optimized" version can be found here: https://github.com/Hopson97/MineC
 There also is a version of this game with very good graphics, and things like a day/night cycle. However, it was causing rendering issues for many people. This version can be found here:
 https://github.com/Hopson97/MineCraft-One-Week-Challenge/tree/aa50ad8077ef0e617a9cfc336bdb7db81c313017
 
-# Other People's Projects
+## Other People's Projects
 
 This was made in a week, as a challenge for a video. There do exist other, more mature and developed Minecraft clones written in C++.
 
 MineTest here: https://github.com/minetest/minetest
 
-# Building
+## Building
 
 You will need GLM and SFML 2.4.1+ libraries w/headers, and this also requires a compiler that supports C++14 (or newer) with threads.
 
@@ -27,20 +27,31 @@ Install macports from https://www.macports.org
 
 `sudo port install sfml glm`
 
-### Ubuntu 17.04+ :
+### Ubuntu
 
 `sudo apt-get install libsfml-dev libglm-dev`
 
+## Compile Source and Runnimg
 
-## Compile Source
+### Linux
 
-For now I don't have CMakelists here, so you have to do this manually. 
+#### Debug
 
-Include directories should be the SFML/include folder, glm/glm folder, and the local glad/ folder
+```sh
+sh scripts/build.sh
+sh scripts/run.sh
+```
 
+#### Release
 
+```sh
+sh scripts/build.sh release
+sh scripts/run.sh release
+```
 
-# Day One
+## The Challenge
+
+### Day One
 
 End of day one commit: https://github.com/Hopson97/MineCraft-One-Week-Challenge/tree/44ace72573833796da05a97972be5765b05ce94f
 
@@ -59,7 +70,7 @@ Lines of Code Today | 829
 Total Time programming | 3:21:51
 Total Lines of Code | 829
 
-# Day Two
+### Day Two
 
 End of day two commit: https://github.com/Hopson97/MineCraft-One-Week-Challenge/tree/98055215f735335de80193221a30c0bb8586fba5
 
@@ -81,7 +92,7 @@ Total Time programming | 7:37:58
 Total Lines of Code | 1561
 
 
-# Day Three
+### Day Three
 
 End of day three commit: https://github.com/Hopson97/MineCraft-One-Week-Challenge/commit/78bd637581542576372d75cf7638f76381e933b4
 
@@ -104,7 +115,7 @@ Lines of Code Today | 410
 Total Time programming | 10:53:36
 Total Lines of Code | 1974
 
-# Day 4
+### Day 4
 
 The first thing I did on day 4 was create a sky box using OpenGL cube maps.
 
@@ -121,7 +132,7 @@ Lines of Code Today | 523
 Total Time programming | 14:07:51
 Total Lines of Code | 2489
 
-# Day 5
+### Day 5
 
 I started off the day by cleaning up some of the chunk code, and then proceeded to make the world infinite, but
 I felt it was not needed, so I simply went back to a fixed-sized world.
@@ -139,12 +150,12 @@ Lines of Code Today | 560
 Total Time programming | 17:02:05
 Total Lines of Code | 3049
 
-# Day 6
+### Day 6
 
 Mostly optimizations, such as view-frustum culling and making the mesh building faster.
 
-# Day 7 
+### Day 7
 
 Focus on improving how it looks, eg adding directional lighting
 
-Also implemented 100% safe concurency :)
+Also implemented concurency :)
