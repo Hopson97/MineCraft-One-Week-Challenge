@@ -74,7 +74,7 @@ double NoiseGenerator::getHeight(int x, int z, int chunkX, int chunkZ) const noe
 
         auto totalValue = 0.0;
 
-        for (auto a = 0; a < m_noiseParameters.octaves - 1; a++)      //This loops trough the octaves.
+        for (auto a = 0; a < m_noiseParameters.octaves - 1; a++)      //This loops through the octaves.
         {
             auto frequency = pow(2.0, a);           //This increases the frequency with every loop of the octave.
             auto amplitude = pow(m_noiseParameters.roughness, a);  //This decreases the amplitude with every loop of the octave.
