@@ -7,11 +7,11 @@ if (NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose debug or release" FORCE)
 endif()
 
-project(MCOneWeek)
+project(mc-one-week)
 
 #Add the files
 file(GLOB_RECURSE SOURCES Source/*.cpp)
-add_executable(MCOneWeek ${SOURCES})
+add_executable(mc-one-week ${SOURCES})
 
 #Include directory
 include_directories(src/Dependencies/)
@@ -33,7 +33,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${GLM_INCLUDE_DIRS} PRIVATE "$
 target_link_libraries(${PROJECT_NAME} "glad" "${CMAKE_DL_LIBS}")
 find_package(Threads)
 
-target_link_libraries(MCOneWeek Threads::Threads ${EXECUTABLE_NAME} ${SFML_LIBRARIES}) 
+target_link_libraries(mc-one-week Threads::Threads ${EXECUTABLE_NAME} ${SFML_LIBRARIES}) 
 
 #Copy resources
 file(COPY ${CMAKE_SOURCE_DIR}/Res DESTINATION ${CMAKE_BINARY_DIR})
