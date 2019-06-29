@@ -1,3 +1,4 @@
+#Visual Studio
 Debug/
 Release/
 
@@ -7,20 +8,10 @@ Release/
 
 *.dll
 
-CMakeCache.txt
-CMakeFiles
-CMakeScripts
-Testing
-Makefile
-cmake_install.cmake
-install_manifest.txt
-compile_commands.json
-CTestTestfile.cmake
-
-MCOneWeek
-
-libglad.a
-
+# Visual Studio Code
 .vscode/
 
-*.make
+
+# Builds
+bin/
+Makefile
