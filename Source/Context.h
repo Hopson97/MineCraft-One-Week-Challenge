@@ -9,7 +9,7 @@ struct Context
 {
     Context(const Config& config);
 
-    sf::RenderWindow window;
+    sf::Window window;
 };
 
 #endif // CONTEXT_H_INCLUDED

@@ -32,7 +32,7 @@ class Application
 
         Camera& getCamera() { return m_camera; }
 
-        const sf::RenderWindow& getWindow() const { return m_context.window; }
+        const sf::Window& getWindow() const { return m_context.window; }
 
         void turnOffMouse();
         void turnOnMouse ();

@@ -10,7 +10,7 @@
 
 void RenderMaster::drawSFML(const sf::Drawable& drawable)
 {
-    m_sfmlRenderer.add(drawable);
+    //m_sfmlRenderer.add(drawable);
 }
 
 void RenderMaster::drawChunk(const ChunkSection& chunk)
@@ -34,7 +34,7 @@ void RenderMaster::drawSky()
     m_drawBox = true;
 }
 
-void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
+void RenderMaster::finishRender(sf::Window& window, const Camera& camera)
 {
     glClearColor(0.0, 0.0, 0.0, 1.0);
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
@@ -53,7 +53,7 @@ void RenderMaster::finishRender(sf::RenderWindow& window, const Camera& camera)
         m_drawBox = false;
     }
 
-    m_sfmlRenderer  .render (window);
+    //m_sfmlRenderer  .render (window);
 
     window.display();
 }

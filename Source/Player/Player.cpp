@@ -74,7 +74,7 @@ ItemStack& Player::getHeldItems()
 }
 
 
-void Player::handleInput(const sf::RenderWindow& window)
+void Player::handleInput(const sf::Window& window)
 {
     keyboardInput();
     mouseInput(window);
@@ -240,7 +240,7 @@ void Player::keyboardInput()
     }
 }
 
-void Player::mouseInput(const sf::RenderWindow& window)
+void Player::mouseInput(const sf::Window& window)
 {
     static bool useMouse = true;
     static ToggleKey useMouseKey (sf::Keyboard::L);
