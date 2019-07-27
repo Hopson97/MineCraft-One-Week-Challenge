@@ -80,10 +80,10 @@ void ClassicOverWorldGenerator::getHeightIn (int xMin, int zMin, int xMax, int z
                                m_pChunk->getLocation().y);
     };
 
-    int bottomLeft  = getHeightAt(xMin, zMin);
-    int bottomRight = getHeightAt(xMax, zMin);
-    int topLeft     = getHeightAt(xMin, zMax);
-    int topRight    = getHeightAt(xMax, zMax);
+	float bottomLeft  = getHeightAt(xMin, zMin);
+	float bottomRight = getHeightAt(xMax, zMin);
+	float topLeft     = getHeightAt(xMin, zMax);
+	float topRight    = getHeightAt(xMax, zMax);
 
     for (int x = xMin; x < xMax; ++x)
     for (int z = zMin; z < zMax; ++z)
@@ -93,14 +93,14 @@ void ClassicOverWorldGenerator::getHeightIn (int xMin, int zMin, int xMax, int z
         if (z == CHUNK_SIZE)
             continue;
 
-        float h = smoothInterpolation(bottomLeft, topLeft, bottomRight, topRight,
-                                      xMin, xMax,
-                                      zMin, zMax,
-                                      x, z);
+        float h = smoothInterpolation(
+			bottomLeft, topLeft, bottomRight, topRight,
+			static_cast<float>(xMin), static_cast<float>(xMax),
+			static_cast<float>(zMin), static_cast<float>(zMax),
+			static_cast<float>(x), static_cast<float>(z));
 
         m_heightMap.get(x, z) = h;
     }
-    //exit(0);
 }
 
 
