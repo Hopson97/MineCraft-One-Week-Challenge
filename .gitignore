@@ -1,12 +1,13 @@
 #Visual Studio
 Debug/
 Release/
-
+*.sln
 *.vcxproj
 *.filters
+*.users
 *.user
-
 *.dll
+.vs 
 
 # Visual Studio Code
 .vscode/
