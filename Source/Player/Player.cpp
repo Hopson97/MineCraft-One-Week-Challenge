@@ -160,11 +160,15 @@ void Player::update(float dt, World& world)
 
 void Player::collide(World& world, const glm::vec3& vel, float dt)
 {
-    for (int x = position.x - box.dimensions.x; x < position.x + box.dimensions.x; x++)
-    for (int y = position.y - box.dimensions.y; y < position.y + 0.7             ; y++)
-    for (int z = position.z - box.dimensions.z; z < position.z + box.dimensions.z; z++)
+    for (float x = position.x - box.dimensions.x; x < position.x + box.dimensions.x; x++)
+    for (float y = position.y - box.dimensions.y; y < position.y + 0.7             ; y++)
+    for (float z = position.z - box.dimensions.z; z < position.z + box.dimensions.z; z++)
     {
-        auto block = world.getBlock(x, y, z);
+        auto block = world.getBlock(
+			static_cast<int>(x), 
+			static_cast<int>(y), 
+			static_cast<int>(z)
+		);
 
         if (block != 0 && block.getData().isCollidable)
         {
@@ -255,7 +259,7 @@ void Player::mouseInput(const sf::Window& window)
         return;
     }
 
-    static float const BOUND = 89.9999;
+    static float const BOUND = 89.f;
     static auto lastMousePosition = sf::Mouse::getPosition(window);
     auto change = sf::Mouse::getPosition() - lastMousePosition;
 
