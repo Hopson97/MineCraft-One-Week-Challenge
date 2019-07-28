@@ -28,7 +28,7 @@ void StatePlaying::handleInput()
 
     for (Ray ray({m_player.position.x, m_player.position.y + 0.6f, m_player.position.z}, m_player.rotation); //Corrected for camera offset
              ray.getLength() < 6;
-             ray.step(0.05))
+             ray.step(0.05f))
     {
         int x = static_cast<int>(ray.getEnd().x);
         int y = static_cast<int>(ray.getEnd().y);

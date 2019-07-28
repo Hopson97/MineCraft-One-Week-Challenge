@@ -80,10 +80,10 @@ void ClassicOverWorldGenerator::getHeightIn (int xMin, int zMin, int xMax, int z
                                m_pChunk->getLocation().y);
     };
 
-	float bottomLeft  = getHeightAt(xMin, zMin);
-	float bottomRight = getHeightAt(xMax, zMin);
-	float topLeft     = getHeightAt(xMin, zMax);
-	float topRight    = getHeightAt(xMax, zMax);
+	float bottomLeft  = static_cast<float>(getHeightAt(xMin, zMin));
+	float bottomRight = static_cast<float>(getHeightAt(xMax, zMin));
+	float topLeft     = static_cast<float>(getHeightAt(xMin, zMax));
+	float topRight    = static_cast<float>(getHeightAt(xMax, zMax));
 
     for (int x = xMin; x < xMax; ++x)
     for (int z = zMin; z < zMax; ++z)
@@ -99,7 +99,7 @@ void ClassicOverWorldGenerator::getHeightIn (int xMin, int zMin, int xMax, int z
 			static_cast<float>(zMin), static_cast<float>(zMax),
 			static_cast<float>(x), static_cast<float>(z));
 
-        m_heightMap.get(x, z) = h;
+        m_heightMap.get(x, z) = static_cast<int>(h);
     }
 }
 
@@ -123,8 +123,8 @@ void ClassicOverWorldGenerator::getBiomeMap()
     for (int x = 0; x < CHUNK_SIZE + 1; x++)
     for (int z = 0; z < CHUNK_SIZE + 1; z++)
     {
-        int h = m_biomeNoiseGen.getHeight(x, z, location.x + 10, location.y + 10);
-        m_biomeMap.get(x, z) = h;
+        double h = m_biomeNoiseGen.getHeight(x, z, location.x + 10, location.y + 10);
+        m_biomeMap.get(x, z) = static_cast<int>(h);
     }
 }
 

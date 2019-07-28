@@ -19,8 +19,6 @@ void NoiseGenerator::setParameters(const NoiseParameters& params) noexcept
     m_noiseParameters = params;
 }
 
-
-//wtf?
 double NoiseGenerator::getNoise(int  n) const noexcept
 {
     n += m_seed;
@@ -32,7 +30,7 @@ double NoiseGenerator::getNoise(int  n) const noexcept
 
 double NoiseGenerator::getNoise(double  x, double  z) const noexcept
 {
-    return getNoise(x + z * 57);
+    return getNoise(x + z * 57.0);
 }
 
 double NoiseGenerator::lerp(double a, double b, double z) const noexcept
