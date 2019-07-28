@@ -6,8 +6,9 @@
 #include <sstream>
 #include <iomanip>
 
-#include "../World/World.h"
 
+#include "../Input/Keyboard.h"
+#include "../World/World.h"
 #include "../Renderer/RenderMaster.h"
 
 sf::Font f;
@@ -74,9 +75,9 @@ ItemStack& Player::getHeldItems()
 }
 
 
-void Player::handleInput(const sf::Window& window)
+void Player::handleInput(const sf::Window& window, Keyboard& keyboard)
 {
-    keyboardInput();
+    keyboardInput(keyboard);
     mouseInput(window);
 
     if(m_itemDown.isKeyPressed())
@@ -164,11 +165,7 @@ void Player::collide(World& world, const glm::vec3& vel, float dt)
     for (int y = position.y - box.dimensions.y; y < position.y + 0.7             ; y++)
     for (int z = position.z - box.dimensions.z; z < position.z + box.dimensions.z; z++)
     {
-        auto block = world.getBlock(
-			x, 
-			y, 
-			z
-		);
+        auto block = world.getBlock(x, y, z);
 
         if (block != 0 && block.getData().isCollidable)
         {
@@ -209,7 +206,7 @@ void Player::collide(World& world, const glm::vec3& vel, float dt)
 float speed = 0.2f;
 
 
-void Player::keyboardInput()
+void Player::keyboardInput(Keyboard& keyboard)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {

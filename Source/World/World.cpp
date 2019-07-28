@@ -5,7 +5,7 @@
 
 #include "../Maths/Vector2XZ.h"
 #include "../Camera.h"
-#include "../ToggleKey.h"
+#include "../Input/ToggleKey.h"
 #include "../Renderer/RenderMaster.h"
 #include "../Player/Player.h"
 #include "../Util/Random.h"

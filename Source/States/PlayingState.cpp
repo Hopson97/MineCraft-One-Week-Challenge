@@ -17,11 +17,13 @@ StatePlaying::StatePlaying(Application& app, const Config& config)
 }
 
 void StatePlaying::handleEvent(sf::Event e)
-{ }
+{ 
+	m_keyboard.update(e);
+}
 
 void StatePlaying::handleInput()
 {
-    m_player.handleInput(m_pApplication->getWindow());
+    m_player.handleInput(m_pApplication->getWindow(), m_keyboard);
 
     static sf::Clock timer;
     glm::vec3 lastPosition;
