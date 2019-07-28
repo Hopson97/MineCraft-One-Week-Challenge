@@ -6,8 +6,9 @@
 #include <sstream>
 #include <iomanip>
 
-#include "../World/World.h"
 
+#include "../Input/Keyboard.h"
+#include "../World/World.h"
 #include "../Renderer/RenderMaster.h"
 
 sf::Font f;
@@ -74,9 +75,9 @@ ItemStack& Player::getHeldItems()
 }
 
 
-void Player::handleInput(const sf::Window& window)
+void Player::handleInput(const sf::Window& window, Keyboard& keyboard)
 {
-    keyboardInput();
+    keyboardInput(keyboard);
     mouseInput(window);
 
     if(m_itemDown.isKeyPressed())
@@ -205,36 +206,36 @@ void Player::collide(World& world, const glm::vec3& vel, float dt)
 float speed = 0.2f;
 
 
-void Player::keyboardInput()
+void Player::keyboardInput(Keyboard& keyboard)
 {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+    if (keyboard.isKeyDown(sf::Keyboard::W))
     {
         float s = speed;
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) s *= 5;
         m_acceleration.x += -glm::cos(glm::radians(rotation.y + 90)) * s;
         m_acceleration.z += -glm::sin(glm::radians(rotation.y + 90)) * s;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+    if (keyboard.isKeyDown(sf::Keyboard::S))
     {
         m_acceleration.x += glm::cos(glm::radians(rotation.y + 90)) * speed;
         m_acceleration.z += glm::sin(glm::radians(rotation.y + 90)) * speed;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+    if (keyboard.isKeyDown(sf::Keyboard::A))
     {
         m_acceleration.x += -glm::cos(glm::radians(rotation.y)) * speed;
         m_acceleration.z += -glm::sin(glm::radians(rotation.y)) * speed;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    if (keyboard.isKeyDown(sf::Keyboard::D))
     {
         m_acceleration.x += glm::cos(glm::radians(rotation.y)) * speed;
         m_acceleration.z += glm::sin(glm::radians(rotation.y)) * speed;
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    if (keyboard.isKeyDown(sf::Keyboard::Space))
     {
         jump();
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && m_isFlying)
+    else if (keyboard.isKeyDown(sf::Keyboard::LShift) && m_isFlying)
     {
         m_acceleration.y -= speed * 3;
     }
@@ -255,7 +256,7 @@ void Player::mouseInput(const sf::Window& window)
         return;
     }
 
-    static float const BOUND = 89.9999;
+    static float const BOUND = 89.f;
     static auto lastMousePosition = sf::Mouse::getPosition(window);
     auto change = sf::Mouse::getPosition() - lastMousePosition;
 

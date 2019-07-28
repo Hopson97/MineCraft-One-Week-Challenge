@@ -5,7 +5,7 @@
 
 #include "../Maths/Vector2XZ.h"
 #include "../Camera.h"
-#include "../ToggleKey.h"
+#include "../Input/ToggleKey.h"
 #include "../Renderer/RenderMaster.h"
 #include "../Player/Player.h"
 #include "../Util/Random.h"
@@ -18,7 +18,7 @@ World::World(const Camera& camera, const Config& config, Player& player)
     setSpawnPoint();
     player.position = m_playerSpawnPoint;
 
-    for (int i = 0; i < 2; i++)
+    for (int i = 0; i < 1; i++)
     {
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
         m_chunkLoadThreads.emplace_back([&]()

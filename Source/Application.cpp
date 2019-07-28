@@ -52,6 +52,7 @@ void Application::handleEvents()
     sf::Event e;
     while (m_context.window.pollEvent(e))
     {
+		m_states.back()->handleEvent(e);
         switch(e.type)
         {
             case sf::Event::Closed:

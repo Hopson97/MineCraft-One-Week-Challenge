@@ -6,8 +6,9 @@
 
 #include "../Entity.h"
 #include "../Item/ItemStack.h"
-#include "../ToggleKey.h"
+#include "../Input/ToggleKey.h"
 
+class Keyboard;
 class World;
 class RenderMaster;
 
@@ -16,7 +17,7 @@ class Player : public Entity
     public:
         Player();
 
-        void handleInput(const sf::Window& window);
+        void handleInput(const sf::Window& window, Keyboard& keyboard);
 
         void update(float dt, World& wolrd);
         void collide(World& world, const glm::vec3& vel, float dt);
@@ -30,7 +31,7 @@ class Player : public Entity
     private:
         void jump();
 
-        void keyboardInput();
+        void keyboardInput(Keyboard& keyboard);
         void mouseInput(const sf::Window& window);
         bool m_isOnGround = false;
         bool m_isFlying   = false;

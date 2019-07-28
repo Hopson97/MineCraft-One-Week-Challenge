@@ -8,7 +8,10 @@ RandomSingleton& RandomSingleton::get()
 
 RandomSingleton::RandomSingleton()
 {
-    m_randomEngine.seed(std::time(nullptr));
-    for (int i = 0; i < 5; i++)
-        intInRange(i, i * 5);
+    m_randomEngine.seed(
+		static_cast<unsigned>(std::time(nullptr))
+	);
+	for (int i = 0; i < 5; i++) {
+		intInRange(i, i * 5);
+	}
 }

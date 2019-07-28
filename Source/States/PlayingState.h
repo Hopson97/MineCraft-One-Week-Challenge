@@ -7,7 +7,7 @@
 #include "../World/Chunk/Chunk.h"
 #include "../World/World.h"
 #include "../Util/FPSCounter.h"
-
+#include "../Input/Keyboard.h"
 
 
 class StatePlaying : public StateBase
@@ -25,11 +25,9 @@ class StatePlaying : public StateBase
         void onOpen() override;
 
     private:
+		Keyboard m_keyboard;
         Player m_player;
         World m_world;
-
-        sf::RectangleShape m_crosshair;
-        sf::Texture        m_chTexture;
 
         FPSCounter m_fpsCounter;
 };

@@ -21,8 +21,8 @@ std::array<GLfloat, 8> TextureAtlas::getTexture(const sf::Vector2i& coords)
     static const GLfloat INDV_TEX_SIZE    = 1.0f / TEX_PER_ROW;
     static const GLfloat PIXEL_SIZE       = 1.0f / (float)m_imageSize;
 
-    GLfloat xMin = (coords.x * INDV_TEX_SIZE) + 0.5 * PIXEL_SIZE;
-    GLfloat yMin = (coords.y * INDV_TEX_SIZE) + 0.5 * PIXEL_SIZE;
+    GLfloat xMin = (coords.x * INDV_TEX_SIZE) + 0.5f * PIXEL_SIZE;
+    GLfloat yMin = (coords.y * INDV_TEX_SIZE) + 0.5f * PIXEL_SIZE;
 
     GLfloat xMax = (xMin + INDV_TEX_SIZE) - PIXEL_SIZE;
     GLfloat yMax = (yMin + INDV_TEX_SIZE) - PIXEL_SIZE;
