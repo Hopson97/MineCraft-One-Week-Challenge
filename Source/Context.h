@@ -1,7 +1,6 @@
-#ifndef CONTEXT_H_INCLUDED
-#define CONTEXT_H_INCLUDED
+#pragma once
 
-#include <SFML/Graphics.hpp>
+#include <SFML/Window/Window.hpp>
 
 #include "Config.h"
 
@@ -11,5 +10,3 @@ struct Context
 
     sf::Window window;
 };
-
-#endif // CONTEXT_H_INCLUDED

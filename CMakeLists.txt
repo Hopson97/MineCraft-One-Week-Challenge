@@ -13,9 +13,6 @@ project(mc-one-week)
 file(GLOB_RECURSE SOURCES Source/*.cpp)
 add_executable(mc-one-week ${SOURCES})
 
-#Include directory
-include_directories(src/Dependencies/)
-
 #Add libraries
 #SFML
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
@@ -31,9 +28,8 @@ add_library("glad" "${GLAD_DIR}/glad.c")
 target_include_directories("glad" PRIVATE "${GLAD_DIR}")
 target_include_directories(${PROJECT_NAME} PUBLIC ${GLM_INCLUDE_DIRS} PRIVATE "${GLAD_DIR}")
 target_link_libraries(${PROJECT_NAME} "glad" "${CMAKE_DL_LIBS}")
+
+
 find_package(Threads)
 
 target_link_libraries(mc-one-week Threads::Threads ${EXECUTABLE_NAME} ${SFML_LIBRARIES}) 
-
-#Copy resources
-file(COPY ${CMAKE_SOURCE_DIR}/Res DESTINATION ${CMAKE_BINARY_DIR})
