@@ -208,34 +208,34 @@ float speed = 0.2f;
 
 void Player::keyboardInput(Keyboard& keyboard)
 {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+    if (keyboard.isKeyDown(sf::Keyboard::W))
     {
         float s = speed;
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) s *= 5;
         m_acceleration.x += -glm::cos(glm::radians(rotation.y + 90)) * s;
         m_acceleration.z += -glm::sin(glm::radians(rotation.y + 90)) * s;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+    if (keyboard.isKeyDown(sf::Keyboard::S))
     {
         m_acceleration.x += glm::cos(glm::radians(rotation.y + 90)) * speed;
         m_acceleration.z += glm::sin(glm::radians(rotation.y + 90)) * speed;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+    if (keyboard.isKeyDown(sf::Keyboard::A))
     {
         m_acceleration.x += -glm::cos(glm::radians(rotation.y)) * speed;
         m_acceleration.z += -glm::sin(glm::radians(rotation.y)) * speed;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    if (keyboard.isKeyDown(sf::Keyboard::D))
     {
         m_acceleration.x += glm::cos(glm::radians(rotation.y)) * speed;
         m_acceleration.z += glm::sin(glm::radians(rotation.y)) * speed;
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    if (keyboard.isKeyDown(sf::Keyboard::Space))
     {
         jump();
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && m_isFlying)
+    else if (keyboard.isKeyDown(sf::Keyboard::LShift) && m_isFlying)
     {
         m_acceleration.y -= speed * 3;
     }
