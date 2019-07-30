@@ -223,8 +223,8 @@ VectorXZ World::getBlockXZ(int x, int z)
 {
     return
     {
-        x % CHUNK_SIZE,
-        z % CHUNK_SIZE
+        (x % CHUNK_SIZE + CHUNK_SIZE) % CHUNK_SIZE,
+        (z % CHUNK_SIZE + CHUNK_SIZE) % CHUNK_SIZE
     };
 }
 
@@ -295,4 +295,3 @@ void World::setSpawnPoint()
     std::cout   << "Spawn found! Attempts: "    << attempts
                 << " Time Taken: "              << timer.getElapsedTime().asSeconds() << " seconds\n";
 }
-
