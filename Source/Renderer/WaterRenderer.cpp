@@ -1,21 +1,20 @@
 #include "WaterRenderer.h"
 
-#include "../World/Chunk/ChunkMesh.h"
-#include "../World/Block/BlockDatabase.h"
 #include "../Application.h"
 #include "../Camera.h"
+#include "../World/Block/BlockDatabase.h"
+#include "../World/Chunk/ChunkMesh.h"
 
 #include <iostream>
 
-void WaterRenderer::add(const ChunkMesh& mesh)
+void WaterRenderer::add(const ChunkMesh &mesh)
 {
     m_chunks.push_back(&mesh.getModel().getRenderInfo());
 }
 
-void WaterRenderer::render(const Camera& camera)
+void WaterRenderer::render(const Camera &camera)
 {
-    if (m_chunks.empty())
-    {
+    if (m_chunks.empty()) {
         return;
     }
 
@@ -26,8 +25,7 @@ void WaterRenderer::render(const Camera& camera)
     m_shader.loadProjectionViewMatrix(camera.getProjectionViewMatrix());
     m_shader.loadTime(g_timeElapsed);
 
-    for (auto mesh : m_chunks)
-    {
+    for (auto mesh : m_chunks) {
         GL::bindVAO(mesh->vao);
         GL::drawElements(mesh->indicesCount);
     }

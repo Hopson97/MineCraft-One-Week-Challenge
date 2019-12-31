@@ -1,6 +1,6 @@
 #include "Controller.h"
 
-//WIP
+// WIP
 /*
 glm::vec3 Controller::translateInput()
 {

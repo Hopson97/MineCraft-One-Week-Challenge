@@ -3,12 +3,12 @@
 
 #include "BasicShader.h"
 
-class ChunkShader : public BasicShader
-{
-    public:
-        ChunkShader();
-    private:
-        void getUniforms() override;
+class ChunkShader : public BasicShader {
+  public:
+    ChunkShader();
+
+  private:
+    void getUniforms() override;
 };
 
 #endif // CHUNKSHADER_H_INCLUDED

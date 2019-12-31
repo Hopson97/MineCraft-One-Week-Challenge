@@ -1,8 +1,7 @@
 #ifndef RENDERINFO_H_INCLUDED
 #define RENDERINFO_H_INCLUDED
 
-struct RenderInfo
-{
+struct RenderInfo {
     GLuint vao = 0;
     GLuint indicesCount = 0;
 

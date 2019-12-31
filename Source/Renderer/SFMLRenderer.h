@@ -4,15 +4,14 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
-class SFMLRenderer
-{
-    public:
-        void add(const sf::Drawable& drawable);
+class SFMLRenderer {
+  public:
+    void add(const sf::Drawable &drawable);
 
-        void render(sf::Window& window);
+    void render(sf::Window &window);
 
-    private:
-        std::vector<const sf::Drawable*> m_draws;
+  private:
+    std::vector<const sf::Drawable *> m_draws;
 };
 
 #endif // SFMLRENDERER_H_INCLUDED

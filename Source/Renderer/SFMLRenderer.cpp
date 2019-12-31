@@ -2,13 +2,12 @@
 
 #include "../glad/glad.h"
 
-
-void SFMLRenderer::add(const sf::Drawable& drawable)
+void SFMLRenderer::add(const sf::Drawable &drawable)
 {
     m_draws.push_back(&drawable);
 }
 
-void SFMLRenderer::render(sf::Window& window)
+void SFMLRenderer::render(sf::Window &window)
 {
     /*
     if (m_draws.empty())

@@ -5,7 +5,7 @@
 unsigned int g_X;
 unsigned int g_Y;
 
-Context::Context(const Config& config)
+Context::Context(const Config &config)
 {
     sf::ContextSettings settings;
     settings.antialiasingLevel = 0;
@@ -13,21 +13,20 @@ Context::Context(const Config& config)
     settings.minorVersion = 3;
     settings.depthBits = 24;
     settings.stencilBits = 8;
-    //settings.attributeFlags = sf::ContextSettings::Core;
-    //This is no longer necessary due to the Mac Support update.
-    
-    if(config.isFullscreen)
-    {
-        window.create(sf::VideoMode::getDesktopMode(), "MineCraft Week", sf::Style::Fullscreen, settings);
+    // settings.attributeFlags = sf::ContextSettings::Core;
+    // This is no longer necessary due to the Mac Support update.
+
+    if (config.isFullscreen) {
+        window.create(sf::VideoMode::getDesktopMode(), "MineCraft Week",
+                      sf::Style::Fullscreen, settings);
     }
-    else
-    {
+    else {
         sf::VideoMode winMode(config.windowX, config.windowY);
         window.create(winMode, "MineCraft Week", sf::Style::Close, settings);
     }
 
     if (!gladLoadGL()) {
-        
+
         exit(-1);
     }
 

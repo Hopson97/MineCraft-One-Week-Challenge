@@ -1,54 +1,58 @@
 #ifndef APPLICATION_H_INCLUDED
 #define APPLICATION_H_INCLUDED
 
-#include <vector>
 #include <memory>
+#include <vector>
 
-#include "States/StateBase.h"
 #include "Renderer/RenderMaster.h"
+#include "States/StateBase.h"
 
-#include "Context.h"
 #include "Camera.h"
+#include "Context.h"
 
 float extern g_timeElapsed;
 
-class Application
-{
-    
-    public:
-        Application(const Config& config);
+class Application {
 
-        void runLoop();
+  public:
+    Application(const Config &config);
 
-        template<typename T, typename... Args>
-        void pushState(Args&&... args)
-        {
-            m_states.push_back(std::make_unique<T>(std::forward<Args>(args)...));
-            auto& s = m_states.back();
-            s->onOpen();
-        }
+    void runLoop();
 
-        void popState();
+    template <typename T, typename... Args> void pushState(Args &&... args)
+    {
+        m_states.push_back(std::make_unique<T>(std::forward<Args>(args)...));
+        auto &s = m_states.back();
+        s->onOpen();
+    }
 
-        Camera& getCamera() { return m_camera; }
+    void popState();
 
-        const sf::Window& getWindow() const { return m_context.window; }
+    Camera &getCamera()
+    {
+        return m_camera;
+    }
 
-        void turnOffMouse();
-        void turnOnMouse ();
+    const sf::Window &getWindow() const
+    {
+        return m_context.window;
+    }
 
-    private:
-        void handleEvents();
+    void turnOffMouse();
+    void turnOnMouse();
 
-        std::vector<std::unique_ptr<StateBase>> m_states;
+  private:
+    void handleEvents();
 
-        Context m_context;
-        RenderMaster m_masterRenderer;
-        Camera m_camera;
+    std::vector<std::unique_ptr<StateBase>> m_states;
 
-        const Config& m_config;
+    Context m_context;
+    RenderMaster m_masterRenderer;
+    Camera m_camera;
 
-        bool m_isPopState = false;
+    const Config &m_config;
+
+    bool m_isPopState = false;
 };
 
 #endif // APPLICATION_H_INCLUDED

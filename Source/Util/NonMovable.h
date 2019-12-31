@@ -1,15 +1,14 @@
 #ifndef NON_MOVE
 #define NON_MOVE
 
-class NonMovable
-{
-    public:
-        NonMovable(NonMovable&&) = delete;
+class NonMovable {
+  public:
+    NonMovable(NonMovable &&) = delete;
 
-        NonMovable& operator=(NonMovable&&) = delete;
+    NonMovable &operator=(NonMovable &&) = delete;
 
-    protected:
-        NonMovable() = default;
+  protected:
+    NonMovable() = default;
 };
 
 #endif // NON_MOVE

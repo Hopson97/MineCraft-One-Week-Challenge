@@ -3,21 +3,20 @@
 
 #include "glm.h"
 
-class Ray
-{
-    public:
-        Ray(const glm::vec3& position, const glm::vec3& direction) ;
+class Ray {
+  public:
+    Ray(const glm::vec3 &position, const glm::vec3 &direction);
 
-        void step(float scale) ;
+    void step(float scale);
 
-        const glm::vec3& getEnd() const ;
+    const glm::vec3 &getEnd() const;
 
-        float getLength() const ;
+    float getLength() const;
 
-    private:
-        glm::vec3 m_rayStart;
-        glm::vec3 m_rayEnd;
-        glm::vec3 m_direction;
+  private:
+    glm::vec3 m_rayStart;
+    glm::vec3 m_rayEnd;
+    glm::vec3 m_direction;
 };
 
 #endif // RAY_H_INCLUDED

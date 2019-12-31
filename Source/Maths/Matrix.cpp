@@ -5,7 +5,7 @@
 
 #include "../Config.h"
 
-glm::mat4 makeModelMatrix(const Entity& entity)
+glm::mat4 makeModelMatrix(const Entity &entity)
 {
     glm::mat4 matrix;
 
@@ -18,7 +18,7 @@ glm::mat4 makeModelMatrix(const Entity& entity)
     return matrix;
 }
 
-glm::mat4 makeViewMatrix(const Camera& camera)
+glm::mat4 makeViewMatrix(const Camera &camera)
 {
     glm::mat4 matrix(1.f);
 
@@ -31,7 +31,7 @@ glm::mat4 makeViewMatrix(const Camera& camera)
     return matrix;
 }
 
-glm::mat4 makeProjectionMatrix(const Config& config)
+glm::mat4 makeProjectionMatrix(const Config &config)
 {
     float x = (float)config.windowX;
     float y = (float)config.windowY;
