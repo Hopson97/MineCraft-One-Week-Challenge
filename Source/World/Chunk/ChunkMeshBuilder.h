@@ -1,7 +1,8 @@
 #ifndef CHUNKMESHBUILDER_H_INCLUDED
 #define CHUNKMESHBUILDER_H_INCLUDED
 
-#include "../../glad/glad.h"
+#include <glad/glad.h>
+
 #include <SFML/Graphics.hpp>
 #include <vector>
 

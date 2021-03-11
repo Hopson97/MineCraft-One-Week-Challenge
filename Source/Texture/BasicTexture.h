@@ -1,7 +1,8 @@
 #ifndef TEXTURE_H_INCLUDED
 #define TEXTURE_H_INCLUDED
 
-#include "../glad/glad.h"
+#include <glad/glad.h>
+
 #include <SFML/Graphics.hpp>
 #include <string>
 
