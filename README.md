@@ -31,7 +31,7 @@ Install macports from https://www.macports.org
 
 `sudo apt-get install libsfml-dev libglm-dev`
 
-## Compile Source and Runnimg
+## Compile Source and Running
 
 ### Linux
 
@@ -158,4 +158,5 @@ Mostly optimizations, such as view-frustum culling and making the mesh building 
 
 Focus on improving how it looks, eg adding directional lighting
 
-Also implemented concurency :)
+Also implemented concurrency :)
+
