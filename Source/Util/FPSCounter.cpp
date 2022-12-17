@@ -37,5 +37,4 @@ void FPSCounter::update()
 void FPSCounter::draw(RenderMaster &renderer)
 {
     m_text.setString("FPS: " + std::to_string(m_fps));
-    renderer.drawSFML(m_text);
 }
