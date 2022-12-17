@@ -270,9 +270,7 @@ void World::setSpawnPoint()
             std::unique_lock<std::mutex> lock(m_mainMutex);
             m_chunkManager.loadChunk(x, z);
         }
-        // if (isMeshMade)
-        //   break;
-    }
+    };
 
     std::cout << "Spawn found! Attempts: " << attempts
               << " Time Taken: " << timer.getElapsedTime().asSeconds()
