@@ -21,6 +21,10 @@ void Application::runLoop()
 
     sf::Time m;
 
+    // Grab the context window and force it to 0,0
+    // (Arch/ArcoLinux hates window positioning)
+    m_context.window.setPosition(sf::Vector2i(0,0));
+
     while (m_context.window.isOpen() && !m_states.empty()) {
         auto deltaTime = dtTimer.restart();
         auto &state = *m_states.back();
