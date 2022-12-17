@@ -8,11 +8,6 @@
 #include "../World/Chunk/ChunkMesh.h"
 #include "../World/Chunk/ChunkSection.h"
 
-void RenderMaster::drawSFML(const sf::Drawable &drawable)
-{
-    // m_sfmlRenderer.add(drawable);
-}
-
 void RenderMaster::drawChunk(const ChunkSection &chunk)
 {
     const auto &solidMesh = chunk.getMeshes().solidMesh;
@@ -50,8 +45,6 @@ void RenderMaster::finishRender(sf::Window &window, const Camera &camera)
         m_skyboxRenderer.render(camera);
         m_drawBox = false;
     }
-
-    // m_sfmlRenderer  .render (window);
 
     window.display();
 }

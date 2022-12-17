@@ -15,7 +15,6 @@ class ChunkSection;
 
 class RenderMaster {
   public:
-    void drawSFML(const sf::Drawable &drawable);
     void drawChunk(const ChunkSection &chunk);
     void drawSky();
 
@@ -29,7 +28,6 @@ class RenderMaster {
 
     // Detail
     SkyboxRenderer m_skyboxRenderer;
-    // SFMLRenderer    m_sfmlRenderer;
 
     bool m_drawBox = false;
 };
