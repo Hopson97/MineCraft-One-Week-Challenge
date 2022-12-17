@@ -259,7 +259,7 @@ void Player::draw(RenderMaster &master)
         }
         t.setString((m_items[i].getMaterial().name) + " " +
                     std::to_string(m_items[i].getNumInStack()) + " ");
-        master.drawSFML(t);
+        // master.drawSFML(t);
     }
     std::ostringstream stream;
     stream << " X: " << position.x << " Y: " << position.y
@@ -268,7 +268,7 @@ void Player::draw(RenderMaster &master)
 
     m_posPrint.setString(stream.str());
 
-    master.drawSFML(m_posPrint);
+    // master.drawSFML(m_posPrint);
 }
 
 void Player::jump()
