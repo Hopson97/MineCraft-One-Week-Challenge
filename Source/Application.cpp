@@ -22,7 +22,7 @@ void Application::runLoop()
     sf::Time m;
 
     // Grab the context window and force it to 0,0
-    // (Arch/ArcoLinux hates window positioning)
+    // This can be a problem on some distros like Arch
     m_context.window.setPosition(sf::Vector2i(0,0));
 
     while (m_context.window.isOpen() && !m_states.empty()) {
