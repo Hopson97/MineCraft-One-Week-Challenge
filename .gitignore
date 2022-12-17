@@ -16,6 +16,7 @@ Release/
 # Builds
 bin/
 Makefile
+build/
 
 # Manually Added
 CMakeFiles/
