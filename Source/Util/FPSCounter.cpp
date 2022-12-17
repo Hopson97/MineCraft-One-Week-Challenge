@@ -6,6 +6,8 @@
 
 FPSCounter::FPSCounter()
 {
+    debugging = false;
+
     m_text.move(10, 10);
     m_text.setOutlineColor(sf::Color::Black);
     m_text.setOutlineThickness(2);
@@ -23,7 +25,12 @@ void FPSCounter::update()
         m_fps = m_frameCount / m_fpsTimer.restart().asSeconds();
         m_frameCount = 0;
         m_delayTimer.restart();
-        std::cout << m_fps << '\n';
+        
+        // Only show this output in debug mode
+        if(debugging)
+        {
+            std::cout << m_fps << '\n';
+        }
     }
 }
 
