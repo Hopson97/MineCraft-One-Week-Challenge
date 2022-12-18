@@ -10,6 +10,7 @@ struct NoiseParameters {
     double roughness;
 };
 
+/// @brief Perlin noise generator used in construction of chunks and chunk blocks.
 class NoiseGenerator {
   public:
     NoiseGenerator(int seed);

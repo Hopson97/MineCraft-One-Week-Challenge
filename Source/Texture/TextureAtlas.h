@@ -3,6 +3,7 @@
 
 #include "BasicTexture.h"
 
+/// @brief Texture atlas that pulls texture data from existing files and maps them appropraitely.
 class TextureAtlas : public BasicTexture {
   public:
     TextureAtlas(const std::string &textureFileName);

@@ -4,6 +4,7 @@
 #include <glad/glad.h>
 #include <vector>
 
+/// @brief Mesh struct used for the purpose of constructing block meshes.
 struct Mesh {
     std::vector<GLfloat> vertexPositions;
     std::vector<GLfloat> textureCoords;

@@ -4,6 +4,9 @@
 #include <algorithm>
 #include <array>
 
+/// @brief Array template used in mathematical calculations.
+/// @tparam T 
+/// @tparam WIDTH 
 template <typename T, int WIDTH> class Array2D {
     using Array = std::array<T, WIDTH * WIDTH>;
 

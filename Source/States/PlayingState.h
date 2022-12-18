@@ -9,6 +9,7 @@
 #include "../World/Chunk/Chunk.h"
 #include "../World/World.h"
 
+/// @brief Active game playing state, not associated with game menus.
 class StatePlaying : public StateBase {
   public:
     StatePlaying(Application &app, const Config &config);

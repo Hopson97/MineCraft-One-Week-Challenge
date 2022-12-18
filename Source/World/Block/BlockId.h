@@ -5,6 +5,7 @@
 
 using Block_t = uint8_t;
 
+/// @brief Known block ID types used in game.
 enum class BlockId : Block_t {
     Air = 0,
     Grass = 1,

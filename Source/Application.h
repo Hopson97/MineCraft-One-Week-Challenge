@@ -12,6 +12,7 @@
 
 float extern g_timeElapsed;
 
+/// @brief The main game application itself.
 class Application {
 
   public:

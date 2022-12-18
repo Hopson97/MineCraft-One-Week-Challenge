@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
+/// @brief A keyboard related subclass that determines if a key remains pressed.
 class ToggleKey {
   public:
     ToggleKey(sf::Keyboard::Key);

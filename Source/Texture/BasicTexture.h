@@ -8,6 +8,7 @@
 
 #include "../Util/NonCopyable.h"
 
+/// @brief Standard texture that will be mapped to objects.
 class BasicTexture : public NonCopyable {
   public:
     BasicTexture() = default;

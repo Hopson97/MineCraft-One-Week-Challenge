@@ -6,6 +6,7 @@
 
 #include "Singleton.h"
 
+/// @brief Singleton class that increases randomness (such as with seeds)
 class RandomSingleton : public Singleton {
   public:
     static RandomSingleton &get();

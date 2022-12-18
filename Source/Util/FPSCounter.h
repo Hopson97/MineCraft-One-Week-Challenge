@@ -5,6 +5,7 @@
 
 class RenderMaster;
 
+/// @brief Generally obsolete FPS counter associated with SFML.
 class FPSCounter {
   public:
     FPSCounter();

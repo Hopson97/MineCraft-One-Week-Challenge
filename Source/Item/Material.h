@@ -6,6 +6,7 @@
 
 #include "../Util/NonCopyable.h"
 
+/// @brief Determines case-by-case properties and behaviors of known block types.
 struct Material : public NonCopyable {
     enum ID {
         Nothing,

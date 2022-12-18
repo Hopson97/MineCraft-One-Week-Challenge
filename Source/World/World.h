@@ -21,6 +21,7 @@ class Player;
 
 struct Entity;
 
+/// @brief Massive class designed to hold multiple chunks, the player, and most game aspects.
 class World : public NonCopyable {
   public:
     World(const Camera &camera, const Config &config, Player &player);

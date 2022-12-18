@@ -11,6 +11,7 @@
 
 #include "../../Texture/TextureAtlas.h"
 
+/// @brief Singleton class that determines status and ID of blocks as a whole.
 class BlockDatabase : public Singleton {
   public:
     static BlockDatabase &get();

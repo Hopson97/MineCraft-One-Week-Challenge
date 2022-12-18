@@ -13,6 +13,7 @@ class Keyboard;
 class World;
 class RenderMaster;
 
+/// @brief Player character, including player movements and world interactions.
 class Player : public Entity {
   public:
     Player();

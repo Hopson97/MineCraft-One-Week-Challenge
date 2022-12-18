@@ -10,6 +10,7 @@ class RenderMaster;
 class Camera;
 class TerrainGenerator;
 
+/// @brief A chunk, in other words, a large arrangement of blocks.
 class Chunk : public IChunk {
   public:
     Chunk() = default;

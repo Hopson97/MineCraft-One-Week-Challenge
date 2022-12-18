@@ -23,6 +23,7 @@ void Application::runLoop()
 
     // Grab the context window and force it to 0,0
     // This can be a problem on some distros like Arch
+    // Declared outside of main run loop
     m_context.window.setPosition(sf::Vector2i(0,0));
 
     while (m_context.window.isOpen() && !m_states.empty()) {

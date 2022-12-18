@@ -13,6 +13,7 @@
 class Camera;
 class ChunkSection;
 
+/// @brief Master rendering class that handles the sum of drawn in-game objects.
 class RenderMaster {
   public:
     void drawChunk(const ChunkSection &chunk);

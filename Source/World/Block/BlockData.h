@@ -5,17 +5,20 @@
 #include "BlockId.h"
 #include <SFML/Graphics.hpp>
 
+/// @brief Allocates meshes to cubes and non-cube entities.
 enum class BlockMeshType {
     Cube = 0,
     X = 1,
 };
 
+/// @brief Allocates shader behavior to groups of blocks.
 enum class BlockShaderType {
     Chunk = 0,
     Liquid = 1,
     Flora = 2,
 };
 
+/// @brief Struct designed to hold geometric data for each individual block.
 struct BlockDataHolder : public NonCopyable {
     BlockId id;
     sf::Vector2i texTopCoord;

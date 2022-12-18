@@ -6,6 +6,7 @@
 class RenderMaster;
 class Application;
 
+/// @brief Base state that determines how other states should normally behave.
 class StateBase {
   public:
     StateBase(Application &app)

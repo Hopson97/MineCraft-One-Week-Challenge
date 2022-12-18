@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
+/// @brief Deprecated SFML based rendering class.
 class SFMLRenderer {
   public:
     void add(const sf::Drawable &drawable);
