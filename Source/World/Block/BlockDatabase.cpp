@@ -1,5 +1,6 @@
 #include "BlockDatabase.h"
 
+// Block Database initializes to first pack, not the second.
 BlockDatabase::BlockDatabase()
     : textureAtlas("DefaultPack")
 {
