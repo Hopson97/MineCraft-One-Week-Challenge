@@ -22,7 +22,7 @@ Player::Player()
     , m_num3(sf::Keyboard::Num3)
     , m_num4(sf::Keyboard::Num4)
     , m_num5(sf::Keyboard::Num5)
-    , m_slow(sf::Keyboard::RShift)
+    , m_slow(sf::Keyboard::LShift)
     , m_acceleration(glm::vec3(0.f))
 
 {
@@ -281,6 +281,8 @@ void Player::jump()
 {
     if (!m_isFlying) {
         if (m_isOnGround) {
+            // Play 'jump' sound
+
             m_isOnGround = false;
             m_acceleration.y += speed * 50;
         }

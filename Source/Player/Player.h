@@ -2,6 +2,7 @@
 #define PLAYER_H_INCLUDED
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <vector>
 
 #include "../Entity.h"
