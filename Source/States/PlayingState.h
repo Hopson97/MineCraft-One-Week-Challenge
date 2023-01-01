@@ -10,9 +10,9 @@
 #include "../World/World.h"
 
 /// @brief Active game playing state, not associated with game menus.
-class StatePlaying : public StateBase {
+class StatePlay : public StateBase {
   public:
-    StatePlaying(Application &app, const Config &config);
+    StatePlay(Application &app, const Config &config);
 
     void handleEvent(sf::Event e) override;
     void handleInput() override;

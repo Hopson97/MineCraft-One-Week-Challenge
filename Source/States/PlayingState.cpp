@@ -7,19 +7,19 @@
 
 #include <iostream>
 
-StatePlaying::StatePlaying(Application &app, const Config &config)
+StatePlay::StatePlay(Application &app, const Config &config)
     : StateBase(app)
     , m_world(app.getCamera(), config, m_player)
 {
     app.getCamera().hookEntity(m_player);
 }
 
-void StatePlaying::handleEvent(sf::Event e)
+void StatePlay::handleEvent(sf::Event e)
 {
     m_keyboard.update(e);
 }
 
-void StatePlaying::handleInput()
+void StatePlay::handleInput()
 {
     m_player.handleInput(m_pApplication->getWindow(), m_keyboard);
 
@@ -57,7 +57,7 @@ void StatePlaying::handleInput()
     }
 }
 
-void StatePlaying::update(float deltaTime)
+void StatePlay::update(float deltaTime)
 {
     if (m_player.position.x < 0)
         m_player.position.x = 0;
@@ -69,7 +69,7 @@ void StatePlaying::update(float deltaTime)
     m_world.update(m_pApplication->getCamera());
 }
 
-void StatePlaying::render(RenderMaster &renderer)
+void StatePlay::render(RenderMaster &renderer)
 {
     static sf::Clock dt;
 
@@ -88,7 +88,7 @@ void StatePlaying::render(RenderMaster &renderer)
     m_world.renderWorld(renderer, m_pApplication->getCamera());
 }
 
-void StatePlaying::onOpen()
+void StatePlay::onOpen()
 {
     m_pApplication->turnOffMouse();
 }
