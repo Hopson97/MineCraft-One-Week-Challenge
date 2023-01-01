@@ -7,11 +7,12 @@
 
 struct AABB;
 
+/// @brief Vertex based construct, usually flat.
 struct Plane {
     float distanceToPoint(const glm::vec3 &point) const;
 
     float distanceToOrigin;
-    glm::vec3 normal;
+    glm::vec3 normal; // Vector3 normals
 };
 
 class ViewFrustum {
