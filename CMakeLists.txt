@@ -3,6 +3,8 @@ cmake_minimum_required(VERSION 3.10)
 #Set up project
 project(mc-one-week VERSION 1.0)
 
+configure_file(config.txt ${CMAKE_BINARY_DIR}/config.txt COPYONLY)
+
 #Set executable
 add_executable(mc-one-week
     Source/Item/Material.cpp
