@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 
+// This base class for all States, used more as a template than a functional class.
+
 class RenderMaster;
 class Application;
 
