@@ -12,6 +12,11 @@ float smoothstep(float edge0, float edge1, float x)
     return (edge0 * x) + (edge1 * (1 - x));
 }
 
+/// @brief Clamp function that regulates values between limits.
+/// @param x 
+/// @param lowerlimit 
+/// @param upperlimit 
+/// @return x
 float clamp(float x, float lowerlimit, float upperlimit)
 {
     if (x < lowerlimit)
