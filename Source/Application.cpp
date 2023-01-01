@@ -14,6 +14,7 @@ Application::Application(const Config &config)
 
 float g_timeElapsed = 0;
 
+/// @brief Game loop utilizing a mixture of SFML events and GL rendering.
 void Application::runLoop()
 {
     sf::Clock dtTimer;
@@ -49,6 +50,7 @@ void Application::runLoop()
     }
 }
 
+/// @brief Handles window events, especially window polling and keyboard inputs.
 void Application::handleEvents()
 {
     sf::Event e;
@@ -76,16 +78,19 @@ void Application::handleEvents()
     }
 }
 
+/// @brief Tell the program stack to pop off the state.
 void Application::popState()
 {
     m_isPopState = true;
 }
 
+/// @brief Makes the mouse invisible, doesn't actually turn off the mouse.
 void Application::turnOffMouse()
 {
     m_context.window.setMouseCursorVisible(false);
 }
 
+/// @brief Makes the mouse visible again.
 void Application::turnOnMouse()
 {
     m_context.window.setMouseCursorVisible(true);
