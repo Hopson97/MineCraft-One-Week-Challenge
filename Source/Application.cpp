@@ -9,7 +9,7 @@ Application::Application(const Config &config)
     , m_config(config)
 {
     BlockDatabase::get();
-    pushState<StatePlaying>(*this, config);
+    pushState<StatePlay>(*this, config);
 }
 
 float g_timeElapsed = 0;
