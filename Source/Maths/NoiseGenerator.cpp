@@ -19,6 +19,9 @@ void NoiseGenerator::setParameters(const NoiseParameters &params) noexcept
     m_noiseParameters = params;
 }
 
+/// @brief Gets Noise through n which acts as a seed number.
+/// @param n 
+/// @return 
 double NoiseGenerator::getNoise(int n) const noexcept
 {
     n += m_seed;
@@ -28,6 +31,10 @@ double NoiseGenerator::getNoise(int n) const noexcept
     return 1.0 - ((double)newN / 1073741824.0);
 }
 
+/// @brief Overload of getNoise that takes doubles instead of int n.
+/// @param x 
+/// @param z 
+/// @return 
 double NoiseGenerator::getNoise(double x, double z) const noexcept
 {
     return getNoise(x + z * 57.0);
@@ -66,6 +73,12 @@ double NoiseGenerator::noise(double x, double z) const noexcept
     return rec3;
 }
 
+/// @brief Gets the height of the chunk for the sake of Noise Generation.
+/// @param x 
+/// @param z 
+/// @param chunkX 
+/// @param chunkZ 
+/// @return val
 double NoiseGenerator::getHeight(int x, int z, int chunkX, int chunkZ) const
     noexcept
 {
@@ -96,5 +109,5 @@ double NoiseGenerator::getHeight(int x, int z, int chunkX, int chunkZ) const
     auto val = (((totalValue / 2.1) + 1.2) * m_noiseParameters.amplitude) +
                m_noiseParameters.heightOffset;
 
-    return val > 0 ? val : 1;
+    return val > 0 ? val : 1; // Compare if value is greater than 0
 }
