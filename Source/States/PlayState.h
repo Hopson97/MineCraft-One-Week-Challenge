@@ -1,5 +1,5 @@
-#ifndef PLAYINGSTATE_H_INCLUDED
-#define PLAYINGSTATE_H_INCLUDED
+#ifndef PLAYSTATE_H_INCLUDED
+#define PLAYSTATE_H_INCLUDED
 
 #include "../Player/Player.h"
 #include "StateBase.h"
@@ -31,4 +31,4 @@ class StatePlay : public StateBase {
     FPSCounter m_fpsCounter;
 };
 
-#endif // PLAYINGSTATE_H_INCLUDED
+#endif // PlayState_H_INCLUDED
