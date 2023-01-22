@@ -17,6 +17,7 @@
 
 class Chunk;
 
+/// @brief Generates chunks based on perlin noise and recognizable MC parameters.
 class ClassicOverWorldGenerator : public TerrainGenerator {
   public:
     ClassicOverWorldGenerator();
