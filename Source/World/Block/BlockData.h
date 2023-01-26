@@ -18,7 +18,7 @@ enum class BlockShaderType {
     Flora = 2,
 };
 
-/// @brief Struct designed to hold geometric data for each individual block.
+/// @brief Struct designed to hold geometric and tangibility data for each individual block.
 struct BlockDataHolder : public NonCopyable {
     BlockId id;
     sf::Vector2i texTopCoord;
