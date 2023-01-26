@@ -26,6 +26,7 @@ void StatePlay::handleInput()
     static sf::Clock timer;
     glm::vec3 lastPosition;
 
+    // Ray is cast as player's 'vision'
     for (Ray ray({m_player.position.x, m_player.position.y + 0.6f,
                   m_player.position.z},
                  m_player.rotation); // Corrected for camera offset
@@ -41,12 +42,14 @@ void StatePlay::handleInput()
             if (timer.getElapsedTime().asSeconds() > 0.2) {
                 if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                     timer.restart();
+                    // The player "digs" the block up
                     m_world.addEvent<PlayerDigEvent>(sf::Mouse::Left,
                                                      ray.getEnd(), m_player);
                     break;
                 }
                 else if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
                     timer.restart();
+                    // Block is placed by player
                     m_world.addEvent<PlayerDigEvent>(sf::Mouse::Right,
                                                      lastPosition, m_player);
                     break;
