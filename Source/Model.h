@@ -7,6 +7,7 @@
 
 #include "Renderer/RenderInfo.h"
 
+/// @brief Models using mesh data to spawn entities for the game world.
 class Model : public NonCopyable {
   public:
     Model() = default;
