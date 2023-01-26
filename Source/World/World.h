@@ -40,7 +40,7 @@ class World : public NonCopyable {
     static VectorXZ getBlockXZ(int x, int z);
     static VectorXZ getChunkXZ(int x, int z);
 
-    void collisionTest(Entity &entity);
+    // void collisionTest(Entity &entity);
 
     template <typename T, typename... Args> void addEvent(Args &&... args)
     {
@@ -59,6 +59,9 @@ class World : public NonCopyable {
 
     std::atomic<bool> m_isRunning{true};
     std::vector<std::thread> m_chunkLoadThreads;
+
+    // Mutex classes invoked to protect data from shared threads
+
     std::mutex m_mainMutex;
     std::mutex m_genMutex;
 
