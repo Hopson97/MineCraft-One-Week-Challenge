@@ -5,6 +5,20 @@ project(mc-one-week VERSION 1.0)
 
 configure_file(config.txt ${CMAKE_BINARY_DIR}/config.txt COPYONLY)
 
+# Copy the resource files to the new binary dir
+add_custom_target(copy_resources ALL
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${PROJECT_SOURCE_DIR}/Res
+    ${PROJECT_BINARY_DIR}/Res
+    COMMENT "Copying game resources into Res folder")
+
+
+add_custom_target(copy_shaders ALL
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${PROJECT_SOURCE_DIR}/Shaders
+    ${PROJECT_BINARY_DIR}/Shaders
+    COMMENT "Copying shaders into Shaders folder")
+
 #Set executable
 add_executable(mc-one-week
     Source/Item/Material.cpp
