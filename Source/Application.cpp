@@ -19,19 +19,28 @@ void Application::runLoop()
 {
     sf::Clock dtTimer;
     sf::Clock dt;
+    sf::Vector2i win_center;
 
     sf::Time m;
 
     // Grab the context window and force it to a certain position.
     // This prevents the window from sticking to the bottom of the visible screen like it does
     // in some Linux distros. Especially Arch.
-    
-    sf::Vector2i pos;
-    // Aligns roughly to center of screen, or should
-    pos.x = (sf::VideoMode::getDesktopMode().width / 3.5);
-    pos.y = (sf::VideoMode::getDesktopMode().height / 3.5);
 
-    m_context.window.setPosition(pos);
+    // If the window is small, use these parameters
+    if(m_context.window.getSize().x <= 640)
+    {
+        win_center = {
+            sf::VideoMode::getDesktopMode().width / 3.5,
+            sf::VideoMode::getDesktopMode().height / 4
+        };
+    }
+    else // Else force it to the upper-left
+    {
+        win_center = { 0,0 };
+    }
+
+    m_context.window.setPosition(win_center);
 
     while (m_context.window.isOpen() && !m_states.empty()) {
         auto deltaTime = dtTimer.restart();
