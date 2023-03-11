@@ -39,8 +39,49 @@ void loadConfig(Config &config)
     std::ifstream configFile("config.txt");
     std::string key;
 
+    // If the config file is missing or "bad"
+    if(!configFile.good())
+    {
+        std::cout << "Configuration file invalid,\n";
+        std::cout << "writing 'new' configuration." << "\n";
+        std::cout << "\n";
+
+        std::ofstream outfile("config.txt");
+
+        if(outfile.is_open())
+        {
+            outfile << "renderdistance " << "8";
+            outfile << "fullscreen " << "0";
+            outfile << "windowsize " << "1600 " << "900";
+            outfile << "fov " << "105";
+
+            outfile.close();
+            configFile.close(); // Close so it can be reopened safely.
+        }
+
+        std::cout << "\n";
+        std::cout << "New configuration file created." << "\n";
+    }
+
     try
     {
+        // Open 'new' config file.
+        if(!configFile.is_open())
+        {
+            configFile.open("config.txt");
+        }
+
+        // If the file is still creating errors
+        if(configFile.fail())
+        {
+            std::cout << "Error: The program failed to load the configuration files." << "\n";
+            std::cout << "To understand why this error may have occured,\n";
+            std::cout << "please examine your 'config.txt' file. Thank you." << "\n";
+
+            // Because this is thrown before runtime, no memory needs to be freed.
+            throw "Unable to load configuration file.";
+        }
+
         if (configFile.is_open())
         {
             while (configFile >> key)
@@ -66,23 +107,11 @@ void loadConfig(Config &config)
                 }
             }
         }
-        else
-        {
-            std::cout << "Error: The program requires a configuration file to operate properly." << "\n";
-            std::cout << "Please find or clone the relevant config.txt file!" << "\n";
-            std::cout << "Terminating sequence..." << "\n";
-            throw "Unable to load configuration file. This process cannot continue.";
-        }
     }
     catch(const std::exception& e)
     {
         std::cerr << e.what();
     }
-
-    //else {
-
-        //std::cerr << "Error: Could not find config.txt file! Using defaults.\n";
-    //}
 }
 
 void displayInfo()
