@@ -6,7 +6,6 @@
 #include "../Config.h"
 #include "ChunkRenderer.h"
 #include "FloraRenderer.h"
-#include "SFMLRenderer.h"
 #include "SkyboxRenderer.h"
 #include "WaterRenderer.h"
 
