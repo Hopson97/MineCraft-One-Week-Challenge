@@ -46,7 +46,6 @@ add_executable(mc-one-week
     Source/World/Chunk/ChunkSection.cpp
     Source/World/Chunk/ChunkMeshBuilder.cpp
     Source/States/PlayState.cpp
-    Source/Physics/AABB.cpp
     Source/Player/Player.cpp
     Source/Maths/Ray.cpp
     Source/Maths/Frustum.cpp
