@@ -281,7 +281,6 @@ void Player::jump()
 {
     if (!m_isFlying) {
         if (m_isOnGround) {
-            // Play 'jump' sound
 
             m_isOnGround = false;
             m_acceleration.y += speed * 50;
