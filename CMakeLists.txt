@@ -78,7 +78,6 @@ add_executable(mc-one-week
     Source/Renderer/WaterRenderer.cpp
     Source/Renderer/ChunkRenderer.cpp
     Source/Renderer/SkyboxRenderer.cpp
-    Source/Renderer/SFMLRenderer.cpp
     Source/Renderer/FloraRenderer.cpp
     Source/Model.cpp
 )
