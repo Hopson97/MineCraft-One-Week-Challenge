@@ -3,6 +3,7 @@
 
 #include "Material.h"
 
+/// @brief Determines if a player character is holding blocks or items, also determines placement behavior.
 class ItemStack {
   public:
     ItemStack(const Material &material, int amount);

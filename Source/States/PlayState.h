@@ -1,5 +1,5 @@
-#ifndef PLAYINGSTATE_H_INCLUDED
-#define PLAYINGSTATE_H_INCLUDED
+#ifndef PLAYSTATE_H_INCLUDED
+#define PLAYSTATE_H_INCLUDED
 
 #include "../Player/Player.h"
 #include "StateBase.h"
@@ -9,9 +9,10 @@
 #include "../World/Chunk/Chunk.h"
 #include "../World/World.h"
 
-class StatePlaying : public StateBase {
+/// @brief Active game playing state, not associated with game menus.
+class StatePlay : public StateBase {
   public:
-    StatePlaying(Application &app, const Config &config);
+    StatePlay(Application &app, const Config &config);
 
     void handleEvent(sf::Event e) override;
     void handleInput() override;
@@ -30,4 +31,4 @@ class StatePlaying : public StateBase {
     FPSCounter m_fpsCounter;
 };
 
-#endif // PLAYINGSTATE_H_INCLUDED
+#endif // PlayState_H_INCLUDED

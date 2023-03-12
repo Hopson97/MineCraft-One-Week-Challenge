@@ -10,6 +10,7 @@ struct RenderInfo;
 class ChunkMesh;
 class Camera;
 
+/// @brief Renderer handling 'flora' based entities that are not true blocks.
 class FloraRenderer {
   public:
     void add(const ChunkMesh &mesh);

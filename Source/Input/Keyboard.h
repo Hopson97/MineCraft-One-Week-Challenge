@@ -5,6 +5,7 @@
 
 #include <array>
 
+/// @brief Handles keyboard inputs and events.
 class Keyboard {
   public:
     Keyboard();

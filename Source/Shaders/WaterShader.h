@@ -3,6 +3,7 @@
 
 #include "BasicShader.h"
 
+/// @brief Shader affecting water blocks specifically.
 class WaterShader : public BasicShader {
   public:
     WaterShader();

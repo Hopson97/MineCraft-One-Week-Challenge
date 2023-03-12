@@ -10,6 +10,7 @@ struct RenderInfo;
 class ChunkMesh;
 class Camera;
 
+/// @brief Renderer specifically targeting water and handling shader behaviors.
 class WaterRenderer {
   public:
     void add(const ChunkMesh &mesh);

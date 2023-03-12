@@ -6,16 +6,15 @@
 #include "../Config.h"
 #include "ChunkRenderer.h"
 #include "FloraRenderer.h"
-#include "SFMLRenderer.h"
 #include "SkyboxRenderer.h"
 #include "WaterRenderer.h"
 
 class Camera;
 class ChunkSection;
 
+/// @brief Master rendering class that handles the sum of drawn in-game objects.
 class RenderMaster {
   public:
-    void drawSFML(const sf::Drawable &drawable);
     void drawChunk(const ChunkSection &chunk);
     void drawSky();
 
@@ -29,7 +28,6 @@ class RenderMaster {
 
     // Detail
     SkyboxRenderer m_skyboxRenderer;
-    // SFMLRenderer    m_sfmlRenderer;
 
     bool m_drawBox = false;
 };

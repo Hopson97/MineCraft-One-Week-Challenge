@@ -2,6 +2,7 @@
 #define PLAYER_H_INCLUDED
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <vector>
 
 #include "../Entity.h"
@@ -12,6 +13,7 @@ class Keyboard;
 class World;
 class RenderMaster;
 
+/// @brief Player character, including player movements and world interactions.
 class Player : public Entity {
   public:
     Player();
@@ -34,6 +36,7 @@ class Player : public Entity {
     void mouseInput(const sf::Window &window);
     bool m_isOnGround = false;
     bool m_isFlying = false;
+    bool m_isSneak = false;
 
     std::vector<ItemStack> m_items;
     std::vector<sf::Text> m_itemText;
@@ -49,6 +52,8 @@ class Player : public Entity {
     ToggleKey m_num3;
     ToggleKey m_num4;
     ToggleKey m_num5;
+
+    ToggleKey m_slow;
 
     glm::vec3 m_acceleration;
 };

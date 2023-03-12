@@ -1,5 +1,7 @@
 #include "Model.h"
 
+/// @brief Default constructor.
+/// @param mesh 
 Model::Model(const Mesh &mesh)
 {
     addData(mesh);
@@ -10,6 +12,8 @@ Model::~Model()
     deleteData();
 }
 
+/// @brief Copy constructor.
+/// @param other 
 Model::Model(Model &&other)
     : m_renderInfo(other.m_renderInfo)
     , m_vboCount(other.m_vboCount)
@@ -19,6 +23,9 @@ Model::Model(Model &&other)
     other.m_vboCount = 0;
 }
 
+/// @brief Operator function that declares a model can be assigned to another model.
+/// @param other 
+/// @return *this
 Model &Model::operator=(Model &&other)
 {
     m_renderInfo = other.m_renderInfo;
@@ -80,6 +87,7 @@ void Model::addEBO(const std::vector<GLuint> &indices)
                  indices.data(), GL_STATIC_DRAW);
 }
 
+/// @brief Deletes model data, used to free models from memory.
 void Model::deleteData()
 {
     if (m_renderInfo.vao)

@@ -1,5 +1,5 @@
 #include "Application.h"
-#include "States/PlayingState.h"
+#include "States/PlayState.h"
 #include "World/Block/BlockDatabase.h"
 #include <iostream>
 
@@ -9,17 +9,38 @@ Application::Application(const Config &config)
     , m_config(config)
 {
     BlockDatabase::get();
-    pushState<StatePlaying>(*this, config);
+    pushState<StatePlay>(*this, config);
 }
 
 float g_timeElapsed = 0;
 
+/// @brief Game loop utilizing a mixture of SFML events and GL rendering.
 void Application::runLoop()
 {
     sf::Clock dtTimer;
     sf::Clock dt;
+    sf::Vector2i win_center;
 
     sf::Time m;
+
+    // Grab the context window and force it to a certain position.
+    // This prevents the window from sticking to the bottom of the visible screen like it does
+    // in some Linux distros. Especially Arch.
+
+    // If the window is small, use these parameters
+    if(m_context.window.getSize().x <= 640)
+    {
+        win_center = {
+            sf::VideoMode::getDesktopMode().width / 3.5,
+            sf::VideoMode::getDesktopMode().height / 4
+        };
+    }
+    else // Else force it to the upper-leftgit p
+    {
+        win_center = { 0,0 };
+    }
+
+    m_context.window.setPosition(win_center);
 
     while (m_context.window.isOpen() && !m_states.empty()) {
         auto deltaTime = dtTimer.restart();
@@ -44,6 +65,7 @@ void Application::runLoop()
     }
 }
 
+/// @brief Handles window events, especially window polling and keyboard inputs.
 void Application::handleEvents()
 {
     sf::Event e;
@@ -71,16 +93,19 @@ void Application::handleEvents()
     }
 }
 
+/// @brief Tell the program stack to pop off the state.
 void Application::popState()
 {
     m_isPopState = true;
 }
 
+/// @brief Makes the mouse invisible, doesn't actually turn off the mouse.
 void Application::turnOffMouse()
 {
     m_context.window.setMouseCursorVisible(false);
 }
 
+/// @brief Makes the mouse visible again.
 void Application::turnOnMouse()
 {
     m_context.window.setMouseCursorVisible(true);

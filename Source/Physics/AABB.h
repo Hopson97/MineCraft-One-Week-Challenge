@@ -3,6 +3,7 @@
 
 #include "../Maths/glm.h"
 
+/// @brief Collision detection class for 3D environment.
 struct AABB {
     AABB(const glm::vec3 &dim)
         : dimensions(dim)

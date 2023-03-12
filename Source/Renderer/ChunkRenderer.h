@@ -9,6 +9,7 @@ struct RenderInfo;
 class ChunkMesh;
 class Camera;
 
+/// @brief Block chunk renderer that helps display block data.
 class ChunkRenderer {
   public:
     void add(const ChunkMesh &mesh);

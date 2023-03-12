@@ -4,6 +4,8 @@
 #include "Maths/glm.h"
 #include <SFML/Graphics.hpp>
 
+/* Vestigial class that was going to be used for player movement. */
+
 // WIP
 class Controller {
     glm::vec3 translateInput();

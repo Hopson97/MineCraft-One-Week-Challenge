@@ -1,4 +1,4 @@
-renderdistance 16
+renderdistance 8
 fullscreen 0
 windowsize 1600 900
 fov 105

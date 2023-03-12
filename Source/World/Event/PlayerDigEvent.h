@@ -8,6 +8,7 @@
 
 class Player;
 
+/// @brief Event class that handles what happens to a block in a world as a player interacts.
 class PlayerDigEvent : public IWorldEvent {
   public:
     PlayerDigEvent(sf::Mouse::Button button, const glm::vec3 &location,

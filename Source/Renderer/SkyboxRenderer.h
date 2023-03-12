@@ -7,6 +7,7 @@
 
 class Camera;
 
+/// @brief Renderer that specifically draws the skybox and entities outside player reach.
 class SkyboxRenderer {
   public:
     SkyboxRenderer();

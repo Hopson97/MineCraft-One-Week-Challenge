@@ -6,6 +6,10 @@
 
 FPSCounter::FPSCounter()
 {
+    enabled = true;
+    debugging = false;
+
+    // m_text.setPosition(sf::Vector2f(10.f,10.f));
     m_text.move(10, 10);
     m_text.setOutlineColor(sf::Color::Black);
     m_text.setOutlineThickness(2);
@@ -19,16 +23,24 @@ void FPSCounter::update()
 {
     m_frameCount++;
 
-    if (m_delayTimer.getElapsedTime().asSeconds() > 0.5) {
-        m_fps = m_frameCount / m_fpsTimer.restart().asSeconds();
-        m_frameCount = 0;
-        m_delayTimer.restart();
-        std::cout << m_fps << '\n';
+    if(enabled)
+    {
+        if (m_delayTimer.getElapsedTime().asSeconds() > 0.5)
+        {
+            m_fps = m_frameCount / m_fpsTimer.restart().asSeconds();
+            m_frameCount = 0;
+            m_delayTimer.restart();
+        
+            // Only show this output in debug mode
+            if(debugging)
+            {
+                std::cout << m_fps << '\n';
+            }
+        }
     }
 }
 
 void FPSCounter::draw(RenderMaster &renderer)
 {
     m_text.setString("FPS: " + std::to_string(m_fps));
-    renderer.drawSFML(m_text);
 }

@@ -9,6 +9,7 @@
 
 #include "../Util/NonCopyable.h"
 
+/// @brief Complex texture class that applies textures to all sides of a cube.
 class CubeTexture : public NonCopyable {
   public:
     CubeTexture() = default;

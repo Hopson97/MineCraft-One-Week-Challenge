@@ -18,3 +18,4 @@ else
     echo "\nBuilt target in bin/debug/"
     echo "Use argument \"release\" to build in release mode."
 fi
+

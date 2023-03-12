@@ -1,4 +1,4 @@
-#include "PlayingState.h"
+#include "PlayState.h"
 
 #include "../Application.h"
 #include "../Maths/Ray.h"
@@ -7,25 +7,26 @@
 
 #include <iostream>
 
-StatePlaying::StatePlaying(Application &app, const Config &config)
+StatePlay::StatePlay(Application &app, const Config &config)
     : StateBase(app)
     , m_world(app.getCamera(), config, m_player)
 {
     app.getCamera().hookEntity(m_player);
 }
 
-void StatePlaying::handleEvent(sf::Event e)
+void StatePlay::handleEvent(sf::Event e)
 {
     m_keyboard.update(e);
 }
 
-void StatePlaying::handleInput()
+void StatePlay::handleInput()
 {
     m_player.handleInput(m_pApplication->getWindow(), m_keyboard);
 
     static sf::Clock timer;
     glm::vec3 lastPosition;
 
+    // Ray is cast as player's 'vision'
     for (Ray ray({m_player.position.x, m_player.position.y + 0.6f,
                   m_player.position.z},
                  m_player.rotation); // Corrected for camera offset
@@ -41,12 +42,14 @@ void StatePlaying::handleInput()
             if (timer.getElapsedTime().asSeconds() > 0.2) {
                 if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                     timer.restart();
+                    // The player "digs" the block up
                     m_world.addEvent<PlayerDigEvent>(sf::Mouse::Left,
                                                      ray.getEnd(), m_player);
                     break;
                 }
                 else if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
                     timer.restart();
+                    // Block is placed by player
                     m_world.addEvent<PlayerDigEvent>(sf::Mouse::Right,
                                                      lastPosition, m_player);
                     break;
@@ -57,7 +60,7 @@ void StatePlaying::handleInput()
     }
 }
 
-void StatePlaying::update(float deltaTime)
+void StatePlay::update(float deltaTime)
 {
     if (m_player.position.x < 0)
         m_player.position.x = 0;
@@ -69,7 +72,7 @@ void StatePlaying::update(float deltaTime)
     m_world.update(m_pApplication->getCamera());
 }
 
-void StatePlaying::render(RenderMaster &renderer)
+void StatePlay::render(RenderMaster &renderer)
 {
     static sf::Clock dt;
 
@@ -88,7 +91,7 @@ void StatePlaying::render(RenderMaster &renderer)
     m_world.renderWorld(renderer, m_pApplication->getCamera());
 }
 
-void StatePlaying::onOpen()
+void StatePlay::onOpen()
 {
     m_pApplication->turnOffMouse();
 }

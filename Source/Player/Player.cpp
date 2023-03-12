@@ -22,6 +22,7 @@ Player::Player()
     , m_num3(sf::Keyboard::Num3)
     , m_num4(sf::Keyboard::Num4)
     , m_num5(sf::Keyboard::Num5)
+    , m_slow(sf::Keyboard::LShift)
     , m_acceleration(glm::vec3(0.f))
 
 {
@@ -104,6 +105,10 @@ void Player::handleInput(const sf::Window &window, Keyboard &keyboard)
     if (m_num5.isKeyPressed()) {
         m_heldItem = 4;
     }
+    if (m_slow.isKeyPressed())
+    {
+        m_isSneak = !m_isSneak;
+    }
 }
 
 void Player::update(float dt, World &world)
@@ -185,6 +190,9 @@ void Player::keyboardInput(Keyboard &keyboard)
         float s = speed;
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
             s *= 5;
+        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::RShift) ||
+        sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+            s *= 0.35;
         m_acceleration.x += -glm::cos(glm::radians(rotation.y + 90)) * s;
         m_acceleration.z += -glm::sin(glm::radians(rotation.y + 90)) * s;
     }
@@ -259,7 +267,7 @@ void Player::draw(RenderMaster &master)
         }
         t.setString((m_items[i].getMaterial().name) + " " +
                     std::to_string(m_items[i].getNumInStack()) + " ");
-        master.drawSFML(t);
+        // master.drawSFML(t);
     }
     std::ostringstream stream;
     stream << " X: " << position.x << " Y: " << position.y
@@ -267,14 +275,13 @@ void Player::draw(RenderMaster &master)
            << m_isOnGround;
 
     m_posPrint.setString(stream.str());
-
-    master.drawSFML(m_posPrint);
 }
 
 void Player::jump()
 {
     if (!m_isFlying) {
         if (m_isOnGround) {
+
             m_isOnGround = false;
             m_acceleration.y += speed * 50;
         }

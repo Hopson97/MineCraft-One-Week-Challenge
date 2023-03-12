@@ -3,6 +3,22 @@ cmake_minimum_required(VERSION 3.10)
 #Set up project
 project(mc-one-week VERSION 1.0)
 
+configure_file(config.txt ${CMAKE_BINARY_DIR}/config.txt COPYONLY)
+
+# Copy the resource files to the new binary dir
+add_custom_target(copy_resources ALL
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${PROJECT_SOURCE_DIR}/Res
+    ${PROJECT_BINARY_DIR}/Res
+    COMMENT "Copying game resources into Res folder")
+
+
+add_custom_target(copy_shaders ALL
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${PROJECT_SOURCE_DIR}/Shaders
+    ${PROJECT_BINARY_DIR}/Shaders
+    COMMENT "Copying shaders into Shaders folder")
+
 #Set executable
 add_executable(mc-one-week
     Source/Item/Material.cpp
@@ -29,8 +45,7 @@ add_executable(mc-one-week
     Source/World/Chunk/Chunk.cpp
     Source/World/Chunk/ChunkSection.cpp
     Source/World/Chunk/ChunkMeshBuilder.cpp
-    Source/States/PlayingState.cpp
-    Source/Physics/AABB.cpp
+    Source/States/PlayState.cpp
     Source/Player/Player.cpp
     Source/Maths/Ray.cpp
     Source/Maths/Frustum.cpp
@@ -62,7 +77,6 @@ add_executable(mc-one-week
     Source/Renderer/WaterRenderer.cpp
     Source/Renderer/ChunkRenderer.cpp
     Source/Renderer/SkyboxRenderer.cpp
-    Source/Renderer/SFMLRenderer.cpp
     Source/Renderer/FloraRenderer.cpp
     Source/Model.cpp
 )

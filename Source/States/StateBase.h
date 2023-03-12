@@ -3,9 +3,12 @@
 
 #include <SFML/Graphics.hpp>
 
+// This base class for all States, used more as a template than a functional class.
+
 class RenderMaster;
 class Application;
 
+/// @brief Base state that determines how other states should normally behave.
 class StateBase {
   public:
     StateBase(Application &app)

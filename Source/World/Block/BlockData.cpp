@@ -11,6 +11,14 @@ BlockData::BlockData(const std::string &fileName)
                                  "!");
     }
 
+    /* BlockData parses through text strings and applies valid attributes.
+
+    Textures are applied first, then Block IDs, opacity data, collision data,
+    mesh data, and shader data.
+
+    Essentially, blocks being constructed by the renderer depend on this
+    file data being correctly imported and read by the program.*/
+
     std::string line;
     while (std::getline(inFile, line)) {
         if (line == "TexTop") {
