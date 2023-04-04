@@ -82,7 +82,7 @@ void Application::handleEvents()
                         m_context.window.close();
                         break;
 
-                    default:
+                    default: // This should never happen.
                         break;
                 }
                 break;
