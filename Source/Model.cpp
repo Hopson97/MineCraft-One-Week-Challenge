@@ -40,6 +40,7 @@ Model &Model::operator=(Model &&other)
 
 void Model::genVAO()
 {
+    // If the render info is not null, delete this data during generation.
     if (m_renderInfo.vao != 0)
         deleteData();
 
