@@ -25,3 +25,4 @@ CMakeCache.txt
 mc-one-week
 libglad.a
 development_notes.txt
+deps/SFML-2.5.1
