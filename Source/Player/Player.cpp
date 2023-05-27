@@ -46,6 +46,8 @@ Player::Player()
     m_posPrint.setPosition(20.0f, 20.0f * 6.0f + 100.0f);
 }
 
+// TODO: Fix player bug where held item is out of order in placement array.
+
 void Player::addItem(const Material &material)
 {
     Material::ID id = material.id;
