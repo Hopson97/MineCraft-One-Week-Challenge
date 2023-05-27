@@ -2,7 +2,7 @@
 #define RENDERINFO_H_INCLUDED
 
 struct RenderInfo {
-    GLuint vao = 0;
+    GLuint vao = 0; // Vertex Array Object
     GLuint indicesCount = 0;
 
     inline void reset()
