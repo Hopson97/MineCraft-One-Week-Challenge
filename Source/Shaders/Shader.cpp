@@ -40,9 +40,12 @@ void Shader::loadMatrix4(GLuint location, const glm::mat4 &matrix)
 
 Shader::~Shader()
 {
+    // Deletes (removes from memory) programs no longer being used by OpenGL.
+
     glDeleteProgram(m_id);
 }
 
+/// @brief Links to OpenGL's "Use Program" function relevant to handles and rendering.
 void Shader::useProgram() const
 {
     glUseProgram(m_id);
