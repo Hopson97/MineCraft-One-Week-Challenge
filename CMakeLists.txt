@@ -21,6 +21,7 @@ add_custom_target(copy_shaders ALL
 
 #Set executable
 add_executable(mc-one-week
+    # Source/Audio/AudioStream.cpp
     Source/Item/Material.cpp
     Source/Item/ItemStack.cpp
     Source/Application.cpp
