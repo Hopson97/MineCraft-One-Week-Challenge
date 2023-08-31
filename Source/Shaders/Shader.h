@@ -7,6 +7,7 @@
 #include "../Maths/glm.h"
 #include "../Util/NonCopyable.h"
 
+/// @brief The base class for all shaders.
 class Shader : NonCopyable {
   public:
     Shader(const std::string &vertexFile, const std::string &fragmentFile);
