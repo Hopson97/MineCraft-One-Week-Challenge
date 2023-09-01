@@ -21,6 +21,7 @@ void StatePlay::handleEvent(sf::Event e)
 
 void StatePlay::handleInput()
 {
+    // Grab the window and begin accepting input
     m_player.handleInput(m_pApplication->getWindow(), m_keyboard);
 
     static sf::Clock timer;
@@ -63,9 +64,9 @@ void StatePlay::handleInput()
 void StatePlay::update(float deltaTime)
 {
     if (m_player.position.x < 0)
-        m_player.position.x = 0;
+    { m_player.position.x = 0; };
     if (m_player.position.z < 0)
-        m_player.position.z = 0;
+    { m_player.position.z = 0; };
 
     m_fpsCounter.update();
     m_player.update(deltaTime, m_world);
