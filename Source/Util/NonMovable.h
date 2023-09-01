@@ -2,6 +2,7 @@
 #define NON_MOVE
 
 /// @brief Class that identifies entities not designed for physical movement.
+/// Used for Singletons.
 class NonMovable {
   public:
     NonMovable(NonMovable &&) = delete;
