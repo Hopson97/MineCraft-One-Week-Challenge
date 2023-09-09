@@ -1,5 +1,5 @@
 #ifndef CHUNKSECTION_H_INCLUDED
-#define CHUNKSECTION_H_INCLUDED
+#define CHUNKSECTION_H_INCLUDED 1
 
 #include <SFML/Graphics.hpp>
 #include <array>
