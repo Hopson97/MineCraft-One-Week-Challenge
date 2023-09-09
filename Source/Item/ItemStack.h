@@ -1,5 +1,5 @@
 #ifndef ITEMSTACK_H_INCLUDED
-#define ITEMSTACK_H_INCLUDED
+#define ITEMSTACK_H_INCLUDED 1
 
 #include "Material.h"
 
