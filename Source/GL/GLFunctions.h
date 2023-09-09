@@ -1,5 +1,5 @@
 #ifndef GLFUNCTIONS_H_INCLUDED
-#define GLFUNCTIONS_H_INCLUDED
+#define GLFUNCTIONS_H_INCLUDED 1
 
 #include <glad/glad.h>
 
