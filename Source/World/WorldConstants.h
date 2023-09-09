@@ -1,5 +1,5 @@
 #ifndef WORLDCONSTANTS_H_INCLUDED
-#define WORLDCONSTANTS_H_INCLUDED
+#define WORLDCONSTANTS_H_INCLUDED 1
 
 // Defines the most basic rules for chunk generation in any given world.
 
