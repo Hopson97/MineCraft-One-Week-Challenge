@@ -1,5 +1,5 @@
 #ifndef CHUNKSHADER_H_INCLUDED
-#define CHUNKSHADER_H_INCLUDED
+#define CHUNKSHADER_H_INCLUDED 1
 
 #include "BasicShader.h"
 
