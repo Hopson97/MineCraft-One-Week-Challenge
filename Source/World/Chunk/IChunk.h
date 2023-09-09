@@ -1,5 +1,5 @@
 #ifndef ICHUNK_H_INCLUDED
-#define ICHUNK_H_INCLUDED
+#define ICHUNK_H_INCLUDED 1
 
 struct IChunk {
     virtual ~IChunk() = default;
