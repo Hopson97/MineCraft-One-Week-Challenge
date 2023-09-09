@@ -1,5 +1,5 @@
 #ifndef PLAYSTATE_H_INCLUDED
-#define PLAYSTATE_H_INCLUDED
+#define PLAYSTATE_H_INCLUDED 1
 
 #include "../Player/Player.h"
 #include "StateBase.h"
