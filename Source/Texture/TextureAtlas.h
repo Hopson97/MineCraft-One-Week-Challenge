@@ -1,5 +1,5 @@
 #ifndef TEXTUREATLAS_H_INCLUDED
-#define TEXTUREATLAS_H_INCLUDED
+#define TEXTUREATLAS_H_INCLUDED 1
 
 #include "BasicTexture.h"
 
