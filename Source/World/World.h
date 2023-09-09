@@ -1,5 +1,5 @@
 #ifndef WORLD_H_INCLUDED
-#define WORLD_H_INCLUDED
+#define WORLD_H_INCLUDED 1
 
 #include <atomic>
 #include <memory>
