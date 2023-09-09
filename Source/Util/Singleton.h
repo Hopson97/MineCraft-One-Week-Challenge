@@ -1,5 +1,5 @@
 #ifndef SINGLETON_H_INCLUDED
-#define SINGLETON_H_INCLUDED
+#define SINGLETON_H_INCLUDED 1
 
 #include "NonCopyable.h"
 #include "NonMovable.h"
