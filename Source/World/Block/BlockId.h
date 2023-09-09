@@ -1,5 +1,5 @@
 #ifndef BLOCKID_H_INCLUDED
-#define BLOCKID_H_INCLUDED
+#define BLOCKID_H_INCLUDED 1
 
 #include <cstdint>
 
