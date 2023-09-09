@@ -1,5 +1,5 @@
 #ifndef CHUNKMESH_H_INCLUDED
-#define CHUNKMESH_H_INCLUDED
+#define CHUNKMESH_H_INCLUDED 1
 
 #include "../../Model.h"
 
