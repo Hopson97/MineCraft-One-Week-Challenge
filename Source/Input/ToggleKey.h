@@ -1,5 +1,5 @@
 #ifndef TOGGLEKEY_H_INCLUDED
-#define TOGGLEKEY_H_INCLUDED
+#define TOGGLEKEY_H_INCLUDED 1
 
 #include <SFML/Graphics.hpp>
 
