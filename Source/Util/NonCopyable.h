@@ -1,5 +1,5 @@
 #ifndef NONCOPYABLE_H_INCLUDED
-#define NONCOPYABLE_H_INCLUDED
+#define NONCOPYABLE_H_INCLUDED 1
 
 /// @brief Struct used to define entities that should not be duplicated.
 struct NonCopyable {
