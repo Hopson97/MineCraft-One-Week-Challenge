@@ -1,5 +1,5 @@
 #ifndef RENDERMASTER_H_INCLUDED
-#define RENDERMASTER_H_INCLUDED
+#define RENDERMASTER_H_INCLUDED 1
 
 #include <SFML/Graphics.hpp>
 
