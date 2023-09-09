@@ -1,5 +1,5 @@
 #ifndef WATERSHADER_H_INCLUDED
-#define WATERSHADER_H_INCLUDED
+#define WATERSHADER_H_INCLUDED 1
 
 #include "BasicShader.h"
 
