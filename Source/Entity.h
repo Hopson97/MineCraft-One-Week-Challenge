@@ -1,5 +1,5 @@
 #ifndef ENTITY_H_INCLUDED
-#define ENTITY_H_INCLUDED
+#define ENTITY_H_INCLUDED 1
 
 #include "Maths/Matrix.h"
 #include "Physics/AABB.h"
