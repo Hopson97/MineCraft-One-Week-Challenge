@@ -1,5 +1,5 @@
 #ifndef SKYBOXSHADER_H_INCLUDED
-#define SKYBOXSHADER_H_INCLUDED
+#define SKYBOXSHADER_H_INCLUDED 1
 
 #include "Shader.h"
 
