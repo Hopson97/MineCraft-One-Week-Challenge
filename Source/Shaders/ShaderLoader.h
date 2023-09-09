@@ -1,5 +1,5 @@
 #ifndef SHADERLOADER_H_INCLUDED
-#define SHADERLOADER_H_INCLUDED
+#define SHADERLOADER_H_INCLUDED 1
 
 #include <glad/glad.h>
 #include <string>
