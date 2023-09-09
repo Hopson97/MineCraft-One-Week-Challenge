@@ -1,5 +1,5 @@
 #ifndef TEXTURE_H_INCLUDED
-#define TEXTURE_H_INCLUDED
+#define TEXTURE_H_INCLUDED 1
 
 #include <glad/glad.h>
 
