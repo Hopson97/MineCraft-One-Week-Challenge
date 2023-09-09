@@ -1,5 +1,5 @@
 #ifndef CAMERA_H_INCLUDED
-#define CAMERA_H_INCLUDED
+#define CAMERA_H_INCLUDED 1
 
 #include "Config.h"
 #include "Entity.h"
