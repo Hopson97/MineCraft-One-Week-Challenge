@@ -1,5 +1,5 @@
 #ifndef STATEBASE_H_INCLUDED
-#define STATEBASE_H_INCLUDED
+#define STATEBASE_H_INCLUDED 1
 
 #include <SFML/Graphics.hpp>
 
