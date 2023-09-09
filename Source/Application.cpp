@@ -35,7 +35,7 @@ void Application::runLoop()
             sf::VideoMode::getDesktopMode().height / 4
         };
     }
-    else // Else force it to the upper-leftgit p
+    else
     {
         win_center = { 0,0 };
     }
