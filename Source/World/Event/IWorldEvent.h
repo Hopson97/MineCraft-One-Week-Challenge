@@ -1,5 +1,5 @@
 #ifndef IWORLDEVENT_H_INCLUDED
-#define IWORLDEVENT_H_INCLUDED
+#define IWORLDEVENT_H_INCLUDED 1
 
 class World;
 
