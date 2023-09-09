@@ -1,5 +1,5 @@
 #ifndef CHUNKRENDERER_H_INCLUDED
-#define CHUNKRENDERER_H_INCLUDED
+#define CHUNKRENDERER_H_INCLUDED 1
 
 #include <vector>
 
