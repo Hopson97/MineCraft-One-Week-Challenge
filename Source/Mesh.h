@@ -1,5 +1,5 @@
 #ifndef MESH_H_INCLUDED
-#define MESH_H_INCLUDED
+#define MESH_H_INCLUDED 1
 
 #include <glad/glad.h>
 #include <vector>
