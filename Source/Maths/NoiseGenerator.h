@@ -1,5 +1,5 @@
 #ifndef NOISEGENERATOR_H_INCLUDED
-#define NOISEGENERATOR_H_INCLUDED
+#define NOISEGENERATOR_H_INCLUDED 1
 
 struct NoiseParameters {
     int octaves;
