@@ -1,5 +1,5 @@
 #ifndef RAY_H_INCLUDED
-#define RAY_H_INCLUDED
+#define RAY_H_INCLUDED 1
 
 #include "glm.h"
 
