@@ -1,5 +1,5 @@
 #ifndef FLORARENDERER_H_INCLUDED
-#define FLORARENDERER_H_INCLUDED
+#define FLORARENDERER_H_INCLUDED 1
 
 #include <SFML/Graphics.hpp>
 #include <vector>
