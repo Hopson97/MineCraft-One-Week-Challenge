@@ -1,5 +1,5 @@
 #ifndef BASICSHADER_H_INCLUDED
-#define BASICSHADER_H_INCLUDED
+#define BASICSHADER_H_INCLUDED 1
 
 #include "Shader.h"
 
