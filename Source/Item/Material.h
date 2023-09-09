@@ -1,5 +1,5 @@
 #ifndef MATERIAL_H_INCLUDED
-#define MATERIAL_H_INCLUDED
+#define MATERIAL_H_INCLUDED 1
 
 #include "../World/Block/BlockId.h"
 #include <string>
