@@ -1,5 +1,5 @@
 #ifndef MODEL_H_INCLUDED
-#define MODEL_H_INCLUDED
+#define MODEL_H_INCLUDED 1
 
 #include "Mesh.h"
 
