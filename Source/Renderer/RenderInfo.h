@@ -1,5 +1,5 @@
 #ifndef RENDERINFO_H_INCLUDED
-#define RENDERINFO_H_INCLUDED
+#define RENDERINFO_H_INCLUDED 1
 
 struct RenderInfo {
     GLuint vao = 0; // Vertex Array Object
