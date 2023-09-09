@@ -1,5 +1,5 @@
 #ifndef CHUNKMANAGER_H_INCLUDED
-#define CHUNKMANAGER_H_INCLUDED
+#define CHUNKMANAGER_H_INCLUDED 1
 
 #include <functional>
 #include <memory>
