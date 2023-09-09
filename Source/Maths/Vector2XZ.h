@@ -1,5 +1,5 @@
 #ifndef VECTOR2XZ_H_INCLUDED
-#define VECTOR2XZ_H_INCLUDED
+#define VECTOR2XZ_H_INCLUDED 1
 
 #include <SFML/Graphics.hpp>
 #include <functional>
