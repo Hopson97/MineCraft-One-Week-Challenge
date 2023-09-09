@@ -1,5 +1,5 @@
 #ifndef ARRAY2D_H_INCLUDED
-#define ARRAY2D_H_INCLUDED
+#define ARRAY2D_H_INCLUDED 1
 
 #include <algorithm>
 #include <array>
