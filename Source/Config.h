@@ -1,5 +1,5 @@
 #ifndef CONFIG_H_INCLUDED
-#define CONFIG_H_INCLUDED
+#define CONFIG_H_INCLUDED 1
 
 /// @brief Default configuration for program.
 struct Config {
