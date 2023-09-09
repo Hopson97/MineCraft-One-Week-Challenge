@@ -1,5 +1,5 @@
 #ifndef CONTROLLER_H_INCLUDED
-#define CONTROLLER_H_INCLUDED
+#define CONTROLLER_H_INCLUDED 1
 
 #include "Maths/glm.h"
 #include <SFML/Graphics.hpp>
