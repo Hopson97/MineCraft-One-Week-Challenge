@@ -1,4 +1,5 @@
-#pragma once
+#ifndef KEYBOARD_H_INCLUDED
+#define KEYBOARD_H_INCLUDED 1
 
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
@@ -19,3 +20,5 @@ class Keyboard {
     std::array<bool, sf::Keyboard::KeyCount> m_keys;
     sf::Keyboard::Key m_recentlyReleased;
 };
+
+#endif
