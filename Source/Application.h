@@ -1,5 +1,5 @@
 #ifndef APPLICATION_H_INCLUDED
-#define APPLICATION_H_INCLUDED
+#define APPLICATION_H_INCLUDED 1
 
 #include <memory>
 #include <vector>
