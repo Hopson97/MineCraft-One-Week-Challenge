@@ -1,5 +1,5 @@
 #ifndef BLOCKDATABASE_H_INCLUDED
-#define BLOCKDATABASE_H_INCLUDED
+#define BLOCKDATABASE_H_INCLUDED 1
 
 #include <array>
 #include <memory>
