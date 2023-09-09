@@ -1,5 +1,5 @@
 #ifndef PLAYER_H_INCLUDED
-#define PLAYER_H_INCLUDED
+#define PLAYER_H_INCLUDED 1
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
