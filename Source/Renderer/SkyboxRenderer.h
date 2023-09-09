@@ -1,5 +1,5 @@
 #ifndef SKYBOXRENDERER_H_INCLUDED
-#define SKYBOXRENDERER_H_INCLUDED
+#define SKYBOXRENDERER_H_INCLUDED 1
 
 #include "../Model.h"
 #include "../Shaders/SkyboxShader.h"
