@@ -1,5 +1,5 @@
 #ifndef NON_MOVE
-#define NON_MOVE
+#define NON_MOVE 1
 
 /// @brief Class that identifies entities not designed for physical movement.
 /// Used for Singletons.
