@@ -1,5 +1,5 @@
 #ifndef CHUNKBLOCK_H_INCLUDED
-#define CHUNKBLOCK_H_INCLUDED
+#define CHUNKBLOCK_H_INCLUDED 1
 
 #include "BlockId.h"
 
