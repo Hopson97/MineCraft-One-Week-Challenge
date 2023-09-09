@@ -1,5 +1,5 @@
 #ifndef FLORASHADER_H_INCLUDED
-#define FLORASHADER_H_INCLUDED
+#define FLORASHADER_H_INCLUDED 1
 
 #include "BasicShader.h"
 
