@@ -1,5 +1,5 @@
 #ifndef AABB_H_INCLUDED
-#define AABB_H_INCLUDED
+#define AABB_H_INCLUDED 1
 
 #include "../Maths/glm.h"
 
