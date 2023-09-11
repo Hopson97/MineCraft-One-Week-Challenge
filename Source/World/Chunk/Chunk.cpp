@@ -7,6 +7,9 @@
 #include "../Generation/Terrain/TerrainGenerator.h"
 #include "../World.h"
 
+/// @brief Chunk constructor, creates blocks via world and vector data.
+/// @param world 
+/// @param location 
 Chunk::Chunk(World &world, const sf::Vector2i &location)
     : m_location(location)
     , m_pWorld(&world)
