@@ -31,8 +31,8 @@ void Application::runLoop()
     if(m_context.window.getSize().x <= 640)
     {
         win_center = {
-            sf::VideoMode::getDesktopMode().width / 3.5,
-            sf::VideoMode::getDesktopMode().height / 4
+            static_cast<int>(sf::VideoMode::getDesktopMode().width / 3.5),
+            static_cast<int>(sf::VideoMode::getDesktopMode().height / 4)
         };
     }
     else
