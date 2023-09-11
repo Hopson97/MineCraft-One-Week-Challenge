@@ -25,10 +25,13 @@ ClassicOverWorldGenerator::ClassicOverWorldGenerator()
     setUpNoise();
 }
 
+/// @brief Initializes world data based on seed input, generates noise.
 void ClassicOverWorldGenerator::setUpNoise()
 {
     std::cout << "Seed: " << seed << '\n';
     static bool noiseGen = false;
+    // Noise generation is assumed false immediately,
+    // then it actually runs
     if (!noiseGen) {
         std::cout << "making noise\n";
         noiseGen = true;

@@ -3,6 +3,7 @@
 
 class Chunk;
 
+/// @brief Base class for all terrain generation.
 class TerrainGenerator {
   public:
     virtual void generateTerrainFor(Chunk &chunk) = 0;
