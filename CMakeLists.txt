@@ -1,7 +1,49 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.20)
+
+#Set module path
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake"  ${CMAKE_MODULE_PATH})
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules"  ${CMAKE_MODULE_PATH})
+
+#Includes
+include(CheckIPOSupported)
+
+include(message_macros)
+include(clang_format)
+
+
 
 #Set up project
 project(mc-one-week VERSION 1.0)
+
+begin_header(Configuration)
+# TODO: move such stuff into toolchain file
+find_program(CCACHE_PROGRAM ccache)
+if (CCACHE_PROGRAM)
+    set(CMAKE_CXX_COMPILER_LAUNCHER "ccache")
+    set(CMAKE_C_COMPILER_LAUNCHER "ccache")
+endif()
+
+
+find_program(NINJA_PROGRAM ninja)
+if(NINJA_PROGRAM)
+    message(STATUS "Using Ninja as the build system : ${NINJA_PROGRAM}")
+    set(CMAKE_GENERATOR Ninja)
+endif()
+
+
+check_ipo_supported(RESULT supported)
+if(supported)
+    set(CMAKE_INTERPROCEDURAL_OPTIMIZATION True)
+endif()
+
+end_header()
+
+begin_header(Linters)
+# linters:
+set(CMAKE_LINK_WHAT_YOU_USE ON)
+set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE iwyu)
+end_header()
+
 
 configure_file(config.txt ${CMAKE_BINARY_DIR}/config.txt COPYONLY)
 
@@ -81,12 +123,11 @@ add_executable(mc-one-week
     Source/Model.cpp
 )
 
-#Set module path
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
+
 
 #Find libraries
-find_package(Threads)
-find_package(SFML REQUIRED audio network graphics window system)
+find_package(Threads REQUIRED)
+find_package(SFML REQUIRED graphics window system)
 
 add_subdirectory(deps/glm)
 add_subdirectory(deps/glad)
@@ -113,12 +154,11 @@ function(setup_target TARGET)
 endfunction(setup_target)
 
 setup_target(mc-one-week)
-
 target_link_libraries(mc-one-week
     glm
     glad
-    Threads::Threads 
-    ${SFML_LIBRARIES} 
+    Threads::Threads
+    ${SFML_LIBRARIES}
     ${SFML_DEPENDENCIES}
     ${CMAKE_DL_LIBS}
 )

@@ -1,4 +1,4 @@
-#Visual Studio
+# IDE
 Debug/
 Release/
 *.sln
@@ -9,9 +9,9 @@ Release/
 *.dll
 .vs 
 
-# Visual Studio Code
 .vscode/
 
+.idea/
 
 # Builds
 bin/
