@@ -1,3 +1,4 @@
-sh scripts/build.sh
-gdb ./bin/debug/mc-one-week
+#!/bin/bash
 
+./scripts/build.sh
+gdb ./build/debug/mc-one-week-challenge  

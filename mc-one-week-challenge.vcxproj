@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{a8f1dcc1-7e1a-43fd-96c4-e6bd9c626405}</ProjectGuid>
+    <RootNamespace>mc-one-week-challenge</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>mc-one-week-challenge</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <EnableClangTidyCodeAnalysis>true</EnableClangTidyCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <EnableClangTidyCodeAnalysis>true</EnableClangTidyCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <VcpkgUseStatic>false</VcpkgUseStatic>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <VcpkgUseStatic>false</VcpkgUseStatic>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <VcpkgUseStatic>false</VcpkgUseStatic>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <VcpkgUseStatic>false</VcpkgUseStatic>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)deps;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)deps;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="deps\glad\glad.c" />
+    <ClCompile Include="Source\Application.cpp" />
+    <ClCompile Include="Source\Camera.cpp" />
+    <ClCompile Include="Source\Context.cpp" />
+    <ClCompile Include="Source\Controller.cpp" />
+    <ClCompile Include="Source\GL\GLFunctions.cpp" />
+    <ClCompile Include="Source\Input\Keyboard.cpp" />
+    <ClCompile Include="Source\Input\ToggleKey.cpp" />
+    <ClCompile Include="Source\Item\ItemStack.cpp" />
+    <ClCompile Include="Source\Item\Material.cpp" />
+    <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\Maths\Frustum.cpp" />
+    <ClCompile Include="Source\Maths\GeneralMaths.cpp" />
+    <ClCompile Include="Source\Maths\Matrix.cpp" />
+    <ClCompile Include="Source\Maths\NoiseGenerator.cpp" />
+    <ClCompile Include="Source\Maths\Ray.cpp" />
+    <ClCompile Include="Source\Maths\Vector2XZ.cpp" />
+    <ClCompile Include="Source\Model.cpp" />
+    <ClCompile Include="Source\Player\Player.cpp" />
+    <ClCompile Include="Source\Renderer\ChunkRenderer.cpp" />
+    <ClCompile Include="Source\Renderer\FloraRenderer.cpp" />
+    <ClCompile Include="Source\Renderer\RenderMaster.cpp" />
+    <ClCompile Include="Source\Renderer\SkyboxRenderer.cpp" />
+    <ClCompile Include="Source\Renderer\WaterRenderer.cpp" />
+    <ClCompile Include="Source\Shaders\BasicShader.cpp" />
+    <ClCompile Include="Source\Shaders\ChunkShader.cpp" />
+    <ClCompile Include="Source\Shaders\FloraShader.cpp" />
+    <ClCompile Include="Source\Shaders\Shader.cpp" />
+    <ClCompile Include="Source\Shaders\ShaderLoader.cpp" />
+    <ClCompile Include="Source\Shaders\SkyboxShader.cpp" />
+    <ClCompile Include="Source\Shaders\WaterShader.cpp" />
+    <ClCompile Include="Source\States\PlayState.cpp" />
+    <ClCompile Include="Source\Texture\BasicTexture.cpp" />
+    <ClCompile Include="Source\Texture\CubeTexture.cpp" />
+    <ClCompile Include="Source\Texture\TextureAtlas.cpp" />
+    <ClCompile Include="Source\Util\FileUtil.cpp" />
+    <ClCompile Include="Source\Util\FPSCounter.cpp" />
+    <ClCompile Include="Source\Util\Random.cpp" />
+    <ClCompile Include="Source\World\Block\BlockData.cpp" />
+    <ClCompile Include="Source\World\Block\BlockDatabase.cpp" />
+    <ClCompile Include="Source\World\Block\BlockTypes\BlockType.cpp" />
+    <ClCompile Include="Source\World\Block\ChunkBlock.cpp" />
+    <ClCompile Include="Source\World\Chunk\Chunk.cpp" />
+    <ClCompile Include="Source\World\Chunk\ChunkManager.cpp" />
+    <ClCompile Include="Source\World\Chunk\ChunkMesh.cpp" />
+    <ClCompile Include="Source\World\Chunk\ChunkMeshBuilder.cpp" />
+    <ClCompile Include="Source\World\Chunk\ChunkSection.cpp" />
+    <ClCompile Include="Source\World\Event\PlayerDigEvent.cpp" />
+    <ClCompile Include="Source\World\Generation\Biome\Biome.cpp" />
+    <ClCompile Include="Source\World\Generation\Biome\DesertBiome.cpp" />
+    <ClCompile Include="Source\World\Generation\Biome\GrasslandBiome.cpp" />
+    <ClCompile Include="Source\World\Generation\Biome\LightForest.cpp" />
+    <ClCompile Include="Source\World\Generation\Biome\OceanBiome.cpp" />
+    <ClCompile Include="Source\World\Generation\Biome\TemperateForestBiome.cpp" />
+    <ClCompile Include="Source\World\Generation\Structures\StructureBuilder.cpp" />
+    <ClCompile Include="Source\World\Generation\Structures\TreeGenerator.cpp" />
+    <ClCompile Include="Source\World\Generation\Terrain\ClassicOverWorldGenerator.cpp" />
+    <ClCompile Include="Source\World\Generation\Terrain\SuperFlatGenerator.cpp" />
+    <ClCompile Include="Source\World\World.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".clang-format" />
+    <None Include=".gitignore" />
+    <None Include="README.md" />
+    <None Include="scripts\build.sh" />
+    <None Include="scripts\debug.sh" />
+    <None Include="scripts\run.sh" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="deps\glad\glad.h" />
+    <ClInclude Include="deps\glad\khrplatform.h" />
+    <ClInclude Include="Source\Application.h" />
+    <ClInclude Include="Source\Camera.h" />
+    <ClInclude Include="Source\Config.h" />
+    <ClInclude Include="Source\Context.h" />
+    <ClInclude Include="Source\Controller.h" />
+    <ClInclude Include="Source\Entity.h" />
+    <ClInclude Include="Source\GL\GLFunctions.h" />
+    <ClInclude Include="Source\Input\Keyboard.h" />
+    <ClInclude Include="Source\Input\ToggleKey.h" />
+    <ClInclude Include="Source\Item\ItemStack.h" />
+    <ClInclude Include="Source\Item\ItemType.h" />
+    <ClInclude Include="Source\Item\Material.h" />
+    <ClInclude Include="Source\Maths\Frustum.h" />
+    <ClInclude Include="Source\Maths\GeneralMaths.h" />
+    <ClInclude Include="Source\Maths\glm.h" />
+    <ClInclude Include="Source\Maths\Matrix.h" />
+    <ClInclude Include="Source\Maths\NoiseGenerator.h" />
+    <ClInclude Include="Source\Maths\Ray.h" />
+    <ClInclude Include="Source\Maths\Vector2XZ.h" />
+    <ClInclude Include="Source\Mesh.h" />
+    <ClInclude Include="Source\Model.h" />
+    <ClInclude Include="Source\Physics\AABB.h" />
+    <ClInclude Include="Source\Player\Player.h" />
+    <ClInclude Include="Source\Renderer\ChunkRenderer.h" />
+    <ClInclude Include="Source\Renderer\FloraRenderer.h" />
+    <ClInclude Include="Source\Renderer\RenderInfo.h" />
+    <ClInclude Include="Source\Renderer\RenderMaster.h" />
+    <ClInclude Include="Source\Renderer\SkyboxRenderer.h" />
+    <ClInclude Include="Source\Renderer\WaterRenderer.h" />
+    <ClInclude Include="Source\Shaders\BasicShader.h" />
+    <ClInclude Include="Source\Shaders\ChunkShader.h" />
+    <ClInclude Include="Source\Shaders\FloraShader.h" />
+    <ClInclude Include="Source\Shaders\Shader.h" />
+    <ClInclude Include="Source\Shaders\ShaderLoader.h" />
+    <ClInclude Include="Source\Shaders\SkyboxShader.h" />
+    <ClInclude Include="Source\Shaders\WaterShader.h" />
+    <ClInclude Include="Source\States\PlayState.h" />
+    <ClInclude Include="Source\States\StateBase.h" />
+    <ClInclude Include="Source\Texture\BasicTexture.h" />
+    <ClInclude Include="Source\Texture\CubeTexture.h" />
+    <ClInclude Include="Source\Texture\TextureAtlas.h" />
+    <ClInclude Include="Source\Util\Array2D.h" />
+    <ClInclude Include="Source\Util\FileUtil.h" />
+    <ClInclude Include="Source\Util\FPSCounter.h" />
+    <ClInclude Include="Source\Util\NonCopyable.h" />
+    <ClInclude Include="Source\Util\NonMovable.h" />
+    <ClInclude Include="Source\Util\Random.h" />
+    <ClInclude Include="Source\Util\Singleton.h" />
+    <ClInclude Include="Source\World\Block\BlockData.h" />
+    <ClInclude Include="Source\World\Block\BlockDatabase.h" />
+    <ClInclude Include="Source\World\Block\BlockId.h" />
+    <ClInclude Include="Source\World\Block\BlockTypes\BlockType.h" />
+    <ClInclude Include="Source\World\Block\ChunkBlock.h" />
+    <ClInclude Include="Source\World\Chunk\Chunk.h" />
+    <ClInclude Include="Source\World\Chunk\ChunkManager.h" />
+    <ClInclude Include="Source\World\Chunk\ChunkMesh.h" />
+    <ClInclude Include="Source\World\Chunk\ChunkMeshBuilder.h" />
+    <ClInclude Include="Source\World\Chunk\ChunkSection.h" />
+    <ClInclude Include="Source\World\Chunk\IChunk.h" />
+    <ClInclude Include="Source\World\Event\IWorldEvent.h" />
+    <ClInclude Include="Source\World\Event\PlayerDigEvent.h" />
+    <ClInclude Include="Source\World\Generation\Biome\Biome.h" />
+    <ClInclude Include="Source\World\Generation\Biome\DesertBiome.h" />
+    <ClInclude Include="Source\World\Generation\Biome\GrasslandBiome.h" />
+    <ClInclude Include="Source\World\Generation\Biome\LightForest.h" />
+    <ClInclude Include="Source\World\Generation\Biome\OceanBiome.h" />
+    <ClInclude Include="Source\World\Generation\Biome\TemperateForestBiome.h" />
+    <ClInclude Include="Source\World\Generation\Structures\StructureBuilder.h" />
+    <ClInclude Include="Source\World\Generation\Structures\TreeGenerator.h" />
+    <ClInclude Include="Source\World\Generation\Terrain\ClassicOverWorldGenerator.h" />
+    <ClInclude Include="Source\World\Generation\Terrain\SuperFlatGenerator.h" />
+    <ClInclude Include="Source\World\Generation\Terrain\TerrainGenerator.h" />
+    <ClInclude Include="Source\World\World.h" />
+    <ClInclude Include="Source\World\WorldConstants.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMakeLists.txt" />
+    <Text Include="deps\CMakeLists.txt" />
+    <Text Include="deps\glad\CMakeLists.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

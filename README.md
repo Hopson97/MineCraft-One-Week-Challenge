@@ -17,32 +17,69 @@ This was made in a week, as a challenge for a video. There do exist other, more 
 
 MineTest here: https://github.com/minetest/minetest
 
-## Building
+## Building and Running
 
-You will need GLM and SFML 2.4.1+ libraries w/headers, and this also requires a compiler that supports C++14 (or newer) with threads.
+### Windows (Visual Studio)
 
-### macOS
+The easiest way to build is to use [vcpkg](https://vcpkg.io/en/index.html) and install dependencies through this:
 
-Install macports from https://www.macports.org 
+```bash
+vcpkg install sfml
+vcpkg install imgui
+vcpkg install glm
+vcpkg integrate install
+```
 
-`sudo port install sfml glm`
-
-### Ubuntu
-
-`sudo apt-get install libsfml-dev libglm-dev`
-
-## Compile Source and Running
+Then open the Visual Studio project file to build and run.
 
 ### Linux
 
-#### Debug
+#### Pre-requisites
+
+Install Vcpkg and other required packages using your distribution's package manager:
 
 ```sh
+git clone https://github.com/microsoft/vcpkg.git
+cd vcpkg
+./bootstrap-vcpkg.sh
+
+# These are required to build some packages
+sudo apt install cmake make autoconf libtool pkg-config
+
+# The following are required for SFML
+sudo apt install libx11-dev xorg-dev freeglut3-dev libudev-dev
+```
+
+Ensure paths are set correctly:
+
+```sh
+export VCPKG_ROOT=/path/to/vcpkg
+export PATH=$VCPKG_ROOT:$PATH
+```
+
+RECOMMENDED: Add the above lines to your `.bashrc` or `.zshrc` file:
+
+```sh
+echo 'export VCPKG_ROOT=/path/to/vcpkg' >> ~/.bashrc
+echo 'export PATH=$VCPKG_ROOT:$PATH' >> ~/.bashrc
+```
+
+#### Build and Run
+
+To build, at the root of the project:
+
+```sh
+vcpkg install # First time only
 sh scripts/build.sh
+```
+
+To run, at the root of the project:
+
+```sh
 sh scripts/run.sh
 ```
 
-#### Release
+To build and run in release mode, simply add the `release` suffix:
 
 ```sh
 sh scripts/build.sh release

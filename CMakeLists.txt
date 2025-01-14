@@ -1,26 +1,13 @@
 cmake_minimum_required(VERSION 3.10)
 
-#Set up project
-project(mc-one-week VERSION 1.0)
+project(
+    mc-one-week-challenge 
+    VERSION 1.0
+)
 
-configure_file(config.txt ${CMAKE_BINARY_DIR}/config.txt COPYONLY)
+include("$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake")
 
-# Copy the resource files to the new binary dir
-add_custom_target(copy_resources ALL
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-    ${PROJECT_SOURCE_DIR}/Res
-    ${PROJECT_BINARY_DIR}/Res
-    COMMENT "Copying game resources into Res folder")
-
-
-add_custom_target(copy_shaders ALL
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-    ${PROJECT_SOURCE_DIR}/Shaders
-    ${PROJECT_BINARY_DIR}/Shaders
-    COMMENT "Copying shaders into Shaders folder")
-
-#Set executable
-add_executable(mc-one-week
+add_executable(${PROJECT_NAME}
     Source/Item/Material.cpp
     Source/Item/ItemStack.cpp
     Source/Application.cpp
@@ -81,44 +68,33 @@ add_executable(mc-one-week
     Source/Model.cpp
 )
 
-#Set module path
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_23)
+set_target_properties(${PROJECT_NAME} PROPERTIES CXX_EXTENSIONS OFF)
 
-#Find libraries
-find_package(Threads)
-find_package(SFML REQUIRED audio network graphics window system)
+target_compile_definitions(${PROJECT_NAME} PRIVATE GLM_ENABLE_EXPERIMENTAL)
 
-add_subdirectory(deps/glm)
-add_subdirectory(deps/glad)
+if(MSVC)
+    set(CMAKE_CXX_FLAGS_RELEASE "/O2")
+    set(CMAKE_CXX_FLAGS_RELEASE "/Ox")
+  	target_compile_options(${PROJECT_NAME} PRIVATE 
+    	/W4)
+else()
+  	target_compile_options(${PROJECT_NAME} PRIVATE 
+		-Wall -Wextra -pedantic)		
+endif()
 
-function(setup_target TARGET)
-    #Set C++17
-    target_compile_features(${TARGET} PUBLIC cxx_std_17)
-    set_target_properties(${TARGET} PROPERTIES CXX_EXTENSIONS OFF)
+find_package(glm CONFIG REQUIRED)
+find_package(SFML COMPONENTS system audio network window graphics CONFIG REQUIRED)
 
-    #Set flags
-    if(MSVC)
-        target_compile_options(${TARGET} PRIVATE 
-            /W4 /WX)
-    else()
-        target_compile_options(${TARGET} PRIVATE 
-            -Wall -Wextra -pedantic)
-    endif()
+add_subdirectory(deps)
+target_include_directories(
+    ${PROJECT_NAME}
+    PRIVATE
+    deps
+)
 
-    target_include_directories(
-        ${TARGET}
-        PRIVATE
-        deps
-    )
-endfunction(setup_target)
-
-setup_target(mc-one-week)
-
-target_link_libraries(mc-one-week
-    glm
-    glad
-    Threads::Threads 
-    ${SFML_LIBRARIES} 
-    ${SFML_DEPENDENCIES}
-    ${CMAKE_DL_LIBS}
+target_link_libraries(${PROJECT_NAME} PRIVATE
+    sfml-system sfml-audio sfml-network sfml-graphics sfml-window
+    glm::glm
+    glad 
 )

@@ -1,14 +1,13 @@
 Language: Cpp
 BasedOnStyle: LLVM
 IndentWidth: 4
-
-BreakBeforeBraces: Stroustrup
+BreakBeforeBraces: Allman
 FixNamespaceComments: true
 IndentCaseLabels: true
-NamespaceIndentation: None
-
+NamespaceIndentation: All
 BreakConstructorInitializersBeforeComma: true
-
+ColumnLimit: 100
+AlwaysBreakTemplateDeclarations: true
+PointerAlignment: Left
 AllowShortFunctionsOnASingleLine: None
 
-ColumnLimit: 80

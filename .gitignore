@@ -1,27 +1,24 @@
-#Visual Studio
-Debug/
-Release/
-*.sln
-*.vcxproj
-*.filters
-*.users
-*.user
-*.dll
-.vs 
-
-# Visual Studio Code
-.vscode/
-
-
-# Builds
-bin/
-Makefile
+# Linux
 build/
 
-# Manually Added
-CMakeFiles/
-cmake_install.cmake 
-CMakeCache.txt
-mc-one-week
-libglad.a
-development_notes.txt
+# Windows
+*.dll
+*.exe
+*.filters
+*.user
+*.vs
+.vscode
+Debug/
+Release/
+
+# Misc
+*.zip
+*.temp
+*.srctrlprj
+*.srctrldb
+*.srctrlbm
+
+# Vcpkg
+vcpkg_installed/
+
+mc-one-week-challenge/

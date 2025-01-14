@@ -2,10 +2,7 @@
 
 if [ "$1" = "release" ]
 then
-    echo "\nRunning release build."
-    ./bin/release/mc-one-week
+    ./build/release/mc-one-week-challenge
 else
-    echo "\nRunning debug build."
-    echo "Use argument \"release\" to run in release mode."
-    ./bin/debug/mc-one-week
+    ./build/debug/mc-one-week-challenge
 fi

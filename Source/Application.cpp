@@ -3,7 +3,7 @@
 #include "World/Block/BlockDatabase.h"
 #include <iostream>
 
-Application::Application(const Config &config)
+Application::Application(const Config& config)
     : m_context(config)
     , m_camera(config)
     , m_config(config)
@@ -28,23 +28,23 @@ void Application::runLoop()
     // in some Linux distros. Especially Arch.
 
     // If the window is small, use these parameters
-    if(m_context.window.getSize().x <= 640)
-    {
-        win_center = {
-            sf::VideoMode::getDesktopMode().width / 3.5,
-            sf::VideoMode::getDesktopMode().height / 4
-        };
-    }
-    else // Else force it to the upper-leftgit p
-    {
-        win_center = { 0,0 };
-    }
+    //if (m_context.window.getSize().x <= 640)
+    //{
+    //    win_center = {(float)sf::VideoMode::getDesktopMode().width / 3.5f,
+    //                  (float)sf::VideoMode::getDesktopMode().height / 4.0f};
+    //}
+    //else // Else force it to the upper-leftgit p
+    //{
+    //    win_center = {0, 0};
+    //}
 
     m_context.window.setPosition(win_center);
+    m_context.window.setVerticalSyncEnabled(true);
 
-    while (m_context.window.isOpen() && !m_states.empty()) {
+    while (m_context.window.isOpen() && !m_states.empty())
+    {
         auto deltaTime = dtTimer.restart();
-        auto &state = *m_states.back();
+        auto& state = *m_states.back();
 
         state.handleInput();
         state.update(deltaTime.asSeconds());
@@ -54,7 +54,8 @@ void Application::runLoop()
         m_masterRenderer.finishRender(m_context.window, m_camera);
 
         handleEvents();
-        if (m_isPopState) {
+        if (m_isPopState)
+        {
             m_isPopState = false;
             m_states.pop_back();
         }
@@ -69,15 +70,18 @@ void Application::runLoop()
 void Application::handleEvents()
 {
     sf::Event e;
-    while (m_context.window.pollEvent(e)) {
+    while (m_context.window.pollEvent(e))
+    {
         m_states.back()->handleEvent(e);
-        switch (e.type) {
+        switch (e.type)
+        {
             case sf::Event::Closed:
                 m_context.window.close();
                 break;
 
             case sf::Event::KeyPressed:
-                switch (e.key.code) {
+                switch (e.key.code)
+                {
                     case sf::Keyboard::Escape:
                         m_context.window.close();
                         break;
