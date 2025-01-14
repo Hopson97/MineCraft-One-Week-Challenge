@@ -6,7 +6,7 @@ Video: https://www.youtube.com/watch?v=Xq3isov6mZ8
 
 Note: I continued to edit after the 7 days, however the version seen in the video is found here https://github.com/Hopson97/MineCraft-One-Week-Challenge/tree/eb01640580cc5ad403f6a8b9fb58af37e2f03f0c
 
-And the "optimized" version can be found here: https://github.com/Hopson97/MineCraft-One-Week-Challenge/tree/792df07e9780b444be5290fd05a3c8598aacafc8 (~1 week later version) 
+And the "optimized" version can be found here: https://github.com/Hopson97/MineCraft-One-Week-Challenge/tree/792df07e9780b444be5290fd05a3c8598aacafc8 (~1 week later version)
 
 There also is a version of this game with very good graphics, and things like a day/night cycle. However, it was causing rendering issues for many people. This version can be found here:
 https://github.com/Hopson97/MineCraft-One-Week-Challenge/tree/aa50ad8077ef0e617a9cfc336bdb7db81c313017
@@ -25,7 +25,6 @@ The easiest way to build is to use [vcpkg](https://vcpkg.io/en/index.html) and i
 
 ```bash
 vcpkg install sfml
-vcpkg install imgui
 vcpkg install glm
 vcpkg integrate install
 ```
@@ -100,12 +99,12 @@ The day was finished off by creating a first person camera.
 
 End of day stats:
 
-Title | Data
------------- | -------------
-Time programming Today | 3:21:51
-Lines of Code Today | 829
-Total Time programming | 3:21:51
-Total Lines of Code | 829
+| Title                  | Data    |
+| ---------------------- | ------- |
+| Time programming Today | 3:21:51 |
+| Lines of Code Today    | 829     |
+| Total Time programming | 3:21:51 |
+| Total Lines of Code    | 829     |
 
 ### Day Two
 
@@ -121,19 +120,18 @@ I finished up the day attempting to create a mesh builder for the chunk; however
 
 End of day stats:
 
-Title | Data
------------- | -------------
-Time programming Today | 4:16:07
-Lines of Code Today | 732
-Total Time programming | 7:37:58
-Total Lines of Code | 1561
-
+| Title                  | Data    |
+| ---------------------- | ------- |
+| Time programming Today | 4:16:07 |
+| Lines of Code Today    | 732     |
+| Total Time programming | 7:37:58 |
+| Total Lines of Code    | 1561    |
 
 ### Day Three
 
 End of day three commit: https://github.com/Hopson97/MineCraft-One-Week-Challenge/commit/78bd637581542576372d75cf7638f76381e933b4
 
-To start the day off, I fixed the chunk drawing. Turns out I was telling OpenGL the indices were ```GL_UNSIGNED_BYTE```, but they were actually ```GL_UNSIGNED_INT```. This took 3 hours to work out...
+To start the day off, I fixed the chunk drawing. Turns out I was telling OpenGL the indices were `GL_UNSIGNED_BYTE`, but they were actually `GL_UNSIGNED_INT`. This took 3 hours to work out...
 
 ![gl bytesss](http://i.imgur.com/PD44aRg.png)
 
@@ -145,12 +143,12 @@ To finish the day off, I got some naive block editing to work.
 
 End of day stats:
 
-Title | Data
------------- | -------------
-Time programming Today | 3:15:38
-Lines of Code Today | 410
-Total Time programming | 10:53:36
-Total Lines of Code | 1974
+| Title                  | Data     |
+| ---------------------- | -------- |
+| Time programming Today | 3:15:38  |
+| Lines of Code Today    | 410      |
+| Total Time programming | 10:53:36 |
+| Total Lines of Code    | 1974     |
 
 ### Day 4
 
@@ -162,12 +160,12 @@ After this, I started work on the world generation, eg adding height map and tre
 
 End of day stats:
 
-Title | Data
------------- | -------------
-Time programming Today | 3:14:15
-Lines of Code Today | 523
-Total Time programming | 14:07:51
-Total Lines of Code | 2489
+| Title                  | Data     |
+| ---------------------- | -------- |
+| Time programming Today | 3:14:15  |
+| Lines of Code Today    | 523      |
+| Total Time programming | 14:07:51 |
+| Total Lines of Code    | 2489     |
 
 ### Day 5
 
@@ -180,12 +178,12 @@ at creating that sort of the thing.
 Basically, when a player breaks a block, it gets added to their inventory. When they place a block, a block
 is placed.
 
-Title | Data
------------- | -------------
-Time programming Today | 2:54:14
-Lines of Code Today | 560
-Total Time programming | 17:02:05
-Total Lines of Code | 3049
+| Title                  | Data     |
+| ---------------------- | -------- |
+| Time programming Today | 2:54:14  |
+| Lines of Code Today    | 560      |
+| Total Time programming | 17:02:05 |
+| Total Lines of Code    | 3049     |
 
 ### Day 6
 
@@ -196,4 +194,3 @@ Mostly optimizations, such as view-frustum culling and making the mesh building 
 Focus on improving how it looks, eg adding directional lighting
 
 Also implemented concurrency :)
-
