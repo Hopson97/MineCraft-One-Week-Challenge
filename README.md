@@ -17,6 +17,12 @@ This was made in a week, as a challenge for a video. There do exist other, more 
 
 MineTest here: https://github.com/minetest/minetest
 
+## SFML 3 Update
+
+On November 2nd 2025, this project was updated to use SFML 3.0.0 and various changes were made to the codebase to accommodate this.
+
+To see the commit prior to this change, see: https://github.com/Hopson97/MineCraft-One-Week-Challenge/tree/fead1af708dca0518a6161fbac4c2673393d5ae0
+
 ## Building and Running
 
 ### Windows (Visual Studio)
@@ -25,6 +31,7 @@ The easiest way to build is to use [vcpkg](https://vcpkg.io/en/index.html) and i
 
 ```bash
 vcpkg install sfml
+vcpkg install imgui
 vcpkg install glm
 vcpkg integrate install
 ```
@@ -95,7 +102,7 @@ The first day was spent setting up boilerplate code such as the game state/ game
 
 The day was finished off by creating a first person camera.
 
-![Quad](http://i.imgur.com/fJDgA2a.png)
+![Quad](Screenshots/day1.png)
 
 End of day stats:
 
@@ -116,7 +123,7 @@ I also worked out the coordinates for a cube, and thus created a cube renderer.
 
 I finished up the day attempting to create a mesh builder for the chunk; however, this did not go well at all, and two had ended before I got it to work correctly.
 
-![Messed up chunk](http://i.imgur.com/UsKHJrR.png)
+![Messed up chunk](Screenshots/day2.png)
 
 End of day stats:
 
@@ -133,13 +140,13 @@ End of day three commit: https://github.com/Hopson97/MineCraft-One-Week-Challeng
 
 To start the day off, I fixed the chunk drawing. Turns out I was telling OpenGL the indices were `GL_UNSIGNED_BYTE`, but they were actually `GL_UNSIGNED_INT`. This took 3 hours to work out...
 
-![gl bytesss](http://i.imgur.com/PD44aRg.png)
+![Code Fix](Screenshots/day3a.png)
 
 Anyways, after this I got the game working with more chunks. I now have an area of 16x16 chunks, made out of chunk sections of 16x16x16 blocks.
 
 To finish the day off, I got some naive block editing to work.
 
-![Block editing](http://i.imgur.com/ilTJr8i.png)
+![Block editing](Screenshots/day3b.png)
 
 End of day stats:
 
@@ -156,7 +163,7 @@ The first thing I did on day 4 was create a sky box using OpenGL cube maps.
 
 After this, I started work on the world generation, eg adding height map and trees.
 
-![Skybox and world gen](http://i.imgur.com/mzUwqPo.png)
+![Skybox and world gen](Screenshots/day4.png)
 
 End of day stats:
 

@@ -2,7 +2,7 @@
 
 if [ "$1" = "release" ]
 then
-    ./build/release/mc-one-week-challenge
+    ./build/release/minecraft-one-week-challenge
 else
-    ./build/debug/mc-one-week-challenge
+    ./build/debug/minecraft-one-week-challenge
 fi

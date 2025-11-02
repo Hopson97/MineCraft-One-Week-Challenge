@@ -19,17 +19,17 @@ target_debug() {
 # Create folder for distribution
 if [ "$1" = "release" ]
 then
-    if [ -d "$mc-one-week-challenge" ]
+    if [ -d "$minecraft-one-week-challenge" ]
     then
-        rm -rf -d mc-one-week-challenge
+        rm -rf -d minecraft-one-week-challenge
     fi
 
-    mkdir -p mc-one-week-challenge
+    mkdir -p minecraft-one-week-challenge
 fi
 
 # Creates the folder for the buildaries
-mkdir -p mc-one-week-challenge 
-mkdir -p mc-one-week-challenge/assets
+mkdir -p minecraft-one-week-challenge 
+mkdir -p minecraft-one-week-challenge/assets
 mkdir -p build
 mkdir -p build/release
 mkdir -p build/debug
@@ -39,9 +39,9 @@ cd build
 if [ "$1" = "release" ]
 then
     target_release
-    cp build/release/mc-one-week-challenge mc-one-week-challenge/mc-one-week-challenge
+    cp build/release/minecraft-one-week-challenge minecraft-one-week-challenge/minecraft-one-week-challenge
 else
     target_debug
 fi
 
-cp -R assets mc-one-week-challenge/
+cp -R assets minecraft-one-week-challenge/

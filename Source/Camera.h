@@ -24,9 +24,9 @@ class Camera : public Entity {
 
     ViewFrustum m_frustum;
 
-    glm::mat4 m_projectionMatrix;
-    glm::mat4 m_viewMatrix;
-    glm::mat4 m_projViewMatrx;
+    glm::mat4 m_projectionMatrix{1.0f};
+    glm::mat4 m_viewMatrix{1.0f};
+    glm::mat4 m_projViewMatrx{1.0f};
 
     Config m_config;
 };

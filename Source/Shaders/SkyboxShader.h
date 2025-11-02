@@ -11,7 +11,6 @@ class SkyboxShader : public Shader {
     void loadProjectionMatrix(const glm::mat4 &proj);
 
   private:
-    void getUniforms() override;
 
     GLuint m_locationProjection;
     GLuint m_locationView;

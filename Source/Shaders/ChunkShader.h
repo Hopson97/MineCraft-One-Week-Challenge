@@ -8,7 +8,6 @@ class ChunkShader : public BasicShader {
     ChunkShader();
 
   private:
-    void getUniforms() override;
 };
 
 #endif // CHUNKSHADER_H_INCLUDED

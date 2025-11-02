@@ -22,9 +22,9 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{a8f1dcc1-7e1a-43fd-96c4-e6bd9c626405}</ProjectGuid>
-    <RootNamespace>mc-one-week-challenge</RootNamespace>
+    <RootNamespace>minecraft-one-week-challenge</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>mc-one-week-challenge</ProjectName>
+    <ProjectName>minecraft-one-week-challenge</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -121,7 +121,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GLM_ENABLE_EXPERIMENTAL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)deps;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
@@ -138,7 +138,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GLM_ENABLE_EXPERIMENTAL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)deps;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
@@ -153,16 +153,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="deps\glad\glad.c" />
+    <ClCompile Include="deps\imgui_sfml\imgui-SFML.cpp" />
+    <ClCompile Include="deps\imgui_sfml\imgui_impl_opengl3.cpp" />
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
-    <ClCompile Include="Source\Context.cpp" />
     <ClCompile Include="Source\Controller.cpp" />
     <ClCompile Include="Source\GL\GLFunctions.cpp" />
+    <ClCompile Include="Source\GL\GLUtils.cpp" />
+    <ClCompile Include="Source\GUI.cpp" />
     <ClCompile Include="Source\Input\Keyboard.cpp" />
     <ClCompile Include="Source\Input\ToggleKey.cpp" />
     <ClCompile Include="Source\Item\ItemStack.cpp" />
     <ClCompile Include="Source\Item\Material.cpp" />
-    <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Maths\Frustum.cpp" />
     <ClCompile Include="Source\Maths\GeneralMaths.cpp" />
     <ClCompile Include="Source\Maths\Matrix.cpp" />
@@ -183,13 +185,13 @@
     <ClCompile Include="Source\Shaders\ShaderLoader.cpp" />
     <ClCompile Include="Source\Shaders\SkyboxShader.cpp" />
     <ClCompile Include="Source\Shaders\WaterShader.cpp" />
-    <ClCompile Include="Source\States\PlayState.cpp" />
     <ClCompile Include="Source\Texture\BasicTexture.cpp" />
     <ClCompile Include="Source\Texture\CubeTexture.cpp" />
     <ClCompile Include="Source\Texture\TextureAtlas.cpp" />
     <ClCompile Include="Source\Util\FileUtil.cpp" />
-    <ClCompile Include="Source\Util\FPSCounter.cpp" />
+    <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\Util\Random.cpp" />
+    <ClCompile Include="Source\Util\Profiler.cpp" />
     <ClCompile Include="Source\World\Block\BlockData.cpp" />
     <ClCompile Include="Source\World\Block\BlockDatabase.cpp" />
     <ClCompile Include="Source\World\Block\BlockTypes\BlockType.cpp" />
@@ -215,6 +217,9 @@
   <ItemGroup>
     <None Include=".clang-format" />
     <None Include=".gitignore" />
+    <None Include="assets\shaders\Scene\SceneSimpleFragment.glsl" />
+    <None Include="deps\imgui_sfml\LICENSE" />
+    <None Include="imgui.ini" />
     <None Include="README.md" />
     <None Include="scripts\build.sh" />
     <None Include="scripts\debug.sh" />
@@ -223,13 +228,18 @@
   <ItemGroup>
     <ClInclude Include="deps\glad\glad.h" />
     <ClInclude Include="deps\glad\khrplatform.h" />
+    <ClInclude Include="deps\imgui_sfml\imgui-SFML.h" />
+    <ClInclude Include="deps\imgui_sfml\imgui-SFML_export.h" />
+    <ClInclude Include="deps\imgui_sfml\imgui_impl_opengl3.h" />
+    <ClInclude Include="deps\imgui_sfml\imgui_inc.h" />
     <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Config.h" />
-    <ClInclude Include="Source\Context.h" />
     <ClInclude Include="Source\Controller.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\GL\GLFunctions.h" />
+    <ClInclude Include="Source\GL\GLUtils.h" />
+    <ClInclude Include="Source\GUI.h" />
     <ClInclude Include="Source\Input\Keyboard.h" />
     <ClInclude Include="Source\Input\ToggleKey.h" />
     <ClInclude Include="Source\Item\ItemStack.h" />
@@ -259,18 +269,17 @@
     <ClInclude Include="Source\Shaders\ShaderLoader.h" />
     <ClInclude Include="Source\Shaders\SkyboxShader.h" />
     <ClInclude Include="Source\Shaders\WaterShader.h" />
-    <ClInclude Include="Source\States\PlayState.h" />
-    <ClInclude Include="Source\States\StateBase.h" />
     <ClInclude Include="Source\Texture\BasicTexture.h" />
     <ClInclude Include="Source\Texture\CubeTexture.h" />
     <ClInclude Include="Source\Texture\TextureAtlas.h" />
     <ClInclude Include="Source\Util\Array2D.h" />
     <ClInclude Include="Source\Util\FileUtil.h" />
-    <ClInclude Include="Source\Util\FPSCounter.h" />
     <ClInclude Include="Source\Util\NonCopyable.h" />
     <ClInclude Include="Source\Util\NonMovable.h" />
     <ClInclude Include="Source\Util\Random.h" />
     <ClInclude Include="Source\Util\Singleton.h" />
+    <ClInclude Include="Source\Util\Profiler.h" />
+    <ClInclude Include="Source\Util\TimeStep.h" />
     <ClInclude Include="Source\World\Block\BlockData.h" />
     <ClInclude Include="Source\World\Block\BlockDatabase.h" />
     <ClInclude Include="Source\World\Block\BlockId.h" />
@@ -302,6 +311,12 @@
     <Text Include="CMakeLists.txt" />
     <Text Include="deps\CMakeLists.txt" />
     <Text Include="deps\glad\CMakeLists.txt" />
+    <Text Include="deps\imgui_sfml\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\textures\crate_specular.png" />
+    <Image Include="assets\textures\grass_specular.png" />
+    <Image Include="assets\textures\person_specular.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

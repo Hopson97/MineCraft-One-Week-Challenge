@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 project(
-    mc-one-week-challenge 
+    minecraft-one-week-challenge 
     VERSION 1.0
 )
 
@@ -32,7 +32,6 @@ add_executable(${PROJECT_NAME}
     Source/World/Chunk/Chunk.cpp
     Source/World/Chunk/ChunkSection.cpp
     Source/World/Chunk/ChunkMeshBuilder.cpp
-    Source/States/PlayState.cpp
     Source/Player/Player.cpp
     Source/Maths/Ray.cpp
     Source/Maths/Frustum.cpp
@@ -42,7 +41,6 @@ add_executable(${PROJECT_NAME}
     Source/Maths/GeneralMaths.cpp
     Source/Camera.cpp
     Source/GL/GLFunctions.cpp
-    Source/Context.cpp
     Source/Texture/CubeTexture.cpp
     Source/Texture/BasicTexture.cpp
     Source/Texture/TextureAtlas.cpp
@@ -51,7 +49,6 @@ add_executable(${PROJECT_NAME}
     Source/Main.cpp
     Source/Controller.cpp
     Source/Util/Random.cpp
-    Source/Util/FPSCounter.cpp
     Source/Util/FileUtil.cpp
     Source/Shaders/FloraShader.cpp
     Source/Shaders/WaterShader.cpp
@@ -66,8 +63,10 @@ add_executable(${PROJECT_NAME}
     Source/Renderer/SkyboxRenderer.cpp
     Source/Renderer/FloraRenderer.cpp
     Source/Model.cpp
+    src/Util/Profiler.cpp
+    src/GUI.cpp
+    src/GL/GLUtils.cpp
 )
-
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_23)
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_EXTENSIONS OFF)
 
@@ -76,8 +75,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE GLM_ENABLE_EXPERIMENTAL)
 if(MSVC)
     set(CMAKE_CXX_FLAGS_RELEASE "/O2")
     set(CMAKE_CXX_FLAGS_RELEASE "/Ox")
-  	target_compile_options(${PROJECT_NAME} PRIVATE 
-    	/W4)
+  	target_compile_options(${PROJECT_NAME} PRIVATE /W4 _CRT_SECURE_NO_WARNINGS)
 else()
   	target_compile_options(${PROJECT_NAME} PRIVATE 
 		-Wall -Wextra -pedantic)		
@@ -85,6 +83,7 @@ endif()
 
 find_package(glm CONFIG REQUIRED)
 find_package(SFML COMPONENTS system audio network window graphics CONFIG REQUIRED)
+find_package(imgui CONFIG REQUIRED)
 
 add_subdirectory(deps)
 target_include_directories(
@@ -95,6 +94,8 @@ target_include_directories(
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
     sfml-system sfml-audio sfml-network sfml-graphics sfml-window
+    imgui::imgui
     glm::glm
+    imgui_sfml
     glad 
 )

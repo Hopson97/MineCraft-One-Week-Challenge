@@ -1,116 +1,102 @@
 #include "Application.h"
-#include "States/PlayState.h"
-#include "World/Block/BlockDatabase.h"
+
+#include <SFML/Window/Event.hpp>
+#include <imgui.h>
 #include <iostream>
 
-Application::Application(const Config& config)
-    : m_context(config)
-    , m_camera(config)
-    , m_config(config)
-{
-    BlockDatabase::get();
-    pushState<StatePlay>(*this, config);
-}
-
+#include "Maths/Ray.h"
+#include "Renderer/RenderMaster.h"
+#include "World/Block/BlockDatabase.h"
+#include "World/Event/PlayerDigEvent.h"
 float g_timeElapsed = 0;
 
-/// @brief Game loop utilizing a mixture of SFML events and GL rendering.
-void Application::runLoop()
+Application::Application(sf::Window& window, const Config& config)
+    : m_window(window)
+    , m_camera(config)
+    , m_config(config)
+    , m_world(m_camera, config, m_player)
+
 {
-    sf::Clock dtTimer;
-    sf::Clock dt;
-    sf::Vector2i win_center;
-
-    sf::Time m;
-
-    // Grab the context window and force it to a certain position.
-    // This prevents the window from sticking to the bottom of the visible screen like it does
-    // in some Linux distros. Especially Arch.
-
-    // If the window is small, use these parameters
-    //if (m_context.window.getSize().x <= 640)
-    //{
-    //    win_center = {(float)sf::VideoMode::getDesktopMode().width / 3.5f,
-    //                  (float)sf::VideoMode::getDesktopMode().height / 4.0f};
-    //}
-    //else // Else force it to the upper-leftgit p
-    //{
-    //    win_center = {0, 0};
-    //}
-
-    m_context.window.setPosition(win_center);
-    m_context.window.setVerticalSyncEnabled(true);
-
-    while (m_context.window.isOpen() && !m_states.empty())
-    {
-        auto deltaTime = dtTimer.restart();
-        auto& state = *m_states.back();
-
-        state.handleInput();
-        state.update(deltaTime.asSeconds());
-        m_camera.update();
-
-        state.render(m_masterRenderer);
-        m_masterRenderer.finishRender(m_context.window, m_camera);
-
-        handleEvents();
-        if (m_isPopState)
-        {
-            m_isPopState = false;
-            m_states.pop_back();
-        }
-
-        m = dt.restart();
-
-        g_timeElapsed += m.asSeconds();
-    }
+    BlockDatabase::get();
+    m_camera.hookEntity(m_player);
 }
 
-/// @brief Handles window events, especially window polling and keyboard inputs.
-void Application::handleEvents()
+void Application::on_event(const sf::Event& event)
 {
-    sf::Event e;
-    while (m_context.window.pollEvent(e))
-    {
-        m_states.back()->handleEvent(e);
-        switch (e.type)
-        {
-            case sf::Event::Closed:
-                m_context.window.close();
-                break;
+}
 
-            case sf::Event::KeyPressed:
-                switch (e.key.code)
+void Application::on_update(const Keyboard& keyboard, sf::Time dt)
+{
+
+    m_player.handleInput(m_window, keyboard);
+    static sf::Clock timer;
+    glm::vec3 lastPosition;
+
+    // Ray is cast as player's 'vision'
+    for (Ray ray({m_player.position.x, m_player.position.y + 0.6f, m_player.position.z},
+                 m_player.rotation); // Corrected for camera offset
+         ray.getLength() < 6; ray.step(0.05f))
+    {
+        int x = static_cast<int>(ray.getEnd().x);
+        int y = static_cast<int>(ray.getEnd().y);
+        int z = static_cast<int>(ray.getEnd().z);
+
+        auto block = m_world.getBlock(x, y, z);
+        auto id = (BlockId)block.id;
+
+        if (id != BlockId::Air && id != BlockId::Water)
+        {
+            if (timer.getElapsedTime().asSeconds() > 0.2)
+            {
+                if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
                 {
-                    case sf::Keyboard::Escape:
-                        m_context.window.close();
-                        break;
-
-                    default:
-                        break;
+                    timer.restart();
+                    // The player "digs" the block up
+                    m_world.addEvent<PlayerDigEvent>(sf::Mouse::Button::Left, ray.getEnd(),
+                                                     m_player);
+                    break;
                 }
-                break;
-
-            default:
-                break;
+                else if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Right))
+                {
+                    timer.restart();
+                    // Block is placed by player
+                    m_world.addEvent<PlayerDigEvent>(sf::Mouse::Button::Right, lastPosition,
+                                                     m_player);
+                    break;
+                }
+            }
         }
+        lastPosition = ray.getEnd();
     }
+
+    if (m_player.position.x < 0)
+        m_player.position.x = 0;
+    if (m_player.position.z < 0)
+        m_player.position.z = 0;
+
+    m_camera.update();
+    m_player.update(dt.asSeconds(), m_world);
+    m_world.update(m_camera);
 }
 
-/// @brief Tell the program stack to pop off the state.
-void Application::popState()
+void Application::on_render(bool show_debug_info)
 {
-    m_isPopState = true;
-}
+    static sf::Clock dt;
 
-/// @brief Makes the mouse invisible, doesn't actually turn off the mouse.
-void Application::turnOffMouse()
-{
-    m_context.window.setMouseCursorVisible(false);
-}
+    static bool drawGUI = false;
+    static ToggleKey drawKey(sf::Keyboard::Key::F3);
 
-/// @brief Makes the mouse visible again.
-void Application::turnOnMouse()
-{
-    m_context.window.setMouseCursorVisible(true);
+    if (drawKey.isKeyPressed())
+    {
+        drawGUI = !drawGUI;
+    }
+
+    if (drawGUI)
+    {
+        m_player.draw(m_masterRenderer);
+    }
+
+    m_world.renderWorld(m_masterRenderer, m_camera);
+
+    m_masterRenderer.finishRender(m_window, m_camera);
 }

@@ -57,7 +57,7 @@ void World::setBlock(int x, int y, int z, ChunkBlock block)
 // make chunk meshes
 void World::update(const Camera &camera)
 {
-    static ToggleKey key(sf::Keyboard::C);
+    static ToggleKey key(sf::Keyboard::Key::C);
 
     if (key.isKeyPressed()) {
         std::unique_lock<std::mutex> lock(m_mainMutex);

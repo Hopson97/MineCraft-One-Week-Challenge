@@ -3,7 +3,8 @@
 SkyboxShader::SkyboxShader()
     : Shader("Skybox", "Skybox")
 {
-    getUniforms();
+    m_locationProjection = glGetUniformLocation(m_id, "projectionMatrix");
+    m_locationView = glGetUniformLocation(m_id, "viewMatrix");
 }
 
 void SkyboxShader::loadViewMatrix(glm::mat4 viewMatrix)
@@ -17,10 +18,4 @@ void SkyboxShader::loadViewMatrix(glm::mat4 viewMatrix)
 void SkyboxShader::loadProjectionMatrix(const glm::mat4 &proj)
 {
     Shader::loadMatrix4(m_locationProjection, proj);
-}
-
-void SkyboxShader::getUniforms()
-{
-    m_locationProjection = glGetUniformLocation(m_id, "projectionMatrix");
-    m_locationView = glGetUniformLocation(m_id, "viewMatrix");
 }

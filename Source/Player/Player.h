@@ -18,7 +18,7 @@ class Player : public Entity {
   public:
     Player();
 
-    void handleInput(const sf::Window &window, Keyboard &keyboard);
+    void handleInput(const sf::Window& window, const Keyboard& keyboard);
 
     void update(float dt, World &wolrd);
     void collide(World &world, const glm::vec3 &vel, float dt);
@@ -32,7 +32,7 @@ class Player : public Entity {
   private:
     void jump();
 
-    void keyboardInput(Keyboard &keyboard);
+    void keyboardInput(const Keyboard& keyboard);
     void mouseInput(const sf::Window &window);
     bool m_isOnGround = false;
     bool m_isFlying = false;
@@ -40,7 +40,6 @@ class Player : public Entity {
 
     std::vector<ItemStack> m_items;
     std::vector<sf::Text> m_itemText;
-    sf::Text m_posPrint;
     int m_heldItem = 0;
 
     ToggleKey m_itemDown;

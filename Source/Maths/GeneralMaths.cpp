@@ -13,9 +13,9 @@ float smoothstep(float edge0, float edge1, float x)
 }
 
 /// @brief Clamp function that regulates values between limits.
-/// @param x 
-/// @param lowerlimit 
-/// @param upperlimit 
+/// @param x
+/// @param lowerlimit
+/// @param upperlimit
 /// @return x
 float clamp(float x, float lowerlimit, float upperlimit)
 {
@@ -26,9 +26,8 @@ float clamp(float x, float lowerlimit, float upperlimit)
     return x;
 }
 
-float smoothInterpolation(float bottomLeft, float topLeft, float bottomRight,
-                          float topRight, float xMin, float xMax, float zMin,
-                          float zMax, float x, float z)
+float smoothInterpolation(float bottomLeft, float topLeft, float bottomRight, float topRight,
+                          float xMin, float xMax, float zMin, float zMax, float x, float z)
 {
     float width = xMax - xMin, height = zMax - zMin;
     float xValue = 1 - (x - xMin) / width;
@@ -41,9 +40,8 @@ float smoothInterpolation(float bottomLeft, float topLeft, float bottomRight,
     return smoothstep(a, b, zValue);
 }
 
-float bilinearInterpolation(float bottomLeft, float topLeft, float bottomRight,
-                            float topRight, float xMin, float xMax, float zMin,
-                            float zMax, float x, float z)
+float bilinearInterpolation(float bottomLeft, float topLeft, float bottomRight, float topRight,
+                            float xMin, float xMax, float zMin, float zMax, float x, float z)
 {
     float width = xMax - xMin, height = zMax - zMin,
 

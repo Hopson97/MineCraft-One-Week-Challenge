@@ -1,59 +1,33 @@
-#ifndef APPLICATION_H_INCLUDED
-#define APPLICATION_H_INCLUDED
+#pragma once
 
-#include <memory>
-#include <vector>
+#include <SFML/System/Clock.hpp>
+#include <SFML/Window/Window.hpp>
 
+#include "Input/Keyboard.h"
+#include "Player/Player.h"
+#include "World/Chunk/Chunk.h"
+#include "World/World.h"
 #include "Renderer/RenderMaster.h"
-#include "States/StateBase.h"
-
 #include "Camera.h"
-#include "Context.h"
-
 float extern g_timeElapsed;
 
-/// @brief The main game application itself.
-class Application {
 
+class Keyboard;
+
+class Application
+{
   public:
-    Application(const Config &config);
+    Application(sf::Window& window, const Config& config);
 
-    void runLoop();
-
-    template <typename T, typename... Args> void pushState(Args &&... args)
-    {
-        m_states.push_back(std::make_unique<T>(std::forward<Args>(args)...));
-        auto &s = m_states.back();
-        s->onOpen();
-    }
-
-    void popState();
-
-    Camera &getCamera()
-    {
-        return m_camera;
-    }
-
-    const sf::Window &getWindow() const
-    {
-        return m_context.window;
-    }
-
-    void turnOffMouse();
-    void turnOnMouse();
+    void on_event(const sf::Event& event);
+    void on_update(const Keyboard& keyboard, sf::Time dt);
+    void on_render(bool show_debug_info);
 
   private:
-    void handleEvents();
-
-    std::vector<std::unique_ptr<StateBase>> m_states;
-
-    Context m_context;
+    sf::Window& m_window;
+    const Config& m_config;
     RenderMaster m_masterRenderer;
     Camera m_camera;
-
-    const Config &m_config;
-
-    bool m_isPopState = false;
+    Player m_player;
+    World m_world;
 };
-
-#endif // APPLICATION_H_INCLUDED

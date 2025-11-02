@@ -4,7 +4,9 @@ BasicShader::BasicShader(const std::string &vertexFile,
                          const std::string &fragmentFile)
     : Shader(vertexFile, fragmentFile)
 {
-    getUniforms();
+    useProgram();
+    m_locationProjectionViewMatrix = glGetUniformLocation(m_id, "projViewMatrix");
+    m_locationModelMatrix = glGetUniformLocation(m_id, "modelMatrix");
 }
 
 void BasicShader::loadProjectionViewMatrix(const glm::mat4 &pvMatrix)

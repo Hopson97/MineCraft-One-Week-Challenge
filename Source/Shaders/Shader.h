@@ -24,7 +24,7 @@ class Shader : NonCopyable {
     void loadMatrix4(GLuint location, const glm::mat4 &matrix);
 
   protected:
-    virtual void getUniforms() = 0;
+    virtual void getUniforms() {};
     GLuint m_id;
 };
 

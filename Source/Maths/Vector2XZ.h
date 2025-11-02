@@ -19,7 +19,7 @@ template <> struct hash<VectorXZ> {
         auto hash1 = hasher(vect.x);
         auto hash2 = hasher(vect.z);
 
-        return std::hash<decltype(vect.x)>{}((hash1 ^ hash2) >> 2);
+        return std::hash<decltype(vect.x)>{}(size_t((hash1 ^ hash2) >> 2));
     }
 };
 } // namespace std
@@ -35,7 +35,7 @@ template <> struct hash<sf::Vector3i> {
         auto hash3 = hasher(vect.z);
 
         return std::hash<decltype(vect.x)>{}(
-            (hash1 ^ (hash2 << hash3) ^ hash3));
+            size_t(hash1 ^ (hash2 << hash3) ^ hash3));
     }
 };
 } // namespace std

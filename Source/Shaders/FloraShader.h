@@ -9,7 +9,6 @@ class FloraShader : public BasicShader {
     void loadTime(const float &time);
 
   private:
-    void getUniforms() override;
     GLuint m_time;
 };
 
