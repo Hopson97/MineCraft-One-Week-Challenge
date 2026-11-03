@@ -63,9 +63,9 @@ add_executable(${PROJECT_NAME}
     Source/Renderer/SkyboxRenderer.cpp
     Source/Renderer/FloraRenderer.cpp
     Source/Model.cpp
-    src/Util/Profiler.cpp
-    src/GUI.cpp
-    src/GL/GLUtils.cpp
+    Source/Util/Profiler.cpp
+    Source/GUI.cpp
+    Source/GL/GLUtils.cpp
 )
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_23)
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_EXTENSIONS OFF)
@@ -82,7 +82,7 @@ else()
 endif()
 
 find_package(glm CONFIG REQUIRED)
-find_package(SFML COMPONENTS system audio network window graphics CONFIG REQUIRED)
+find_package(SFML 3 COMPONENTS System Audio Network Window Graphics CONFIG REQUIRED)
 find_package(imgui CONFIG REQUIRED)
 
 add_subdirectory(deps)
@@ -93,7 +93,7 @@ target_include_directories(
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-    sfml-system sfml-audio sfml-network sfml-graphics sfml-window
+    SFML::System SFML::Audio SFML::Network SFML::Graphics SFML::Window
     imgui::imgui
     glm::glm
     imgui_sfml
