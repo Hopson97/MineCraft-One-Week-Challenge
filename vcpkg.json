@@ -1,3 +1,18 @@
 {
-  "dependencies": ["glm", "sfml", "imgui", "assimp"]
+  "dependencies": [
+    "glm",
+    "sfml",
+    "imgui",
+    "assimp"
+  ],
+  "overrides": [
+    {
+      "name": "sfml",
+      "version": "3.0.0"
+    },
+    {
+      "name": "imgui",
+      "version": "1.91.9"
+    }
+  ]
 }

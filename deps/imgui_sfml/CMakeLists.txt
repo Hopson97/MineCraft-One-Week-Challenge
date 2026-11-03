@@ -5,6 +5,7 @@ add_library(
 )   
 
 target_link_libraries(imgui_sfml PRIVATE
-    sfml-system sfml-graphics sfml-window
+    SFML::System SFML::Graphics SFML::Window
     imgui::imgui
 )
+target_compile_features(imgui_sfml PUBLIC cxx_std_17)
